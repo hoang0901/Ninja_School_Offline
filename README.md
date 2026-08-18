@@ -1,0 +1,2 @@
+- Save game để không mất data
+- begin the game sẽ hơi đứng hình 20s-30s xong là vào được 

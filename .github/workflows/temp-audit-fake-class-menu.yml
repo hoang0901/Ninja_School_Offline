@@ -10,30 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Split audit
+      - name: Targeted menu/class audit
         shell: bash
         run: |
           set -euo pipefail
           rm -rf /tmp/fakeaudit && mkdir -p /tmp/fakeaudit && cd /tmp/fakeaudit
           jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          { echo '=== MANIFEST ==='; cat META-INF/MANIFEST.MF 2>/dev/null || true; } > "$GITHUB_WORKSPACE/audit_manifest.txt"
-          : > "$GITHUB_WORKSPACE/audit_candidates.txt"
-          for c in $(find . -name '*.class' -type f | sort); do
-            if grep -aEiq 'female|fan|vip|v12\.2|local|offline|Ninja|Bản thân|Hành trang|Kỹ năng|phái|môn phái|Kiếm|Tiêu|Kunai|Cung|Đao|Quạt|trang bị' "$c"; then
-              echo "### ${c#./}" >> "$GITHUB_WORKSPACE/audit_candidates.txt"
-              strings -n 4 "$c" | grep -Ei 'female|fan|vip|v12\.2|local|offline|Ninja|Ban than|Hanh trang|Ky nang|phai|mon phai|Kiem|Tieu|Kunai|Cung|Dao|Quat|trang bi|Menu' | head -80 >> "$GITHUB_WORKSPACE/audit_candidates.txt" || true
-            fi
-          done
-          javap -classpath . -p -c k25 > "$GITHUB_WORKSPACE/audit_k25.txt" 2>&1 || true
-          javap -classpath . -p -c DoHoang091\$k0 > "$GITHUB_WORKSPACE/audit_player.txt" 2>&1 || true
-          grep '^### ' "$GITHUB_WORKSPACE/audit_candidates.txt" | sed 's/^### //;s/\.class$//;s#/#.#g' | head -12 | while read cls; do
-            echo "===== $cls =====" >> "$GITHUB_WORKSPACE/audit_menu_javap.txt"
-            javap -classpath . -p -c "$cls" 2>/dev/null | grep -B25 -A45 -Ei 'female|fan|vip|v12\.2|local|offline|Bản thân|Hành trang|Kỹ năng|phái|môn phái|Kiếm|Tiêu|Kunai|Cung|Đao|Quạt|trang bị|Menu' >> "$GITHUB_WORKSPACE/audit_menu_javap.txt" || true
-          done
-      - name: Commit reports
+          javap -classpath . -p -c OfflineDeleteMenu > "$GITHUB_WORKSPACE/audit_offline_delete_menu.txt" 2>&1 || true
+          javap -classpath . -p -c OfflineBridge > "$GITHUB_WORKSPACE/audit_offline_bridge.txt" 2>&1 || true
+          javap -classpath . -p -c dt > /tmp/dt.txt 2>&1 || true
+          grep -n -B70 -A120 -E 'OfflineDeleteMenu|offlineReceive|Menu|menu' /tmp/dt.txt > "$GITHUB_WORKSPACE/audit_dt_menu.txt" || true
+          javap -classpath . -p -c k1d > /tmp/k1d.txt 2>&1 || true
+          grep -n -B70 -A140 -E 'NPC menu/action mismatch|Ninja (Cung|Ki|Kunai|Phi|Qu)|Menu|menu|phái|phai' /tmp/k1d.txt > "$GITHUB_WORKSPACE/audit_k1d_menu.txt" || true
+          javap -classpath . -p -c DoHoang091 > /tmp/main.txt 2>&1 || true
+          grep -n -B70 -A140 -E 'Ninja Cung|Ninja Ki|Ninja Kunai|Ninja Phi|Ninja Qu|Ninja ' /tmp/main.txt > "$GITHUB_WORKSPACE/audit_class_names.txt" || true
+          javap -classpath . -p -c k25 > /tmp/k25.txt 2>&1 || true
+          grep -n -B90 -A180 'getstatic.*Field e:\[I' /tmp/k25.txt > "$GITHUB_WORKSPACE/audit_k25_class_select.txt" || true
+          grep -n -B80 -A140 'Field DoHoang091\$k0\.' /tmp/k25.txt | head -1200 > "$GITHUB_WORKSPACE/audit_k25_player_fields.txt" || true
+      - name: Commit targeted reports
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add audit_manifest.txt audit_candidates.txt audit_k25.txt audit_player.txt audit_menu_javap.txt
-          git commit -m "chore: split fake class audit reports"
+          git add audit_offline_delete_menu.txt audit_offline_bridge.txt audit_dt_menu.txt audit_k1d_menu.txt audit_class_names.txt audit_k25_class_select.txt audit_k25_player_fields.txt
+          git commit -m "chore: inspect offline fake class integration"
           git push

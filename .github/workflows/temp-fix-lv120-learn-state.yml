@@ -20,89 +20,64 @@ jobs:
           jar='Nso_Offline_By_h0901.jar'
           out=jar+'.patched'
 
-          # Extract k25 for inspection/patching.
           with zipfile.ZipFile(jar,'r') as zin:
               original={n:zin.read(n) for n in zin.namelist()}
-              k25=bytearray(original['k25.class'])
+              b=bytearray(original['k25.class'])
 
-          # Parse constant pool and locate Fieldref k24.e and k24.i.
-          b=k25; o=0
+          o=0
           def u1():
               global o; v=b[o]; o+=1; return v
           def u2():
               global o; v=struct.unpack_from('>H',b,o)[0]; o+=2; return v
           def u4():
               global o; v=struct.unpack_from('>I',b,o)[0]; o+=4; return v
+
           assert u4()==0xCAFEBABE
           u2(); u2(); cp_count=u2(); cp=[None]*cp_count
           i=1
           while i<cp_count:
               tag=u1()
               if tag==1:
-                  ln=u2(); cp[i]=('Utf8',bytes(b[o:o+ln]).decode('utf-8','replace')); o+=ln
-              elif tag in (3,4): cp[i]=(tag,None); o+=4
-              elif tag in (5,6): cp[i]=(tag,None); o+=8; i+=1
-              elif tag==7: cp[i]=('Class',u2())
-              elif tag==8: cp[i]=('String',u2())
-              elif tag in (9,10,11): cp[i]=(tag,u2(),u2())
-              elif tag==12: cp[i]=('NT',u2(),u2())
-              elif tag==15: cp[i]=(tag,u1(),u2())
-              elif tag==16: cp[i]=(tag,u2())
-              elif tag==18: cp[i]=(tag,u2(),u2())
-              else: raise RuntimeError(f'cp tag {tag}')
+                  ln=u2(); cp[i]=bytes(b[o:o+ln]).decode('utf-8','replace'); o+=ln
+              elif tag in (3,4): o+=4
+              elif tag in (5,6): o+=8; i+=1
+              elif tag in (7,8,16,19,20): o+=2
+              elif tag in (9,10,11,12,17,18): o+=4
+              elif tag==15: o+=3
+              else: raise RuntimeError(f'unsupported cp tag {tag}')
               i+=1
 
-          def utf(idx): return cp[idx][1] if cp[idx] and cp[idx][0]=='Utf8' else None
-          def field_name(idx):
-              e=cp[idx]
-              if not e or e[0]!=9: return None
-              _,ci,nti=e
-              cls=utf(cp[ci][1])
-              nt=cp[nti]
-              return cls,utf(nt[1]),utf(nt[2])
-
-          e_ref=i_ref=None
-          for idx in range(1,cp_count):
-              info=field_name(idx)
-              if info==('k24','e','[B'): e_ref=idx
-              if info==('k24','i','[B'): i_ref=idx
-          if e_ref is None or i_ref is None:
-              raise RuntimeError(f'missing refs e={e_ref} i={i_ref}')
-
-          # Locate method g(II)Z Code attribute and patch the lv120-only getfield.
-          # Skip class header remainder from current offset o.
-          o += 6
-          interfaces=u2(); o += 2*interfaces
-          fields=u2()
-          for _ in range(fields):
-              o += 6; ac=u2()
+          # class header / interfaces / fields
+          o+=6
+          ni=u2(); o+=2*ni
+          nf=u2()
+          for _ in range(nf):
+              o+=6; ac=u2()
               for __ in range(ac): u2(); ln=u4(); o+=ln
-          methods=u2(); changed=0
-          for _ in range(methods):
-              o += 2; name_i=u2(); desc_i=u2(); ac=u2()
-              name=utf(name_i); desc=utf(desc_i)
+
+          # Find g(II)Z. Replace ONLY bytecode offsets 92..104:
+          # old: aload 4; getfield k24.e; iconst_1; baload; sipush 255; iand; istore 5
+          # new: iconst_1; istore 5; NOP x10
+          nm=u2(); changed=0
+          for _ in range(nm):
+              o+=2; name_i=u2(); desc_i=u2(); ac=u2()
+              name=cp[name_i]; desc=cp[desc_i]
               for __ in range(ac):
-                  attr_i=u2(); ln=u4(); start=o
-                  if name=='g' and desc=='(II)Z' and utf(attr_i)=='Code':
-                      p=o; p+=2; p+=2; clen=struct.unpack_from('>I',b,p)[0]; p+=4
-                      code_start=p; code=bytes(b[p:p+clen])
-                      old=bytes([0xB4,(e_ref>>8)&255,e_ref&255])
-                      new=bytes([0xB4,(i_ref>>8)&255,i_ref&255])
-                      # Only the lv120 branch should read k24.e directly here.
-                      hits=[]; pos=0
-                      while True:
-                          q=code.find(old,pos)
-                          if q<0: break
-                          hits.append(q); pos=q+1
-                      # Require the known lv120 branch near bytecode offset 94.
-                      target=[q for q in hits if 80 <= q <= 120]
-                      if len(target)!=1:
-                          raise RuntimeError(f'expected one lv120 k24.e getfield near 94, hits={hits}')
-                      q=target[0]
-                      b[code_start+q:code_start+q+3]=new
+                  ai=u2(); ln=u4(); start=o
+                  if name=='g' and desc=='(II)Z' and cp[ai]=='Code':
+                      p=start+4
+                      clen=struct.unpack_from('>I',b,p)[0]; p+=4
+                      code_start=p
+                      if clen <= 105: raise RuntimeError('g(II)Z unexpectedly short')
+                      old=bytes(b[code_start+92:code_start+105])
+                      # Validate exact instruction shape, allowing constant-pool index bytes to vary.
+                      if not (old[0:2]==bytes([0x19,0x04]) and old[2]==0xB4 and old[5]==0x04 and old[6]==0x33 and old[7:10]==bytes([0x11,0x00,0xFF]) and old[10]==0x7E and old[11:13]==bytes([0x36,0x05])):
+                          raise RuntimeError('lv120 learned-value bytecode pattern changed: '+old.hex())
+                      new=bytes([0x04,0x36,0x05]) + bytes([0x00])*10
+                      b[code_start+92:code_start+105]=new
                       changed+=1
                   o=start+ln
-          if changed!=1: raise RuntimeError(f'changed methods={changed}')
+          if changed!=1: raise RuntimeError(f'expected one g(II)Z patch, got {changed}')
 
           with zipfile.ZipFile(jar,'r') as zin, zipfile.ZipFile(out,'w') as zout:
               changed_entries=[]
@@ -111,19 +86,24 @@ jobs:
                   if payload != original[info.filename]: changed_entries.append(info.filename)
                   zout.writestr(info,payload)
           if changed_entries != ['k25.class']:
-              raise RuntimeError(f'unexpected changed entries {changed_entries}')
+              raise RuntimeError(f'unexpected changed entries: {changed_entries}')
           with zipfile.ZipFile(out,'r') as z:
-              if z.testzip(): raise RuntimeError('CRC failure')
+              bad=z.testzip()
+              if bad: raise RuntimeError(f'CRC failure: {bad}')
               open('/tmp/k25.class','wb').write(z.read('k25.class'))
           os.replace(out,jar)
 
           subprocess.run(['javap','-p','-c','/tmp/k25.class'],stdout=open('/tmp/k25.txt','w'),check=True)
           text=open('/tmp/k25.txt').read()
-          # Validation: lv120 branch must now read k24.i at row 1, while k24 runtime lookup is untouched.
           m=re.search(r'static boolean g\(int, int\).*?static boolean b\(',text,re.S)
-          if not m or 'Field k24.i:[B' not in m.group(0):
-              raise RuntimeError('validation failed: lv120 branch does not read k24.i')
-          print('Patched only k25 lv120 learn row: e[1] learned-point -> i[1] row marker (1).')
+          if not m: raise RuntimeError('cannot locate patched g(II)Z in javap')
+          block=m.group(0)
+          # Must still contain lv120 ID guard 85..90 and now assign local 5 directly to 1.
+          if 'bipush        85' not in block or 'bipush        90' not in block:
+              raise RuntimeError('lv120 ID guard missing')
+          if not re.search(r'92:\s+iconst_1\s+93:\s+istore\s+5',block):
+              raise RuntimeError('row=1 patch validation failed')
+          print('Validated: lv120 IDs 85-90 now persist learned row index 1; only k25.class changed.')
 
       - name: Commit corrected JAR only
         shell: bash

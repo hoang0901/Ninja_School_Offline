@@ -1,4 +1,4 @@
-name: Isolate skill 120 persistence
+name: Inspect k24 point lookup
 on:
   push:
     branches: [fix-skill120-1125-1130]
@@ -10,47 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect save/load methods
+      - name: Dump k24 lookup
         shell: bash
         run: |
           set -euo pipefail
           JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          WORK=/tmp/s120persist
-          LOG="$GITHUB_WORKSPACE/skill120_persistence_focus.txt"
-          exec > >(tee "$LOG") 2>&1
-          rm -rf "$WORK" && mkdir -p "$WORK/jar"
-          (cd "$WORK/jar" && jar xf "$JAR")
-          cd "$WORK/jar"
-          echo '=== k0 signatures ==='
-          javap -classpath . -p k0 | grep -n 'DoHoang091\$k0' || true
-          echo '=== k0 bytecode around calls with DoHoang091$k0 ==='
-          javap -classpath . -c -p k0 | grep -n -B30 -A220 'DoHoang091\$k0' | head -n 5000 || true
-          echo '=== k25 save/load portions bE/bF/bG ==='
-          javap -classpath . -c -p k25 > "$WORK/k25.txt"
-          grep -n -B80 -A180 'Field DoHoang091\$k0.bE' "$WORK/k25.txt" | head -n 6000 || true
-          echo '=== methods invoking k0.a(state) ==='
-          grep -n -B50 -A80 'Method k0.a:(LDoHoang091\$k0;)V' "$WORK/k25.txt" | head -n 3000 || true
-          echo '=== skill template 85-90 point lookup ==='
-          cat > "$WORK/Test.java" <<'JAVA'
-          import java.lang.reflect.*;
-          public class Test{
-            public static void main(String[]a)throws Exception{
-              Class<?> c=Class.forName("k25");Method g=c.getDeclaredMethod("g",int.class);g.setAccessible(true);
-              for(int id=85;id<=90;id++){
-                Object t=g.invoke(null,id);Method p=t.getClass().getDeclaredMethod("a",int.class);p.setAccessible(true);
-                System.out.println("template="+id+" point0skill="+p.invoke(t,0)+" point1skill="+p.invoke(t,1));
-              }
-            }
-          }
-          JAVA
-          javac -classpath "$JAR" "$WORK/Test.java"
-          java -classpath "$JAR:$WORK" Test
+          LOG="$GITHUB_WORKSPACE/skill120_k24_lookup.txt"
+          rm -rf /tmp/k24 && mkdir /tmp/k24 && (cd /tmp/k24 && jar xf "$JAR")
+          cd /tmp/k24
+          {
+            echo '=== k24 signatures ==='
+            javap -classpath . -p k24
+            echo '=== k24 bytecode ==='
+            javap -classpath . -c -p k24
+          } > "$LOG"
+          cat "$LOG"
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_persistence_focus.txt || true
-          git commit -m 'chore: isolate skill 120 persistence' || exit 0
+          git add skill120_k24_lookup.txt || true
+          git commit -m 'chore: inspect k24 point lookup' || exit 0
           git push origin fix-skill120-1125-1130

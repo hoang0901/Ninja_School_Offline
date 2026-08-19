@@ -1,4 +1,4 @@
-name: Inspect skill 120 exact mapping
+name: Compare skill 120 books and templates
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,42 +10,53 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect exact source skill 120 flow
+      - name: Compare exact source and JAR data
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_exact.txt"
+          LOG="$GITHUB_WORKSPACE/skill120_compare.txt"
           exec > >(tee "$LOG") 2>&1
           git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git /tmp/ref >/dev/null 2>&1
           ROOT=/tmp/ref/NinjaSchoolOffline_by_dohoang091
-          echo '=== Char.learnSkill 7280-7460 ==='
-          sed -n '7280,7460p' "$ROOT/src/main/java/Exe_Z/model/Char.java"
-          echo '=== Char surrounding useItem calls 3540-3620 ==='
-          sed -n '3540,3620p' "$ROOT/src/main/java/Exe_Z/model/Char.java"
-          echo '=== Char surrounding second learnSkill 4890-4980 ==='
-          sed -n '4890,4980p' "$ROOT/src/main/java/Exe_Z/model/Char.java"
-          echo '=== GameData skill loading/template APIs ==='
-          sed -n '150,380p' "$ROOT/src/main/java/Exe_Z/server/GameData.java"
-          echo '=== Skill.java ==='
-          cat "$ROOT/src/main/java/Exe_Z/skill/Skill.java"
-          echo '=== SkillTemplate.java ==='
-          cat "$ROOT/src/main/java/Exe_Z/skill/SkillTemplate.java"
-          echo '=== item rows likely skill books level 120 ==='
-          grep -nE "Sách.*120|sách.*120|võ công.*120|Võ công.*120" "$ROOT/SQL/nsoz.sql" | head -n 150 || true
-          echo '=== all item rows around 1177-1190 ==='
-          grep -nE '^\((1177|1178|1179|1180|1181|1182|1183|1184|1185|1186|1187|1188|1189|1190),' "$ROOT/SQL/nsoz.sql" | head -n 100 || true
-          echo '=== configs referencing SACH_VO_CONG_120 ==='
-          grep -RIn -E 'SACH_VO_CONG_120|1177|1178|1179|1180|1181|1182|1183|1184|1185|1186|1187|1188|1189|1190' "$ROOT" --exclude='nsoz.sql' | head -n 500 || true
-          echo '=== sql schema/table lines for skill ==='
-          grep -nEi 'CREATE TABLE.*skill|INSERT INTO.*skill|skill_template|skilltemplate|nclass' "$ROOT/SQL/nsoz.sql" | head -n 120 || true
-          echo '=== skill-related config files ==='
-          find "$ROOT" -type f | grep -Ei 'skill|class|nclass' | head -n 300 || true
+          echo '=== SOURCE item 1134-1139 ==='
+          grep -nE '^\((1134|1135|1136|1137|1138|1139),' "$ROOT/SQL/nsoz.sql" | head -n 100 || true
+          echo '=== SOURCE pool SACH_VO_CONG_120 JSON ==='
+          find "$ROOT" -type f -path '*SACH_VO_CONG_120.json' -print -exec cat {} \; || true
+          echo '=== SOURCE learn mapping ==='
+          sed -n '7390,7445p' "$ROOT/src/main/java/Exe_Z/model/Char.java"
+          echo '=== SOURCE SQL lines templates 85-90 / skills ==='
+          grep -nE '^\((85|86|87|88|89|90),' "$ROOT/SQL/nsoz.sql" | head -n 250 || true
+          grep -nEi 'INSERT INTO `?(skill|skill_template|nclass)' "$ROOT/SQL/nsoz.sql" | head -n 80 || true
+          echo '=== JAR table rows ==='
+          cat >/tmp/Dump.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Dump{
+            static Object table(String name)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);return ct.newInstance(name);}
+            static Object find(Object t,int id)throws Exception{Method m=t.getClass().getDeclaredMethod("find",int.class);m.setAccessible(true);return m.invoke(t,id);}
+            static void row(String tn,Object t,int id)throws Exception{try{Object r=find(t,id);if(r==null){System.out.println(tn+" "+id+" NULL");return;}Field ns=r.getClass().getDeclaredField("numbers"),ss=r.getClass().getDeclaredField("strings");ns.setAccessible(true);ss.setAccessible(true);System.out.println(tn+" "+id+" nums="+Arrays.toString((long[])ns.get(r))+" strs="+Arrays.deepToString((Object[])ss.get(r)));}catch(Throwable x){System.out.println(tn+" "+id+" ERR "+x);}}
+            public static void main(String[]a)throws Exception{
+              for(String tn:new String[]{"item","skill","skill_template","nj_skill","nclass"})try{Object t=table(tn);System.out.println("TABLE "+tn+" OK");if(tn.equals("item")){for(int i=1134;i<=1139;i++)row(tn,t,i);}else{for(int i=85;i<=90;i++)row(tn,t,i);}}catch(Throwable x){System.out.println("TABLE "+tn+" ERR "+x);}
+            }
+          }
+          JAVA
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/Dump.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" Dump
+          echo '=== JAR classes with learn/book messages and 1134-1139 ==='
+          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
+          cd /tmp/jar
+          for c in *.class; do
+            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
+            if printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(1134|1135|1136|1137|1138|1139)|Chiêu này đã học|Sách nay không phù hợp'; then
+              echo "===== ${c%.class} ====="
+              printf '%s\n' "$j" | grep -n -B70 -A140 -E 'sipush[[:space:]]+(1134|1135|1136|1137|1138|1139)|Chiêu này đã học|Sách nay không phù hợp' | head -n 1800 || true
+            fi
+          done | head -n 8000
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_exact.txt || true
-          git commit -m 'chore: inspect exact skill 120 mapping' || exit 0
+          git add skill120_compare.txt || true
+          git commit -m 'chore: compare skill 120 books and templates' || exit 0
           git push origin fix-skill120-learning

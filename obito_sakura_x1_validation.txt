@@ -1,0 +1,27 @@
+220,offline/x1/effect/220.png,-849951849,-1,-1,-1,-1,-1
+221,offline/x1/effect/221.png,-849028328,-1,-1,-1,-1,-1
+222,offline/x1/effect/222.png,-848104807,-1,-1,-1,-1,-1
+223,offline/x1/effect/223.png,-847181286,-1,-1,-1,-1,-1
+224,offline/x1/effect/224.png,-846257765,-1,-1,-1,-1,-1
+225,offline/x1/effect/225.png,-845334244,-1,-1,-1,-1,-1
+226,offline/x1/effect/226.png,-844410723,-1,-1,-1,-1,-1
+227,offline/x1/effect/227.png,-843487202,-1,-1,-1,-1,-1
+228,offline/x1/effect/228.png,-842563681,-1,-1,-1,-1,-1
+229,offline/x1/effect/229.png,-841640160,-1,-1,-1,-1,-1
+230,offline/x1/effect/230.png,-821322698,-1,-1,-1,-1,-1
+231,offline/x1/effect/231.png,-820399177,-1,-1,-1,-1,-1
+232,offline/x1/effect/232.png,-819475656,-1,-1,-1,-1,-1
+233,offline/x1/effect/233.png,-818552135,-1,-1,-1,-1,-1
+234,offline/x1/effect/234.png,-817628614,-1,-1,-1,-1,-1
+235,offline/x1/effect/235.png,-816705093,-1,-1,-1,-1,-1
+236,offline/x1/effect/236.png,-815781572,-1,-1,-1,-1,-1
+237,offline/x1/effect/237.png,-814858051,-1,-1,-1,-1,-1
+238,offline/x1/effect/238.png,-813934530,-1,-1,-1,-1,-1
+239,offline/x1/effect/239.png,-813011009,-1,-1,-1,-1,-1
+240,offline/x1/effect/240.png,-792693547,-1,-1,-1,-1,-1
+241,offline/x1/effect/241.png,-791770026,-1,-1,-1,-1,-1
+242,offline/x1/effect/242.png,-790846505,-1,-1,-1,-1,-1
+243,offline/x1/effect/243.png,-789922984,-1,-1,-1,-1,-1
+244,offline/x1/effect/244.png,-788999463,-1,-1,-1,-1,-1
+245,offline/x1/effect/245.png,-788075942,-1,-1,-1,-1,-1
+no neighboring x1/effect asset found

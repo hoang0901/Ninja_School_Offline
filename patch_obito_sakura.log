@@ -1,0 +1,2 @@
+Exception in thread "main" java.lang.RuntimeException: Missing packed resource for Small2715
+	at LocateResources.main(LocateResources.java:15)

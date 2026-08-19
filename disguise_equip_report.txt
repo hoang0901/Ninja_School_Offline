@@ -1,0 +1,1265 @@
+=== item 1173 ===
+types=[1, 3, 1, 1, 3, 1, 1, 1, 1, 1]
+numbers=[1173, 0, 9, 2, 0, 102, 13405, -1, -1, 0]
+strings=[null, Minh Giác Cốt Ngọc Phù, null, null, , null, null, null, null, null]
+=== item 1174 ===
+types=[1, 3, 1, 1, 3, 1, 1, 1, 1, 1]
+numbers=[1174, 0, 7, 2, 0, 104, 13406, -1, -1, 0]
+strings=[null, Minh Giác Cốt Ngọc Bội, null, null, , null, null, null, null, null]
+ERR nj_item 1173 java.lang.reflect.InvocationTargetException
+ERR nj_item 1174 java.lang.reflect.InvocationTargetException
+ERR item_template 1173 java.lang.reflect.InvocationTargetException
+ERR item_template 1174 java.lang.reflect.InvocationTargetException
+
+=== CLASSES CONTAINING fashion / 1173 / 1174 / 230 / 233 ===
+===== Class_gd =====
+- Choose Equiptment and Gem
+"- Choose Equiptment and stone only
+'- Move to inventory to choose Equipment
+'- Upgrade equipment successful 1 times.
+@After upgrade this item will be locked. Do you want to continue?
+@After using this item, it will be locked. Do you want to use it?
+"Can not split the unupgraded item.
+!Choose item and coins to exchange
+5Choose the equipment that you want to split the Stone
+Del Item
+&Do you really want to split this item?
+&Do you want to buy item with # coins ?
+'Do you want to sell item with # coins ?
+Enhance equipment
+	Equipment
+Equipment 1
+Equipment 2
+'Equipment enhanced to max level already
+"Equipment has been split, you get 
+Fashion Store
++I will help you extract gem from this item.
+Item is sent for trading
+Items for Trading are full.
+Items, accessories and stones
++Just choose Equipment and conversion items.
+3Just choose Stone, Equipment and upgrade insurance.
+!Just transfer same type equipment
+Only select unlocked items
+/Only select unlocked items that haven't expired
+)Only upgraded item or equipment to split.
+WPrecautionary measures cost money but will Increase the success rate of upgrading items
+%Select items to view the information.
+?Sold items can not be recovered. Do you want to sell this item?
+Split Equipment
+!Success,  equipped with level up 
+This equipment can not Enhance
+1This function is not available for this equipment
+This item was locked.
+Throw Item
+Use special items to upgrade
+_When separated from the stone equipped, you will collect half amount of stone at the beginning.
+IYou do not have any special weapons. Go to Menu/Status/Equipment to check
+0You don't have enough coins to upgrade equipment
+4You don't have enough gold bars to upgrade equipment
+%You level is too low to use this item
+$Your equipment has reached max level
+equipment level
+equipment upgraded maximum
+!failed, return level of equipment
+item
+public final class Class_gd {
+  public static java.lang.String a;
+
+  public static java.lang.String b;
+
+  public static java.lang.String c;
+
+  public static java.lang.String d;
+
+  public static java.lang.String e;
+
+  public static java.lang.String[] f;
+
+  public static java.lang.String g;
+
+  public static java.lang.String h;
+
+  public static java.lang.String i;
+
+  public static java.lang.String j;
+
+  private static int[] sr;
+
+  public static java.lang.String[] k;
+
+  public static java.lang.String l;
+
+  public static java.lang.String m;
+
+  public static java.lang.String n;
+
+  public static java.lang.String o;
+
+  public static java.lang.String p;
+
+  public static java.lang.String[] q;
+
+  public static java.lang.String r;
+
+  public static java.lang.String s;
+
+  public static java.lang.String t;
+
+  public static java.lang.String u;
+
+  public static java.lang.String v;
+
+  public static java.lang.String w;
+
+  public static java.lang.String[] x;
+
+  public static java.lang.String y;
+
+  public static java.lang.String z;
+
+  public static java.lang.String aa;
+
+  public static java.lang.String ab;
+
+  public static java.lang.String ac;
+
+  public static java.lang.String[] ad;
+
+  public static java.lang.String ae;
+
+  public static java.lang.String af;
+
+  public static java.lang.String ag;
+
+  public static java.lang.String ah;
+
+  public static java.lang.String ai;
+
+  public static java.lang.String aj;
+
+  public static java.lang.String ak;
+
+  public static java.lang.String al;
+
+  public static java.lang.String am;
+
+  public static java.lang.String an;
+
+  public static java.lang.String[][] ao;
+
+  public static java.lang.String ap;
+
+  public static java.lang.String aq;
+
+  public static java.lang.String ar;
+
+  public static java.lang.String[] as;
+
+  public static java.lang.String at;
+
+  public static java.lang.String au;
+
+  public static java.lang.String av;
+
+  public static java.lang.String aw;
+
+  public static java.lang.String ax;
+
+  public static java.lang.String ay;
+
+  public static java.lang.String[] az;
+
+  public static java.lang.String ba;
+
+  public static java.lang.String bb;
+
+  public static java.lang.String bc;
+
+  public static java.lang.String bd;
+
+  public static java.lang.String be;
+
+  public static java.lang.String bf;
+
+  public static java.lang.String bg;
+
+  public static java.lang.String bh;
+
+  public static java.lang.String[] bi;
+
+  public static java.lang.String bj;
+
+  public static java.lang.String bk;
+
+  public static java.lang.String[] bl;
+
+  public static java.lang.String bm;
+
+  public static java.lang.String[] bn;
+
+  public static java.lang.String bo;
+
+  public static java.lang.String bp;
+
+  public static java.lang.String bq;
+
+  public static java.lang.String[] br;
+
+  public static java.lang.String[] bs;
+
+  public static java.lang.String[] bt;
+
+  public static java.lang.String bu;
+
+  public static java.lang.String bv;
+
+  public static java.lang.String bw;
+
+  public static java.lang.String[] bx;
+
+  public static java.lang.String by;
+
+  public static java.lang.String[] bz;
+
+  public static java.lang.String ca;
+
+  public static java.lang.String cb;
+
+  public static java.lang.String[] cc;
+
+  public static java.lang.String cd;
+
+  public static java.lang.String ce;
+
+  public static java.lang.String cf;
+
+  public static java.lang.String[] cg;
+
+  public static java.lang.String ch;
+
+  public static java.lang.String ci;
+
+  public static java.lang.String cj;
+
+  public static java.lang.String ck;
+
+  public static java.lang.String cl;
+
+  public static java.lang.String cm;
+
+  public static java.lang.String[] cn;
+
+  public static java.lang.String co;
+
+  public static java.lang.String cp;
+
+  public static java.lang.String cq;
+
+  public static java.lang.String cr;
+
+  public static java.lang.String cs;
+
+  public static java.lang.String ct;
+
+  public static java.lang.String cu;
+
+  public static java.lang.String[] cv;
+
+  public static java.lang.String cw;
+
+  public static java.lang.String cx;
+
+  public static java.lang.String cy;
+
+  public static java.lang.String cz;
+
+  public static java.lang.String da;
+
+  public static java.lang.String db;
+
+  public static java.lang.String dc;
+
+  public static java.lang.String dd;
+
+  public static java.lang.String de;
+
+  public static java.lang.String df;
+
+  public static java.lang.String[] dg;
+
+  public static java.lang.String dh;
+
+  public static java.lang.String di;
+
+  public static java.lang.String dj;
+
+  public static java.lang.String dk;
+
+  public static java.lang.String dl;
+
+  public static java.lang.String dm;
+
+  public static java.lang.String[] dn;
+
+  public static java.lang.String doa;
+
+  public static java.lang.String dp;
+
+  public static java.lang.String dq;
+
+  public static java.lang.String dr;
+
+  public static java.lang.String ds;
+
+  public static java.lang.String dt;
+
+  public static java.lang.String du;
+
+  public static java.lang.String[] dv;
+
+  public static java.lang.String[] dw;
+
+  public static java.lang.String[] dx;
+
+  public static java.lang.String dy;
+
+  public static java.lang.String dz;
+
+  public static java.lang.String[] ea;
+
+  public static java.lang.String eb;
+
+  public static java.lang.String ec;
+
+  public static java.lang.String ed;
+
+  public static java.lang.String ee;
+
+  public static java.lang.String ef;
+
+  public static java.lang.String eg;
+
+  public static java.lang.String[] eh;
+
+  public static java.lang.String[] ei;
+
+  public static java.lang.String ej;
+
+  public static java.lang.String ek;
+
+  public static java.lang.String el;
+
+  public static java.lang.String em;
+
+  public static java.lang.String[] en;
+
+  public static java.lang.String eo;
+
+  public static java.lang.String[] ep;
+
+  public static java.lang.String eq;
+
+  public static java.lang.String er;
+
+  public static java.lang.String es;
+
+  public static java.lang.String et;
+
+  public static int eu;
+
+  public static java.lang.String[][] ev;
+
+  public static java.lang.String ew;
+
+  public static java.lang.String ex;
+
+  public static java.lang.String ey;
+
+  public static java.lang.String ez;
+
+  public static java.lang.String fa;
+
+  public static java.lang.String fb;
+
+  public static java.lang.String fc;
+
+  public static java.lang.String fd;
+
+  public static java.lang.String fe;
+
+  public static java.lang.String ff;
+
+  public static java.lang.String fg;
+
+  public static java.lang.String fh;
+
+  public static java.lang.String fi;
+
+  public static java.lang.String fj;
+
+  public static java.lang.String fk;
+
+  public static java.lang.String fl;
+
+  public static java.lang.String fm;
+
+  public static java.lang.String fn;
+
+  public static java.lang.String fo;
+
+  public static java.lang.String[] fp;
+
+  public static java.lang.String fq;
+
+  public static java.lang.String fr;
+
+  public static java.lang.String fs;
+
+  public static java.lang.String[] ft;
+
+  public static java.lang.String[] fu;
+
+  public static java.lang.String fv;
+
+  public static java.lang.String fw;
+
+  public static java.lang.String fx;
+
+  public static java.lang.String[] fy;
+
+  public static java.lang.String fz;
+
+  public static java.lang.String ga;
+
+  public static java.lang.String gb;
+
+  public static java.lang.String[] gc;
+
+  public static java.lang.String gd;
+
+  public static java.lang.String ge;
+
+  public static java.lang.String gf;
+
+  public static java.lang.String gg;
+
+  public static java.lang.String gh;
+
+  public static java.lang.String gi;
+
+  public static java.lang.String[] gj;
+
+  public static java.lang.String gk;
+
+  public static java.lang.String[] gl;
+
+  public static java.lang.String[] gm;
+
+  public static java.lang.String gn;
+
+  public static java.lang.String[] go;
+
+  public static java.lang.String gp;
+
+  public static java.lang.String[] gq;
+
+  public static java.lang.String gr;
+
+  public static java.lang.String gs;
+
+  public static java.lang.String gt;
+
+  public static java.lang.String gu;
+
+  public static java.lang.String gv;
+
+  public static java.lang.String gw;
+
+  public static java.lang.String gx;
+
+  public static java.lang.String[] gy;
+
+  public static java.lang.String gz;
+
+  public static java.lang.String ha;
+
+  public static java.lang.String hb;
+
+  public static java.lang.String hc;
+
+  public static java.lang.String hd;
+
+  public static java.lang.String he;
+
+  public static java.lang.String hf;
+
+  public static java.lang.String hg;
+
+  public static java.lang.String hh;
+
+  public static java.lang.String[] hi;
+
+  public static java.lang.String hj;
+
+  public static java.lang.String hk;
+
+  public static java.lang.String hl;
+
+  public static java.lang.String[] hm;
+
+  public static java.lang.String hn;
+
+  public static java.lang.String ho;
+
+  public static java.lang.String hp;
+
+  public static java.lang.String hq;
+
+  public static java.lang.String hr;
+
+  public static java.lang.String hs;
+
+  public static java.lang.String[] ht;
+
+  public static java.lang.String hu;
+
+  public static java.lang.String hv;
+
+  public static java.lang.String hw;
+
+  public static java.lang.String[] hx;
+
+  public static java.lang.String hy;
+
+  public static java.lang.String hz;
+
+  public static java.lang.String ia;
+
+  public static java.lang.String[] ib;
+
+  public static java.lang.String ic;
+
+  public static java.lang.String id;
+
+  public static java.lang.String ie;
+
+  public static java.lang.String ifa;
+
+  public static java.lang.String ig;
+
+  public static java.lang.String ih;
+
+  public static java.lang.String ii;
+
+  public static java.lang.String ij;
+
+  public static java.lang.String[] ik;
+
+  public static java.lang.String il;
+
+  public static java.lang.String im;
+
+  public static java.lang.String in;
+
+  public static java.lang.String io;
+
+  public static java.lang.String[] ip;
+
+  public static java.lang.String iq;
+
+  public static java.lang.String ir;
+
+  public static java.lang.String is;
+
+  public static java.lang.String it;
+
+  public static java.lang.String[] iu;
+
+  public static java.lang.String[] iv;
+
+  public static java.lang.String iw;
+
+  public static java.lang.String ix;
+
+  public static java.lang.String iy;
+
+  public static java.lang.String iz;
+
+  public static java.lang.String ja;
+
+  public static java.lang.String jb;
+
+  public static java.lang.String jc;
+
+  public static java.lang.String jd;
+
+  public static java.lang.String je;
+
+  public static java.lang.String jf;
+
+  public static java.lang.String[] jg;
+
+  public static java.lang.String jh;
+
+  public static java.lang.String ji;
+
+  public static java.lang.String jj;
+
+  public static java.lang.String jk;
+
+  public static java.lang.String jl;
+
+  public static java.lang.String jm;
+
+  public static java.lang.String jn;
+
+  public static java.lang.String jo;
+
+  public static java.lang.String jp;
+
+  public static java.lang.String jq;
+
+  public static java.lang.String jr;
+
+  public static java.lang.String js;
+
+  public static java.lang.String jt;
+
+  public static java.lang.String ju;
+
+  public static java.lang.String[] jv;
+
+  public static java.lang.String[] jw;
+
+  public static java.lang.String jx;
+
+  public static java.lang.String jy;
+
+  public static java.lang.String jz;
+
+  public static java.lang.String ka;
+
+  public static java.lang.String kb;
+
+  public static java.lang.String kc;
+
+  public static java.lang.String kd;
+
+  public static java.lang.String ke;
+
+  public static java.lang.String kf;
+
+  public static java.lang.String kg;
+
+  public static java.lang.String kh;
+
+  public static java.lang.String ki;
+
+  public static java.lang.String kj;
+
+  public static java.lang.String kk;
+
+  public static java.lang.String kl;
+
+  public static java.lang.String[] km;
+
+  public static java.lang.String kn;
+
+  public static java.lang.String[] ko;
+
+  public static java.lang.String[] kp;
+
+  public static java.lang.String kq;
+
+  public static java.lang.String[] kr;
+
+  public static java.lang.String ks;
+
+  public static java.lang.String kt;
+
+  public static java.lang.String ku;
+
+  public static java.lang.String kv;
+
+  public static java.lang.String kw;
+
+  public static java.lang.String kx;
+
+  public static java.lang.String ky;
+
+  public static java.lang.String[] kz;
+
+  public static java.lang.String la;
+
+  public static java.lang.String lb;
+
+  public static java.lang.String lc;
+
+  public static java.lang.String ld;
+
+  public static java.lang.String le;
+
+  public static java.lang.String lf;
+
+  public static java.lang.String lg;
+
+  public static java.lang.String lh;
+
+  public static java.lang.String li;
+
+  public static java.lang.String lj;
+
+  public static java.lang.String lk;
+
+  public static java.lang.String[] ll;
+
+  public static java.lang.String lm;
+
+  public static java.lang.String[] ln;
+
+  public static java.lang.String[] lo;
+
+  public static java.lang.String lp;
+
+  public static java.lang.String[] lq;
+
+  public static java.lang.String lr;
+
+  public static java.lang.String ls;
+
+  public static java.lang.String[] lt;
+
+  public static java.lang.String lu;
+
+  public static java.lang.String lv;
+
+  public static java.lang.String lw;
+
+  public static java.lang.String lx;
+
+  public static java.lang.String ly;
+
+  public static java.lang.String lz;
+
+  public static java.lang.String ma;
+
+  public static java.lang.String mb;
+
+  public static java.lang.String mc;
+
+  public static java.lang.String[] md;
+
+  public static java.lang.String[] me;
+
+  public static java.lang.String mf;
+
+  public static java.lang.String[] mg;
+
+  public static java.lang.String mh;
+
+  public static java.lang.String mi;
+
+  public static java.lang.String mj;
+
+  public static java.lang.String mk;
+
+  public static java.lang.String ml;
+
+  public static java.lang.String[] mm;
+
+  public static java.lang.String mn;
+
+  public static java.lang.String mo;
+
+  public static java.lang.String mp;
+
+  public static java.lang.String[] mq;
+
+  public static java.lang.String mr;
+
+  public static java.lang.String ms;
+
+  public static java.lang.String mt;
+
+  public static java.lang.String mu;
+
+  public static java.lang.String mv;
+
+  public static java.lang.String[] mw;
+
+  public static java.lang.String mx;
+
+  public static java.lang.String my;
+
+  public static java.lang.String mz;
+
+  public static java.lang.String na;
+
+  public static java.lang.String nb;
+
+  public static java.lang.String nc;
+
+  public static java.lang.String nd;
+
+  public static java.lang.String[] ne;
+
+  public static java.lang.String nf;
+
+  public static java.lang.String ng;
+
+  public static java.lang.String nh;
+
+  public static java.lang.String ni;
+
+  public static java.lang.String[] nj;
+
+  public static java.lang.String nk;
+
+  public static java.lang.String nl;
+
+  public static java.lang.String nm;
+
+  public static java.lang.String nn;
+
+  public static java.lang.String no;
+
+  public static java.lang.String np;
+
+  public static java.lang.String nq;
+
+  public static java.lang.String nr;
+
+  public static java.lang.String ns;
+
+  public static java.lang.String nt;
+
+  public static java.lang.String nu;
+
+  public static java.lang.String nv;
+
+  public static java.lang.String nw;
+
+  public static java.lang.String nx;
+
+  public static java.lang.String ny;
+
+  public static java.lang.String nz;
+
+  public static java.lang.String[] oa;
+
+  public static java.lang.String ob;
+
+  public static java.lang.String[][] oc;
+
+  public static java.lang.String od;
+
+  public static java.lang.String oe;
+
+  public static java.lang.String of;
+
+  public static java.lang.String[] og;
+
+  public static java.lang.String oh;
+
+  public static java.lang.String[] oi;
+
+  public static java.lang.String oj;
+
+  public static java.lang.String ok;
+
+  public static java.lang.String ol;
+
+  public static java.lang.String[] om;
+
+  public static java.lang.String on;
+
+  public static java.lang.String[] oo;
+
+  public static java.lang.String op;
+
+  public static java.lang.String[] oq;
+
+  public static java.lang.String or;
+
+  public static java.lang.String os;
+
+  public static java.lang.String ot;
+
+  public static java.lang.String[] ou;
+
+  public static java.lang.String ov;
+
+  public static java.lang.String[] ow;
+
+  public static java.lang.String ox;
+
+  public static java.lang.String oy;
+
+  public static java.lang.String[] oz;
+
+  public static java.lang.String[] pa;
+
+  public static java.lang.String[] pb;
+
+  public static java.lang.String pc;
+
+  public static java.lang.String pd;
+
+  public static java.lang.String pe;
+
+  public static java.lang.String pf;
+
+  public static java.lang.String pg;
+
+  public static java.lang.String ph;
+
+  public static java.lang.String pi;
+
+  public static java.lang.String[] pj;
+
+  public static java.lang.String pk;
+
+  public static java.lang.String pl;
+
+  public static java.lang.String pm;
+
+  public static java.lang.String[] pn;
+
+  public static java.lang.String po;
+
+  public static java.lang.String pp;
+
+  public static java.lang.String pq;
+
+  public static java.lang.String[] pr;
+
+  public static java.lang.String ps;
+
+  public static java.lang.String pt;
+
+  public static java.lang.String pu;
+
+  public static java.lang.String pv;
+
+  public static java.lang.String pw;
+
+  public static java.lang.String px;
+
+  public static java.lang.String py;
+
+  public static java.lang.String pz;
+
+  public static java.lang.String qa;
+
+  public static java.lang.String qb;
+
+  public static java.lang.String qc;
+
+  public static java.lang.String qd;
+
+  public static java.lang.String qe;
+
+  public static java.lang.String qf;
+
+  public static java.lang.String[] qg;
+
+  public static java.lang.String qh;
+
+  public static java.lang.String qi;
+
+  public static java.lang.String qj;
+
+  public static java.lang.String qk;
+
+  public static java.lang.String ql;
+
+  public static java.lang.String qm;
+
+  public static java.lang.String qn;
+
+  public static java.lang.String qo;
+
+  public static java.lang.String qp;
+
+  public static java.lang.String qq;
+
+  public static java.lang.String qr;
+
+  public static java.lang.String qs;
+
+  public static java.lang.String[] qt;
+
+  public static java.lang.String[] qu;
+
+  public static java.lang.String qv;
+
+  public static java.lang.String qw;
+
+  public static java.lang.String qx;
+
+  public static java.lang.String qy;
+
+  public static java.lang.String[][] qz;
+
+  public static java.lang.String[] ra;
+
+  public static java.lang.String rb;
+
+  public static java.lang.String rc;
+
+  public static java.lang.String rd;
+
+  public static java.lang.String[] re;
+
+  public static java.lang.String[] rf;
+
+  public static java.lang.String rg;
+
+  public static java.lang.String rh;
+
+  public static java.lang.String ri;
+
+  public static java.lang.String rj;
+
+  public static java.lang.String rk;
+
+  public static java.lang.String rl;
+
+  public static java.lang.String rm;
+
+  public static java.lang.String rn;
+
+  public static java.lang.String ro;
+
+  public static java.lang.String rp;
+
+  public static java.lang.String rq;
+
+  public static java.lang.String[] rr;
+
+  public static java.lang.String rs;
+
+  public static java.lang.String rt;
+
+  public static java.lang.String ru;
+
+  public static java.lang.String[] rv;
+
+  public static java.lang.String rw;
+
+  public static java.lang.String rx;
+
+  public static java.lang.String ry;
+
+  public static java.lang.String rz;
+
+  public static java.lang.String[] sa;
+
+  public static java.lang.String sb;
+
+  public static java.lang.String sc;
+
+  public static java.lang.String sd;
+
+  public static java.lang.String se;
+
+  public static java.lang.String sf;
+
+  public static java.lang.String sg;
+
+  public static java.lang.String[] sh;
+
+  public static java.lang.String si;
+
+  public static java.lang.String sj;
+
+  public static java.lang.String sk;
+
+  public static java.lang.String sl;
+
+  public static java.lang.String sm;
+
+  public static java.lang.String sn;
+
+  public static java.lang.String so;
+
+  public static java.lang.String sp;
+
+  public static java.lang.String sq;
+
+  static {};
+    Code:
+       0: invokestatic  #2102               // Method b:()V
+       3: getstatic     #2092               // Field sr:[I
+       6: bipush        10
+       8: iaload
+       9: anewarray     #1587               // class java/lang/String
+      12: dup
+      13: getstatic     #2092               // Field sr:[I
+      16: iconst_1
+      17: iaload
+      18: ldc_w         #364                // String Cấp 1
+      21: aastore
+      22: dup
+      23: getstatic     #2092               // Field sr:[I
+      26: iconst_2
+      27: iaload
+      28: ldc_w         #365                // String Cấp 10
+      31: aastore
+      32: dup
+      33: getstatic     #2092               // Field sr:[I
+      36: iconst_3
+      37: iaload
+      38: ldc_w         #369                // String Cấp 20
+      41: aastore
+      42: dup
+      43: getstatic     #2092               // Field sr:[I
+      46: iconst_4
+      47: iaload
+      48: ldc_w         #371                // String Cấp 30
+      51: aastore
+      52: dup
+      53: getstatic     #2092               // Field sr:[I
+      56: iconst_5
+      57: iaload
+      58: ldc_w         #373                // String Cấp 40
+      61: aastore
+      62: dup
+      63: getstatic     #2092               // Field sr:[I
+      66: bipush        6
+      68: iaload
+      69: ldc_w         #375                // String Cấp 50
+      72: aastore
+      73: dup
+      74: getstatic     #2092               // Field sr:[I
+      77: bipush        7
+      79: iaload
+      80: ldc_w         #377                // String Cấp 60
+      83: aastore
+      84: dup
+      85: getstatic     #2092               // Field sr:[I
+      88: bipush        8
+      90: iaload
+      91: ldc_w         #379                // String Cấp 70
+      94: aastore
+      95: dup
+      96: getstatic     #2092               // Field sr:[I
+      99: bipush        9
+     101: iaload
+     102: ldc_w         #382                // String Cấp 90
+     105: aastore
+     106: putstatic     #1744               // Field fu:[Ljava/lang/String;
+     109: ldc_w         #652                // String Không thể bán trang bị đã nâng cấp
+     112: putstatic     #1734               // Field fk:Ljava/lang/String;
+     115: ldc_w         #937                // String Quy định
+     118: putstatic     #1671               // Field db:Ljava/lang/String;
+     121: ldc_w         #1284               // String Xóa
+     124: putstatic     #2059               // Field rl:Ljava/lang/String;
+     127: ldc_w         #1098               // String Thêm
+     130: putstatic     #2057               // Field rj:Ljava/lang/String;
+     133: getstatic     #2092               // Field sr:[I
+     136: iconst_3
+     137: iaload
+     138: anewarray     #1587               // class java/lang/String
+     141: dup
+     142: getstatic     #2092               // Field sr:[I
+     145: iconst_1
+     146: iaload
+     147: ldc_w         #834                // String Nhặt đồ
+     150: aastore
+     151: dup
+     152: getstatic     #2092               // Field sr:[I
+     155: iconst_2
+     156: iaload
+     157: ldc_w         #577                // String Hành trang
+     160: aastore
+     161: putstatic     #1897               // Field ll:[Ljava/lang/String;
+     164: getstatic     #2092               // Field sr:[I
+     167: iconst_3
+     168: iaload
+     169: anewarray     #1587               // class java/lang/String
+     172: dup
+     173: getstatic     #2092               // Field sr:[I
+     176: iconst_1
+     177: iaload
+     178: ldc_w         #417                // String Del Item
+     181: aastore
+     182: dup
+     183: getstatic     #2092               // Field sr:[I
+     186: iconst_2
+     187: iaload
+     188: ldc_w         #577                // String Hành trang
+     191: aastore
+     192: putstatic     #1858               // Field k:[Ljava/lang/String;
+     195: getstatic     #2092               // Field sr:[I
+     198: iconst_3
+     199: iaload
+     200: anewarray     #1587               // class java/lang/String
+     203: dup
+     204: getstatic     #2092               // Field sr:[I
+     207: iconst_1
+     208: iaload
+     209: ldc_w         #1082               // String Throw Item
+     212: aastore
+     213: dup
+     214: getstatic     #2092               // Field sr:[I
+     217: iconst_2
+     218: iaload
+     219: ldc_w         #577                // String Hành trang
+     222: aastore
+     223: putstatic     #1967               // Field oa:[Ljava/lang/String;
+     226: getstatic     #2092               // Field sr:[I
+     229: bipush        13
+     231: iaload
+     232: anewarray     #1587               // class java/lang/String
+     235: dup
+     236: getstatic     #2092               // Field sr:[I
+     239: iconst_1
+     240: iaload
+     241: ldc_w         #364                // String Cấp 1
+     244: aastore
+     245: dup
+     246: getstatic     #2092               // Field sr:[I
+     249: iconst_2
+     250: iaload
+     251: ldc_w         #368                // String Cấp 2
+     254: aastore
+     255: dup
+     256: getstatic     #2092               // Field sr:[I
+     259: iconst_3
+     260: iaload
+     261: ldc_w         #370                // String Cấp 3
+     264: aastore
+     265: dup
+     266: getstatic     #2092               // Field sr:[I
+     269: iconst_4
+     270: iaload
+     271: ldc_w         #372                // String Cấp 4
+     274: aastore
+     275: dup
+     276: getstatic     #2092               // Field sr:[I
+     279: iconst_5
+     280: iaload
+     281: ldc_w         #374                // String Cấp 5
+     284: aastore
+     285: dup
+     286: getstatic     #2092               // Field sr:[I
+     289: bipush        6
+     291: iaload
+     292: ldc_w         #376                // String Cấp 6
+     295: aastore
+     296: dup
+     297: getstatic     #2092               // Field sr:[I
+     300: bipush        7
+     302: iaload
+     303: ldc_w         #378                // String Cấp 7
+     306: aastore
+     307: dup
+     308: getstatic     #2092               // Field sr:[I
+     311: bipush        8
+     313: iaload
+     314: ldc_w         #380                // String Cấp 8
+     317: aastore
+     318: dup
+     319: getstatic     #2092               // Field sr:[I

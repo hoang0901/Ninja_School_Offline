@@ -1,0 +1,2333 @@
+=== REFERENCE: fashion assignment/use ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/event/KoroKing.java:238:        if (_char.fashion[11] == null || _char.fashion[11].id != ItemName.KHAU_TRANG) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:165:                    owner.ID_HAIR = 180;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:166:                    owner.ID_BODY = 181;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:167:                    owner.ID_LEG = 182;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:170:                    owner.ID_HAIR = 183;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:171:                    owner.ID_BODY = 184;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:172:                    owner.ID_LEG = 185;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:179:        if (owner.fashion[11] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:180:            owner.ID_MAT_NA = owner.fashion[11].template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:184:        if (owner.fashion[2] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:185:            short idFashion = owner.fashion[2].template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:188:                owner.ID_HAIR = idFashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:191:                        owner.ID_BODY = 38;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:192:                        owner.ID_LEG = 39;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:196:                        owner.ID_BODY = 41;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:197:                        owner.ID_LEG = 42;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:201:                        owner.ID_BODY = 56;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:202:                        owner.ID_LEG = 57;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:206:                        owner.ID_BODY = 59;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:207:                        owner.ID_LEG = 60;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:211:                        owner.ID_BODY = 68;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:212:                        owner.ID_LEG = 69;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:216:                        owner.ID_BODY = 71;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:217:                        owner.ID_LEG = 72;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:221:                        owner.ID_BODY = 133;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:225:                        owner.ID_BODY = 142;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:229:                        owner.ID_BODY = 175;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:230:                        owner.ID_LEG = 176;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:234:                        owner.ID_BODY = 178;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:235:                        owner.ID_LEG = 179;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:238:                        owner.ID_BODY = 231;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:239:                        owner.ID_LEG = 232;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:242:                        owner.ID_BODY = 234;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:243:                        owner.ID_LEG = 235;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:250:            owner.ID_HAIR = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:251:            owner.ID_BODY = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:252:            owner.ID_LEG = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:256:            short idFashion = eAoChoang.template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:268:        if (owner.fashion[ItemTemplate.TYPE_THUNUOI] != null && owner.fashion[ItemTemplate.TYPE_THUNUOI].id != 864) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:269:            owner.ID_NAME = owner.fashion[ItemTemplate.TYPE_THUNUOI].template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:279:        if (owner.fashion[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:280:            short idFashion = owner.fashion[1].template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:288:        if (owner.fashion[1] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:290:                short idFashion = vuKhi.template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:300:        if (owner.fashion[2] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:303:                short idFashion = Ao.template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:305:                    owner.ID_BODY = idFashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:307:                    owner.ID_BODY = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:310:                owner.ID_BODY = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:314:                short idFashion = Quan.template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:316:                    owner.ID_LEG = idFashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:318:                    owner.ID_BODY = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:321:                owner.ID_LEG = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:323:            if (owner.ID_BODY != -1 && owner.ID_LEG != -1) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:324:                owner.ID_HAIR = (short) (Ao.template.fashion - 1);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:329:            short idFashion = mount.template.fashion;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:362:        Equip eThuNuoi2 = owner.fashion[ItemTemplate.TYPE_THUNUOI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionCustom.java:52:        owner.ID_BODY = this.fBody;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionCustom.java:53:        owner.ID_HAIR = this.fHair;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionCustom.java:55:        owner.ID_LEG = this.fLeg;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:196:                            this.fashion[equip.template.type] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:320:                        if (this.fashion[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:321:                            fashion.add(this.fashion[i].toJSONObject());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:339:    public short ID_BODY = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:341:    public short ID_HAIR = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:342:    public short ID_LEG = -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:888:            if (fashion[15] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:889:                if (fashion[15].id == 1148) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:892:                if (fashion[15].id == 1149) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:895:                if (fashion[15].id == 1150) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:898:                if (fashion[15].id == 1151) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:901:                if (fashion[15].id == 1152) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:904:                if (fashion[15].id == 1153) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:907:                if (fashion[15].id == 1154) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:910:                if (fashion[15].id == 1155) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:913:                if (fashion[15].id == 1156) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:916:                if (fashion[15].id == 1157) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:919:                if (fashion[15].id == 1158) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:922:                if (fashion[15].id == 1159) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:925:                if (fashion[15].id == 1160) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:928:                if (fashion[15].id == 1161) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:931:                if (fashion[15].id == 1162) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:934:                if (fashion[15].id == 1163) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:937:                if (fashion[15].id == 1164) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:940:                if (fashion[15].id == 1165) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:943:                if (fashion[15].id == 1166) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:946:                if (fashion[15].id == 1167) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:949:                if (fashion[15].id == 1168) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:952:                if (fashion[15].id == 1169) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:955:                if (fashion[15].id == 1170) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:958:                if (fashion[15].id == 1248) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:961://                if (fashion[15].id == 1247) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:964:                if (fashion[15].id == 1252) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:967:                if (fashion[15] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:968:                    if (fashion[15].id == 1247) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1020:            if (fashion[4] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1021:                if (fashion[4].id == 1240) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1026:            if (fashion[4] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1027:                if (fashion[4].id == 1251) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1044://            if (fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1045://                Item item1 = fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1176:            if (fashion[15] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1177:                if (fashion[15].id == 1148) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1180:                if (fashion[15].id == 1149) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1183:                if (fashion[15].id == 1150) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1186:                if (fashion[15].id == 1151) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1189:                if (fashion[15].id == 1152) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1192:                if (fashion[15].id == 1153) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1195:                if (fashion[15].id == 1154) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1198:                if (fashion[15].id == 1155) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1201:                if (fashion[15].id == 1156) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1204:                if (fashion[15].id == 1157) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1207:                if (fashion[15].id == 1158) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1210:                if (fashion[15].id == 1159) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1213:                if (fashion[15].id == 1160) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1216:                if (fashion[15].id == 1161) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1219:                if (fashion[15].id == 1162) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1222:                if (fashion[15].id == 1163) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1225:                if (fashion[15].id == 1164) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1228:                if (fashion[15].id == 1165) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1231:                if (fashion[15].id == 1166) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1234:                if (fashion[15].id == 1167) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1237:                if (fashion[15].id == 1168) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1240:                if (fashion[15].id == 1169) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1243:                if (fashion[15].id == 1170) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1246:                if (fashion[15].id == 1248) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1249://                if (fashion[15].id == 1247) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1252:                if (fashion[15].id == 1252) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1255:                if (fashion[15] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1256:                    if (fashion[15].id == 1247) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1269:            if (fashion[4] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1270:                if (fashion[4].id == 1240) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1275:            if (fashion[4] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1276:                if (fashion[4].id == 1251) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1293://            if (fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1294://                Item item1 = fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1425:        thoiTrang[0] = this.ID_HAIR;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1426:        thoiTrang[1] = this.ID_BODY;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1427:        thoiTrang[2] = this.ID_LEG;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1874:        if (item.template.fashion > -1 && item.id != 797 && item.id != ItemName.PET_UNG_LONG && item.id != ItemName.PET_THANH_LONG && !item.isTb10x()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1875:            if (fashion[index] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1876:                Item it = Converter.getInstance().toItem(fashion[index]);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1885:            fashion[index] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1967:        if (index == ItemTemplate.TYPE_THUNUOI && item.template.fashion == -1) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1984:        short body = this.ID_BODY;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1986:        short leg = this.ID_LEG;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1987:        short hair = this.ID_HAIR;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5913:                        Equip equip = this.fashion[index];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5921:                                    this.fashion[index] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7649:                            if (fashion[2] == null
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7650:                                    || (fashion[2] != null && fashion[2].template.id != ItemName.AO_NGU_THAN
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7651:                                    && fashion[2].template.id != ItemName.AO_TAN_THOI)) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:9527:            if (item2.template.fashion > 0 && !item2.isTb10x()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:10188:                    || item.template.fashion > -1 && !item.isTb10x()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:10348://            if ((!item.template.isTypeClothe() && !item.template.isTypeAdorn() && !item.template.isTypeWeapon()) || item.template.fashion > -1 && !item.isTb10x()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12580:        if (fashion[13] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12584:        if (fashion[13].upgrade >= 10) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12593:        int index = fashion[13].upgrade - 1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12624:            getService().deleteItemBody(fashion[13].template.type);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12625:            Item itm = ItemFactory.getInstance().newItem(fashion[13].id + 1);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12628:            fashion[13] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14600:                        Item item6 = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14661:                                this.fashion[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16131:                if (this.fashion[11] == null || this.fashion[11].template.id < 814
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16132:                        || this.fashion[11].template.id > 818) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16488:                        this.fashion[equip.template.type] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19319://            if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19324://            if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19329://            if (this.fashion[14].upgrade > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19333://            Item item1 = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19339://            if (this.fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19346://                    int itemId = this.fashion[14].id;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19348://                    this.fashion[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19405:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19410:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19415:                if (this.fashion[14].upgrade > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19419:                Item item1 = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19425:                if (this.fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19432:                        int itemId = this.fashion[14].id;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19434:                        this.fashion[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19484:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19489:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19494:                if (this.fashion[14].upgrade > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19498:                Item item1 = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19504:                if (this.fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19511:                        int itemId = this.fashion[14].id;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19513:                        this.fashion[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19563:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19568:                if (this.fashion[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19573:                if (this.fashion[14].upgrade > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19577:                Item item1 = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19583:                if (this.fashion[14] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19590:                        int itemId = this.fashion[14].id;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19592:                        this.fashion[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19644:            Item item = this.fashion[14];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:19646:                int cap = this.fashion[14].upgrade;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:20255:                    if (fashion[13] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:20259:                        fashion[13] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22062:                            Equip equip = _char.fashion[index];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22273:                    if (fashion[index] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22274:                        getService().equipmentInfo(fashion[index], typeUI, indexUI);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23017:                        if (this.fashion[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23018:                            fashion.add(this.fashion[i].toJSONObject());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1705:                if (player.fashion[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1706:                    ds.writeShort(player.fashion[i].id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1707:                    ds.writeByte(player.fashion[i].upgrade);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1708:                    ds.writeByte(player.fashion[i].sys);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1850:                if (player.fashion[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1851:                    ds.writeShort(player.fashion[i].id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1852:                    ds.writeByte(player.fashion[i].upgrade);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:1853:                    ds.writeByte(player.fashion[i].sys);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:3335:                    if (pl.fashion[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:3336:                        ds.writeShort(pl.fashion[i].id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:3337:                        ds.writeByte(pl.fashion[i].upgrade);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/network/Service.java:3338:                        ds.writeByte(pl.fashion[i].sys);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Item.java:2505:        return this.template.type == 10 || this.template.type == 11 || this.template.fashion > -1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/ItemManager.java:45:            if (template.level >= 10 && template.level <= 49 && template.fashion == -1) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/FujukaSanctuary.java:320:                .fBody(player.ID_BODY)
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/FujukaSanctuary.java:321:                .fHair(player.ID_HAIR)
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/FujukaSanctuary.java:323:                .fLeg(player.ID_LEG)
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/TalentShow.java:592:        if (p.fashion[10] != null && p.honor > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/TalentShow.java:650:                    if (_char2.fashion != null && _char2.fashion[10] != null && _char2.honor > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/Zone.java:446:        if (p.fashion[10] != null && p.honor > 0) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/map/zones/Zone.java:934:                if (_char2.fashion[10] != null && _char2.honor > 0) {
+=== REFERENCE: equip/use methods around fashion ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:84:            if (item.template.isTypeBody() || item.template.isTypeMount() || item.template.isTypeNgocKham()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:112:            if (item.template.isTypeBody() || item.template.isTypeMount() || item.template.isTypeNgocKham()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:175:                    this.equipment = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:180:                            Equip equipe = new Equip((JSONObject) jso.get(i));
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:184:                            this.equipment[equipe.template.type] = equipe;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:187:                    this.fashion = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:192:                            Equip equip = new Equip((JSONObject) jso.get(i));
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:255:                    setFashionStrategy(new FashionFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:256:                    setAbilityStrategy(new AbilityFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:311:                        if (this.equipment[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/CloneChar.java:312:                            equipment.add(this.equipment[i].toJSONObject());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/User.java:509:                this.sltChar.setFashionStrategy(new FashionFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/User.java:510:                this.sltChar.setAbilityStrategy(new AbilityFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/User.java:582:                        if (item.template.isTypeBody() || item.template.isTypeMount()
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/User.java:588:                if (sltChar.equipment[ItemTemplate.TYPE_THUNUOI] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:878:            if (equipment[10] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:879:                if (equipment[10].id == 1239) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:883:            if (equipment[10] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:884:                if (equipment[10].id == 1239) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1031://            if (equipment[13] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1032://                if (equipment[13].id == 427) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1280://            if (equipment[13] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1281://                if (equipment[13].id == 427) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1883:            Equip equip = Converter.getInstance().toEquip(item);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1934:            if (equipment[index] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1935:                Item it = Converter.getInstance().toItem(equipment[index]);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1943:            Equip equip = Converter.getInstance().toEquip(item);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:1945:            equipment[index] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:4971:                    if (item.template.isTypeBody()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5654:                Item item = this.equipment[indexUI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5682:                Item item = this.equipment[indexUI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5861:                    Equip equip = this.equipment[indexUI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:5869:                                this.equipment[indexUI] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7005:            if (this.equipment[1] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7153:                        if (clone.equipment[ItemTemplate.TYPE_THUNUOI] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7657:                                if (equipment[11] == null
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7658:                                        || (equipment[11] != null && equipment[11].template.id != ItemName.MAT_NA_THANH_GIONG_
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7659:                                        && equipment[11].template.id != ItemName.MAT_NA_THANH_GIONG_)) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:8344:            if (this.equipment[1] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:8537:            Equip equip = cAtt.equipment[ItemTemplate.TYPE_THUNUOI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:8612:            if (this.equipment[1] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:8812:                    Equip equip = player.equipment[ItemTemplate.TYPE_THUNUOI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11261:        if (this.equipment[0] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11264:        if (this.equipment[6] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11267:        if (this.equipment[5] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11270:        kickOption(this.equipment[0], num);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11271:        kickOption(this.equipment[6], num);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11272:        kickOption(this.equipment[5], num);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11273:        if (this.equipment[2] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11276:        if (this.equipment[8] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11279:        if (this.equipment[7] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11282:        kickOption(this.equipment[2], num2);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11283:        kickOption(this.equipment[8], num2);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11284:        kickOption(this.equipment[7], num2);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11285:        if (this.equipment[4] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11288:        if (this.equipment[3] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11291:        if (this.equipment[9] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11294:        if (this.equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11295:            if (this.equipment[1].sys == this.getSys()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11296:                if (this.equipment[1].options != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11297:                    for (int i = 0; i < this.equipment[1].options.size(); i++) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11298:                        ItemOption itemOption = this.equipment[1].options.get(i);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11304:            } else if (this.equipment[1].options != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11305:                for (int j = 0; j < this.equipment[1].options.size(); j++) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11306:                    ItemOption itemOption2 = this.equipment[1].options.get(j);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11313:        kickOption(this.equipment[4], num3);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11314:        kickOption(this.equipment[3], num3);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:11315:        kickOption(this.equipment[9], num3);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:12046:            if (taskId == TaskName.NV_LAN_DAU_DUNG_KIEM && equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:13364:                if (this.equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:13608://                } else if (this.equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:13750://                } else if (this.equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:13891://                } else if (this.equipment[1] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14436:                        if (equipment[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14440:                        if (equipment[14].upgrade >= 10) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14450:                        int point = (equipment[14].upgrade + 0) * 100;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14457:                        int index = equipment[14].upgrade - 1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14492:                            getService().deleteItemBody(equipment[14].template.type);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14493:                            Item itm = ItemFactory.getInstance().newItem(equipment[14].id + 1);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14496:                            equipment[14] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14528:                        Item item2 = this.equipment[ItemTemplate.TYPE_BIKIP];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14581:                                this.equipment[ItemTemplate.TYPE_BIKIP] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14732:                        Item item7 = this.equipment[10];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:14786:                                this.equipment[10] = null;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15137:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15203:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15279:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15353:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15427:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15492:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:15558:                        item = this.equipment[tempIndex];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16040:                if (equipment[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16044:                if (equipment[14].upgrade >= 10) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16050:                int index = equipment[14].upgrade - 1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16052:                        "Bạn có muốn nâng cấp " + equipment[14].template.name + " với " + costs[index]
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16058:                if (equipment[14] == null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16062:                if (equipment[14].upgrade >= 10) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16069:                int index = equipment[14].upgrade - 1;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16071:                        "Bạn có muốn nâng cấp " + equipment[14].template.name + " với " + costs[index]
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16467:                this.equipment = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16472:                        Equip equip = new Equip((JSONObject) jso.get(i));
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16476:                        this.equipment[equip.template.type] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16479:                this.fashion = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:16484:                        Equip equip = new Equip((JSONObject) jso.get(i));
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:18781:        if (this.level < 10 && equipment[ItemTemplate.TYPE_VUKHI] == null
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:20925:                    if (item.template.isTypeBody()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22055:                        Equip equip = _char.equipment[indexUI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22238:                        Item itm4 = this.equipment[indexUI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22265:                    if (equipment[indexUI] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:22266:                        getService().equipmentInfo(equipment[indexUI], typeUI, indexUI);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23008:                        if (this.equipment[i] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23009:                            equipment.add(this.equipment[i].toJSONObject());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23514:        } else if (equipment[10] != null) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23515:            switch (equipment[10].id) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:23590:                Equip e = equipment[ItemTemplate.TYPE_THUNUOI];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:24004:                    bot.setFashionStrategy(new FashionFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:24005:                    bot.setAbilityStrategy(new AbilityFromEquip());
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Pet.java:56:        this.equipment = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Pet.java:57:        this.fashion = new Equip[16];
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Pet.java:80:        Equip equip = Converter.getInstance().toEquip(item);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Pet.java:82:        this.equipment[1] = equip;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Equip.java:12:    public Equip(int id) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Equip.java:16:    public Equip(JSONObject obj) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Item.java:909:        } else if (this.template.isTypeBody() || this.template.isTypeMount() || this.template.isTypeNgocKham()
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Item.java:940:        if (this.template.isTypeBody() || this.template.isTypeMount() || this.template.isTypeNgocKham()
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/Item.java:1131:        if (this.template.isTypeBody() || this.template.isTypeMount() || this.template.isTypeNgocKham()
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/ItemTemplate.java:113:    public boolean isTypeBody() {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/item/ItemFactory.java:136:        Equip equipment = new Equip(id);
+=== REFERENCE SQL fashion roots 174 177 230 233 ===
+(1083, 'Áo ngũ thân', 2, 1, 'Dùng thay đổi diện mạo', 20, 3379, 0, 174, 0),
+(1084, 'Áo tân thời', 2, 0, 'Dùng thay đổi diện mạo', 20, 3380, 0, 177, 0),
+(1173, 'Obito', 2, 1, 'Dùng thay đổi diện mạo', 20, 3422, -1, 230, 0),
+(1174, 'Sakura', 2, 0, 'Dùng thay đổi diện mạo', 20, 3421, -1, 233, 0),
+=== TARGET ITEM ROWS WITH fashion roots ===
+1084 nums=[1084, 0, 2, 0, 0, 20, 3380, 0, 174, 0] strs=[null, Áo tân thời, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+1173 nums=[1173, 0, 2, 1, 0, 20, 3422, -1, 230, 0] strs=[null, Obito, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+1174 nums=[1174, 0, 2, 0, 0, 20, 3421, -1, 233, 0] strs=[null, Sakura, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+=== TARGET BYTECODE constants 230/233 and fashion-like strings ===
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_ag =====
+1631-     710: invokestatic  #141                // Method Class_ch.b:(Ljava/lang/String;[B)V
+1632-     713: getstatic     #100                // Field e:I
+1633-     716: getstatic     #111                // Field p:I
+1634-     719: invokestatic  #145                // Method Class_dt.b:(II)I
+1635-     722: putstatic     #124                // Field Class_dt.ap:I
+1636-     725: ldc           #28                 // String Lưu cài đặt thành công
+1637-     727: invokestatic  #144                // Method Class_ds.b:(Ljava/lang/String;)V
+1638-     730: aload_2
+1639-     731: invokevirtual #160                // Method java/io/DataOutputStream.flush:()V
+1640-     734: aload_1
+1641-     735: invokevirtual #166                // Method java/io/OutputStream.flush:()V
+1642-     738: aload_1
+1643-     739: invokevirtual #149                // Method java/io/ByteArrayOutputStream.close:()V
+1644-     742: aload_2
+1645-     743: invokevirtual #159                // Method java/io/DataOutputStream.close:()V
+1646-     746: ldc           #1                  // String
+1647-     748: invokevirtual #170                // Method java/lang/String.length:()I
+1648-     751: pop
+1649:     752: sipush        233
+1650-     755: sipush        128
+1651-     758: ixor
+1652-     759: sipush        201
+1653-     762: sipush        193
+1654-     765: ixor
+1655-     766: ixor
+1656-     767: bipush        106
+1657-     769: bipush        18
+1658-     771: ixor
+1659-     772: sipush        154
+1660-     775: sipush        131
+1661-     778: ixor
+1662-     779: ixor
+1663-     780: ldc           #2                  // String
+1664-     782: invokevirtual #170                // Method java/lang/String.length:()I
+1665-     785: ineg
+1666-     786: ixor
+1667-     787: iand
+1668-     788: ifge          923
+1669-     791: return
+1670-     792: ldc           #1                  // String
+1671-     794: invokevirtual #170                // Method java/lang/String.length:()I
+1672-     797: pop2
+1673-     798: ldc           #1                  // String
+1674-     800: invokevirtual #170                // Method java/lang/String.length:()I
+1675-     803: pop
+1676-     804: ldc           #3                  // String
+1677-     806: invokevirtual #170                // Method java/lang/String.length:()I
+1678-     809: bipush        107
+1679-     811: bipush        111
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_ax =====
+1489-     311: bipush        59
+1490-     313: bipush        9
+1491-     315: iadd
+1492-     316: bipush        17
+1493-     318: isub
+1494-     319: sipush        182
+1495-     322: iadd
+1496-     323: bipush        113
+1497-     325: sipush        167
+1498-     328: iadd
+1499-     329: sipush        199
+1500-     332: isub
+1501-     333: bipush        89
+1502-     335: iadd
+1503-     336: ixor
+1504-     337: iastore
+1505-     338: getstatic     #46                 // Field d:[I
+1506-     341: bipush        15
+1507:     343: sipush        235
+1508-     346: sipush        194
+1509-     349: ixor
+1510-     350: iconst_5
+1511-     351: bipush        100
+1512-     353: ixor
+1513-     354: ixor
+1514-     355: iastore
+1515-     356: getstatic     #46                 // Field d:[I
+1516-     359: bipush        16
+1517-     361: bipush        12
+1518-     363: bipush        19
+1519-     365: ixor
+1520-     366: iastore
+1521-     367: getstatic     #46                 // Field d:[I
+1522-     370: bipush        17
+1523-     372: bipush        64
+1524-     374: bipush        30
+1525-     376: iadd
+1526-     377: bipush        -32
+1527-     379: isub
+1528-     380: bipush        34
+1529-     382: iadd
+1530-     383: sipush        159
+1531-     386: bipush        7
+1532-     388: iadd
+1533-     389: sipush        155
+1534-     392: isub
+1535-     393: sipush        164
+1536-     396: iadd
+1537-     397: ixor
+===== Class_az =====
+44-      58: sipush        157
+45-      61: iadd
+46-      62: bipush        99
+47-      64: bipush        84
+48-      66: iadd
+49-      67: bipush        -2
+50-      69: isub
+51-      70: bipush        11
+52-      72: iadd
+53-      73: ixor
+54-      74: ldc           #2                  // String
+55-      76: invokevirtual #141                // Method java/lang/String.length:()I
+56-      79: ineg
+57-      80: ixor
+58-      81: iand
+59-      82: iastore
+60-      83: getstatic     #41                 // Field a:[I
+61-      86: iconst_3
+62:      87: sipush        234
+63-      90: sipush        151
+64-      93: ixor
+65-      94: bipush        34
+66-      96: bipush        91
+67-      98: ixor
+68-      99: ixor
+69-     100: iastore
+70-     101: getstatic     #41                 // Field a:[I
+71-     104: iconst_4
+72-     105: ldc           #3                  // String
+73-     107: invokevirtual #141                // Method java/lang/String.length:()I
+74-     110: iastore
+75-     111: getstatic     #41                 // Field a:[I
+76-     114: iconst_5
+77-     115: sipush        188
+78-     118: bipush        30
+79-     120: iadd
+80-     121: sipush        165
+81-     124: isub
+82-     125: sipush        160
+83-     128: iadd
+84-     129: bipush        57
+85-     131: bipush        9
+86-     133: iadd
+87-     134: bipush        51
+88-     136: isub
+89-     137: sipush        135
+90-     140: iadd
+91-     141: ixor
+92-     142: iastore
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_bv =====
+272-     389: bipush        54
+273-     391: bipush        10
+274-     393: iadd
+275-     394: iconst_3
+276-     395: isub
+277-     396: bipush        90
+278-     398: iadd
+279-     399: bipush        23
+280-     401: bipush        14
+281-     403: iadd
+282-     404: bipush        -83
+283-     406: isub
+284-     407: bipush        22
+285-     409: iadd
+286-     410: ixor
+287-     411: bipush        50
+288-     413: bipush        78
+289-     415: ixor
+290:     416: sipush        235
+291-     419: sipush        142
+292-     422: ixor
+293-     423: ixor
+294-     424: ldc           #2                  // String
+295-     426: invokevirtual #100                // Method java/lang/String.length:()I
+296-     429: ineg
+297-     430: ixor
+298-     431: iand
+299-     432: if_icmpeq     439
+300-     435: aconst_null
+301-     436: athrow
+302-     437: ldc           #6                  // String 1500
+303-     439: getstatic     #61                 // Field g:[I
+304-     442: iconst_5
+305-     443: iaload
+306-     444: getstatic     #61                 // Field g:[I
+307-     447: iconst_1
+308-     448: iaload
+309-     449: invokespecial #118                // Method javax/microedition/lcdui/TextField."<init>":(Ljava/lang/String;Ljava/lang/String;II)V
+310-     452: dup_x1
+311-     453: putfield      #60                 // Field f:Ljavax/microedition/lcdui/TextField;
+312-     456: invokevirtual #117                // Method javax/microedition/lcdui/Form.append:(Ljavax/microedition/lcdui/Item;)I
+313-     459: ldc           #1                  // String
+314-     461: invokevirtual #100                // Method java/lang/String.length:()I
+315-     464: pop2
+316-     465: aload_0
+317-     466: aload_0
+318-     467: new           #53                 // class javax/microedition/lcdui/TextField
+319-     470: dup
+320-     471: new           #44                 // class java/lang/StringBuffer
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_cb =====
+824-      47: ldc           #1                  // String
+825-      49: invokevirtual #79                 // Method java/lang/String.length:()I
+826-      52: pop
+827-      53: ldc           #3                  // String
+828-      55: invokevirtual #79                 // Method java/lang/String.length:()I
+829-      58: ldc           #4                  // String
+830-      60: invokevirtual #79                 // Method java/lang/String.length:()I
+831-      63: if_icmplt     6
+832-      66: bipush        53
+833-      68: bipush        119
+834-      70: iadd
+835-      71: bipush        126
+836-      73: isub
+837-      74: bipush        98
+838-      76: iadd
+839-      77: sipush        135
+840-      80: bipush        127
+841-      82: iadd
+842:      83: sipush        231
+843-      86: isub
+844-      87: sipush        158
+845-      90: iadd
+846-      91: ixor
+847-      92: bipush        38
+848-      94: bipush        41
+849-      96: iadd
+850-      97: bipush        9
+851-      99: isub
+852-     100: bipush        79
+853-     102: iadd
+854-     103: sipush        131
+855-     106: bipush        102
+856-     108: iadd
+857-     109: sipush        147
+858-     112: isub
+859-     113: bipush        98
+860-     115: iadd
+861-     116: ixor
+862-     117: ldc           #2                  // String
+863-     119: invokevirtual #79                 // Method java/lang/String.length:()I
+864-     122: ineg
+865-     123: ixor
+866-     124: iand
+867-     125: ireturn
+868-     126: getstatic     #45                 // Field b:[I
+869-     129: iconst_0
+870-     130: iaload
+871-     131: ireturn
+872-
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_cg =====
+59-      32: instanceof    #4                  // class Class_ct
+60-      35: invokestatic  #22                 // Method a:(I)Z
+61-      38: ifeq          42
+62-      41: return
+63-      42: invokestatic  #26                 // Method Class_ew.ai:()LClass_ew;
+64-      45: aload_0
+65-      46: getfield      #16                 // Field a:LClass_fj;
+66-      49: getfield      #19                 // Field Class_fj.i:I
+67-      52: invokevirtual #27                 // Method Class_ew.am:(I)V
+68-      55: ldc2_w        #14                 // long 20l
+69-      58: invokestatic  #30                 // Method java/lang/Thread.sleep:(J)V
+70-      61: iinc          1, 1
+71-      64: ldc           #1                  // String
+72-      66: invokevirtual #29                 // Method java/lang/String.length:()I
+73-      69: pop
+74-      70: sipush        243
+75-      73: sipush        187
+76-      76: ixor
+77:      77: sipush        234
+78-      80: sipush        166
+79-      83: ixor
+80-      84: ixor
+81-      85: bipush        27
+82-      87: bipush        14
+83-      89: ixor
+84-      90: bipush        41
+85-      92: bipush        16
+86-      94: ixor
+87-      95: ixor
+88-      96: bipush        95
+89-      98: sipush        156
+90-     101: iadd
+91-     102: bipush        83
+92-     104: isub
+93-     105: bipush        17
+94-     107: iadd
+95-     108: bipush        9
+96-     110: bipush        54
+97-     112: iadd
+98-     113: bipush        59
+99-     115: isub
+100-     116: sipush        145
+101-     119: iadd
+102-     120: ixor
+103-     121: ldc           #2                  // String
+104-     123: invokevirtual #29                 // Method java/lang/String.length:()I
+105-     126: ineg
+106-     127: ixor
+107-     128: iand
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_cn =====
+24-       4: putstatic     #20                 // Field b:[I
+25-       7: getstatic     #20                 // Field b:[I
+26-      10: iconst_0
+27-      11: sipush        186
+28-      14: sipush        143
+29-      17: ixor
+30-      18: iconst_3
+31-      19: bipush        33
+32-      21: ixor
+33-      22: ixor
+34-      23: iastore
+35-      24: getstatic     #20                 // Field b:[I
+36-      27: iconst_1
+37-      28: sipush        -13585
+38-      31: sipush        16190
+39-      34: iand
+40-      35: ineg
+41-      36: sipush        -20481
+42:      39: sipush        23535
+43-      42: iand
+44-      43: iand
+45-      44: iastore
+46-      45: getstatic     #20                 // Field b:[I
+47-      48: iconst_2
+48-      49: sipush        146
+49-      52: sipush        161
+50-      55: ixor
+51-      56: bipush        92
+52-      58: bipush        113
+53-      60: ixor
+54-      61: iadd
+55-      62: sipush        194
+56-      65: sipush        197
+57-      68: ixor
+58-      69: isub
+59-      70: bipush        24
+60-      72: bipush        49
+61-      74: ixor
+62-      75: iadd
+63-      76: iastore
+64-      77: getstatic     #20                 // Field b:[I
+65-      80: iconst_3
+66-      81: bipush        -37
+67-      83: sipush        22703
+68-      86: iand
+69-      87: ineg
+70-      88: sipush        -9314
+71-      91: sipush        32239
+72-      94: iand
+===== Class_cp =====
+327-     563: bipush        98
+328-     565: bipush        70
+329-     567: iadd
+330-     568: bipush        127
+331-     570: isub
+332-     571: sipush        130
+333-     574: iadd
+334-     575: bipush        115
+335-     577: bipush        98
+336-     579: iadd
+337-     580: bipush        86
+338-     582: isub
+339-     583: bipush        47
+340-     585: iadd
+341-     586: ixor
+342-     587: bipush        85
+343-     589: bipush        22
+344-     591: ixor
+345:     592: sipush        232
+346-     595: sipush        174
+347-     598: ixor
+348-     599: ixor
+349-     600: ldc           #2                  // String
+350-     602: invokevirtual #122                // Method java/lang/String.length:()I
+351-     605: ineg
+352-     606: ixor
+353-     607: iand
+354-     608: if_icmpge     1470
+355-     611: return
+356-     612: invokestatic  #102                // Method Class_cy.aa:()LClass_cy;
+357-     615: dup
+358-     616: astore_3
+359-     617: getfield      #47                 // Field Class_cy.cm:LClass_cy;
+360-     620: invokestatic  #88                 // Method b:(Ljava/lang/Object;)Z
+361-     623: ifeq          967
+362-     626: getstatic     #39                 // Field Class_ct.bi:LClass_dj;
+363-     629: astore        4
+364-     631: getstatic     #38                 // Field a:[I
+365-     634: iconst_3
+366-     635: iaload
+367-     636: istore        5
+368-     638: iload         5
+369-     640: aload         4
+370-     642: invokevirtual #124                // Method java/util/Vector.size:()I
+371-     645: invokestatic  #99                 // Method h:(II)Z
+372-     648: ifeq          967
+373-     651: aload         4
+374-     653: iload         5
+375-     655: invokevirtual #106                // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_cx =====
+40-      31: bipush        58
+41-      33: bipush        52
+42-      35: ixor
+43-      36: ixor
+44-      37: iastore
+45-      38: getstatic     #20                 // Field d:[I
+46-      41: iconst_2
+47-      42: bipush        13
+48-      44: bipush        7
+49-      46: ixor
+50-      47: iastore
+51-      48: getstatic     #20                 // Field d:[I
+52-      51: iconst_3
+53-      52: ldc           #2                  // String
+54-      54: invokevirtual #32                 // Method java/lang/String.length:()I
+55-      57: iastore
+56-      58: getstatic     #20                 // Field d:[I
+57-      61: iconst_4
+58:      62: sipush        231
+59-      65: sipush        190
+60-      68: ixor
+61-      69: bipush        58
+62-      71: bipush        118
+63-      73: ixor
+64-      74: ixor
+65-      75: iastore
+66-      76: getstatic     #20                 // Field d:[I
+67-      79: iconst_5
+68-      80: sipush        211
+69-      83: sipush        197
+70-      86: ixor
+71-      87: iastore
+72-      88: getstatic     #20                 // Field d:[I
+73-      91: bipush        6
+74-      93: bipush        26
+75-      95: bipush        61
+76-      97: ixor
+77-      98: sipush        163
+78-     101: sipush        147
+79-     104: ixor
+80-     105: ixor
+81-     106: iastore
+82-     107: getstatic     #20                 // Field d:[I
+83-     110: bipush        7
+84-     112: iconst_5
+85-     113: bipush        15
+86-     115: ixor
+87-     116: bipush        18
+88-     118: iconst_0
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_cz =====
+644-      25: getstatic     #72                 // Field o:[I
+645-      28: iconst_1
+646-      29: ldc           #2                  // String
+647-      31: invokevirtual #141                // Method java/lang/String.length:()I
+648-      34: ineg
+649-      35: iastore
+650-      36: getstatic     #72                 // Field o:[I
+651-      39: iconst_2
+652-      40: ldc           #2                  // String
+653-      42: invokevirtual #141                // Method java/lang/String.length:()I
+654-      45: iastore
+655-      46: getstatic     #72                 // Field o:[I
+656-      49: iconst_3
+657-      50: ldc           #3                  // String
+658-      52: invokevirtual #141                // Method java/lang/String.length:()I
+659-      55: iastore
+660-      56: getstatic     #72                 // Field o:[I
+661-      59: iconst_4
+662:      60: sipush        234
+663-      63: sipush        148
+664-      66: ixor
+665-      67: sipush        220
+666-      70: sipush        168
+667-      73: ixor
+668-      74: ixor
+669-      75: iastore
+670-      76: getstatic     #72                 // Field o:[I
+671-      79: iconst_5
+672-      80: sipush        186
+673-      83: sipush        134
+674-      86: ixor
+675-      87: iastore
+676-      88: getstatic     #72                 // Field o:[I
+677-      91: bipush        6
+678-      93: bipush        14
+679-      95: bipush        38
+680-      97: ixor
+681-      98: iastore
+682-      99: getstatic     #72                 // Field o:[I
+683-     102: bipush        7
+684-     104: bipush        67
+685-     106: bipush        79
+686-     108: ixor
+687-     109: iastore
+688-     110: getstatic     #72                 // Field o:[I
+689-     113: bipush        8
+690-     115: bipush        105
+691-     117: bipush        61
+692-     119: ixor
+693-     120: sipush        205
+694-     123: sipush        188
+695-     126: ixor
+696-     127: ixor
+697-     128: ineg
+698-     129: iastore
+699-     130: getstatic     #72                 // Field o:[I
+700-     133: bipush        9
+701-     135: sipush        229
+702-     138: sipush        134
+703-     141: ixor
+704:     142: sipush        230
+705-     145: sipush        168
+706-     148: ixor
+707-     149: ixor
+708-     150: ineg
+709-     151: iastore
+710-     152: return
+711-
+712-  private static boolean c(int, int);
+713-    Code:
+714-       0: iload_0
+715-       1: iload_1
+716-       2: if_icmple     9
+717-       5: iconst_1
+718-       6: goto          10
+719-       9: iconst_0
+720-      10: ireturn
+721-
+722-  public static void b();
+723-    Code:
+724-       0: ldc           #1                  // String
+725-       2: astore_0
+726-       3: getstatic     #66                 // Field i:LClass_dj;
+727-       6: invokevirtual #150                // Method java/util/Vector.isEmpty:()Z
+728-       9: invokestatic  #112                // Method h:(I)Z
+729-      12: ifeq          129
+730-      15: getstatic     #72                 // Field o:[I
+731-      18: iconst_0
+732-      19: iaload
+733-      20: istore_1
+734-      21: iload_1
+===== Class_di =====
+51-      59: bipush        -3
+52-      61: sipush        24575
+53-      64: iand
+54-      65: iand
+55-      66: iastore
+56-      67: getstatic     #12                 // Field h:[I
+57-      70: iconst_3
+58-      71: sipush        -2381
+59-      74: sipush        3023
+60-      77: iand
+61-      78: iastore
+62-      79: getstatic     #12                 // Field h:[I
+63-      82: iconst_4
+64-      83: sipush        -12725
+65-      86: sipush        31231
+66-      89: iand
+67-      90: ineg
+68-      91: sipush        -4097
+69:      94: sipush        23247
+70-      97: iand
+71-      98: iand
+72-      99: iastore
+73-     100: getstatic     #12                 // Field h:[I
+74-     103: iconst_5
+75-     104: sipush        -11545
+76-     107: sipush        12220
+77-     110: iand
+78-     111: iastore
+79-     112: getstatic     #12                 // Field h:[I
+80-     115: bipush        6
+81-     117: sipush        -21575
+82-     120: sipush        30535
+83-     123: iand
+84-     124: ineg
+85-     125: sipush        -6273
+86-     128: sipush        16351
+87-     131: iand
+88-     132: iand
+89-     133: iastore
+90-     134: return
+91-
+92-  static {};
+93-    Code:
+94-       0: invokestatic  #13                 // Method a:()V
+95-       3: return
+96-
+97-  public Class_di(int, int, int, java.lang.String, int, boolean);
+98-    Code:
+99-       0: aload_0
+===== Class_dk =====
+3478-     771: ixor
+3479-     772: bipush        50
+3480-     774: bipush        56
+3481-     776: ixor
+3482-     777: ixor
+3483-     778: iastore
+3484-     779: getstatic     #61                 // Field ab:[I
+3485-     782: bipush        44
+3486-     784: sipush        219
+3487-     787: sipush        170
+3488-     790: ixor
+3489-     791: bipush        120
+3490-     793: bipush        58
+3491-     795: ixor
+3492-     796: ixor
+3493-     797: iastore
+3494-     798: getstatic     #61                 // Field ab:[I
+3495-     801: bipush        45
+3496:     803: sipush        233
+3497-     806: sipush        188
+3498-     809: ixor
+3499-     810: iastore
+3500-     811: getstatic     #61                 // Field ab:[I
+3501-     814: bipush        46
+3502-     816: sipush        147
+3503-     819: sipush        167
+3504-     822: ixor
+3505-     823: iastore
+3506-     824: getstatic     #61                 // Field ab:[I
+3507-     827: bipush        47
+3508-     829: sipush        254
+3509-     832: sipush        191
+3510-     835: ixor
+3511-     836: sipush        134
+3512-     839: sipush        131
+3513-     842: ixor
+3514-     843: ixor
+3515-     844: iastore
+3516-     845: getstatic     #61                 // Field ab:[I
+3517-     848: bipush        48
+3518-     850: bipush        92
+3519-     852: bipush        40
+3520-     854: ixor
+3521-     855: bipush        83
+3522-     857: bipush        18
+3523-     859: ixor
+3524-     860: ixor
+3525-     861: iastore
+3526-     862: getstatic     #61                 // Field ab:[I
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_do =====
+44-  protected final void keyPressed(int);
+45-    Code:
+46-       0: aload_0
+47-       1: getfield      #26                 // Field b:LClass_ha;
+48-       4: iload_1
+49-       5: invokevirtual #44                 // Method Class_ha.b:(I)V
+50-       8: return
+51-
+52-  public final void run();
+53-    Code:
+54-       0: ldc2_w        #20                 // long 10l
+55-       3: invokestatic  #52                 // Method java/lang/Thread.sleep:(J)V
+56-       6: ldc           #3                  // String
+57-       8: invokevirtual #50                 // Method java/lang/String.length:()I
+58-      11: pop
+59-      12: sipush        240
+60-      15: sipush        162
+61-      18: ixor
+62:      19: sipush        235
+63-      22: sipush        185
+64-      25: ixor
+65-      26: iconst_m1
+66-      27: ixor
+67-      28: iand
+68-      29: bipush        117
+69-      31: bipush        113
+70-      33: ixor
+71-      34: if_icmplt     44
+72-      37: return
+73-      38: ldc           #3                  // String
+74-      40: invokevirtual #50                 // Method java/lang/String.length:()I
+75-      43: pop2
+76-      44: getstatic     #31                 // Field g:[I
+77-      47: iconst_0
+78-      48: iaload
+79-      49: putstatic     #25                 // Field a:Z
+80-      52: getstatic     #25                 // Field a:Z
+81-      55: invokestatic  #41                 // Method c:(I)Z
+82-      58: ifeq          211
+83-      61: invokestatic  #51                 // Method java/lang/System.currentTimeMillis:()J
+84-      64: lstore_1
+85-      65: aload_0
+86-      66: getfield      #26                 // Field b:LClass_ha;
+87-      69: invokevirtual #49                 // Method Class_ha.i:()V
+88-      72: invokestatic  #51                 // Method java/lang/System.currentTimeMillis:()J
+89-      75: lload_1
+90-      76: lsub
+91-      77: lstore_3
+92-      78: lload_3
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_eb =====
+22-       8: iconst_0
+23-       9: iaload
+24-      10: putfield      #6                  // Field d:I
+25-      13: aload_0
+26-      14: iload_1
+27-      15: putfield      #5                  // Field b:I
+28-      18: aload_0
+29-      19: iload_2
+30-      20: putfield      #7                  // Field e:I
+31-      23: return
+32-
+33-  private static void a();
+34-    Code:
+35-       0: iconst_1
+36-       1: newarray       int
+37-       3: putstatic     #8                  // Field g:[I
+38-       6: getstatic     #8                  // Field g:[I
+39-       9: iconst_0
+40:      10: sipush        235
+41-      13: sipush        143
+42-      16: ixor
+43-      17: bipush        37
+44-      19: bipush        70
+45-      21: ixor
+46-      22: ixor
+47:      23: sipush        230
+48-      26: sipush        161
+49-      29: ixor
+50-      30: bipush        57
+51-      32: bipush        121
+52-      34: ixor
+53-      35: ixor
+54-      36: ldc           #1                  // String
+55-      38: invokevirtual #11                 // Method java/lang/String.length:()I
+56-      41: ineg
+57-      42: ixor
+58-      43: iand
+59-      44: iastore
+60-      45: return
+61-
+62-  public Class_eb();
+63-    Code:
+64-       0: aload_0
+65-       1: invokespecial #10                 // Method java/lang/Object."<init>":()V
+66-       4: aload_0
+67-       5: getstatic     #8                  // Field g:[I
+68-       8: iconst_0
+69-       9: iaload
+70-      10: putfield      #6                  // Field d:I
+71-      13: aload_0
+72-      14: getstatic     #8                  // Field g:[I
+73-      17: iconst_0
+74-      18: iaload
+75-      19: putfield      #5                  // Field b:I
+76-      22: aload_0
+77-      23: getstatic     #8                  // Field g:[I
+===== Class_eh =====
+65-      85: ineg
+66-      86: ixor
+67-      87: iand
+68-      88: iconst_2
+69-      89: bipush        61
+70-      91: ixor
+71-      92: bipush        72
+72-      94: bipush        115
+73-      96: ixor
+74-      97: ixor
+75-      98: if_icmplt     6
+76-     101: bipush        69
+77-     103: bipush        102
+78-     105: ixor
+79-     106: bipush        82
+80-     108: bipush        100
+81-     110: ixor
+82-     111: ixor
+83:     112: sipush        230
+84-     115: sipush        146
+85-     118: ixor
+86-     119: sipush        215
+87-     122: sipush        182
+88-     125: ixor
+89-     126: ixor
+90-     127: ldc           #2                  // String
+91-     129: invokevirtual #62                 // Method java/lang/String.length:()I
+92-     132: ineg
+93-     133: ixor
+94-     134: iand
+95-     135: ireturn
+96-     136: getstatic     #30                 // Field i:[I
+97-     139: iconst_1
+98-     140: iaload
+99-     141: ireturn
+100-
+101-  public static void a();
+102-    Code:
+103-       0: aconst_null
+104-       1: putstatic     #29                 // Field h:LClass_eh;
+105-       4: return
+106-
+107-  public final void b();
+108-    Code:
+109-       0: aload_0
+110-       1: aload_0
+111-       2: getfield      #26                 // Field c:LClass_dj;
+112-       5: invokevirtual #68                 // Method java/util/Vector.size:()I
+113-       8: getstatic     #30                 // Field i:[I
+--
+678-      51: sipush        141
+679-      54: sipush        137
+680-      57: ixor
+681-      58: iastore
+682-      59: getstatic     #30                 // Field i:[I
+683-      62: iconst_4
+684-      63: ldc           #3                  // String
+685-      65: invokevirtual #62                 // Method java/lang/String.length:()I
+686-      68: iastore
+687-      69: getstatic     #30                 // Field i:[I
+688-      72: iconst_5
+689-      73: bipush        33
+690-      75: bipush        83
+691-      77: ixor
+692-      78: bipush        76
+693-      80: bipush        35
+694-      82: ixor
+695-      83: iadd
+696:      84: sipush        233
+697-      87: sipush        136
+698-      90: ixor
+699-      91: isub
+700-      92: sipush        175
+701-      95: sipush        143
+702-      98: ixor
+703-      99: iadd
+704-     100: iastore
+705-     101: return
+706-
+707-  public final void e(java.lang.String);
+708-    Code:
+709-       0: getstatic     #30                 // Field i:[I
+710-       3: iconst_1
+711-       4: iaload
+712-       5: istore_2
+713-       6: iload_2
+714-       7: aload_0
+715-       8: getfield      #28                 // Field e:LClass_dj;
+716-      11: invokevirtual #68                 // Method java/util/Vector.size:()I
+717-      14: invokestatic  #51                 // Method b:(II)Z
+718-      17: ifeq          66
+719-      20: aload_0
+720-      21: getfield      #28                 // Field e:LClass_dj;
+721-      24: iload_2
+722-      25: invokevirtual #44                 // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+723-      28: checkcast     #17                 // class java/lang/String
+724-      31: aload_1
+725-      32: invokevirtual #61                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+726-      35: invokestatic  #50                 // Method b:(I)Z
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_ev =====
+1-public final class Class_ev extends Class_cf {
+2-  private static int[] a;
+3-
+4-  private java.lang.String b;
+5-
+6-  private boolean c;
+7-
+8-  private static void b();
+9-    Code:
+10-       0: iconst_5
+11-       1: newarray       int
+12-       3: putstatic     #16                 // Field a:[I
+13-       6: getstatic     #16                 // Field a:[I
+14-       9: iconst_0
+15:      10: sipush        230
+16-      13: sipush        168
+17-      16: ixor
+18-      17: bipush        17
+19-      19: bipush        89
+20-      21: ixor
+21-      22: ixor
+22-      23: iastore
+23-      24: getstatic     #16                 // Field a:[I
+24-      27: iconst_1
+25-      28: ldc           #2                  // String
+26-      30: invokevirtual #30                 // Method java/lang/String.length:()I
+27-      33: iastore
+28-      34: getstatic     #16                 // Field a:[I
+29-      37: iconst_2
+30-      38: sipush        169
+31-      41: sipush        188
+32-      44: ixor
+33-      45: bipush        103
+34-      47: bipush        114
+35-      49: ixor
+36-      50: iconst_m1
+37-      51: ixor
+38-      52: iand
+39-      53: iastore
+40-      54: getstatic     #16                 // Field a:[I
+41-      57: iconst_3
+42-      58: bipush        52
+43-      60: bipush        37
+44-      62: ixor
+45-      63: iastore
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_fp =====
+297-     341: getstatic     #55                 // Field t:[I
+298-     344: bipush        20
+299-     346: bipush        61
+300-     348: bipush        41
+301-     350: ixor
+302-     351: sipush        194
+303-     354: sipush        191
+304-     357: ixor
+305-     358: ixor
+306-     359: iastore
+307-     360: getstatic     #55                 // Field t:[I
+308-     363: bipush        21
+309-     365: sipush        203
+310-     368: sipush        165
+311-     371: ixor
+312-     372: iastore
+313-     373: getstatic     #55                 // Field t:[I
+314-     376: bipush        22
+315:     378: sipush        232
+316-     381: sipush        154
+317-     384: ixor
+318-     385: iastore
+319-     386: getstatic     #55                 // Field t:[I
+320-     389: bipush        23
+321-     391: bipush        92
+322-     393: bipush        58
+323-     395: ixor
+324-     396: iastore
+325-     397: getstatic     #55                 // Field t:[I
+326-     400: bipush        24
+327-     402: sipush        143
+328-     405: sipush        160
+329-     408: ixor
+330-     409: bipush        50
+331-     411: bipush        124
+332-     413: ixor
+333-     414: ixor
+334-     415: iastore
+335-     416: getstatic     #55                 // Field t:[I
+336-     419: bipush        25
+337-     421: bipush        11
+338-     423: bipush        18
+339-     425: ixor
+340-     426: sipush        181
+341-     429: sipush        166
+342-     432: ixor
+343-     433: ixor
+344-     434: iastore
+345-     435: getstatic     #55                 // Field t:[I
+--
+395-     528: bipush        91
+396-     530: ixor
+397-     531: iconst_m1
+398-     532: ixor
+399-     533: iand
+400-     534: bipush        58
+401-     536: bipush        42
+402-     538: ixor
+403-     539: ixor
+404-     540: iastore
+405-     541: getstatic     #55                 // Field t:[I
+406-     544: bipush        33
+407-     546: sipush        254
+408-     549: sipush        154
+409-     552: ixor
+410-     553: iastore
+411-     554: getstatic     #55                 // Field t:[I
+412-     557: bipush        34
+413:     559: sipush        232
+414-     562: sipush        158
+415-     565: ixor
+416-     566: iastore
+417-     567: getstatic     #55                 // Field t:[I
+418-     570: bipush        35
+419-     572: bipush        127
+420-     574: bipush        49
+421-     576: ixor
+422-     577: bipush        83
+423-     579: bipush        104
+424-     581: ixor
+425-     582: ixor
+426-     583: iastore
+427-     584: getstatic     #55                 // Field t:[I
+428-     587: bipush        36
+429-     589: bipush        87
+430-     591: bipush        72
+431-     593: ixor
+432-     594: ineg
+433-     595: iastore
+434-     596: getstatic     #55                 // Field t:[I
+435-     599: bipush        37
+436-     601: sipush        134
+437-     604: bipush        82
+438-     606: iadd
+439-     607: bipush        11
+440-     609: isub
+441-     610: bipush        42
+442-     612: iadd
+443-     613: sipush        132
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_fr =====
+1512-     540: iastore
+1513-     541: getstatic     #41                 // Field f:[I
+1514-     544: bipush        36
+1515-     546: sipush        203
+1516-     549: sipush        196
+1517-     552: ixor
+1518-     553: iastore
+1519-     554: getstatic     #41                 // Field f:[I
+1520-     557: bipush        37
+1521-     559: bipush        23
+1522-     561: bipush        7
+1523-     563: ixor
+1524-     564: iastore
+1525-     565: getstatic     #41                 // Field f:[I
+1526-     568: bipush        38
+1527-     570: bipush        93
+1528-     572: bipush        100
+1529-     574: ixor
+1530:     575: sipush        232
+1531-     578: sipush        184
+1532-     581: ixor
+1533-     582: ixor
+1534-     583: iastore
+1535-     584: getstatic     #41                 // Field f:[I
+1536-     587: bipush        39
+1537-     589: bipush        51
+1538-     591: bipush        34
+1539-     593: ixor
+1540-     594: iastore
+1541-     595: getstatic     #41                 // Field f:[I
+1542-     598: bipush        40
+1543-     600: bipush        90
+1544-     602: bipush        49
+1545-     604: ixor
+1546-     605: bipush        119
+1547-     607: bipush        125
+1548-     609: ixor
+1549-     610: ixor
+1550-     611: iastore
+1551-     612: getstatic     #41                 // Field f:[I
+1552-     615: bipush        41
+1553-     617: bipush        50
+1554-     619: bipush        32
+1555-     621: ixor
+1556-     622: iastore
+1557-     623: getstatic     #41                 // Field f:[I
+1558-     626: bipush        42
+1559-     628: sipush        152
+1560-     631: sipush        139
+--
+1653-     809: bipush        80
+1654-     811: bipush        71
+1655-     813: iadd
+1656-     814: sipush        128
+1657-     817: isub
+1658-     818: sipush        197
+1659-     821: iadd
+1660-     822: sipush        166
+1661-     825: bipush        97
+1662-     827: iadd
+1663-     828: sipush        209
+1664-     831: isub
+1665-     832: sipush        143
+1666-     835: iadd
+1667-     836: ixor
+1668-     837: iastore
+1669-     838: getstatic     #41                 // Field f:[I
+1670-     841: bipush        52
+1671:     843: sipush        234
+1672-     846: sipush        173
+1673-     849: ixor
+1674-     850: sipush        210
+1675-     853: sipush        143
+1676-     856: ixor
+1677-     857: ixor
+1678-     858: iastore
+1679-     859: getstatic     #41                 // Field f:[I
+1680-     862: bipush        53
+1681-     864: sipush        136
+1682-     867: sipush        147
+1683-     870: ixor
+1684-     871: iastore
+1685-     872: getstatic     #41                 // Field f:[I
+1686-     875: bipush        54
+1687-     877: sipush        135
+1688-     880: sipush        155
+1689-     883: ixor
+1690-     884: iastore
+1691-     885: getstatic     #41                 // Field f:[I
+1692-     888: bipush        55
+1693-     890: bipush        77
+1694-     892: bipush        108
+1695-     894: iadd
+1696-     895: bipush        48
+1697-     897: isub
+1698-     898: bipush        45
+1699-     900: iadd
+1700-     901: bipush        56
+1701-     903: bipush        55
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_fu =====
+436-      72: iconst_2
+437-      73: iadd
+438-      74: bipush        61
+439-      76: isub
+440-      77: bipush        104
+441-      79: iadd
+442-      80: sipush        134
+443-      83: bipush        107
+444-      85: iadd
+445-      86: sipush        218
+446-      89: isub
+447-      90: bipush        117
+448-      92: iadd
+449-      93: ixor
+450-      94: iastore
+451-      95: getstatic     #46                 // Field h:[I
+452-      98: bipush        6
+453-     100: bipush        -21
+454:     102: sipush        23549
+455-     105: iand
+456-     106: ineg
+457-     107: sipush        -1026
+458-     110: ldc           #1                  // int 2013290473
+459-     112: iand
+460-     113: iand
+461-     114: ineg
+462-     115: iastore
+463-     116: getstatic     #46                 // Field h:[I
+464-     119: bipush        7
+465-     121: bipush        70
+466-     123: bipush        101
+467-     125: ixor
+468-     126: iastore
+469-     127: return
+470-
+471-  private static int b(long, long);
+472-    Code:
+473-       0: lload_0
+474-       1: lload_2
+475-       2: lcmp
+476-       3: ireturn
+477-
+478-  public static void b();
+479-    Code:
+480-       0: new           #19                 // class Class_fu
+481-       3: invokespecial #55                 // Method "<init>":()V
+482-       6: return
+483-
+484-  private static boolean c(int);
+===== Class_fv =====
+2347-     140: bipush        104
+2348-     142: isub
+2349-     143: bipush        50
+2350-     145: iadd
+2351-     146: bipush        92
+2352-     148: bipush        26
+2353-     150: iadd
+2354-     151: bipush        34
+2355-     153: isub
+2356-     154: bipush        53
+2357-     156: iadd
+2358-     157: ixor
+2359-     158: iastore
+2360-     159: getstatic     #123                // Field i:[I
+2361-     162: bipush        9
+2362-     164: bipush        108
+2363-     166: bipush        48
+2364-     168: ixor
+2365:     169: sipush        233
+2366-     172: sipush        149
+2367-     175: ixor
+2368-     176: ixor
+2369-     177: iastore
+2370-     178: getstatic     #123                // Field i:[I
+2371-     181: bipush        10
+2372-     183: bipush        124
+2373-     185: bipush        115
+2374-     187: iadd
+2375-     188: sipush        160
+2376-     191: isub
+2377-     192: bipush        61
+2378-     194: iadd
+2379-     195: bipush        107
+2380-     197: bipush        39
+2381-     199: iadd
+2382-     200: bipush        18
+2383-     202: isub
+2384-     203: bipush        47
+2385-     205: iadd
+2386-     206: ixor
+2387-     207: iastore
+2388-     208: getstatic     #123                // Field i:[I
+2389-     211: bipush        11
+2390-     213: bipush        119
+2391-     215: bipush        67
+2392-     217: ixor
+2393-     218: iastore
+2394-     219: getstatic     #123                // Field i:[I
+2395-     222: bipush        12
+--
+2447-     319: sipush        188
+2448-     322: ixor
+2449-     323: sipush        245
+2450-     326: sipush        149
+2451-     329: ixor
+2452-     330: ixor
+2453-     331: iastore
+2454-     332: getstatic     #123                // Field i:[I
+2455-     335: bipush        20
+2456-     337: bipush        64
+2457-     339: bipush        6
+2458-     341: ixor
+2459-     342: iastore
+2460-     343: getstatic     #123                // Field i:[I
+2461-     346: bipush        21
+2462-     348: sipush        186
+2463-     351: sipush        225
+2464-     354: iadd
+2465:     355: sipush        234
+2466-     358: isub
+2467-     359: bipush        78
+2468-     361: iadd
+2469-     362: sipush        181
+2470-     365: bipush        29
+2471-     367: iadd
+2472-     368: sipush        135
+2473-     371: isub
+2474-     372: bipush        113
+2475-     374: iadd
+2476-     375: ixor
+2477-     376: iastore
+2478-     377: getstatic     #123                // Field i:[I
+2479-     380: bipush        22
+2480-     382: bipush        60
+2481-     384: bipush        16
+2482-     386: ixor
+2483-     387: iastore
+2484-     388: getstatic     #123                // Field i:[I
+2485-     391: bipush        23
+2486-     393: sipush        130
+2487-     396: sipush        169
+2488-     399: ixor
+2489-     400: iastore
+2490-     401: getstatic     #123                // Field i:[I
+2491-     404: bipush        24
+2492:     406: sipush        231
+2493-     409: sipush        188
+2494-     412: ixor
+2495-     413: sipush        180
+2496-     416: sipush        191
+2497-     419: ixor
+2498-     420: ixor
+2499-     421: iastore
+2500-     422: getstatic     #123                // Field i:[I
+2501-     425: bipush        25
+2502-     427: bipush        60
+2503-     429: bipush        21
+2504-     431: ixor
+2505-     432: iastore
+2506-     433: getstatic     #123                // Field i:[I
+2507-     436: bipush        26
+2508-     438: bipush        122
+2509-     440: bipush        65
+2510-     442: ixor
+2511-     443: iastore
+2512-     444: getstatic     #123                // Field i:[I
+2513-     447: bipush        27
+2514-     449: bipush        98
+2515-     451: bipush        122
+2516-     453: ixor
+2517-     454: iastore
+2518-     455: getstatic     #123                // Field i:[I
+2519-     458: bipush        28
+2520-     460: bipush        51
+2521-     462: bipush        30
+2522-     464: ixor
+--
+2724-     837: iastore
+2725-     838: getstatic     #123                // Field i:[I
+2726-     841: bipush        50
+2727-     843: sipush        149
+2728-     846: sipush        146
+2729-     849: ixor
+2730-     850: iastore
+2731-     851: getstatic     #123                // Field i:[I
+2732-     854: bipush        51
+2733-     856: bipush        26
+2734-     858: bipush        65
+2735-     860: ixor
+2736-     861: iastore
+2737-     862: getstatic     #123                // Field i:[I
+2738-     865: bipush        52
+2739-     867: sipush        181
+2740-     870: sipush        164
+2741-     873: ixor
+2742:     874: sipush        233
+2743-     877: sipush        166
+2744-     880: ixor
+2745-     881: ixor
+2746-     882: iastore
+2747-     883: getstatic     #123                // Field i:[I
+2748-     886: bipush        53
+2749-     888: bipush        63
+2750-     890: bipush        110
+2751-     892: ixor
+2752-     893: sipush        182
+2753-     896: sipush        142
+2754-     899: ixor
+2755-     900: ixor
+2756-     901: iastore
+2757-     902: getstatic     #123                // Field i:[I
+2758-     905: bipush        54
+2759-     907: bipush        74
+2760-     909: bipush        107
+2761-     911: ixor
+2762-     912: bipush        79
+2763-     914: bipush        28
+2764-     916: ixor
+2765-     917: ixor
+2766-     918: iastore
+2767-     919: getstatic     #123                // Field i:[I
+2768-     922: bipush        55
+2769-     924: sipush        240
+2770-     927: sipush        141
+2771-     930: ixor
+2772-     931: iastore
+===== Class_ga =====
+1904-    2302: iadd
+1905-    2303: bipush        79
+1906-    2305: isub
+1907-    2306: bipush        96
+1908-    2308: iadd
+1909-    2309: sipush        177
+1910-    2312: bipush        122
+1911-    2314: iadd
+1912-    2315: sipush        284
+1913-    2318: isub
+1914-    2319: sipush        183
+1915-    2322: iadd
+1916-    2323: ixor
+1917-    2324: bipush        68
+1918-    2326: sipush        194
+1919-    2329: iadd
+1920-    2330: sipush        250
+1921-    2333: isub
+1922:    2334: sipush        233
+1923-    2337: iadd
+1924-    2338: sipush        150
+1925-    2341: bipush        9
+1926-    2343: iadd
+1927-    2344: bipush        32
+1928-    2346: isub
+1929-    2347: bipush        50
+1930-    2349: iadd
+1931-    2350: ixor
+1932-    2351: ldc           #2                  // String
+1933-    2353: invokevirtual #62                 // Method java/lang/String.length:()I
+1934-    2356: ineg
+1935-    2357: ixor
+1936-    2358: iand
+1937-    2359: if_icmpgt     2570
+1938-    2362: aconst_null
+1939-    2363: areturn
+1940-    2364: aload         5
+1941-    2366: getfield      #23                 // Field f:I
+1942-    2369: aload         5
+1943-    2371: getfield      #30                 // Field m:I
+1944-    2374: invokestatic  #57                 // Method d:(II)Z
+1945-    2377: ifeq          2411
+1946-    2380: aload         5
+1947-    2382: aload         5
+1948-    2384: getfield      #30                 // Field m:I
+1949-    2387: putfield      #41                 // Field x:I
+1950-    2390: ldc           #1                  // String
+1951-    2392: invokevirtual #62                 // Method java/lang/String.length:()I
+1952-    2395: pop
+===== Class_gf =====
+1368-      70: iconst_4
+1369-      71: sipush        -27652
+1370-      74: sipush        28603
+1371-      77: iand
+1372-      78: iastore
+1373-      79: getstatic     #126                // Field c:[I
+1374-      82: iconst_5
+1375-      83: sipush        -15401
+1376-      86: sipush        16361
+1377-      89: iand
+1378-      90: iastore
+1379-      91: getstatic     #126                // Field c:[I
+1380-      94: bipush        6
+1381-      96: sipush        -1223
+1382-      99: sipush        21727
+1383-     102: iand
+1384-     103: ineg
+1385-     104: sipush        -2053
+1386:     107: sipush        23518
+1387-     110: iand
+1388-     111: iand
+1389-     112: iastore
+1390-     113: getstatic     #126                // Field c:[I
+1391-     116: bipush        7
+1392-     118: sipush        169
+1393-     121: sipush        160
+1394-     124: ixor
+1395-     125: iastore
+1396-     126: getstatic     #126                // Field c:[I
+1397-     129: bipush        8
+1398-     131: sipush        155
+1399-     134: sipush        158
+1400-     137: ixor
+1401-     138: sipush        163
+1402-     141: sipush        166
+1403-     144: ixor
+1404-     145: iconst_m1
+1405-     146: ixor
+1406-     147: iand
+1407-     148: iastore
+1408-     149: getstatic     #126                // Field c:[I
+1409-     152: bipush        9
+1410-     154: bipush        60
+1411-     156: bipush        70
+1412-     158: ixor
+1413-     159: sipush        188
+1414-     162: sipush        147
+1415-     165: ixor
+1416-     166: ixor
+--
+1696-     667: bipush        124
+1697-     669: ixor
+1698-     670: ixor
+1699-     671: iastore
+1700-     672: getstatic     #126                // Field c:[I
+1701-     675: bipush        36
+1702-     677: sipush        246
+1703-     680: sipush        186
+1704-     683: ixor
+1705-     684: iastore
+1706-     685: getstatic     #126                // Field c:[I
+1707-     688: bipush        37
+1708-     690: bipush        113
+1709-     692: bipush        127
+1710-     694: ixor
+1711-     695: iastore
+1712-     696: getstatic     #126                // Field c:[I
+1713-     699: bipush        38
+1714:     701: sipush        232
+1715-     704: bipush        54
+1716-     706: iadd
+1717-     707: sipush        274
+1718-     710: isub
+1719:     711: sipush        230
+1720-     714: iadd
+1721-     715: iastore
+1722-     716: getstatic     #126                // Field c:[I
+1723-     719: bipush        39
+1724-     721: iconst_3
+1725-     722: sipush        138
+1726-     725: iadd
+1727-     726: bipush        122
+1728-     728: isub
+1729-     729: sipush        187
+1730-     732: iadd
+1731-     733: sipush        173
+1732-     736: bipush        33
+1733-     738: iadd
+1734-     739: bipush        16
+1735-     741: isub
+1736-     742: iconst_3
+1737-     743: iadd
+1738-     744: ixor
+1739-     745: iastore
+1740-     746: getstatic     #126                // Field c:[I
+1741-     749: bipush        40
+1742-     751: sipush        158
+1743-     754: sipush        168
+1744-     757: ixor
+1745-     758: sipush        194
+1746-     761: sipush        154
+1747-     764: ixor
+1748-     765: ixor
+1749-     766: iastore
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== Class_he =====
+230-     104: bipush        119
+231-     106: iadd
+232-     107: sipush        140
+233-     110: bipush        42
+234-     112: iadd
+235-     113: bipush        95
+236-     115: isub
+237-     116: bipush        74
+238-     118: iadd
+239-     119: ixor
+240-     120: iastore
+241-     121: getstatic     #23                 // Field c:[I
+242-     124: bipush        7
+243-     126: ldc           #170                // String
+244-     128: invokevirtual #130                // Method java/lang/String.length:()I
+245-     131: iastore
+246-     132: getstatic     #23                 // Field c:[I
+247-     135: bipush        8
+248:     137: sipush        230
+249-     140: sipush        141
+250-     143: ixor
+251-     144: iastore
+252-     145: getstatic     #23                 // Field c:[I
+253-     148: bipush        9
+254-     150: sipush        142
+255-     153: sipush        177
+256-     156: iadd
+257-     157: sipush        280
+258-     160: isub
+259-     161: sipush        152
+260-     164: iadd
+261-     165: sipush        182
+262-     168: bipush        86
+263-     170: iadd
+264:     171: sipush        231
+265-     174: isub
+266-     175: sipush        150
+267-     178: iadd
+268-     179: ixor
+269-     180: iastore
+270-     181: getstatic     #23                 // Field c:[I
+271-     184: bipush        10
+272-     186: bipush        48
+273-     188: bipush        81
+274-     190: ixor
+275-     191: sipush        164
+276-     194: sipush        160
+277-     197: ixor
+278-     198: ixor
+279-     199: iastore
+280-     200: getstatic     #23                 // Field c:[I
+281-     203: bipush        11
+282-     205: bipush        54
+283-     207: bipush        51
+284-     209: ixor
+285-     210: iastore
+286-     211: getstatic     #23                 // Field c:[I
+287-     214: bipush        12
+288-     216: bipush        6
+289-     218: bipush        114
+290-     220: ixor
+291-     221: iastore
+292-     222: getstatic     #23                 // Field c:[I
+293-     225: bipush        13
+294-     227: sipush        149
+--
+570-     734: bipush        44
+571-     736: ixor
+572-     737: sipush        152
+573-     740: sipush        147
+574-     743: ixor
+575-     744: ixor
+576-     745: iastore
+577-     746: getstatic     #23                 // Field c:[I
+578-     749: bipush        41
+579-     751: sipush        154
+580-     754: sipush        128
+581-     757: ixor
+582-     758: iastore
+583-     759: getstatic     #23                 // Field c:[I
+584-     762: bipush        42
+585-     764: bipush        10
+586-     766: bipush        118
+587-     768: ixor
+588:     769: sipush        231
+589-     772: sipush        175
+590-     775: ixor
+591-     776: ixor
+592-     777: iastore
+593-     778: getstatic     #23                 // Field c:[I
+594-     781: bipush        43
+595-     783: sipush        158
+596-     786: sipush        133
+597-     789: ixor
+598-     790: iastore
+599-     791: getstatic     #23                 // Field c:[I
+600-     794: bipush        44
+601-     796: bipush        51
+602-     798: bipush        47
+603-     800: ixor
+604-     801: iastore
+605-     802: getstatic     #23                 // Field c:[I
+606-     805: bipush        45
+607-     807: bipush        57
+608-     809: bipush        14
+609-     811: ixor
+610-     812: bipush        38
+611-     814: bipush        12
+612-     816: ixor
+613-     817: ixor
+614-     818: iastore
+615-     819: getstatic     #23                 // Field c:[I
+616-     822: bipush        46
+617-     824: sipush        128
+618-     827: sipush        155
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== k17 =====
+618-     134: invokevirtual #158                // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+619-     137: ldc           #45                 // String  hiện chưa được mở.
+620-     139: invokevirtual #158                // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+621-     142: invokevirtual #159                // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+622-     145: invokestatic  #131                // Method DoHoang091.b:(Ljava/lang/String;)V
+623-     148: iconst_1
+624-     149: ireturn
+625-     150: iload_0
+626-     151: iload_1
+627-     152: aload_2
+628-     153: invokestatic  #196                // Method k19.a:(IILjava/lang/String;)Z
+629-     156: pop
+630-     157: iconst_1
+631-     158: ireturn
+632-
+633-  static boolean c(int);
+634-    Code:
+635-       0: iload_0
+636:       1: sipush        232
+637-       4: if_icmpne     18
+638-       7: sipush        770
+639-      10: invokestatic  #172                // Method k16.d:(I)I
+640-      13: ifgt          18
+641-      16: iconst_0
+642-      17: ireturn
+643-      18: iconst_1
+644-      19: ireturn
+645-
+646-  static boolean d(int);
+647-    Code:
+648-       0: iload_0
+649:       1: sipush        232
+650-       4: if_icmpne     9
+651-       7: iconst_1
+652-       8: ireturn
+653-       9: iconst_0
+654-      10: ireturn
+655-
+656-  static void e(int) throws java.lang.Exception;
+657-    Code:
+658-       0: iload_0
+659:       1: sipush        232
+660-       4: if_icmpeq     8
+661-       7: return
+662-       8: sipush        770
+663-      11: iconst_1
+664-      12: invokestatic  #170                // Method k16.b:(II)I
+665-      15: iconst_1
+666-      16: if_icmpeq     20
+667-      19: return
+668-      20: ldc2_w        #113                // long 50000000l
+669-      23: invokestatic  #133                // Method DoHoang091.c:(J)V
+670-      26: invokestatic  #202                // Method k2e.s:()I
+671-      29: ifgt          33
+672-      32: return
+673-      33: ldc           #48                 // String BUA_MAY_MAN
+674-      35: invokestatic  #205                // Method kb.a:(Ljava/lang/String;)I
+675-      38: istore_1
+676-      39: iload_1
+677-      40: iflt          48
+678-      43: iload_1
+679-      44: invokestatic  #199                // Method k19.g:(I)Z
+680-      47: pop
+681-      48: return
+682-
+683-  static void a(int, short, short) throws java.lang.Exception;
+684-    Code:
+685-       0: iload_0
+686-       1: invokestatic  #137                // Method DoHoang091.z:()LDoHoang091$k0;
+687-       4: getfield      #122                // Field DoHoang091$k0.r:I
+688-       7: isub
+689-       8: invokestatic  #152                // Method java/lang/Math.abs:(I)I
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== k1c =====
+654-  static int j(int, int);
+655-    Code:
+656-       0: iload_0
+657-       1: iload_1
+658-       2: invokestatic  #200                // Method d:(II)I
+659-       5: sipush        224
+660-       8: if_icmpne     17
+661-      11: sipush        900
+662-      14: goto          18
+663-      17: iconst_0
+664-      18: ireturn
+665-
+666-  static boolean c(int);
+667-    Code:
+668-       0: iload_0
+669-       1: sipush        224
+670-       4: if_icmpeq     16
+671-       7: iload_0
+672:       8: sipush        230
+673-      11: if_icmpeq     16
+674-      14: iconst_0
+675-      15: ireturn
+676-      16: iconst_1
+677-      17: ireturn
+678-
+679-  static boolean d(int);
+680-    Code:
+681-       0: iload_0
+682-       1: sipush        224
+683-       4: if_icmpne     9
+684-       7: iconst_1
+685-       8: ireturn
+686-       9: iconst_0
+687-      10: ireturn
+688-
+689-  static int k(int, int);
+690-    Code:
+691-       0: iload_0
+692-       1: sipush        224
+693-       4: if_icmpeq     9
+694-       7: iload_1
+695-       8: ireturn
+696-       9: invokestatic  #144                // Method DoHoang091.z:()LDoHoang091$k0;
+697-      12: getfield      #130                // Field DoHoang091$k0.cb:[I
+698-      15: iconst_0
+699-      16: iaload
+700-      17: ifle          24
+701-      20: iconst_1
+702-      21: goto          25
+--
+717-      19: iconst_0
+718-      20: iconst_0
+719-      21: iconst_0
+720-      22: bipush        100
+721-      24: iconst_0
+722-      25: invokestatic  #188                // Method a:(IIIIII)V
+723-      28: new           #107                // class java/lang/StringBuffer
+724-      31: dup
+725-      32: invokestatic  #144                // Method DoHoang091.z:()LDoHoang091$k0;
+726-      35: getfield      #129                // Field DoHoang091$k0.a:Ljava/lang/String;
+727-      38: invokestatic  #164                // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+728-      41: invokespecial #167                // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+729-      44: ldc           #51                 // String  đã tiêu diệt người tuyết
+730-      46: invokevirtual #169                // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+731-      49: invokevirtual #170                // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+732-      52: invokestatic  #139                // Method DoHoang091.b:(Ljava/lang/String;)V
+733-      55: return
+734-      56: iload_0
+735:      57: sipush        230
+736-      60: if_icmpne     103
+737-      63: iconst_0
+738-      64: iconst_0
+739-      65: iconst_1
+740-      66: iconst_0
+741-      67: iconst_0
+742-      68: iconst_0
+743-      69: invokestatic  #188                // Method a:(IIIIII)V
+744-      72: ldc2_w        #125                // long 80000000l
+745-      75: invokestatic  #141                // Method DoHoang091.c:(J)V
+746-      78: invokestatic  #212                // Method k2e.s:()I
+747-      81: ifle          103
+748-      84: ldc           #88                 // String VUA_TUAN_LOC
+749-      86: invokestatic  #215                // Method kb.a:(Ljava/lang/String;)I
+750-      89: istore_3
+751-      90: iload_3
+752-      91: iflt          103
+753-      94: iload_3
+754-      95: iconst_1
+755-      96: iconst_0
+756-      97: iconst_0
+757-      98: iconst_0
+758-      99: invokestatic  #180                // Method k16.a:(IIZBB)I
+759-     102: pop
+760-     103: return
+761-
+762-  static int e(int);
+763-    Code:
+764-       0: iload_0
+765-       1: iflt          10
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+/home/runner/work/_temp/32eb15b5-de9a-412f-8e24-57f9c21f83d9.sh: line 35: printf: write error: Broken pipe
+===== k9 =====
+877-    1396: bastore
+878-    1397: dup
+879-    1398: sipush        226
+880-    1401: bipush        50
+881-    1403: bastore
+882-    1404: dup
+883-    1405: sipush        227
+884-    1408: bipush        50
+885-    1410: bastore
+886-    1411: dup
+887-    1412: sipush        228
+888-    1415: bipush        70
+889-    1417: bastore
+890-    1418: dup
+891-    1419: sipush        229
+892-    1422: bipush        33
+893-    1424: bastore
+894-    1425: dup
+895:    1426: sipush        230
+896-    1429: bipush        70
+897-    1431: bastore
+898-    1432: dup
+899:    1433: sipush        231
+900-    1436: bipush        70
+901-    1438: bastore
+902-    1439: dup
+903:    1440: sipush        232
+904-    1443: bipush        70
+905-    1445: bastore
+906-    1446: dup
+907:    1447: sipush        233
+908-    1450: bipush        70
+909-    1452: bastore
+910-    1453: dup
+911:    1454: sipush        234
+912-    1457: bipush        70
+913-    1459: bastore
+914-    1460: dup
+915:    1461: sipush        235
+916-    1464: bipush        33
+917-    1466: bastore
+918-    1467: dup
+919-    1468: sipush        236
+920-    1471: bipush        120
+921-    1473: bastore
+922-    1474: dup
+923-    1475: sipush        237
+924-    1478: bipush        120
+925-    1480: bastore
+926-    1481: dup
+927-    1482: sipush        238
+928-    1485: bipush        72
+929-    1487: bastore
+930-    1488: dup
+931-    1489: sipush        239
+932-    1492: bipush        120
+933-    1494: bastore
+934-    1495: dup
+935-    1496: sipush        240
+936-    1499: bipush        120
+937-    1501: bastore
+938-    1502: dup
+939-    1503: sipush        241
+940-    1506: bipush        120
+941-    1508: bastore
+942-    1509: dup
+943-    1510: sipush        242
+944-    1513: bipush        120
+945-    1515: bastore
+--
+1840-    2753: bastore
+1841-    2754: dup
+1842-    2755: sipush        226
+1843-    2758: iconst_1
+1844-    2759: bastore
+1845-    2760: dup
+1846-    2761: sipush        227
+1847-    2764: iconst_1
+1848-    2765: bastore
+1849-    2766: dup
+1850-    2767: sipush        228
+1851-    2770: iconst_1
+1852-    2771: bastore
+1853-    2772: dup
+1854-    2773: sipush        229
+1855-    2776: iconst_4
+1856-    2777: bastore
+1857-    2778: dup
+1858:    2779: sipush        230
+1859-    2782: iconst_1
+1860-    2783: bastore
+1861-    2784: dup
+1862:    2785: sipush        231
+1863-    2788: iconst_1
+1864-    2789: bastore
+1865-    2790: dup
+1866:    2791: sipush        232
+1867-    2794: iconst_1
+1868-    2795: bastore
+1869-    2796: dup
+1870:    2797: sipush        233
+1871-    2800: iconst_1
+1872-    2801: bastore
+1873-    2802: dup
+1874:    2803: sipush        234
+1875-    2806: iconst_1
+1876-    2807: bastore
+1877-    2808: dup
+1878:    2809: sipush        235
+1879-    2812: iconst_4
+1880-    2813: bastore
+1881-    2814: dup
+1882-    2815: sipush        236
+1883-    2818: iconst_4
+1884-    2819: bastore
+1885-    2820: dup
+1886-    2821: sipush        237
+1887-    2824: iconst_4
+1888-    2825: bastore
+1889-    2826: dup
+1890-    2827: sipush        238
+1891-    2830: iconst_4
+1892-    2831: bastore
+1893-    2832: dup
+1894-    2833: sipush        239
+1895-    2836: iconst_4
+1896-    2837: bastore
+1897-    2838: dup
+1898-    2839: sipush        240
+1899-    2842: iconst_4
+1900-    2843: bastore
+1901-    2844: dup
+1902-    2845: sipush        241
+1903-    2848: iconst_4
+1904-    2849: bastore
+1905-    2850: dup
+1906-    2851: sipush        242
+1907-    2854: iconst_4
+1908-    2855: bastore
+=== TARGET CLASSES referencing item type/equip/fashion text ===
+--Class_ey--
+Equip=
+--Class_gd--
+- Choose Equiptment and Gem
+"- Choose Equiptment and stone only
+'- Move to inventory to choose Equipment
+'- Upgrade equipment successful 1 times.
+5Choose the equipment that you want to split the Stone
+Costume shop
+Enhance equipment
+	Equipment
+Equipment 1
+Equipment 2
+'Equipment enhanced to max level already
+"Equipment has been split, you get 
+Fashion Store
++Just choose Equipment and conversion items.
+3Just choose Stone, Equipment and upgrade insurance.
+!Just transfer same type equipment
+)Only upgraded item or equipment to split.
+Split Equipment
+!Success,  equipped with level up 
+This equipment can not Enhance
+1This function is not available for this equipment
+_When separated from the stone equipped, you will collect half amount of stone at the beginning.
+IYou do not have any special weapons. Go to Menu/Status/Equipment to check
+0You don't have enough coins to upgrade equipment
+4You don't have enough gold bars to upgrade equipment
+$Your equipment has reached max level
+equipment level
+equipment upgraded maximum
+!failed, return level of equipment

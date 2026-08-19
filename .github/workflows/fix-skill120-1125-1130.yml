@@ -1,4 +1,4 @@
-name: Trace skill 120 learned check 1125-1130
+name: Isolate skill 120 persistence
 on:
   push:
     branches: [fix-skill120-1125-1130]
@@ -10,41 +10,47 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Trace check and persistence paths
+      - name: Inspect save/load methods
         shell: bash
         run: |
           set -euo pipefail
           JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          WORK=/tmp/skill120check
-          LOG="$GITHUB_WORKSPACE/skill120_check_trace.txt"
+          WORK=/tmp/s120persist
+          LOG="$GITHUB_WORKSPACE/skill120_persistence_focus.txt"
           exec > >(tee "$LOG") 2>&1
           rm -rf "$WORK" && mkdir -p "$WORK/jar"
           (cd "$WORK/jar" && jar xf "$JAR")
           cd "$WORK/jar"
-          echo '=== STRINGS related learned/unlearned ==='
-          for c in *.class; do
-            s=$(strings "$c" | grep -Ei 'chưa học|chua hoc|đã học|da hoc|Chiêu này đã học|kỹ năng này|skill.*learn|learn.*skill|CSkill|KSkill|OSkill' || true)
-            if [ -n "$s" ]; then echo "===== ${c%.class} ====="; echo "$s"; fi
-          done
-          echo '=== BYTECODE classes with learned/unlearned strings ==='
-          for c in *.class; do
-            if strings "$c" | grep -Eqi 'chưa học|Chiêu này đã học|CSkill|KSkill|OSkill'; then
-              echo "===== ${c%.class} ====="
-              javap -classpath . -c -p "${c%.class}" | grep -n -B120 -A240 -Ei 'chưa học|Chiêu này đã học|CSkill|KSkill|OSkill' | head -n 3500 || true
-            fi
-          done
-          echo '=== k25 methods touching learned arrays bE/bF ==='
-          javap -classpath . -c -p -verbose k25 | grep -n -B60 -A140 -E 'DoHoang091\$k0\.bE|DoHoang091\$k0\.bF' | head -n 9000 || true
-          echo '=== k0 persistence methods touching bE/bF ==='
-          javap -classpath . -c -p -verbose k0 | grep -n -B80 -A180 -E 'DoHoang091\$k0\.bE|DoHoang091\$k0\.bF' | head -n 9000 || true
-          echo '=== state serializer ==='
-          javap -classpath . -c -p -verbose 'DoHoang091$k0' | grep -n -B60 -A160 -E 'bE|bF|bG' | head -n 7000 || true
+          echo '=== k0 signatures ==='
+          javap -classpath . -p k0 | grep -n 'DoHoang091\$k0' || true
+          echo '=== k0 bytecode around calls with DoHoang091$k0 ==='
+          javap -classpath . -c -p k0 | grep -n -B30 -A220 'DoHoang091\$k0' | head -n 5000 || true
+          echo '=== k25 save/load portions bE/bF/bG ==='
+          javap -classpath . -c -p k25 > "$WORK/k25.txt"
+          grep -n -B80 -A180 'Field DoHoang091\$k0.bE' "$WORK/k25.txt" | head -n 6000 || true
+          echo '=== methods invoking k0.a(state) ==='
+          grep -n -B50 -A80 'Method k0.a:(LDoHoang091\$k0;)V' "$WORK/k25.txt" | head -n 3000 || true
+          echo '=== skill template 85-90 point lookup ==='
+          cat > "$WORK/Test.java" <<'JAVA'
+          import java.lang.reflect.*;
+          public class Test{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25");Method g=c.getDeclaredMethod("g",int.class);g.setAccessible(true);
+              for(int id=85;id<=90;id++){
+                Object t=g.invoke(null,id);Method p=t.getClass().getDeclaredMethod("a",int.class);p.setAccessible(true);
+                System.out.println("template="+id+" point0skill="+p.invoke(t,0)+" point1skill="+p.invoke(t,1));
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/Test.java"
+          java -classpath "$JAR:$WORK" Test
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_check_trace.txt || true
-          git commit -m 'chore: trace skill 120 learned check' || exit 0
+          git add skill120_persistence_focus.txt || true
+          git commit -m 'chore: isolate skill 120 persistence' || exit 0
           git push origin fix-skill120-1125-1130

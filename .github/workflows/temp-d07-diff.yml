@@ -1,0 +1,42 @@
+name: Temporary d07 diff
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-d07-diff.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Compare d07 before and after skill-120 changes
+        shell: python
+        run: |
+          import subprocess, zipfile, difflib, hashlib
+          before='15094ae1953e93b6c3a8ceb26aa3ef350dafc674'
+          subprocess.run(['git','show',f'{before}:Nso_Offline_By_h0901.jar'],stdout=open('/tmp/before.jar','wb'),check=True)
+          with zipfile.ZipFile('/tmp/before.jar') as z: a=z.read('offline/packs/d07.pak')
+          with zipfile.ZipFile('Nso_Offline_By_h0901.jar') as z: b=z.read('offline/packs/d07.pak')
+          sm=difflib.SequenceMatcher(None,a,b,autojunk=False)
+          with open('d07_diff_report.txt','w') as f:
+            f.write(f'before len={len(a)} sha256={hashlib.sha256(a).hexdigest()}\n')
+            f.write(f'after  len={len(b)} sha256={hashlib.sha256(b).hexdigest()}\n')
+            for tag,i1,i2,j1,j2 in sm.get_opcodes():
+              if tag!='equal':
+                f.write(f'\n{tag} before[{i1}:{i2}] ({i2-i1}) -> after[{j1}:{j2}] ({j2-j1})\n')
+                f.write('before_hex='+a[i1:min(i2,i1+256)].hex()+'\n')
+                f.write('after_hex='+b[j1:min(j2,j1+512)].hex()+'\n')
+      - name: Commit report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add d07_diff_report.txt
+          git commit -m "chore: temporary d07 skill diff"
+          git push

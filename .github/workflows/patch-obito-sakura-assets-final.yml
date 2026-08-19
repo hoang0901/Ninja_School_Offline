@@ -1,4 +1,4 @@
-name: Inspect offline pack key scheme
+name: Patch exact Obito Sakura x1 models
 on:
   push:
     branches: [fix-obito-sakura-final-v2]
@@ -6,34 +6,126 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump k1e normalization and callers
+      - name: Patch exact x1 effect assets 230-235
+        id: patch
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/k1e_key_report.txt"
+          JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          WORK=/tmp/obito_sakura_x1
+          LOG="$GITHUB_WORKSPACE/obito_sakura_x1_validation.txt"
           exec > >(tee "$LOG") 2>&1
-          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
-          cd /tmp/jar
-          echo '=== k1e verbose ==='
-          javap -classpath . -c -p -verbose k1e
-          echo '=== classes directly referencing k1e ==='
-          grep -aFl 'k1e' *.class | while read c; do echo "===== ${c%.class} ====="; javap -classpath . -c -p "${c%.class}" | grep -n -B70 -A100 'k1e' | head -n 1400 || true; done
-          echo '=== normalization probes ==='
-          cat >/tmp/P.java <<'JAVA'
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git "$WORK/ref" >/dev/null 2>&1
+          (cd "$WORK/jar" && jar xf "$JAR")
+
+          cat > "$WORK/tools/Locate.java" <<'JAVA'
           import java.lang.reflect.*;
-          public class P{public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k1e");Method n=c.getDeclaredMethod("normalize",String.class),h=c.getDeclaredMethod("hash",String.class),e=c.getDeclaredMethod("ensureIndex"),f=c.getDeclaredMethod("findIndex",String.class);n.setAccessible(true);h.setAccessible(true);e.setAccessible(true);f.setAccessible(true);e.invoke(null);String[]ps={"Data/Img/Effect/1/230.png","/Data/Img/Effect/1/230.png","offline/Data/Img/Effect/1/230.png","/offline/Data/Img/Effect/1/230.png","/offline/full/item.dat","offline/full/item.dat","/offline/effect/1/230.png","/offline/img/effect/1/230.png"};for(String p:ps){Object q=n.invoke(null,p);System.out.print(p+" => "+q);if(q!=null)System.out.print(" hash="+h.invoke(null,q)+" idx="+f.invoke(null,q));System.out.println();}}}
+          public class Locate {
+            public static void main(String[] a)throws Exception{
+              Class<?> c=Class.forName("k1e");
+              Method norm=c.getDeclaredMethod("normalize",String.class), hash=c.getDeclaredMethod("hash",String.class), ensure=c.getDeclaredMethod("ensureIndex"), find=c.getDeclaredMethod("findIndex",String.class);
+              norm.setAccessible(true);hash.setAccessible(true);ensure.setAccessible(true);find.setAccessible(true);ensure.invoke(null);
+              Field fk=c.getDeclaredField("kinds"),fc=c.getDeclaredField("chunks"),fo=c.getDeclaredField("offsets"),fl=c.getDeclaredField("lengths");fk.setAccessible(true);fc.setAccessible(true);fo.setAccessible(true);fl.setAccessible(true);
+              byte[] kinds=(byte[])fk.get(null),chunks=(byte[])fc.get(null);int[] offs=(int[])fo.get(null),lens=(int[])fl.get(null);
+              for(int id=220;id<=245;id++){
+                String p="/offline/x1/effect/"+id+".png";String n=(String)norm.invoke(null,p);int h=(Integer)hash.invoke(null,n),i=(Integer)find.invoke(null,n);
+                if(i>=0) System.out.println(id+","+n+","+h+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offs[i]+","+lens[i]);
+                else System.out.println(id+","+n+","+h+",-1,-1,-1,-1,-1");
+              }
+            }
+          }
           JAVA
-          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/P.java
-          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" P
-      - name: Commit report
+          javac -classpath "$JAR" "$WORK/tools/Locate.java"
+          java -classpath "$JAR:$WORK/tools" Locate | tee "$WORK/locate.csv"
+
+          INDEX="$WORK/jar/offline/packs/index.bin" PACKDIR="$WORK/jar/offline/packs" LOCATE="$WORK/locate.csv" REF="$WORK/ref/NinjaSchoolOffline_by_dohoang091" python3 - <<'PY'
+          import os,struct,re
+          from pathlib import Path
+          idxp=Path(os.environ['INDEX']); packdir=Path(os.environ['PACKDIR']); ref=Path(os.environ['REF']); locate=Path(os.environ['LOCATE'])
+          raw=idxp.read_bytes()
+          if raw[:4]!=b'OPR1': raise SystemExit('bad OPR1')
+          n=struct.unpack_from('>I',raw,4)[0]
+          if len(raw)!=8+n*14: raise SystemExit(f'bad index length {len(raw)} count={n}')
+          rec=[]
+          for i in range(n):
+            p=8+i*14; rec.append([struct.unpack_from('>i',raw,p)[0],raw[p+4],raw[p+5],struct.unpack_from('>I',raw,p+6)[0],struct.unpack_from('>I',raw,p+10)[0]])
+          signed=all(rec[i][0]<=rec[i+1][0] for i in range(n-1)); unsigned=all((rec[i][0]&0xffffffff)<=(rec[i+1][0]&0xffffffff) for i in range(n-1))
+          if not (signed or unsigned): raise SystemExit('index not sorted by recognized hash order')
+          rows={}
+          for line in locate.read_text().splitlines():
+            a=line.split(','); rows[int(a[0])]=dict(norm=a[1],hash=int(a[2]),idx=int(a[3]),kind=int(a[4]),chunk=int(a[5]),off=int(a[6]),ln=int(a[7]))
+          # Find nearest existing x1/effect assets around the missing target IDs.
+          anchors=[rows[i] for i in list(range(229,220,-1))+list(range(236,246)) if i in rows and rows[i]['idx']>=0]
+          if not anchors: raise SystemExit('no neighboring x1/effect asset found')
+          # Prefer an anchor whose kind/chunk is also used by multiple neighbors.
+          from collections import Counter
+          kc=Counter((x['kind'],x['chunk']) for x in anchors)
+          kind,chunk=kc.most_common(1)[0][0]
+          prefix='s' if kind==0 else 'd'; pack=packdir/f'{prefix}{chunk:02d}.pak'
+          if not pack.exists(): raise SystemExit(f'anchor pack missing {pack}')
+          print('ANCHOR',kind,chunk,pack.name,'neighbors',[(i,rows[i]['kind'],rows[i]['chunk']) for i in rows if rows[i]['idx']>=0 and 220<=i<=245])
+          blob=bytearray(pack.read_bytes())
+          target_hashes={rows[i]['hash'] for i in range(230,236)}
+          rec=[r for r in rec if r[0] not in target_hashes]
+          for id in range(230,236):
+            src=ref/f'Data/Img/Effect/1/{id}.png'
+            if not src.exists(): raise SystemExit(f'missing ref {src}')
+            data=src.read_bytes(); off=len(blob); blob+=data
+            rec.append([rows[id]['hash'],kind,chunk,off,len(data)])
+            print('ADD',id,rows[id]['norm'],'hash',rows[id]['hash'],'offset',off,'len',len(data))
+          pack.write_bytes(blob)
+          rec.sort(key=(lambda x:x[0]) if signed else (lambda x:x[0]&0xffffffff))
+          out=bytearray(b'OPR1'+struct.pack('>I',len(rec)))
+          for h,k,c,o,l in rec: out+=struct.pack('>iBBII',h,k,c,o,l)
+          idxp.write_bytes(out)
+          Path('/tmp/obito_sakura_x1/packname.txt').write_text(pack.name)
+          print('INDEX',n,'->',len(rec),'PACKSIZE',len(blob))
+          PY
+
+          PACKNAME=$(cat "$WORK/packname.txt")
+          (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "offline/packs/$PACKNAME")
+
+          cat > "$WORK/tools/Validate.java" <<'JAVA'
+          import java.lang.reflect.*;import java.security.*;import java.util.*;
+          public class Validate {
+            static String sha(byte[] b)throws Exception{MessageDigest d=MessageDigest.getInstance("SHA-256");StringBuilder s=new StringBuilder();for(byte x:d.digest(b))s.append(String.format("%02x",x));return s.toString();}
+            static void asset(Class<?> c,Method r,Method n,Method f,int id)throws Exception{String p="/offline/x1/effect/"+id+".png";String q=(String)n.invoke(null,p);int idx=(Integer)f.invoke(null,q);byte[] b=(byte[])r.invoke(null,p);if(idx<0||b==null)throw new RuntimeException("missing "+p);System.out.println("ASSET "+id+" idx="+idx+" len="+b.length+" sha="+sha(b));}
+            static void item(int id)throws Exception{Class<?> tc=Class.forName("k2c");Constructor<?> ct=tc.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance("item");Method find=tc.getDeclaredMethod("find",int.class);find.setAccessible(true);Object row=find.invoke(t,id);Field ns=row.getClass().getDeclaredField("numbers"),ss=row.getClass().getDeclaredField("strings");ns.setAccessible(true);ss.setAccessible(true);System.out.println("ITEM "+id+" nums="+Arrays.toString((long[])ns.get(row))+" strs="+Arrays.deepToString((Object[])ss.get(row)));}
+            public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class),n=c.getDeclaredMethod("normalize",String.class),f=c.getDeclaredMethod("findIndex",String.class),e=c.getDeclaredMethod("ensureIndex");r.setAccessible(true);n.setAccessible(true);f.setAccessible(true);e.setAccessible(true);e.invoke(null);for(int id=230;id<=235;id++)asset(c,r,n,f,id);item(1173);item(1174);}
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Validate.java"
+          java -classpath "$JAR:$WORK/tools" Validate | tee "$WORK/validate.txt"
+          REF="$WORK/ref/NinjaSchoolOffline_by_dohoang091" VALID="$WORK/validate.txt" python3 - <<'PY'
+          import os,re,hashlib
+          from pathlib import Path
+          txt=Path(os.environ['VALID']).read_text(); ref=Path(os.environ['REF'])
+          for id in range(230,236):
+            b=(ref/f'Data/Img/Effect/1/{id}.png').read_bytes(); h=hashlib.sha256(b).hexdigest(); m=re.search(rf'^ASSET {id} idx=\d+ len=(\d+) sha=([0-9a-f]+)$',txt,re.M)
+            if not m or int(m.group(1))!=len(b) or m.group(2)!=h: raise SystemExit(f'asset validation failed {id}')
+          if 'ITEM 1173 nums=[1173, 0, 2, 1, 0, 20, 3422, -1, 230, 0]' not in txt: raise SystemExit('Obito metadata changed')
+          if 'ITEM 1174 nums=[1174, 0, 2, 0, 0, 20, 3421, -1, 233, 0]' not in txt: raise SystemExit('Sakura metadata changed')
+          print('VALIDATION_OK exact x1 hair/body/leg 230-235; item metadata unchanged')
+          PY
+          jar tf "$JAR" >/dev/null
+          echo "FINAL_JAR_SIZE=$(stat -c %s "$JAR")"
+      - name: Commit patched JAR
+        if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add k1e_key_report.txt
-          git commit -m 'chore: inspect offline resource key scheme' || exit 0
+          git add obito_sakura_x1_validation.txt
+          if [ "${{ steps.patch.outcome }}" = success ]; then
+            git add Nso_Offline_By_h0901.jar
+            MSG='fix: add exact Obito Sakura x1 hair body leg models'
+          else
+            MSG='chore: record exact Obito Sakura x1 model patch failure'
+          fi
+          git commit -m "$MSG" || exit 0
           git push origin fix-obito-sakura-final-v2

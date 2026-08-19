@@ -1,0 +1,18 @@
+name: Inspect skill 120 learning
+on:
+  push:
+    branches: [fix-skill120-learning]
+    paths: ['.github/workflows/inspect-skill120.yml']
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect source and offline JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          LOG="$GITHUB_WORKSPACE/skill120_report.txt"
+          exec > >(tee "$LOG") 2>&1

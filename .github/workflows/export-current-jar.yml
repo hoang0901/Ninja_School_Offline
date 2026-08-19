@@ -25,3 +25,4 @@ jobs:
           name: current-nso-jar
           path: Nso_Offline_By_h0901.jar
           if-no-files-found: error
+# trigger PR synchronize after base workflow exists

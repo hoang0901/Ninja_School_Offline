@@ -1,8 +1,8 @@
 name: Patch Obito Sakura resources
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [fix-obito-sakura]
     paths:
       - '.github/workflows/inspect-obito-sakura.yml'
 
@@ -23,15 +23,17 @@ jobs:
           ref: main
           path: source
 
-      - name: Patch packed x1 resources
+      - name: Patch and validate packed x1 resources
+        id: patch
         shell: bash
         run: |
           set -euo pipefail
           OFF="$GITHUB_WORKSPACE/offline"
+          exec > >(tee "$OFF/patch_obito_sakura.log") 2>&1
           SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
           WORK="$RUNNER_TEMP/nso_patch"
           JAR="$OFF/Nso_Offline_By_h0901.jar"
-          mkdir -p "$WORK/jar"
+          mkdir -p "$WORK/jar" "$WORK/validate"
           (cd "$WORK/jar" && jar xf "$JAR")
 
           cat > "$WORK/jar/LocateResources.java" <<'JAVA'
@@ -45,9 +47,11 @@ jobs:
               fk.setAccessible(true); fc.setAccessible(true); fo.setAccessible(true); fl.setAccessible(true);
               byte[] kinds=(byte[])fk.get(null), chunks=(byte[])fc.get(null); int[] offsets=(int[])fo.get(null), lengths=(int[])fl.get(null);
               for(String s: args){
-                int id=Integer.parseInt(s); String p="/offline/x1/small/Small"+id+".png";
+                int id=Integer.parseInt(s);
+                String p="/offline/x1/small/Small"+id+".png";
                 int i=(Integer)find.invoke(null,p);
-                if(i<0) throw new RuntimeException("Missing packed resource: "+p);
+                if(i<0){p="/offline/x1/small/Small"+id+".PNG"; i=(Integer)find.invoke(null,p);}
+                if(i<0) throw new RuntimeException("Missing packed resource for Small"+id);
                 System.out.println(id+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offsets[i]+","+lengths[i]+","+p);
               }
             }
@@ -56,6 +60,7 @@ jobs:
           (cd "$WORK/jar" && javac -classpath . LocateResources.java)
           IDS=$(seq 2715 2770; echo 3421; echo 3422)
           (cd "$WORK/jar" && java -classpath . LocateResources $IDS) > "$WORK/locations.csv"
+          echo "Located $(wc -l < "$WORK/locations.csv") target resources"
 
           INDEX="$WORK/jar/offline/packs/index.bin" LOC="$WORK/locations.csv" SRCROOT="$SRC" PACKROOT="$WORK/jar/offline/packs" python3 - <<'PY'
           import os, struct
@@ -67,13 +72,13 @@ jobs:
           if len(raw) != 8 + count*14: raise SystemExit(f'Unexpected index length {len(raw)} count {count}')
           recs=[]
           for i in range(count):
-              pos=8+i*14; h=bytes(raw[pos:pos+4]); kind=raw[pos+4]; chunk=raw[pos+5]; off=struct.unpack_from('>I',raw,pos+6)[0]; length=struct.unpack_from('>I',raw,pos+10)[0]
-              recs.append([h,kind,chunk,off,length])
+              pos=8+i*14
+              recs.append([bytes(raw[pos:pos+4]),raw[pos+4],raw[pos+5],struct.unpack_from('>I',raw,pos+6)[0],struct.unpack_from('>I',raw,pos+10)[0]])
           targets={}
           for line in loc_path.read_text().splitlines():
               id_s,idx_s,kind_s,chunk_s,off_s,len_s,path=line.split(',',6)
               rid=int(id_s); idx=int(idx_s); kind=int(kind_s); chunk=int(chunk_s)
-              if kind != 0: raise SystemExit(f'Target {rid} unexpectedly in non-static pack kind={kind}')
+              if kind != 0: raise SystemExit(f'Target {rid} unexpectedly in kind={kind}')
               f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.png'
               if not f.exists(): f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.PNG'
               if not f.exists(): raise SystemExit(f'Missing source sprite {rid}')
@@ -81,36 +86,30 @@ jobs:
               if (r[1],r[2],r[3],r[4]) != (kind,chunk,int(off_s),int(len_s)): raise SystemExit(f'Index mismatch for {rid}')
           touched=sorted({(recs[i][1],recs[i][2]) for i in targets})
           for kind,chunk in touched:
-              if kind!=0: raise SystemExit('Only static packs supported')
               p=pack_root/f's{chunk:02d}.pak'; old=p.read_bytes(); members=[i for i,r in enumerate(recs) if r[1]==kind and r[2]==chunk]; members.sort(key=lambda i: recs[i][3])
               out=bytearray(); cursor=0
               for i in members:
                   h,k,ch,off,length=recs[i]
-                  if off < cursor or off+length > len(old): raise SystemExit(f'Bad resource range in {p.name}: idx={i} off={off} len={length}')
+                  if off < cursor or off+length > len(old): raise SystemExit(f'Bad range {p.name} idx={i} off={off} len={length}')
                   out += old[cursor:off]; new_off=len(out); data=targets.get(i, old[off:off+length]); out += data; recs[i][3]=new_off; recs[i][4]=len(data); cursor=off+length
-              out += old[cursor:]; p.write_bytes(out); print(f'patched {p.name}: {len(old)} -> {len(out)} bytes')
+              out += old[cursor:]; p.write_bytes(out); print(f'patched {p.name}: {len(old)} -> {len(out)}')
           for i,(h,kind,chunk,off,length) in enumerate(recs):
               pos=8+i*14; raw[pos:pos+4]=h; raw[pos+4]=kind; raw[pos+5]=chunk; struct.pack_into('>I',raw,pos+6,off); struct.pack_into('>I',raw,pos+10,length)
-          index_path.write_bytes(raw); print(f'patched {len(targets)} resources across {len(touched)} static packs')
+          index_path.write_bytes(raw)
+          print(f'Patched {len(targets)} resources across {len(touched)} packs')
           PY
 
-          rm -f "$WORK/jar/LocateResources.java" "$WORK/jar/LocateResources.class"
           mapfile -t TOUCHED < <(cut -d, -f4 "$WORK/locations.csv" | sort -nu | awk '{printf "offline/packs/s%02d.pak\n",$1}')
           (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "${TOUCHED[@]}")
 
-      - name: Validate patched resources
-        shell: bash
-        run: |
-          set -euo pipefail
-          OFF="$GITHUB_WORKSPACE/offline"; SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"; WORK="$RUNNER_TEMP/nso_validate"; JAR="$OFF/Nso_Offline_By_h0901.jar"
-          mkdir -p "$WORK"
-          cat > "$WORK/ValidateResources.java" <<'JAVA'
+          cat > "$WORK/validate/ValidateResources.java" <<'JAVA'
           import java.lang.reflect.*; import java.security.*;
-          public class ValidateResources { static String sha(byte[] b)throws Exception{byte[] h=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return s.toString();} public static void main(String[] a)throws Exception{Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class);r.setAccessible(true);for(String s:a){int id=Integer.parseInt(s);String p="/offline/x1/small/Small"+id+".png";byte[] b=(byte[])r.invoke(null,p);if(b==null)throw new RuntimeException("missing "+p);System.out.println(id+","+b.length+","+sha(b));}} }
+          public class ValidateResources {
+            static String sha(byte[] b)throws Exception{byte[] h=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return s.toString();}
+            public static void main(String[] a)throws Exception{Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class);r.setAccessible(true);for(String s:a){int id=Integer.parseInt(s);String p="/offline/x1/small/Small"+id+".png";byte[] b=(byte[])r.invoke(null,p);if(b==null){p="/offline/x1/small/Small"+id+".PNG";b=(byte[])r.invoke(null,p);}if(b==null)throw new RuntimeException("missing Small"+id);System.out.println(id+","+b.length+","+sha(b));}}
+          }
           JAVA
-          (cd "$WORK" && javac -classpath "$JAR" ValidateResources.java)
-          IDS=$(seq 2715 2770; echo 3421; echo 3422)
-          (cd "$WORK" && java -classpath "$JAR:." ValidateResources $IDS) > "$WORK/actual.csv"
+          (cd "$WORK/validate" && javac -classpath "$JAR" ValidateResources.java && java -classpath "$JAR:." ValidateResources $IDS) > "$WORK/actual.csv"
           ACT="$WORK/actual.csv" SRCROOT="$SRC" python3 - <<'PY'
           import os,hashlib
           from pathlib import Path
@@ -121,15 +120,24 @@ jobs:
               want=hashlib.sha256(f.read_bytes()).hexdigest()
               if actual.get(i)!=want: bad.append((i,actual.get(i),want))
           if bad: raise SystemExit('Validation mismatch: '+repr(bad))
-          print('Validated 58 Obito/Sakura sprites: all hashes match Nso_Folder source.')
+          print('VALIDATION_OK: 58/58 sprites match Nso_Folder')
           PY
           jar tf "$JAR" >/dev/null
+          echo "JAR_OK size=$(stat -c %s "$JAR")"
 
-      - name: Commit patched JAR
+      - name: Commit result and diagnostic log
+        if: always()
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/offline"
-          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add Nso_Offline_By_h0901.jar
-          git commit -m 'fix: replace Obito and Sakura disguise sprites from Nso_Folder' || exit 0
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add patch_obito_sakura.log
+          if [ "${{ steps.patch.outcome }}" = "success" ]; then
+            git add Nso_Offline_By_h0901.jar
+            MSG='fix: replace Obito and Sakura disguise sprites from Nso_Folder'
+          else
+            MSG='chore: record Obito Sakura patch failure'
+          fi
+          git commit -m "$MSG" || exit 0
           git push origin fix-obito-sakura

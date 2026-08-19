@@ -1,0 +1,53 @@
+name: Temporary dump lv120 templates
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-dump-lv120-templates.yml]
+permissions:
+  contents: write
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump templates 85-90
+        run: |
+          cat > DumpLv120.java <<'EOF'
+          import java.lang.reflect.*;
+          import java.util.*;
+          public class DumpLv120 {
+            static String arr(Object x) {
+              if (x == null) return "null";
+              if (x instanceof byte[]) return Arrays.toString((byte[])x);
+              if (x instanceof short[]) return Arrays.toString((short[])x);
+              if (x instanceof int[]) return Arrays.toString((int[])x);
+              if (x instanceof byte[][]) return Arrays.deepToString((byte[][])x);
+              if (x instanceof int[][]) return Arrays.deepToString((int[][])x);
+              return String.valueOf(x);
+            }
+            public static void main(String[] args) throws Exception {
+              Class<?> k25 = Class.forName("k25");
+              Method c = k25.getDeclaredMethod("c", int.class);
+              c.setAccessible(true);
+              for (int id=85; id<=90; id++) {
+                Object s = c.invoke(null,id);
+                System.out.println("SKILL="+id+" class="+(s==null?"null":s.getClass().getName()));
+                if (s != null) {
+                  for (String n : new String[]{"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o"}) {
+                    Field f=s.getClass().getDeclaredField(n); f.setAccessible(true);
+                    System.out.println("  "+n+"="+arr(f.get(s)));
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          javac -cp Nso_Offline_By_h0901.jar DumpLv120.java
+          java -cp .:Nso_Offline_By_h0901.jar DumpLv120 > lv120_template_dump.txt 2>&1 || true
+      - name: Commit dump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lv120_template_dump.txt
+          git commit -m "chore: dump level 120 skill templates"
+          git push

@@ -1,0 +1,301 @@
+=== SOURCE FILES WITH TARGET IDS IN NAME ===
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small3421.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/1/Small3422.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small3421.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/2/Small3422.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small3421.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/3/Small3422.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small230.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small231.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small232.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small233.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small234.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small235.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small3421.png
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/Data/Img/Small/4/Small3422.png
+
+=== TARGET SMALL IMAGES ===
+Data/Img/Small/1/Small230.png	400	afbdd95a009c9a6ea7bf369266eaf6678ecf2040b2365dbcfdea99807b27a5b7
+Data/Img/Small/1/Small231.png	309	ed38ccf4273f809821661011b6aa72abaf66f0c3ed16390777c29d525423e850
+Data/Img/Small/1/Small232.png	409	f1d04786f8fe54dfaebf784cfa7597716933768afc1058e4acdc81b3f6260560
+Data/Img/Small/1/Small233.png	434	f44e68b56fa26fab551dff0e2e9f6453b490f269ff263768fe643554ffe50e09
+Data/Img/Small/1/Small234.png	427	846b9cd7c68c9dce756e726c4851ec3ef1c6a0c962309456f2411ca50e5fdd2b
+Data/Img/Small/1/Small235.png	256	4a96f5a6becdf41388336cf94456073bb952a3281589eb5b963acc1ba005895c
+Data/Img/Small/1/Small3421.png	3434	71943b4c8654524b56beb83190e241182f83844843a965694aa32eaa10d644b4
+Data/Img/Small/1/Small3422.png	3532	eb2c488c2191ad1979b61768e58f05a933fe7b8488c96a84475a361317d7ddb3
+Data/Img/Small/2/Small230.png	1222	d5f3cf64722ae0b63a8e96d6ba00c361356937957f1e80400acf58611b7ea14b
+Data/Img/Small/2/Small231.png	1267	350f25db2cdbe84082ecad2db646f36a4db5f08179f7c1e5fc5d44f8feb2da78
+Data/Img/Small/2/Small232.png	1359	d188f5c542ab1ff39984c8a3d3ece08a08006068b0a41f051f4a665deb7b9cdf
+Data/Img/Small/2/Small233.png	1357	e4b40681cce3e898132a9539328aaa1b5648572c163b0740bfecd82d8fb496f2
+Data/Img/Small/2/Small234.png	1282	648d22b986c1611ad6bc1f3988b94b39ac81fe5b211f16f44c8d64b355387e6a
+Data/Img/Small/2/Small235.png	652	d08a91a453c2c645b028a72fd0de965825b505a03b72660df2f5cae106050989
+Data/Img/Small/2/Small3421.png	7500	a4cc871a4a2b08944c11bd27dc8032034139a210317dac301e900b71f14e99ae
+Data/Img/Small/2/Small3422.png	7790	4d1e1d5f625eb4f929b0174f3c873db3f0c1e4348ebeac57695ad64b482dee11
+Data/Img/Small/3/Small230.png	1768	7f780dec95d60e40dbe907cf48d0c98328e2bc1e53f3c731faa44b95dda8b0af
+Data/Img/Small/3/Small231.png	1795	249194379e8b01fb099aef4e03ce9413908653ff6091714c018e8c8426a3ae2a
+Data/Img/Small/3/Small232.png	1790	0333ed34116b5ac3e324e6113e5161a508ccb58601364e9978e4670e972e74eb
+Data/Img/Small/3/Small233.png	1887	81e20c764e252dd1d4989d8d73ad149e5ad7809c4b5a9235556aa1c2d317a1b1
+Data/Img/Small/3/Small234.png	1741	dd46417b93705131fb194b7092a6fba706f0579f30f357517fee74d1d2cff23d
+Data/Img/Small/3/Small235.png	1069	c5e136ae654be27a3386e028d30607d8bdd347b81afd9e93828a5231b669630c
+Data/Img/Small/3/Small3421.png	12392	61fea2c4a32766a24d3bcf356e20ce2c3fd90fa1d1df7a61ca09f0bba1a019cf
+Data/Img/Small/3/Small3422.png	12968	04423f419823915a520ab0a21ed11297d6cf8891caf9fc464b60bc792d34a09e
+Data/Img/Small/4/Small230.png	2175	a9bc3b738e6898a8298dffce325e9df9e9ca2daa77b71666d526398436a1deeb
+Data/Img/Small/4/Small231.png	2182	44ba7cf163890a54822d2a999bcea58bee97f9d492314f503b63818c7127282d
+Data/Img/Small/4/Small232.png	2183	63f9cebbef96342a53bcd46e69aeb3c45c19f7ae8423fae693f678b62cdaab67
+Data/Img/Small/4/Small233.png	2388	061aba4853853739cbabc7e4d6d1dd23d4f8ea89ad5304c53414e897dd086751
+Data/Img/Small/4/Small234.png	2070	aea157c66014ae1a1080cb046245ef552cc62e6580a338cb939d9ec7d49d9956
+Data/Img/Small/4/Small235.png	1185	0667dd27ab0981a4255e92e5616d4d1a61863fa6e3b9537e51311193f59374ff
+Data/Img/Small/4/Small3421.png	17436	d32e989a5a1cc5f6f2bbdae4a2d0aec57d87eac677ca8b9b85cd828295c9966b
+Data/Img/Small/4/Small3422.png	18492	24f4ada37821f8f4a2c6ba32787ca583e621e47d4b9932f8ccc171b80b2b2d7e
+
+=== OFFLINE JAR TOP DIRECTORIES ===
+META-INF
+font
+map
+offline
+offline/boot
+offline/full
+offline/packs
+x1
+x1/bg
+x1/del
+x1/e
+x1/eff
+x1/export
+x1/font
+x1/hd
+x1/img
+x1/t
+x1/u
+
+=== OFFLINE JAR ENTRIES WITH TARGET IDS ===
+Class_df.class	231
+
+=== OFFLINE PNG/GIF/JPG SAMPLE ===
+icon.png	3308
+x1/Big4.png	163
+x1/bg/bg00.png	365
+x1/bg/bg01.png	360
+x1/bg/bg010.png	1353
+x1/bg/bg011.png	1718
+x1/bg/bg013.png	9416
+x1/bg/bg014.png	2089
+x1/bg/bg015.png	7626
+x1/bg/bg016.png	7583
+x1/bg/bg02.png	809
+x1/bg/bg03.png	1001
+x1/bg/bg04.png	240
+x1/bg/bg05.png	1290
+x1/bg/bg06.png	388
+x1/bg/bg07.png	2656
+x1/bg/bg08.png	1284
+x1/bg/bg09.png	282
+x1/bg/bg10.png	228
+x1/bg/bg11.png	326
+x1/bg/bg113.png	7823
+x1/bg/bg114.png	2319
+x1/bg/bg115.png	7430
+x1/bg/bg116.png	3533
+x1/bg/bg12.png	304
+x1/bg/bg13.png	1015
+x1/bg/bg15.png	208
+x1/bg/bg16.png	251
+x1/bg/bg17.png	931
+x1/bg/bg18.png	262
+x1/bg/bg20.png	842
+x1/bg/bg21.png	859
+x1/bg/bg214.png	4123
+x1/bg/bg216.png	1437
+x1/bg/bg22.png	763
+x1/bg/bg23.png	583
+x1/bg/bg25.png	356
+x1/bg/bg26.png	856
+x1/bg/bg28.png	310
+x1/bg/bg30.png	511
+x1/bg/bg31.png	657
+x1/bg/bg314.png	2089
+x1/bg/bg32.png	694
+x1/bg/bg33.png	694
+x1/bg/bg34.png	404
+x1/bg/bg35.png	926
+x1/bg/bg37.png	360
+x1/bg/bg38.png	302
+x1/bg/bg39.png	703
+x1/bg/cl0.png	760
+x1/bg/cl1.png	667
+x1/bg/cl2.png	2611
+x1/bg/cl3.png	2543
+x1/bg/sun0.png	291
+x1/bg/sun1.png	840
+x1/del/10.png	10719
+x1/del/5.png	6476
+x1/del/9.png	5861
+x1/e/d00.png	80
+x1/e/d01.png	97
+x1/e/d02.png	113
+x1/e/d03.png	95
+x1/e/d04.png	91
+x1/e/d10.png	79
+x1/e/d11.png	95
+x1/e/d12.png	108
+x1/e/d13.png	94
+x1/e/d14.png	91
+x1/e/sp0.png	156
+x1/e/sp1.png	166
+x1/e/sp2.png	152
+x1/e/w0.png	116
+x1/e/w1.png	128
+x1/e/w2.png	107
+x1/eff/g10.png	303
+x1/eff/g132.png	500
+x1/eff/g15.png	917
+x1/eff/g6.png	303
+x1/eff/g9.png	262
+x1/eff/g97.png	259
+x1/eff/g99.png	244
+x1/export/_big0.png	1834
+x1/export/_big1.png	3015
+x1/export/_big2.png	1003
+x1/font/number_green.png	195
+x1/font/number_orange.png	195
+x1/font/number_red.png	195
+x1/font/number_white.png	181
+x1/font/number_yellow.png	195
+x1/font/tahoma_7.png	1015
+x1/font/tahoma_7_blue.png	1015
+x1/font/tahoma_7_blue1.png	1015
+x1/font/tahoma_7_green.png	1015
+x1/font/tahoma_7_grey.png	1015
+x1/font/tahoma_7_red.png	1015
+x1/font/tahoma_7_white.png	1015
+x1/font/tahoma_7_yellow.png	1015
+x1/font/tahoma_7b_blue.png	1038
+x1/font/tahoma_7b_green.png	1038
+x1/font/tahoma_7b_purple.png	1038
+x1/font/tahoma_7b_red.png	1038
+x1/font/tahoma_7b_white.png	1038
+x1/font/tahoma_7b_yellow.png	1038
+x1/font/tahoma_8b.png	1220
+x1/hd/analog1.png	2290
+x1/hd/analog2.png	1101
+x1/hd/arrow.png	353
+x1/hd/arrow2.png	515
+x1/hd/bd0.png	652
+x1/hd/bd1.png	813
+x1/hd/bd2.png	123
+x1/hd/btnl.png	1095
+x1/hd/btnlBig0.png	3024
+x1/hd/btnlBig1.png	3454
+x1/hd/btnlf.png	1134
+x1/hd/button.png	1019
+x1/hd/button2.png	980
+x1/hd/chat.png	936
+x1/hd/focus.png	954
+x1/hd/hpp.png	937
+x1/hd/lua.png	487
+x1/hd/mapborder.png	226
+x1/hd/mat.png	225
+x1/hd/menu.png	909
+x1/hd/mpp.png	958
+x1/hd/right.png	1864
+x1/hd/right2.png	1928
+x1/hd/skill.png	808
+x1/hd/tf.png	1534
+x1/hd/topbar.png	2315
+x1/hd/transparent.png	96
+x1/img/Big0.png	22820
+x1/img/Big1.png	23331
+x1/img/Big2.png	9240
+x1/img/Big3.png	14084
+x1/img/Big4.png	30726
+x1/m1.png	246
+x1/m2.png	229
+x1/plus12.png	528
+x1/t/1.png	10743
+x1/t/2.png	15623
+x1/t/3.png	17009
+x1/t/4.png	43358
+x1/t/mini_1.png	660
+x1/t/mini_2.png	819
+x1/t/mini_3.png	768
+x1/t/mini_4.png	10311
+x1/t/twtf.png	2013
+x1/t/uwt.png	101
+x1/t/wtf.png	1688
+x1/t/wts.png	160
+x1/t/wts1.png	224
+x1/trung1.png	3835
+x1/tt.png	4782
+x1/u/c0.png	454
+x1/u/c1.png	466
+x1/u/cobay.png	185
+x1/u/f.png	309
+x1/u/fc.png	135
+x1/u/select.png	304
+x1/u/tuyet.png	128
+x1/u/wpt1.png	369
+x1/u/x.png	591
+x1/wm.png	23393
+
+=== OFFLINE RESOURCE EXTENSIONS ===
+    261 .class
+    171 [no extension]
+    164 .png
+     33 .pak
+      7 .bin
+      3 .txt
+      2 .json
+      1 .rms
+      1 .mf
+
+=== TEXT REFERENCES TO PART IDS IN SOURCE ===
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:91:                    owner.body = 230;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:92:                    owner.leg = 231;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:96:                    owner.body = 233;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:97:                    owner.leg = 234;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:238:                        owner.ID_BODY = 231;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:239:                        owner.ID_LEG = 232;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:242:                        owner.ID_BODY = 234;
+/home/runner/work/Ninja_School_Offline/Ninja_School_Offline/source/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java:243:                        owner.ID_LEG = 235;

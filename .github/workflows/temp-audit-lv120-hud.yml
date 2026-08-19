@@ -1,0 +1,54 @@
+name: Temporary audit lv120 HUD
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-audit-lv120-hud.yml]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect HUD gate and lv120 skill flow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/hudaudit && mkdir -p /tmp/hudaudit && cd /tmp/hudaudit
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          javap -p -c Class_by.class > Class_by.txt
+          javap -p -c Class_ct.class > Class_ct.txt
+          javap -p -c Class_cy.class > Class_cy.txt
+          javap -p -c k32.class > k32.txt
+          javap -p -c k25.class > k25.txt
+          {
+            echo '=== Class_by writes to Class_cy.gc ==='
+            grep -n -B20 -A25 'Field Class_cy.gc:Z' Class_by.txt || true
+            echo
+            echo '=== Class_ct HUD gate reads Class_cy.gc ==='
+            grep -n -B15 -A30 'Field Class_cy.gc:Z' Class_ct.txt || true
+            echo
+            echo '=== k32 full bytecode ==='
+            cat k32.txt
+            echo
+            echo '=== k25 item 1125..1130 mapping ==='
+            grep -n -B25 -A30 'sipush        1125' k25.txt || true
+            echo
+            echo '=== k25 skill 85..90 guards ==='
+            grep -n -B35 -A80 'bipush        85' k25.txt || true
+            echo
+            echo '=== callers of k32.e() across classes ==='
+            for c in *.class; do
+              if javap -p -c "$c" 2>/dev/null | grep -q 'Method k32.e:()V'; then
+                echo "--- $c ---"
+                javap -p -c "$c" 2>/dev/null | grep -B18 -A18 'Method k32.e:()V' || true
+              fi
+            done
+          } > "$GITHUB_WORKSPACE/lv120_hud_audit.txt"
+      - name: Commit audit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lv120_hud_audit.txt
+          git commit -m "chore: audit level 120 HUD state flow"
+          git push

@@ -48,33 +48,33 @@ jobs:
             find "$SRC/src" -type f \( -iname '*item*' -o -iname '*fashion*' -o -iname '*template*' \) -print 2>/dev/null | sort || true
 
             echo
-            echo '=== DATA/IMG TREE (filenames only) ==='
-            find "$SRC/Data/Img" -type f -printf '%P\n' 2>/dev/null | sort || true
+            echo '=== DATA/IMG TREE ==='
+            find "$SRC/Data/Img" -type f -printf '%P\t%s bytes\n' 2>/dev/null | sort || true
 
             echo
             echo '=== OFFLINE JAR ENTRIES ==='
-            (cd "$WORK/offline_jar" && find . -type f -printf '%P\n' | sort)
+            (cd "$WORK/offline_jar" && find . -type f -printf '%P\t%s bytes\n' | sort)
 
             echo
-            echo '=== SQL MATCHES VIA PYTHON (UTF-8/Latin-1 tolerant) ==='
+            echo '=== SQL MATCHES ==='
           } > "$REPORT"
 
-          python3 - <<'PY' >> "$REPORT"
+          SQL_PATH="$SRC/SQL/nsoz.sql" python3 - <<'PY' >> "$REPORT"
+          import os
           from pathlib import Path
-          p = Path("$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql")
-          data = p.read_bytes()
-          text = data.decode('utf-8', errors='replace')
-          keys = ['obito','sakura','cải trang','cai trang','fashion']
-          for i,line in enumerate(text.splitlines(),1):
-              low=line.lower()
+          p = Path(os.environ['SQL_PATH'])
+          text = p.read_bytes().decode('utf-8', errors='replace')
+          keys = ['obito', 'sakura', 'cải trang', 'cai trang', 'fashion']
+          for i, line in enumerate(text.splitlines(), 1):
+              low = line.lower()
               if any(k in low for k in keys):
-                  print(f'{i}: {line[:4000]}')
+                  print(f'{i}: {line[:8000]}')
           PY
 
           echo >> "$REPORT"
-          echo '=== JAR STRING MATCHES ===' >> "$REPORT"
-          find "$WORK/offline_jar" -type f \( -name '*.class' -o -type f \) -print0 | \
-            xargs -0 strings 2>/dev/null | grep -iEa 'obito|sakura|cải trang|cai trang|fashion' | head -n 500 >> "$REPORT" || true
+          echo '=== OFFLINE JAR STRING MATCHES ===' >> "$REPORT"
+          find "$WORK/offline_jar" -type f -print0 | \
+            xargs -0 strings 2>/dev/null | grep -iEa 'obito|sakura|cải trang|cai trang|fashion' | head -n 1000 >> "$REPORT" || true
 
       - name: Commit inspection report
         shell: bash

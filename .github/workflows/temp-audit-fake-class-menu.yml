@@ -1,0 +1,105 @@
+name: Temporary audit fake class menu
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-audit-fake-class-menu.yml]
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect manifest, menu strings, class/skill/weapon checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/fakeaudit && mkdir -p /tmp/fakeaudit && cd /tmp/fakeaudit
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          python - <<'PY' > "$GITHUB_WORKSPACE/fake_class_audit.txt"
+          import os, struct, re, subprocess
+
+          root='/tmp/fakeaudit'
+          print('=== MANIFEST ===')
+          mf=os.path.join(root,'META-INF','MANIFEST.MF')
+          if os.path.exists(mf):
+              print(open(mf,errors='replace').read())
+
+          def utf8s(path):
+              b=open(path,'rb').read(); o=0
+              def u1():
+                  nonlocal o; v=b[o]; o+=1; return v
+              def u2():
+                  nonlocal o; v=struct.unpack_from('>H',b,o)[0]; o+=2; return v
+              def u4():
+                  nonlocal o; v=struct.unpack_from('>I',b,o)[0]; o+=4; return v
+              if u4()!=0xCAFEBABE: return []
+              u2();u2(); n=u2(); out=[]; i=1
+              while i<n:
+                  tag=u1()
+                  if tag==1:
+                      ln=u2(); s=b[o:o+ln].decode('utf-8','replace'); o+=ln; out.append(s)
+                  elif tag in (3,4): o+=4
+                  elif tag in (5,6): o+=8; i+=1
+                  elif tag in (7,8,16,19,20): o+=2
+                  elif tag in (9,10,11,12,17,18): o+=4
+                  elif tag==15: o+=3
+                  else: return out
+                  i+=1
+              return out
+
+          pats=[
+            'female','fan','vip','v12','local','offline','ninja',
+            'phái','phai','kiếm','kiem','tiêu','tieu','kunai','cung','đao','dao','quạt','quat',
+            'bản thân','ban than','hành trang','hanh trang','kỹ năng','ky nang','menu','trang bị','trang bi',
+            'không thể sử dụng','khong the su dung','môn phái','mon phai'
+          ]
+          hits=[]
+          for dp,_,fs in os.walk(root):
+              for f in fs:
+                  if not f.endswith('.class'): continue
+                  p=os.path.join(dp,f); ss=utf8s(p)
+                  ms=[s for s in ss if any(x in s.lower() for x in pats)]
+                  if ms:
+                      rel=os.path.relpath(p,root)
+                      hits.append(rel)
+                      print('\n=== STRINGS',rel,'===')
+                      for s in ms[:120]: print(repr(s))
+
+          print('\n=== CANDIDATE JAVAP ===')
+          # Dump bytecode for candidate classes, bounded to avoid giant report.
+          for rel in hits[:35]:
+              cls=rel[:-6].replace(os.sep,'.')
+              try:
+                  t=subprocess.check_output(['javap','-classpath',root,'-p','-c',cls],stderr=subprocess.STDOUT,text=True,errors='replace')
+              except Exception as e:
+                  continue
+              print('\n###',cls,'###')
+              lines=t.splitlines()
+              for idx,line in enumerate(lines):
+                  low=line.lower()
+                  if any(x in low for x in ['female','fan','vip','v12','phái','phai','kiếm','kiem','tiêu','tieu','kunai','cung','đao','dao','quạt','quat','bản thân','hành trang','kỹ năng','trang bị','menu']):
+                      a=max(0,idx-25); z=min(len(lines),idx+45)
+                      print('\n'.join(lines[a:z]))
+
+          print('\n=== CLASS FIELD CANDIDATES ===')
+          # Character object fields used in k25 skill class gating and likely equipment code.
+          for cls in ['k25','Class_cy','Class_ct']:
+              try:
+                  t=subprocess.check_output(['javap','-classpath',root,'-p','-c',cls],stderr=subprocess.STDOUT,text=True,errors='replace')
+                  print('\n###',cls,'###')
+                  for needle in ['Field DoHoang091$k0.','bipush        6','iconst_6','Field Class_cy.']:
+                      pos=0
+                      while True:
+                          i=t.find(needle,pos)
+                          if i<0: break
+                          print(t[max(0,i-1200):i+1800]); pos=i+len(needle)
+              except: pass
+          PY
+      - name: Commit audit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fake_class_audit.txt
+          git commit -m "chore: audit fake class integration points"
+          git push

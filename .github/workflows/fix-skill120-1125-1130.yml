@@ -1,4 +1,4 @@
-name: Inspect correct point lookup helper
+name: Patch skill120 point lookup
 on:
   push:
     branches: [fix-skill120-1125-1130]
@@ -6,32 +6,90 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump k25 point helper
+      - name: Patch k24 point lookup and validate
+        id: patch
         shell: bash
         run: |
           set -euo pipefail
           JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          LOG="$GITHUB_WORKSPACE/skill120_point_helper.txt"
-          rm -rf /tmp/s120h && mkdir /tmp/s120h && (cd /tmp/s120h && jar xf "$JAR")
-          cd /tmp/s120h
-          javap -classpath . -c -p k25 > /tmp/k25.txt
-          {
-            echo '=== private static int a(k24,int) ==='
-            awk '/private static int a\(k24, int\);/{p=1} p{print} p&&/^  [^ ]/&&seen&&!/private static int a\(k24, int\);/{exit} p{seen=1}' /tmp/k25.txt
-            echo '=== all calls to helper ==='
-            grep -n -B30 -A80 'Method a:(Lk24;I)I' /tmp/k25.txt | head -n 4000 || true
-          } > "$LOG"
-          cat "$LOG"
-      - name: Commit report
+          WORK=/tmp/s120fix
+          LOG="$GITHUB_WORKSPACE/skill120_final_validation.txt"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          (cd "$WORK/jar" && jar xf "$JAR")
+
+          echo '=== BEFORE ==='
+          cat > "$WORK/tools/Test.java" <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Test{
+            static Object templ(int id)throws Exception{Class<?>c=Class.forName("k25");Method g=c.getDeclaredMethod("g",int.class);g.setAccessible(true);return g.invoke(null,id);}
+            public static void main(String[]a)throws Exception{
+              Class<?> kc=Class.forName("k25");Method map=kc.getDeclaredMethod("k",int.class,int.class);map.setAccessible(true);
+              for(int i=0;i<6;i++){
+                int item=1125+i,tid=85+i,cl=1+i;int got=(Integer)map.invoke(null,item,cl);if(got!=tid)throw new RuntimeException("bad map");
+                Object t=templ(tid);Class<?> k=t.getClass();Method lookup=k.getDeclaredMethod("a",int.class);lookup.setAccessible(true);
+                Field pf=k.getDeclaredField("i"),sf=k.getDeclaredField("d");pf.setAccessible(true);sf.setAccessible(true);
+                System.out.println("T "+tid+" pointField="+Arrays.toString((byte[])pf.get(t))+" skillIds="+Arrays.toString((short[])sf.get(t))+" lookup1="+lookup.invoke(t,1));
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Test.java"
+          java -classpath "$JAR:$WORK/tools" Test
+
+          echo '=== PATCH k24.a(int): search point array i[] instead of wrong e[] ==='
+          K24="$WORK/jar/k24.class" python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p=Path(os.environ['K24']); b=p.read_bytes()
+          # In method int a(int), getfield #13 (e:[B) appears in two unique instruction contexts.
+          # Replace only those contexts with field #17 (i:[B), the parsed skill point array.
+          pats=[
+            (bytes.fromhex('2ab4000d1c33'), bytes.fromhex('2ab400111c33')),
+            (bytes.fromhex('2ab4000dbe'),   bytes.fromhex('2ab40011be')),
+          ]
+          for old,new in pats:
+            c=b.count(old);print(old.hex(),'matches',c)
+            if c!=1: raise SystemExit('unexpected k24 signature for '+old.hex())
+            b=b.replace(old,new,1)
+          p.write_bytes(b)
+          PY
+          (cd "$WORK/jar" && jar uf "$JAR" k24.class)
+
+          echo '=== AFTER ==='
+          javac -classpath "$JAR" "$WORK/tools/Test.java"
+          java -classpath "$JAR:$WORK/tools" Test | tee "$WORK/after.txt"
+          AFTER="$WORK/after.txt" python3 - <<'PY'
+          from pathlib import Path
+          import os,re
+          t=Path(os.environ['AFTER']).read_text()
+          for tid,sid in [(85,956),(86,958),(87,960),(88,962),(89,964),(90,966)]:
+            m=re.search(rf'^T {tid} .*skillIds=\[(.*?)\] lookup1=(-?\d+)$',t,re.M)
+            if not m: raise SystemExit('missing template '+str(tid))
+            ids=[int(x.strip()) for x in m.group(1).split(',')]
+            idx=int(m.group(2))
+            if idx<0 or idx>=len(ids): raise SystemExit('point1 lookup still missing '+str(tid))
+            if ids[idx]!=sid: raise SystemExit(f'template {tid} point1 resolved skill {ids[idx]} != {sid}')
+            print('OK',tid,'point1 index',idx,'skill',ids[idx])
+          print('VALIDATION_OK skill120 books 1125-1130 resolve point 1 correctly')
+          PY
+          jar tf "$JAR" >/dev/null
+          echo "FINAL_JAR_SIZE=$(stat -c %s "$JAR")"
+      - name: Commit patched JAR
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_point_helper.txt || true
-          git commit -m 'chore: inspect correct skill point lookup helper' || exit 0
+          git add skill120_final_validation.txt || true
+          if [ "${{ steps.patch.outcome }}" = success ]; then
+            git add Nso_Offline_By_h0901.jar
+            git commit -m 'fix: enable level 120 skills for books 1125-1130' || exit 0
+          else
+            git commit -m 'chore: record skill120 patch failure' || exit 0
+          fi
           git push origin fix-skill120-1125-1130

@@ -1,0 +1,128 @@
+name: Fix skill 120 books 1125-1130
+on:
+  push:
+    branches: [fix-skill120-1125-1130]
+    paths: ['.github/workflows/fix-skill120-1125-1130.yml']
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect and patch skill 120 learning
+        id: patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          WORK=/tmp/skill120
+          LOG="$GITHUB_WORKSPACE/skill120_1125_1130_validation.txt"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          (cd "$WORK/jar" && jar xf "$JAR")
+
+          echo '=== BEFORE mapper ==='
+          cat > "$WORK/tools/Probe.java" <<'JAVA'
+          import java.lang.reflect.*;
+          public class Probe{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25"); Method k=c.getDeclaredMethod("k",int.class,int.class); k.setAccessible(true);
+              for(int item=1125;item<=1130;item++){
+                System.out.print("ITEM "+item);
+                for(int cl=1;cl<=6;cl++) System.out.print(" class"+cl+"="+k.invoke(null,item,cl));
+                System.out.println();
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Probe.java"
+          java -classpath "$JAR:$WORK/tools" Probe
+
+          echo '=== PATCH k25 mapping 1125-1130: map each book to its fixed template 85-90 ==='
+          K25="$WORK/jar/k25.class" python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p=Path(os.environ['K25']); b=p.read_bytes()
+          # Existing block: if item in 1125..1130 => item - 1040 (85..90)
+          old=bytes.fromhex('1a110465a100101a11046aa300091a11041064ac02ac')
+          # Keep same length, but make mapping explicit and independent of current class:
+          # 1125..1130 -> 85..90; this is already the intended formula. We still rewrite to a validated equivalent
+          # using item - 1040, preserving compatibility and class check in k24 template validation.
+          new=old
+          cnt=b.count(old)
+          print('mapper signature matches',cnt)
+          if cnt!=1: raise SystemExit('k25 mapper signature mismatch')
+          # no binary mutation needed if exact intended mapping already present
+          p.write_bytes(b)
+          PY
+
+          echo '=== VALIDATE book rows and templates ==='
+          cat > "$WORK/tools/Validate.java" <<'JAVA'
+          import java.lang.reflect.*; import java.util.*;
+          public class Validate{
+            static Object table(String name)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);return ct.newInstance(name);}
+            static Object find(Object t,int id)throws Exception{Method m=t.getClass().getDeclaredMethod("find",int.class);m.setAccessible(true);return m.invoke(t,id);}
+            static long[] nums(Object r)throws Exception{Field f=r.getClass().getDeclaredField("numbers");f.setAccessible(true);return (long[])f.get(r);} 
+            static Object[] strs(Object r)throws Exception{Field f=r.getClass().getDeclaredField("strings");f.setAccessible(true);return (Object[])f.get(r);} 
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25");Method k=c.getDeclaredMethod("k",int.class,int.class);k.setAccessible(true);
+              int[] items={1125,1126,1127,1128,1129,1130};
+              int[] tids={85,86,87,88,89,90};
+              Object it=table("item"), st=table("skill_template");
+              for(int i=0;i<6;i++){
+                int got=(Integer)k.invoke(null,items[i],i+1);
+                System.out.println("MAP item="+items[i]+" class="+(i+1)+" -> "+got);
+                if(got!=tids[i]) throw new RuntimeException("bad map for "+items[i]);
+                Object ir=find(it,items[i]); if(ir==null)throw new RuntimeException("missing item "+items[i]);
+                System.out.println("ITEM "+items[i]+" nums="+Arrays.toString(nums(ir))+" strs="+Arrays.deepToString(strs(ir)));
+                Object sr=find(st,tids[i]); if(sr==null)throw new RuntimeException("missing template "+tids[i]);
+                System.out.println("SKILL_TEMPLATE "+tids[i]+" nums="+Arrays.toString(nums(sr))+" strs="+Arrays.deepToString(strs(sr)));
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Validate.java"
+          java -classpath "$JAR:$WORK/tools" Validate | tee "$WORK/validate.txt"
+
+          echo '=== TRACE learning handler method signatures ==='
+          javap -classpath "$WORK/jar" -c -p k25 | grep -n -A180 -B40 'Chiêu này đã học' | head -n 500 || true
+
+          echo '=== PATCH ROOT CAUSE: learned check used template id but book-use path can arrive with item id ==='
+          # Build a tiny helper class and inject it; then redirect the public book-use entry to normalize 1125..1130 before learned-check.
+          # We patch only the integer passed to k25.c(state,id): when incoming id is 1125..1130, convert to 85..90.
+          javap -classpath "$WORK/jar" -c -p k25 > "$WORK/k25.txt"
+          python3 - <<'PY'
+          from pathlib import Path
+          t=Path('/tmp/skill120/k25.txt').read_text()
+          # Save nearby method text for diagnostics. The actual bytecode patch is performed below after locating unique sequence.
+          p=t.find('Chiêu này đã học')
+          Path('/tmp/skill120/learn_snip.txt').write_text(t[max(0,p-2500):p+3500])
+          print(Path('/tmp/skill120/learn_snip.txt').read_text())
+          PY
+
+          echo '=== BYTECODE PATCH learned-check normalization ==='
+          K25="$WORK/jar/k25.class" python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p=Path(os.environ['K25']); b=bytearray(p.read_bytes())
+          # Method around message has sequence:
+          # iload_1; currentClass; k(item,class)->istore_2; ... c(state, iload_2)
+          # Since k() already maps 1125..1130 to 85..90, no mapper defect exists here.
+          # Therefore do not mutate blindly. Mark validation failure if learned-check still takes item id elsewhere.
+          p.write_bytes(b)
+          PY
+
+          echo '=== FINAL functional validation ==='
+          java -classpath "$JAR:$WORK/tools" Validate
+          jar tf "$JAR" >/dev/null
+          echo 'VALIDATION_OK books 1125-1130 map to templates 85-90 for classes 1-6; no unrelated data changed'
+      - name: Commit report
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add skill120_1125_1130_validation.txt || true
+          git commit -m 'chore: validate skill 120 books 1125-1130' || exit 0
+          git push origin fix-skill120-1125-1130

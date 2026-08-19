@@ -1,4 +1,4 @@
-name: Compare skill 120 books and templates
+name: Trace offline skill 120 state mutation
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,53 +10,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compare exact source and JAR data
+      - name: Dump relevant offline bytecode
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_compare.txt"
+          LOG="$GITHUB_WORKSPACE/skill120_logic.txt"
           exec > >(tee "$LOG") 2>&1
-          git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git /tmp/ref >/dev/null 2>&1
-          ROOT=/tmp/ref/NinjaSchoolOffline_by_dohoang091
-          echo '=== SOURCE item 1134-1139 ==='
-          grep -nE '^\((1134|1135|1136|1137|1138|1139),' "$ROOT/SQL/nsoz.sql" | head -n 100 || true
-          echo '=== SOURCE pool SACH_VO_CONG_120 JSON ==='
-          find "$ROOT" -type f -path '*SACH_VO_CONG_120.json' -print -exec cat {} \; || true
-          echo '=== SOURCE learn mapping ==='
-          sed -n '7390,7445p' "$ROOT/src/main/java/Exe_Z/model/Char.java"
-          echo '=== SOURCE SQL lines templates 85-90 / skills ==='
-          grep -nE '^\((85|86|87|88|89|90),' "$ROOT/SQL/nsoz.sql" | head -n 250 || true
-          grep -nEi 'INSERT INTO `?(skill|skill_template|nclass)' "$ROOT/SQL/nsoz.sql" | head -n 80 || true
-          echo '=== JAR table rows ==='
-          cat >/tmp/Dump.java <<'JAVA'
-          import java.lang.reflect.*;import java.util.*;
-          public class Dump{
-            static Object table(String name)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);return ct.newInstance(name);}
-            static Object find(Object t,int id)throws Exception{Method m=t.getClass().getDeclaredMethod("find",int.class);m.setAccessible(true);return m.invoke(t,id);}
-            static void row(String tn,Object t,int id)throws Exception{try{Object r=find(t,id);if(r==null){System.out.println(tn+" "+id+" NULL");return;}Field ns=r.getClass().getDeclaredField("numbers"),ss=r.getClass().getDeclaredField("strings");ns.setAccessible(true);ss.setAccessible(true);System.out.println(tn+" "+id+" nums="+Arrays.toString((long[])ns.get(r))+" strs="+Arrays.deepToString((Object[])ss.get(r)));}catch(Throwable x){System.out.println(tn+" "+id+" ERR "+x);}}
-            public static void main(String[]a)throws Exception{
-              for(String tn:new String[]{"item","skill","skill_template","nj_skill","nclass"})try{Object t=table(tn);System.out.println("TABLE "+tn+" OK");if(tn.equals("item")){for(int i=1134;i<=1139;i++)row(tn,t,i);}else{for(int i=85;i<=90;i++)row(tn,t,i);}}catch(Throwable x){System.out.println("TABLE "+tn+" ERR "+x);}
-            }
-          }
-          JAVA
-          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/Dump.java
-          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" Dump
-          echo '=== JAR classes with learn/book messages and 1134-1139 ==='
           rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
           cd /tmp/jar
+          echo '=== k8 FULL ==='
+          javap -classpath . -c -p -verbose k8
+          echo '=== k7 FULL ==='
+          javap -classpath . -c -p -verbose k7
+          echo '=== k18 FULL ==='
+          javap -classpath . -c -p -verbose k18
+          echo '=== k24 FULL ==='
+          javap -classpath . -c -p -verbose k24
+          echo '=== k25 FULL ==='
+          javap -classpath . -c -p -verbose k25
+          echo '=== Classes referencing CSkill/KSkill/OSkill and IDs 955-966 ==='
           for c in *.class; do
+            s=$(strings "$c" | grep -E 'CSkill|KSkill|OSkill|skill_wire|SKILL' | head -n 30 || true)
             j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
-            if printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(1134|1135|1136|1137|1138|1139)|Chiêu này đã học|Sách nay không phù hợp'; then
-              echo "===== ${c%.class} ====="
-              printf '%s\n' "$j" | grep -n -B70 -A140 -E 'sipush[[:space:]]+(1134|1135|1136|1137|1138|1139)|Chiêu này đã học|Sách nay không phù hợp' | head -n 1800 || true
+            if [ -n "$s" ] || printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(955|956|957|958|959|960|961|962|963|964|965|966)'; then
+              echo "===== ${c%.class} STRINGS ====="; echo "$s"
+              echo "===== ${c%.class} CODE MATCH ====="
+              printf '%s\n' "$j" | grep -n -B70 -A160 -E 'sipush[[:space:]]+(955|956|957|958|959|960|961|962|963|964|965|966)|CSkill|KSkill|OSkill' | head -n 2500 || true
             fi
-          done | head -n 8000
+          done | head -n 15000
+          echo '=== DoHoang091 state fields ==='
+          javap -classpath . -p DoHoang091 | grep -E 'Skill|\[S|\[I|boolean|int|short' | head -n 600 || true
+          javap -classpath . -p 'DoHoang091$k0' | head -n 500 || true
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_compare.txt || true
-          git commit -m 'chore: compare skill 120 books and templates' || exit 0
+          git add skill120_logic.txt || true
+          git commit -m 'chore: trace offline skill 120 state mutation' || exit 0
           git push origin fix-skill120-learning

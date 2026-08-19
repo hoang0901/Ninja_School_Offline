@@ -1,0 +1,24 @@
+name: Export current JAR for HUD diagnosis
+
+on:
+  push:
+    branches:
+      - agent/fix-skill-hud
+    paths:
+      - .github/workflows/export-current-jar.yml
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Upload current JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: current-nso-jar
+          path: Nso_Offline_By_h0901.jar
+          if-no-files-found: error

@@ -17,42 +17,80 @@ jobs:
         with:
           ref: fix-obito-sakura
           path: offline
-      - name: Inspect offline pack index
+      - uses: actions/checkout@v4
+        with:
+          repository: hoang0901/Nso_Folder
+          ref: main
+          path: source
+      - name: Compare source and offline records
         shell: bash
         run: |
           set -euo pipefail
           OFF="$GITHUB_WORKSPACE/offline"
-          WORK="$RUNNER_TEMP/nso_index"
-          REPORT="$OFF/obito_sakura_index.txt"
+          SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
+          WORK="$RUNNER_TEMP/nso_compare"
+          REPORT="$OFF/obito_sakura_compare.txt"
           mkdir -p "$WORK/jar"
           (cd "$WORK/jar" && jar xf "$OFF/Nso_Offline_By_h0901.jar")
+
           {
-            echo '=== PACK MANIFEST ==='
-            cat "$WORK/jar/offline/packs/manifest.json" || true
+            echo '=== SOURCE SQL: CREATE/INSERT NJ_PART + TARGET ROWS ==='
+            SQL_PATH="$SRC/SQL/nsoz.sql" python3 - <<'PY'
+          import os,re
+          from pathlib import Path
+          s=Path(os.environ['SQL_PATH']).read_text('utf-8',errors='replace')
+          for pat in [r'CREATE TABLE `?nj_part`?[\s\S]*?;', r'INSERT INTO `?nj_part`?[\s\S]*?;']:
+              for m in re.finditer(pat,s,re.I):
+                  block=m.group(0)
+                  if 'CREATE TABLE' in block.upper():
+                      print(block[:12000])
+                  else:
+                      for line in block.splitlines():
+                          if re.search(r'^\s*\(?(230|231|232|233|234|235)\s*,', line): print(line[:12000])
+                          elif any(f'({i},' in line.replace(' ','') for i in range(230,236)): print(line[:12000])
+          PY
             echo
-            echo '=== FULL MANIFEST - TARGET/SMALL/PART LINES ==='
-            grep -iE '230|231|232|233|234|235|3421|3422|small|part|image' "$WORK/jar/offline/full/manifest.json" | head -n 500 || true
+            echo '=== SOURCE SQL: ITEM 1173/1174 ==='
+            grep -nE '\(1173,|\(1174,' "$SRC/SQL/nsoz.sql" | head -n 30 || true
             echo
-            echo '=== INDEX.BIN HEADER/STRINGS ==='
-            xxd -g1 -l 512 "$WORK/jar/offline/packs/index.bin" || true
-            strings "$WORK/jar/offline/packs/index.bin" | head -n 500 || true
+            echo '=== JAVAP k1e ==='
+            (cd "$WORK/jar" && javap -classpath . -c -p k1e) || true
             echo
-            echo '=== LOADER CLASSES ==='
-            cd "$WORK/jar"
-            for c in *.class; do
-              if strings "$c" | grep -qiE 'offline/packs|index\.bin|\.pak'; then
-                echo "===== ${c%.class} ====="
-                strings "$c" | grep -iE 'offline|packs|index|\.pak|small|image|part|read|offset|length' || true
-                javap -classpath "$WORK/jar" -c -p "${c%.class}" 2>/dev/null || true
-              fi
-            done
+            echo '=== JAVAP k2c ==='
+            (cd "$WORK/jar" && javap -classpath . -c -p k2c) || true
+            echo
+            echo '=== JAVAP k1f ==='
+            (cd "$WORK/jar" && javap -classpath . -c -p k1f) || true
           } > "$REPORT"
-      - name: Commit index report
+
+          cat > "$WORK/jar/InspectOffline.java" <<'JAVA'
+          import java.lang.reflect.*;
+          import java.security.*;
+          import java.util.*;
+          public class InspectOffline {
+            static String hex(byte[] b) throws Exception { MessageDigest md=MessageDigest.getInstance("SHA-256"); byte[] h=md.digest(b); StringBuilder s=new StringBuilder(); for(byte x:h)s.append(String.format("%02x",x)); return s.toString(); }
+            static void dumpObj(Object o) throws Exception {
+              if(o==null){System.out.println("null");return;}
+              Class<?> c=o.getClass(); System.out.println("class="+c.getName()+" value="+o);
+              for(Field f:c.getDeclaredFields()){f.setAccessible(true); Object v=f.get(o); if(v!=null && v.getClass().isArray()){ if(v instanceof byte[]) v=Arrays.toString((byte[])v); else if(v instanceof int[]) v=Arrays.toString((int[])v); else if(v instanceof short[]) v=Arrays.toString((short[])v); else if(v instanceof Object[]) v=Arrays.deepToString((Object[])v); } System.out.println("  "+f.getName()+"="+v); }
+            }
+            public static void main(String[] a) throws Exception {
+              Class<?> tc=Class.forName("k2c"); Constructor<?> ct=tc.getDeclaredConstructor(String.class); ct.setAccessible(true); Object t=ct.newInstance("nj_part"); Method find=tc.getDeclaredMethod("find",int.class); find.setAccessible(true);
+              for(int id=230;id<=235;id++){ System.out.println("=== OFFLINE nj_part "+id+" ==="); dumpObj(find.invoke(t,id)); }
+              Class<?> rc=Class.forName("k1e"); Method read=rc.getDeclaredMethod("read",String.class); read.setAccessible(true);
+              String[] paths={"/offline/x1/small/Small230.png","/offline/x1/small/Small231.png","/offline/x1/small/Small232.png","/offline/x1/small/Small233.png","/offline/x1/small/Small234.png","/offline/x1/small/Small235.png","/offline/x1/small/Small3421.png","/offline/x1/small/Small3422.png"};
+              for(String p:paths){try{byte[] b=(byte[])read.invoke(null,p); System.out.println("RESOURCE "+p+" len="+(b==null?-1:b.length)+(b==null?"":" sha="+hex(b)));}catch(Throwable e){System.out.println("RESOURCE "+p+" ERROR "+e);}}
+            }
+          }
+          JAVA
+          (cd "$WORK/jar" && javac -classpath . InspectOffline.java && java -classpath . InspectOffline) >> "$REPORT" 2>&1 || true
+
+      - name: Commit comparison report
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/offline"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add obito_sakura_index.txt
-          git commit -m 'chore: inspect offline pack index format' || exit 0
+          git add obito_sakura_compare.txt
+          git commit -m 'chore: compare Obito Sakura source and offline records' || exit 0
           git push origin fix-obito-sakura

@@ -1,0 +1,50 @@
+=== REFERENCE SOURCE MAPPING ===
+234-                        owner.ID_BODY = 178;
+235-                        owner.ID_LEG = 179;
+236-                        break;
+237:                    case 230:
+238-                        owner.ID_BODY = 231;
+239-                        owner.ID_LEG = 232;
+240-                        break;
+241:                    case 233:
+242-                        owner.ID_BODY = 234;
+243-                        owner.ID_LEG = 235;
+244-                        break;
+245-                }
+246-            }
+=== REFERENCE FILES 230-235 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/230.png 3013 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/231.png 2133 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/232.png 3673 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/233.png 5214 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/234.png 1745 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/235.png 1518 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/230.png 72035 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/231.png 55592 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/232.png 108586 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/233.png 128141 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/234.png 40314 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/235.png 30977 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/230.png 144803 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/231.png 110462 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/232.png 222195 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/233.png 256106 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/234.png 78216 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/235.png 60956 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/230.png 222444 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/231.png 168006 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/232.png 342168 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/233.png 385293 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/234.png 116774 bytes
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/235.png 90963 bytes
+=== REFERENCE PATHS CONTAINING part ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/party
+=== REFERENCE SQL ROWS 1173/1174 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:1929:(1173, 'Obito', 2, 1, 'Dùng thay đổi diện mạo', 20, 3422, -1, 230, 0),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:1930:(1174, 'Sakura', 2, 0, 'Dùng thay đổi diện mạo', 20, 3421, -1, 233, 0),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:2316:(4, 'Rừng đào Sakura', '[{\"x\":84,\"y\":216,\"templateId\":13,\"status\":1},{\"x\":2796,\"y\":216,\"templateId\":13,\"status\":1},{\"x\":2196,\"y\":192,\"templateId\":34,\"status\":15}]', '[{\"next\":3,\"minY\":192,\"minX\":0,\"maxY\":216,\"maxX\":24,\"x\":1395,\"y\":264},{\"next\":5,\"minY\":192,\"minX\":2856,\"maxY\":216,\"maxX\":2880,\"x\":45,\"y\":144}]', '[{\"boss\":false,\"x\":1236,\"y\":216,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1980,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":2004,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":2436,\"y\":264,\"templateId\":12,\"status\":1},{\"boss\":false,\"x\":636,\"y\":192,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":684,\"y\":192,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":828,\"y\":192,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1044,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1020,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":444,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1404,\"y\":216,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1692,\"y\":216,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":2604,\"y\":192,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":2268,\"y\":264,\"templateId\":12,\"status\":1},{\"boss\":false,\"x\":2340,\"y\":264,\"templateId\":12,\"status\":1},{\"boss\":false,\"x\":1836,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":372,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":852,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":2316,\"y\":192,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1164,\"y\":216,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":252,\"y\":216,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":708,\"y\":240,\"templateId\":6,\"status\":1},{\"boss\":false,\"x\":1928,\"y\":240,\"templateId\":231,\"status\":1},{\"boss\":false,\"x\":1686,\"y\":216,\"templateId\":225,\"status\":1}]', 16, '[]', 1, 0, 0, '[]', '[]', '[]', '[]'),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:4405:(1173, '{\"w\":16,\"x\":176,\"h\":16,\"y\":224,\"id\":4}'),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:4406:(1174, '{\"w\":16,\"x\":190,\"h\":16,\"y\":153,\"id\":4}'),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:9396:(10, 'NV bài học đầu tiên', 'Ghi chú: rùa vàng (Ký túc xá Haruna), nhện đốm (Rừng đào Sakura), quỷ 1 mắt(Hồ Stuki)', '[\"Đánh 50 con rùa vàng\",\"Đánh 30 con nhện đốm\",\"Đánh 20 con quỷ 1 mắt\",\"Báo cáo với hiệu trưởng\"]', '[50, 30, 20, -1]', 0, '[[5,0],[6,0],[7,0],[-1,0]]', '[]'),
+=== TARGET JAR ENTRIES ===
+=== TARGET OFFLINE INDEX PATHS ===

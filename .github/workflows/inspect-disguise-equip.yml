@@ -1,0 +1,46 @@
+name: Inspect disguise equip mapping
+on:
+  push:
+    branches: [fix-obito-sakura-equip]
+    paths: ['.github/workflows/inspect-disguise-equip.yml']
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect offline item rows and bytecode
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/nso/jar
+          (cd /tmp/nso/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
+          cat > /tmp/nso/jar/DumpRows.java <<'JAVA'
+          import java.lang.reflect.*; import java.util.*;
+          public class DumpRows {
+            static void dump(String table,int id)throws Exception{
+              Class<?> tc=Class.forName("k2c"); Constructor<?> ct=tc.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance(table);Method f=tc.getDeclaredMethod("find",int.class);f.setAccessible(true);Object r=f.invoke(t,id);System.out.println("=== "+table+" "+id+" ===");if(r==null){System.out.println("null");return;}for(Field x:r.getClass().getDeclaredFields()){x.setAccessible(true);Object v=x.get(r);if(v instanceof byte[])v=Arrays.toString((byte[])v);else if(v instanceof long[])v=Arrays.toString((long[])v);else if(v instanceof Object[])v=Arrays.deepToString((Object[])v);System.out.println(x.getName()+"="+v);} }
+            public static void main(String[]a)throws Exception{for(String t:new String[]{"item","nj_item","item_template"})for(int id:new int[]{1173,1174})try{dump(t,id);}catch(Throwable e){System.out.println("ERR "+t+" "+id+" "+e);} }
+          }
+          JAVA
+          (cd /tmp/nso/jar && javac -classpath . DumpRows.java && java -classpath . DumpRows) > "$GITHUB_WORKSPACE/disguise_equip_report.txt" 2>&1 || true
+          {
+            echo; echo '=== CLASSES CONTAINING fashion / 1173 / 1174 / 230 / 233 ==='
+            cd /tmp/nso/jar
+            for c in *.class; do
+              if strings "$c" | grep -qiE 'fashion|1173|1174|ID_HAIR|ID_BODY|ID_LEG'; then
+                echo "===== ${c%.class} ====="
+                strings "$c" | grep -iE 'fashion|1173|1174|ID_HAIR|ID_BODY|ID_LEG|equip|item' | head -n 100 || true
+                javap -classpath . -c -p "${c%.class}" 2>/dev/null | head -n 1200 || true
+              fi
+            done
+          } >> "$GITHUB_WORKSPACE/disguise_equip_report.txt"
+      - name: Commit report
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add disguise_equip_report.txt
+          git commit -m 'chore: inspect disguise equip mapping' || exit 0
+          git push origin fix-obito-sakura-equip

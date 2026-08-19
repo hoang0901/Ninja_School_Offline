@@ -1,4 +1,4 @@
-name: Dump skill book mapper bytecode
+name: Inspect legacy skill 120 book ids
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,20 +10,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump k mapper
+      - name: Dump legacy book items
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_kmapper.txt"
-          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
-          cd /tmp/jar
-          javap -classpath . -c -p k25 | awk '/private static int k\(int, int\);/{p=1} p{print} p && /^  [^ ]/ && !/private static int k\(int, int\);/ && seen{exit} p{seen=1}' > "$LOG" || true
-          cat "$LOG"
+          LOG="$GITHUB_WORKSPACE/skill120_legacy.txt"
+          exec > >(tee "$LOG") 2>&1
+          cat >/tmp/D.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class D{public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance("item");Method f=c.getDeclaredMethod("find",int.class);f.setAccessible(true);for(int id=1125;id<=1139;id++){Object r=f.invoke(t,id);Field n=r.getClass().getDeclaredField("numbers"),s=r.getClass().getDeclaredField("strings");n.setAccessible(true);s.setAccessible(true);System.out.println(id+" nums="+Arrays.toString((long[])n.get(r))+" strs="+Arrays.deepToString((Object[])s.get(r)));}}}
+          JAVA
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/D.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" D
       - name: Commit report
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_kmapper.txt
-          git commit -m 'chore: dump skill book mapper bytecode' || exit 0
+          git add skill120_legacy.txt
+          git commit -m 'chore: inspect legacy skill 120 book ids' || exit 0
           git push origin fix-skill120-learning

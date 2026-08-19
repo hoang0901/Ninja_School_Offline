@@ -1,2 +1,4 @@
-Exception in thread "main" java.lang.RuntimeException: Missing packed resource for Small2715
-	at LocateResources.main(LocateResources.java:15)
+Adding missing Obito/Sakura model sprites 2715-2770 as loose fallback resources...
+Locating packed Obito/Sakura item icons 3421/3422...
+Exception in thread "main" java.lang.RuntimeException: Missing packed icon Small3421
+	at LocateIcons.main(LocateIcons.java:13)

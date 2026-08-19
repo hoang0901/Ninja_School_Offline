@@ -1,4 +1,4 @@
-name: Trace item use dispatcher for skill 120
+name: Inspect offline skill persistence helpers
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,32 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find callers and dispatcher
+      - name: Dump k25 k24 and state
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_dispatch.txt"
+          LOG="$GITHUB_WORKSPACE/skill120_persist.txt"
           exec > >(tee "$LOG") 2>&1
           rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
           cd /tmp/jar
-          for target in k26 k8 k16; do
-            echo "=== CALLERS $target ==="
-            grep -aFl "$target" *.class | while read c; do
-              echo "===== ${c%.class} ====="
-              javap -classpath . -c -p "${c%.class}" | grep -n -B120 -A220 "$target" | head -n 3000 || true
-            done
-          done
-          echo '=== classes with inventory/use-item strings ==='
-          for c in *.class; do
-            s=$(strings "$c" | grep -Ei 'use item|item use|ITEM_USE|bag|inventory|SACH_VO_CONG_120|Mảnh sách cổ|Hành trang' | head -n 30 || true)
-            if [ -n "$s" ]; then echo "===== ${c%.class} ====="; echo "$s"; fi
-          done | head -n 2500
+          echo '=== K25 ==='
+          javap -classpath . -c -p -verbose k25
+          echo '=== K24 ==='
+          javap -classpath . -c -p -verbose k24
+          echo '=== STATE ==='
+          javap -classpath . -c -p 'DoHoang091$k0'
+          echo '=== DOHOANG SKILL SIGNATURES ==='
+          javap -classpath . -p DoHoang091 | grep -n -Ei 'skill|\[S|\[I|short|int|boolean' | head -n 1200 || true
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_dispatch.txt || true
-          git commit -m 'chore: trace item use dispatcher for skill 120' || exit 0
+          git add skill120_persist.txt || true
+          git commit -m 'chore: inspect offline skill persistence helpers' || exit 0
           git push origin fix-skill120-learning

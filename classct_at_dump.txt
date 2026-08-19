@@ -1,0 +1,107 @@
+=== METHOD at() ===
+  public final void at();
+    Code:
+       0: aload_0
+       1: getstatic     #1147               // Field nl:[I
+       4: bipush        10
+       6: iaload
+       7: newarray       byte
+       9: dup
+      10: getstatic     #1147               // Field nl:[I
+      13: iconst_0
+      14: iaload
+      15: getstatic     #1147               // Field nl:[I
+      18: iconst_1
+      19: iaload
+      20: bastore
+      21: dup
+      22: getstatic     #1147               // Field nl:[I
+      25: iconst_4
+      26: iaload
+      27: getstatic     #1147               // Field nl:[I
+      30: iconst_1
+      31: iaload
+      32: bastore
+      33: dup
+      34: getstatic     #1147               // Field nl:[I
+      37: iconst_5
+      38: iaload
+      39: getstatic     #1147               // Field nl:[I
+      42: iconst_1
+      43: iaload
+      44: bastore
+      45: dup
+      46: getstatic     #1147               // Field nl:[I
+      49: iconst_3
+      50: iaload
+      51: getstatic     #1147               // Field nl:[I
+      54: iconst_1
+      55: iaload
+      56: bastore
+      57: dup
+      58: getstatic     #1147               // Field nl:[I
+      61: bipush        9
+      63: iaload
+      64: getstatic     #1147               // Field nl:[I
+      67: iconst_1
+      68: iaload
+      69: bastore
+      70: dup
+      71: getstatic     #1147               // Field nl:[I
+      74: iconst_2
+      75: iaload
+      76: getstatic     #1147               // Field nl:[I
+      79: iconst_1
+      80: iaload
+      81: bastore
+      82: putfield      #956                // Field gi:[B
+      85: return
+
+
+=== ONLY Class_by at() caller context ===
+5439-    4674: putfield      #534                // Field Class_cy.k:I
+5440-    4677: invokestatic  #954                // Method Class_cy.aa:()LClass_cy;
+5441-    4680: aload_0
+5442-    4681: invokevirtual #978                // Method Class_de.a:()Ljava/io/DataInputStream;
+5443-    4684: invokevirtual #1146               // Method java/io/DataInputStream.readInt:()I
+5444-    4687: putfield      #493                // Field Class_cy.ew:I
+5445-    4690: invokestatic  #954                // Method Class_cy.aa:()LClass_cy;
+5446-    4693: aload_0
+5447-    4694: invokevirtual #978                // Method Class_de.a:()Ljava/io/DataInputStream;
+5448-    4697: invokevirtual #1146               // Method java/io/DataInputStream.readInt:()I
+5449-    4700: putfield      #527                // Field Class_cy.gq:I
+5450-    4703: aload_0
+5451-    4704: invokevirtual #978                // Method Class_de.a:()Ljava/io/DataInputStream;
+5452-    4707: invokevirtual #1144               // Method java/io/DataInputStream.readByte:()B
+5453-    4710: getstatic     #265                // Field b:[I
+5454-    4713: iconst_3
+5455-    4714: iaload
+5456-    4715: invokestatic  #868                // Method f:(II)Z
+5457-    4718: ifeq          4763
+5458-    4721: invokestatic  #915                // Method Class_ct.ag:()LClass_ct;
+5459:    4724: invokevirtual #923                // Method Class_ct.at:()V
+5460-    4727: invokestatic  #954                // Method Class_cy.aa:()LClass_cy;
+5461-    4730: getstatic     #265                // Field b:[I
+5462-    4733: iconst_3
+5463-    4734: iaload
+5464-    4735: putfield      #517                // Field Class_cy.gc:Z
+5465-    4738: ldc           #16                 // String
+5466-    4740: invokevirtual #1163               // Method java/lang/String.length:()I
+5467-    4743: pop
+5468-    4744: bipush        113
+5469-    4746: bipush        49
+5470-    4748: ixor
+5471-    4749: sipush        214
+5472-    4752: sipush        150
+5473-    4755: ixor
+5474-    4756: iconst_m1
+5475-    4757: ixor
+5476-    4758: iand
+5477-    4759: ifeq          16506
+5478-    4762: return
+5479-    4763: invokestatic  #954                // Method Class_cy.aa:()LClass_cy;
+5480-    4766: getstatic     #265                // Field b:[I
+5481-    4769: iconst_4
+5482-    4770: iaload
+5483-    4771: putfield      #517                // Field Class_cy.gc:Z
+5484-    4774: invokestatic  #1002               // Method Class_dm.t:()V

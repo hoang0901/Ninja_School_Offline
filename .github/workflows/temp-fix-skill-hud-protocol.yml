@@ -1,0 +1,117 @@
+name: Temporary skill HUD protocol fix
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-fix-skill-hud-protocol.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch HUD protocol flag and restore original renderer
+        shell: python
+        run: |
+          import struct, zipfile, os, hashlib
+
+          jar='Nso_Offline_By_h0901.jar'
+          out=jar+'.patched'
+
+          def u1(b,o): return b[o],o+1
+          def u2(b,o): return struct.unpack_from('>H',b,o)[0],o+2
+          def u4(b,o): return struct.unpack_from('>I',b,o)[0],o+4
+
+          def patch_method(data, method_name, method_desc, code_offset, old_opcode, new_opcode, next_opcode=None):
+              b=bytearray(data); o=0
+              magic,o=u4(b,o)
+              if magic != 0xCAFEBABE: raise RuntimeError('invalid class')
+              _,o=u2(b,o); _,o=u2(b,o)
+              cp_count,o=u2(b,o); cp=[None]*cp_count
+              i=1
+              while i<cp_count:
+                  tag,o=u1(b,o)
+                  if tag==1:
+                      ln,o=u2(b,o); cp[i]=bytes(b[o:o+ln]).decode('utf-8','replace'); o+=ln
+                  elif tag in (3,4): o+=4
+                  elif tag in (5,6): o+=8; i+=1
+                  elif tag in (7,8,16,19,20): o+=2
+                  elif tag in (9,10,11,12,18): o+=4
+                  elif tag==15: o+=3
+                  else: raise RuntimeError(f'unsupported cp tag {tag}')
+                  i+=1
+              o+=6
+              n,o=u2(b,o); o+=2*n
+              nf,o=u2(b,o)
+              for _ in range(nf):
+                  o+=6; ac,o=u2(b,o)
+                  for __ in range(ac):
+                      _,o=u2(b,o); ln,o=u4(b,o); o+=ln
+              nm,o=u2(b,o); found=0
+              for _ in range(nm):
+                  _,o=u2(b,o); ni,o=u2(b,o); di,o=u2(b,o); ac,o=u2(b,o)
+                  name=cp[ni]; desc=cp[di]
+                  for __ in range(ac):
+                      ai,o=u2(b,o); ln,o=u4(b,o); start=o
+                      if name==method_name and desc==method_desc and cp[ai]=='Code':
+                          found+=1
+                          p=start
+                          _,p=u2(b,p); _,p=u2(b,p); clen,p=u4(b,p)
+                          if code_offset >= clen: raise RuntimeError(f'{method_name}{method_desc}: offset out of range')
+                          pos=p+code_offset
+                          if b[pos] != old_opcode:
+                              raise RuntimeError(f'{method_name}{method_desc} offset {code_offset}: expected 0x{old_opcode:02x}, got 0x{b[pos]:02x}')
+                          if next_opcode is not None and b[pos+1] != next_opcode:
+                              raise RuntimeError(f'{method_name}{method_desc} offset {code_offset+1}: expected next 0x{next_opcode:02x}, got 0x{b[pos+1]:02x}')
+                          b[pos]=new_opcode
+                      o=start+ln
+              if found != 1: raise RuntimeError(f'expected one {method_name}{method_desc}, found {found}')
+              return bytes(b)
+
+          with zipfile.ZipFile(jar,'r') as zin:
+              names=zin.namelist()
+              if 'k32.class' not in names or 'Class_ct.class' not in names:
+                  raise RuntimeError('required class missing')
+              originals={n:zin.read(n) for n in names}
+
+              # k32.e(): final byte of inner -123 packet.
+              # JVM opcode offset 50 is iconst_0; change to iconst_1 so client keeps Class_cy.gc=true.
+              fixed_k32=patch_method(originals['k32.class'],'e','()V',50,0x03,0x04,0xB6)
+
+              # Revert the previous diagnostic renderer patch: Class_ct.a(Class_dg), offset 145 nop -> return.
+              restored_ct=patch_method(originals['Class_ct.class'],'a','(LClass_dg;)V',145,0x00,0xB1,0x2B)
+
+              changed=[]
+              with zipfile.ZipFile(out,'w') as zout:
+                  for info in zin.infolist():
+                      if info.filename=='k32.class': payload=fixed_k32
+                      elif info.filename=='Class_ct.class': payload=restored_ct
+                      else: payload=originals[info.filename]
+                      if payload != originals[info.filename]: changed.append(info.filename)
+                      zout.writestr(info,payload)
+
+          if changed != ['Class_ct.class','k32.class'] and changed != ['k32.class','Class_ct.class']:
+              raise RuntimeError(f'unexpected changed entries: {changed}')
+
+          with zipfile.ZipFile(out,'r') as z:
+              bad=z.testzip()
+              if bad: raise RuntimeError(f'CRC failure: {bad}')
+              # Re-check patched method opcodes through same parser expectations in reverse.
+              patch_method(z.read('k32.class'),'e','()V',50,0x04,0x04,0xB6)
+              patch_method(z.read('Class_ct.class'),'a','(LClass_dg;)V',145,0xB1,0xB1,0x2B)
+
+          os.replace(out,jar)
+          print('Patched k32 -123 HUD flag 0->1 and restored Class_ct renderer return.')
+
+      - name: Commit only corrected JAR
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Nso_Offline_By_h0901.jar
+          git diff --cached --quiet && { echo 'No JAR change'; exit 1; }
+          git commit -m "fix: keep controls active after skill state sync"
+          git push

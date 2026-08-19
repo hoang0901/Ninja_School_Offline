@@ -1,0 +1,112 @@
+=== k1e methods/fields ===
+M private static int k1e.hash(java.lang.String)
+M static byte[] k1e.read(java.lang.String) throws java.io.IOException
+M static java.io.InputStream k1e.open(java.lang.String) throws java.io.IOException
+M private static java.lang.String k1e.normalize(java.lang.String)
+M static synchronized void k1e.release()
+M private static java.io.InputStream k1e.slice(java.io.InputStream,int,int) throws java.io.IOException
+M private static synchronized boolean k1e.ensureIndex() throws java.io.IOException
+M private static int k1e.findIndex(java.lang.String)
+M static void k1e.bindDataWorker(int)
+M private static void k1e.clearStaticWindowLoad(int,int)
+M private static void k1e.clearStaticWindows()
+M private static void k1e.closeDataStream(int)
+M private static byte[] k1e.copyWindow(byte[],int,int,int)
+M private static synchronized boolean k1e.ensureBootIndex() throws java.io.IOException
+M private static int k1e.findBootLength(java.lang.String) throws java.io.IOException
+M private static int k1e.nextStaticWindowAge()
+M private static java.io.InputStream k1e.openBoot(java.lang.String,int) throws java.io.IOException
+M private static java.io.InputStream k1e.openPack(int,int) throws java.io.IOException
+M private static byte[] k1e.readBootExact(java.lang.String,int,int) throws java.io.IOException
+M private static byte[] k1e.readDataExact(int,int,int) throws java.io.IOException
+M private static byte[] k1e.readDirect(int,int,int,int) throws java.io.IOException
+M private static byte[] k1e.readExact(int,int,int,int) throws java.io.IOException
+M static byte[] k1e.readRange(java.lang.String,int,int) throws java.io.IOException
+M private static byte[] k1e.readStaticWindow(int,int,int) throws java.io.IOException
+M static void k1e.releaseDataWorker(int)
+M private static void k1e.skipFully(java.io.InputStream,int) throws java.io.IOException
+M static void k1e.trimTransient()
+F private static final int k1e.MAGIC
+F private static final int k1e.BOOT_MAGIC
+F private static final java.lang.String k1e.PREFIX
+F private static final int k1e.STATIC_READ_WINDOW_BYTES
+F private static final int k1e.STATIC_READ_WINDOW_ALIGN
+F private static final int k1e.STATIC_READ_WINDOW_SLOTS
+F private static int[] k1e.hashes
+F private static int[] k1e.offsets
+F private static int[] k1e.lengths
+F private static byte[] k1e.kinds
+F private static byte[] k1e.chunks
+F private static int[] k1e.staticPackLengths
+F private static int[] k1e.bootHashes
+F private static int[] k1e.bootLengths
+F private static boolean k1e.bootAttempted
+F private static final byte[][] k1e.staticWindows
+F private static final int[] k1e.staticWindowChunks
+F private static final int[] k1e.staticWindowOffsets
+F private static final int[] k1e.staticWindowAges
+F private static final java.lang.Object k1e.STATIC_WINDOW_LOCK
+F private static final boolean[] k1e.staticWindowLoading
+F private static final int[] k1e.staticWindowLoadChunks
+F private static final int[] k1e.staticWindowLoadOffsets
+F private static final int[] k1e.staticWindowLoadLengths
+F private static int k1e.staticWindowClock
+F private static int k1e.staticWindowEpoch
+F private static final int k1e.DATA_STREAM_LANES
+F private static final java.lang.Object k1e.DATA_BIND_LOCK
+F private static final java.lang.Object[] k1e.DATA_STREAM_LOCKS
+F private static final java.io.InputStream[] k1e.dataStreams
+F private static final java.lang.Thread[] k1e.dataStreamOwners
+F private static final int[] k1e.dataStreamChunks
+F private static final int[] k1e.dataStreamPositions
+F private static boolean k1e.attempted
+F static java.lang.Class k1e.class$0
+=== reference hashes ===
+REF /Data/Img/Effect/1/230.png 3013
+62398530e8d26fa00acadc050516cd884ba4c38f671749a42e52c18decf56c07  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/230.png
+REF /Data/Img/Effect/1/231.png 2133
+666f3f39ae96762e4a1a659c659a13280f0e75ed3d379fbf281bedd34d6172a5  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/231.png
+REF /Data/Img/Effect/1/232.png 3673
+62abed4d6f8e2bd2effefa6e7b1304c8c98f302de9cd07b816f5d106450343c6  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/232.png
+REF /Data/Img/Effect/1/233.png 5214
+4a8eea48e0b0d830cc194adc0fe9948d1ad1d929cb3264123aa4ad090b8afbab  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/233.png
+REF /Data/Img/Effect/1/234.png 1745
+fd6bba50f7e573e8af14926b04c2e7432f22907b0f2aebf445753839aa1bedf1  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/234.png
+REF /Data/Img/Effect/1/235.png 1518
+2790189cbf7496f97d0e65f4532c26b0fc66aab0bebfb3e19d7524e622c0fb5d  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/1/235.png
+REF /Data/Img/Effect/2/230.png 72035
+cca15ad001e8aecfe3086f6231ad26345516552711cf81db3004b08feeb4afdb  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/230.png
+REF /Data/Img/Effect/2/231.png 55592
+9741719158014fab2b8be292d0cced001b33a8b8fc1f422842973b276a5c1e03  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/231.png
+REF /Data/Img/Effect/2/232.png 108586
+65aa1b3f194f1885ce42e343feb7e3480e4380faeb866b7648c911f855c7b217  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/232.png
+REF /Data/Img/Effect/2/233.png 128141
+e461a35a90753bd099230992ce88c810323628ea76bdefc952d68ba35d26def4  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/233.png
+REF /Data/Img/Effect/2/234.png 40314
+79751012cff73e4554b66873dabd494af2b8650f8cdbc00f363010586929f5fc  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/234.png
+REF /Data/Img/Effect/2/235.png 30977
+6032899ebe575e125f32e19dc820dfd605e49223dba15365a715f27f1418b077  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/2/235.png
+REF /Data/Img/Effect/3/230.png 144803
+ec6ba0fa8f74754755c164d50f031d1cab6b9383f1b47d937b8a6cbb44373bff  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/230.png
+REF /Data/Img/Effect/3/231.png 110462
+50055a283ab262a5e4021788e570fb512dece00885f96c7d55aa88f917736c43  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/231.png
+REF /Data/Img/Effect/3/232.png 222195
+e0b68575d4ba88ae5bbbaaf28079a5d8660f195ce9f56e3c50a55831fa057672  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/232.png
+REF /Data/Img/Effect/3/233.png 256106
+7fd2770f757808b6a103e46f8460c6750026dec6da2fdb16ac1ff86c08737602  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/233.png
+REF /Data/Img/Effect/3/234.png 78216
+cc1982d4e37aab70c15fa337ee3634c966b447c7135db13a6cbf5dc3db91e54d  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/234.png
+REF /Data/Img/Effect/3/235.png 60956
+638ef6a7458ab4c2bbfa2e886fd2e55b1591846724eec1862523a9538f766df0  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/3/235.png
+REF /Data/Img/Effect/4/230.png 222444
+0c196bb8fece222f0051b743e838a57094afa7a422a43802098f7682b201c80c  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/230.png
+REF /Data/Img/Effect/4/231.png 168006
+9052a84456eeb24e3ac4a97001c21a0facfc8d02f141690e5383cac3862a454d  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/231.png
+REF /Data/Img/Effect/4/232.png 342168
+56320abfaf48441ba5156c439dd7c34d4902a14b3448adfe00d811f8730db54f  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/232.png
+REF /Data/Img/Effect/4/233.png 385293
+d12ed2438c0b9abbcde9e8e101cb6ba5c09b21049f9c99bce3809e1472a85ffe  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/233.png
+REF /Data/Img/Effect/4/234.png 116774
+eeced7520e86f887bd13f57c4ef21519d75e5646a15088fc0534ca5a9ef61a68  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/234.png
+REF /Data/Img/Effect/4/235.png 90963
+23de503d144a92eb9a803d0d53054d50af1a4ef48c15daa68c9de7d53072d2a8  /tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/4/235.png

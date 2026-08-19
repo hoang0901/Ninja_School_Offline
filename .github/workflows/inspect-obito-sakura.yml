@@ -23,7 +23,7 @@ jobs:
           ref: main
           path: source
 
-      - name: Patch and validate Obito Sakura resources
+      - name: Add and validate missing disguise sprites
         id: patch
         shell: bash
         run: |
@@ -36,113 +36,68 @@ jobs:
           mkdir -p "$WORK/jar/offline/x1/small" "$WORK/validate"
           (cd "$WORK/jar" && jar xf "$JAR")
 
-          echo 'Adding missing Obito/Sakura model sprites 2715-2770 as loose fallback resources...'
+          echo 'Copying Obito/Sakura model sprites Small2715-Small2770 from Nso_Folder...'
+          ADD=()
           for id in $(seq 2715 2770); do
             src="$SRC/Data/Img/Small/1/Small${id}.png"
             [ -f "$src" ] || src="$SRC/Data/Img/Small/1/Small${id}.PNG"
             [ -f "$src" ] || { echo "Missing source Small${id}"; exit 1; }
-            cp "$src" "$WORK/jar/offline/x1/small/Small${id}.png"
+            dst="offline/x1/small/Small${id}.png"
+            cp "$src" "$WORK/jar/$dst"
+            ADD+=("$dst")
           done
+          (cd "$WORK/jar" && jar uf "$JAR" "${ADD[@]}")
 
-          echo 'Locating packed Obito/Sakura item icons 3421/3422...'
-          cat > "$WORK/jar/LocateIcons.java" <<'JAVA'
+          echo 'Validating using k2.a(String), the complete offline image loader...'
+          cat > "$WORK/validate/ValidateK2.java" <<'JAVA'
           import java.lang.reflect.*;
-          public class LocateIcons {
-            public static void main(String[] args) throws Exception {
-              Class<?> c=Class.forName("k1e");
-              Method ensure=c.getDeclaredMethod("ensureIndex"); ensure.setAccessible(true); ensure.invoke(null);
-              Method find=c.getDeclaredMethod("findIndex",String.class); find.setAccessible(true);
-              Field fk=c.getDeclaredField("kinds"), fc=c.getDeclaredField("chunks"), fo=c.getDeclaredField("offsets"), fl=c.getDeclaredField("lengths");
-              fk.setAccessible(true); fc.setAccessible(true); fo.setAccessible(true); fl.setAccessible(true);
-              byte[] kinds=(byte[])fk.get(null), chunks=(byte[])fc.get(null); int[] offsets=(int[])fo.get(null), lengths=(int[])fl.get(null);
-              for(String s: args){
-                int id=Integer.parseInt(s); String p="/offline/x1/small/Small"+id+".png"; int i=(Integer)find.invoke(null,p);
-                if(i<0){p="/offline/x1/small/Small"+id+".PNG"; i=(Integer)find.invoke(null,p);}
-                if(i<0) throw new RuntimeException("Missing packed icon Small"+id);
-                System.out.println(id+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offsets[i]+","+lengths[i]+","+p);
+          import java.security.*;
+          public class ValidateK2 {
+            static String sha(byte[] b)throws Exception{
+              byte[] h=MessageDigest.getInstance("SHA-256").digest(b);
+              StringBuilder s=new StringBuilder();
+              for(byte x:h)s.append(String.format("%02x",x));
+              return s.toString();
+            }
+            public static void main(String[] args)throws Exception{
+              Class<?> c=Class.forName("k2");
+              Method r=c.getDeclaredMethod("a",String.class);
+              r.setAccessible(true);
+              for(String s:args){
+                int id=Integer.parseInt(s);
+                String p="/offline/x1/small/Small"+id+".png";
+                byte[] b=(byte[])r.invoke(null,p);
+                if(b==null)throw new RuntimeException("missing Small"+id);
+                System.out.println(id+","+b.length+","+sha(b));
               }
             }
           }
           JAVA
-          (cd "$WORK/jar" && javac -classpath . LocateIcons.java && java -classpath . LocateIcons 3421 3422) > "$WORK/icons.csv"
-          cat "$WORK/icons.csv"
-
-          INDEX="$WORK/jar/offline/packs/index.bin" LOC="$WORK/icons.csv" SRCROOT="$SRC" PACKROOT="$WORK/jar/offline/packs" python3 - <<'PY'
-          import os, struct
-          from pathlib import Path
-          index_path=Path(os.environ['INDEX']); pack_root=Path(os.environ['PACKROOT']); src=Path(os.environ['SRCROOT']); loc_path=Path(os.environ['LOC'])
-          raw=bytearray(index_path.read_bytes())
-          if raw[:4] != b'OPR1': raise SystemExit('Bad pack index magic')
-          count=struct.unpack_from('>I',raw,4)[0]
-          if len(raw) != 8 + count*14: raise SystemExit(f'Unexpected index length {len(raw)} count {count}')
-          recs=[]
-          for i in range(count):
-              pos=8+i*14
-              recs.append([bytes(raw[pos:pos+4]),raw[pos+4],raw[pos+5],struct.unpack_from('>I',raw,pos+6)[0],struct.unpack_from('>I',raw,pos+10)[0]])
-          targets={}
-          for line in loc_path.read_text().splitlines():
-              id_s,idx_s,kind_s,chunk_s,off_s,len_s,path=line.split(',',6)
-              rid=int(id_s); idx=int(idx_s); kind=int(kind_s); chunk=int(chunk_s)
-              if kind != 0: raise SystemExit(f'Icon {rid} unexpectedly in kind={kind}')
-              f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.png'
-              if not f.exists(): f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.PNG'
-              if not f.exists(): raise SystemExit(f'Missing source icon Small{rid}')
-              targets[idx]=f.read_bytes(); r=recs[idx]
-              if (r[1],r[2],r[3],r[4]) != (kind,chunk,int(off_s),int(len_s)): raise SystemExit(f'Index mismatch for icon {rid}')
-          touched=sorted({(recs[i][1],recs[i][2]) for i in targets})
-          for kind,chunk in touched:
-              p=pack_root/f's{chunk:02d}.pak'; old=p.read_bytes(); members=[i for i,r in enumerate(recs) if r[1]==kind and r[2]==chunk]; members.sort(key=lambda i: recs[i][3])
-              out=bytearray(); cursor=0
-              for i in members:
-                  h,k,ch,off,length=recs[i]
-                  if off < cursor or off+length > len(old): raise SystemExit(f'Bad range {p.name} idx={i} off={off} len={length}')
-                  out += old[cursor:off]
-                  new_off=len(out); data=targets.get(i, old[off:off+length]); out += data
-                  recs[i][3]=new_off; recs[i][4]=len(data); cursor=off+length
-              out += old[cursor:]; p.write_bytes(out)
-              print(f'Patched {p.name}: {len(old)} -> {len(out)} bytes')
-          for i,(h,kind,chunk,off,length) in enumerate(recs):
-              pos=8+i*14; raw[pos:pos+4]=h; raw[pos+4]=kind; raw[pos+5]=chunk
-              struct.pack_into('>I',raw,pos+6,off); struct.pack_into('>I',raw,pos+10,length)
-          index_path.write_bytes(raw)
-          print('Patched packed icons 3421 and 3422')
-          PY
-
-          mapfile -t TOUCHED < <(cut -d, -f4 "$WORK/icons.csv" | sort -nu | awk '{printf "offline/packs/s%02d.pak\n",$1}')
-          ADD=()
-          for id in $(seq 2715 2770); do ADD+=("offline/x1/small/Small${id}.png"); done
-          (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "${TOUCHED[@]}" "${ADD[@]}")
-
-          echo 'Validating through the same k2 image loader used by the client...'
-          cat > "$WORK/validate/ValidateK2.java" <<'JAVA'
-          import java.lang.reflect.*; import java.security.*;
-          public class ValidateK2 {
-            static String sha(byte[] b)throws Exception{byte[] h=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return s.toString();}
-            public static void main(String[] a)throws Exception{
-              Class<?> c=Class.forName("k2"); Method r=c.getDeclaredMethod("c",String.class); r.setAccessible(true);
-              for(String s:a){int id=Integer.parseInt(s);String p="/offline/x1/small/Small"+id+".png";byte[] b=(byte[])r.invoke(null,p);if(b==null)throw new RuntimeException("missing Small"+id);System.out.println(id+","+b.length+","+sha(b));}
-            }
-          }
-          JAVA
-          IDS=$(seq 2715 2770; echo 3421; echo 3422)
+          IDS=$(seq 2715 2770)
           (cd "$WORK/validate" && javac -classpath "$JAR" ValidateK2.java && java -classpath "$JAR:." ValidateK2 $IDS) > "$WORK/actual.csv"
+
           ACT="$WORK/actual.csv" SRCROOT="$SRC" python3 - <<'PY'
           import os,hashlib
           from pathlib import Path
           actual={int(a):h for a,l,h in (x.split(',') for x in Path(os.environ['ACT']).read_text().splitlines())}
-          src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'; bad=[]
-          for i in list(range(2715,2771))+[3421,3422]:
+          src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'
+          bad=[]
+          for i in range(2715,2771):
               f=src/f'Small{i}.png'
               if not f.exists(): f=src/f'Small{i}.PNG'
               want=hashlib.sha256(f.read_bytes()).hexdigest()
               if actual.get(i)!=want: bad.append((i,actual.get(i),want))
           if bad: raise SystemExit('Validation mismatch: '+repr(bad))
-          print('VALIDATION_OK: 58/58 Obito/Sakura resources match Nso_Folder')
+          print('VALIDATION_OK: 56/56 Obito/Sakura model sprites match Nso_Folder')
           PY
+
           jar tf "$JAR" >/dev/null
+          for id in 2715 2732 2741 2743 2760 2770; do
+            jar tf "$JAR" | grep -qx "offline/x1/small/Small${id}.png"
+          done
           echo "JAR_OK size=$(stat -c %s "$JAR")"
 
-      - name: Commit result and diagnostic log
+      - name: Commit patched JAR and log
         if: always()
         shell: bash
         run: |
@@ -152,7 +107,7 @@ jobs:
           git add patch_obito_sakura.log
           if [ "${{ steps.patch.outcome }}" = "success" ]; then
             git add Nso_Offline_By_h0901.jar
-            MSG='fix: replace Obito and Sakura disguise resources from Nso_Folder'
+            MSG='fix: add missing Obito and Sakura disguise model sprites'
           else
             MSG='chore: record Obito Sakura patch failure'
           fi

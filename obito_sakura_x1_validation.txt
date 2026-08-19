@@ -1,27 +1,24 @@
-220,offline/x1/effect/220.png,-849951849,-1,-1,-1,-1,-1
-221,offline/x1/effect/221.png,-849028328,-1,-1,-1,-1,-1
-222,offline/x1/effect/222.png,-848104807,-1,-1,-1,-1,-1
-223,offline/x1/effect/223.png,-847181286,-1,-1,-1,-1,-1
-224,offline/x1/effect/224.png,-846257765,-1,-1,-1,-1,-1
-225,offline/x1/effect/225.png,-845334244,-1,-1,-1,-1,-1
-226,offline/x1/effect/226.png,-844410723,-1,-1,-1,-1,-1
-227,offline/x1/effect/227.png,-843487202,-1,-1,-1,-1,-1
-228,offline/x1/effect/228.png,-842563681,-1,-1,-1,-1,-1
-229,offline/x1/effect/229.png,-841640160,-1,-1,-1,-1,-1
-230,offline/x1/effect/230.png,-821322698,-1,-1,-1,-1,-1
-231,offline/x1/effect/231.png,-820399177,-1,-1,-1,-1,-1
-232,offline/x1/effect/232.png,-819475656,-1,-1,-1,-1,-1
-233,offline/x1/effect/233.png,-818552135,-1,-1,-1,-1,-1
-234,offline/x1/effect/234.png,-817628614,-1,-1,-1,-1,-1
-235,offline/x1/effect/235.png,-816705093,-1,-1,-1,-1,-1
-236,offline/x1/effect/236.png,-815781572,-1,-1,-1,-1,-1
-237,offline/x1/effect/237.png,-814858051,-1,-1,-1,-1,-1
-238,offline/x1/effect/238.png,-813934530,-1,-1,-1,-1,-1
-239,offline/x1/effect/239.png,-813011009,-1,-1,-1,-1,-1
-240,offline/x1/effect/240.png,-792693547,-1,-1,-1,-1,-1
-241,offline/x1/effect/241.png,-791770026,-1,-1,-1,-1,-1
-242,offline/x1/effect/242.png,-790846505,-1,-1,-1,-1,-1
-243,offline/x1/effect/243.png,-789922984,-1,-1,-1,-1,-1
-244,offline/x1/effect/244.png,-788999463,-1,-1,-1,-1,-1
-245,offline/x1/effect/245.png,-788075942,-1,-1,-1,-1,-1
-no neighboring x1/effect asset found
+230,offline/x1/effect/230.png,-821322698,-1
+231,offline/x1/effect/231.png,-820399177,-1
+232,offline/x1/effect/232.png,-819475656,-1
+233,offline/x1/effect/233.png,-818552135,-1
+234,offline/x1/effect/234.png,-817628614,-1
+235,offline/x1/effect/235.png,-816705093,-1
+TARGET_PACK d07.pak kind 1 chunk 7
+ADD 230 offline/x1/effect/230.png hash -821322698 offset 180887 len 3013
+ADD 231 offline/x1/effect/231.png hash -820399177 offset 183900 len 2133
+ADD 232 offline/x1/effect/232.png hash -819475656 offset 186033 len 3673
+ADD 233 offline/x1/effect/233.png hash -818552135 offset 189706 len 5214
+ADD 234 offline/x1/effect/234.png hash -817628614 offset 194920 len 1745
+ADD 235 offline/x1/effect/235.png hash -816705093 offset 196665 len 1518
+INDEX 5995 -> 6001 PACKSIZE 198183
+ASSET 230 idx=1894 len=3013 sha=62398530e8d26fa00acadc050516cd884ba4c38f671749a42e52c18decf56c07
+ASSET 231 idx=1895 len=2133 sha=666f3f39ae96762e4a1a659c659a13280f0e75ed3d379fbf281bedd34d6172a5
+ASSET 232 idx=1896 len=3673 sha=62abed4d6f8e2bd2effefa6e7b1304c8c98f302de9cd07b816f5d106450343c6
+ASSET 233 idx=1897 len=5214 sha=4a8eea48e0b0d830cc194adc0fe9948d1ad1d929cb3264123aa4ad090b8afbab
+ASSET 234 idx=1898 len=1745 sha=fd6bba50f7e573e8af14926b04c2e7432f22907b0f2aebf445753839aa1bedf1
+ASSET 235 idx=1901 len=1518 sha=2790189cbf7496f97d0e65f4532c26b0fc66aab0bebfb3e19d7524e622c0fb5d
+ITEM 1173 nums=[1173, 0, 2, 1, 0, 20, 3422, -1, 230, 0] strs=[null, Obito, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+ITEM 1174 nums=[1174, 0, 2, 0, 0, 20, 3421, -1, 233, 0] strs=[null, Sakura, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+VALIDATION_OK exact x1 hair/body/leg 230-235; item metadata unchanged
+FINAL_JAR_SIZE=5268125

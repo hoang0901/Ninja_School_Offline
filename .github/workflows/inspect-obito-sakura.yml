@@ -22,53 +22,53 @@ jobs:
           repository: hoang0901/Nso_Folder
           ref: main
           path: source
-      - name: Map Obito and Sakura resources
+      - name: Inspect packed offline data
         shell: bash
         run: |
           set -euo pipefail
-          SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
           OFF="$GITHUB_WORKSPACE/offline"
-          WORK="$RUNNER_TEMP/nso_focus"
-          REPORT="$OFF/obito_sakura_focus.txt"
-          mkdir -p "$WORK/jar"
+          WORK="$RUNNER_TEMP/nso_pack"
+          REPORT="$OFF/obito_sakura_pack.txt"
+          mkdir -p "$WORK/jar" "$WORK/javap"
           (cd "$WORK/jar" && jar xf "$OFF/Nso_Offline_By_h0901.jar")
           {
-            echo '=== SOURCE FILES WITH TARGET IDS IN NAME ==='
-            find "$SRC" -type f | grep -E '/(230|231|232|233|234|235|3421|3422)(\.[^/]+)?$|Small(230|231|232|233|234|235|3421|3422)\.' | sort || true
+            echo '=== PACK/BIN/NO-EXT FILES ==='
+            find "$WORK/jar" -type f \( -iname '*.pak' -o -iname '*.bin' \) -printf '%P\t%s bytes\n' | sort
             echo
-            echo '=== TARGET SMALL IMAGES ==='
-            for z in 1 2 3 4; do
-              for id in 230 231 232 233 234 235 3421 3422; do
-                f="$SRC/Data/Img/Small/$z/Small$id.png"
-                [ -f "$f" ] || f="$SRC/Data/Img/Small/$z/Small$id.PNG"
-                if [ -f "$f" ]; then
-                  printf '%s\t%s\t' "${f#$SRC/}" "$(stat -c %s "$f")"
-                  sha256sum "$f" | cut -d' ' -f1
-                fi
-              done
+            echo '=== OFFLINE DIRECTORY FILES ==='
+            find "$WORK/jar/offline" -type f -printf '%P\t%s bytes\n' | sort || true
+            echo
+            echo '=== STRINGS IN PACK/BIN FILES (selected) ==='
+            while IFS= read -r f; do
+              echo "--- ${f#$WORK/jar/} ---"
+              strings "$f" | head -n 80 || true
+            done < <(find "$WORK/jar" -type f \( -iname '*.pak' -o -iname '*.bin' \) | sort)
+            echo
+            echo '=== CLASSES REFERENCING PAK/BIN/OFFLINE ==='
+            for c in "$WORK/jar"/*.class; do
+              [ -f "$c" ] || continue
+              if strings "$c" | grep -qiE '\.pak|\.bin|offline/|offline|packs'; then
+                echo "--- $(basename "$c") ---"
+                strings "$c" | grep -iE '\.pak|\.bin|offline/|offline|packs|small|image|part' | head -n 100 || true
+              fi
             done
             echo
-            echo '=== OFFLINE JAR TOP DIRECTORIES ==='
-            find "$WORK/jar" -mindepth 1 -maxdepth 2 -type d -printf '%P\n' | sort | head -n 300
-            echo
-            echo '=== OFFLINE JAR ENTRIES WITH TARGET IDS ==='
-            find "$WORK/jar" -type f -printf '%P\t%s\n' | grep -E '(^|/|[^0-9])(230|231|232|233|234|235|3421|3422)([^0-9]|$)' | sort || true
-            echo
-            echo '=== OFFLINE PNG/GIF/JPG SAMPLE ==='
-            find "$WORK/jar" -type f \( -iname '*.png' -o -iname '*.gif' -o -iname '*.jpg' \) -printf '%P\t%s\n' | sort | head -n 500
-            echo
-            echo '=== OFFLINE RESOURCE EXTENSIONS ==='
-            find "$WORK/jar" -type f | sed 's#^.*/##' | awk -F. 'NF>1{print "."tolower($NF)} NF==1{print "[no extension]"}' | sort | uniq -c | sort -nr | head -n 100
-            echo
-            echo '=== TEXT REFERENCES TO PART IDS IN SOURCE ==='
-            grep -RniE '(head|body|leg|fashion|part).*(230|231|232|233|234|235)|(230|231|232|233|234|235).*(head|body|leg|fashion|part)' "$SRC/src" --include='*.java' 2>/dev/null | head -n 500 || true
+            echo '=== JAVAP FOR LIKELY OFFLINE CLASSES ==='
+            cd "$WORK/jar"
+            for c in *.class; do
+              cls="${c%.class}"
+              if strings "$c" | grep -qiE '\.pak|offline/|packs'; then
+                echo "===== $cls ====="
+                javap -classpath "$WORK/jar" -c -p "$cls" 2>/dev/null | head -n 1200 || true
+              fi
+            done
           } > "$REPORT"
-      - name: Commit focused report
+      - name: Commit pack report
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/offline"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add obito_sakura_focus.txt
-          git commit -m 'chore: add focused Obito Sakura mapping' || exit 0
+          git add obito_sakura_pack.txt
+          git commit -m 'chore: inspect packed offline resources' || exit 0
           git push origin fix-obito-sakura

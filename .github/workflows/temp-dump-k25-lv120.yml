@@ -1,0 +1,27 @@
+name: Temporary dump k25 lv120
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-dump-k25-lv120.yml]
+permissions:
+  contents: write
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump k25 bytecode
+        run: |
+          unzip -p Nso_Offline_By_h0901.jar k25.class > /tmp/k25.class
+          javap -p -c /tmp/k25.class > lv120_k25_dump.txt
+          echo '' >> lv120_k25_dump.txt
+          echo '=== 1125-1130 constants ===' >> lv120_k25_dump.txt
+          grep -n -B12 -A25 -E '1125|1126|1127|1128|1129|1130' lv120_k25_dump.txt >> lv120_k25_dump.txt.tmp || true
+          cat lv120_k25_dump.txt.tmp >> lv120_k25_dump.txt || true
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lv120_k25_dump.txt
+          git commit -m "chore: dump lv120 book learning bytecode"
+          git push

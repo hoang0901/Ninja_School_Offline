@@ -1,0 +1,490 @@
+=== SOURCE item 1134-1139 ===
+1890:(1134, 'Sách võ công CUNG THUẬT', 27, 2, '', 110, 3509, -1, -1, 0),
+1891:(1135, 'Sách võ công QUẠT THUẬT', 27, 2, '', 110, 3510, -1, -1, 0),
+1892:(1136, 'Sách võ công TIÊU THUẬT', 27, 2, '', 110, 3511, -1, -1, 0),
+1893:(1137, 'Sách võ công KUNAI THUẬT', 27, 2, '', 110, 3512, -1, -1, 0),
+1894:(1138, 'Sách võ công ĐAO THUẬT', 27, 2, '', 110, 3513, -1, -1, 0),
+1895:(1139, 'Sách võ công KIẾM THUẬT', 27, 2, '', 110, 3514, -1, -1, 0),
+4366:(1134, '{\"w\":11,\"x\":270,\"h\":16,\"y\":232,\"id\":4}'),
+4367:(1135, '{\"w\":21,\"x\":261,\"h\":11,\"y\":230,\"id\":4}'),
+4368:(1136, '{\"w\":15,\"x\":259,\"h\":10,\"y\":231,\"id\":4}'),
+4369:(1137, '{\"w\":21,\"x\":260,\"h\":9,\"y\":236,\"id\":4}'),
+4370:(1138, '{\"w\":15,\"x\":262,\"h\":10,\"y\":233,\"id\":4}'),
+4371:(1139, '{\"w\":19,\"x\":260,\"h\":9,\"y\":234,\"id\":4}'),
+=== SOURCE pool SACH_VO_CONG_120 JSON ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/loai_khac/SACH_VO_CONG_120.json
+[
+    { "percent": 10, "id": 4 },
+	{ "percent": 10, "id": 4 }
+]
+=== SOURCE learn mapping ===
+            } else if (item.id == 553) {
+                templateId = 78;
+            } else if (item.id == 554) {
+                templateId = 75;
+            } else if (item.id == 555) {
+                templateId = 76;
+            } else if (item.id == 556) {
+                templateId = 74;
+            } else if (item.id == 557) {
+                templateId = 77;
+            } else if (item.id == 558) {
+                templateId = 79;
+            } else if (item.id == 559) {
+                templateId = 83;
+            } else if (item.id == 560) {
+                templateId = 81;
+            } else if (item.id == 561) {
+                templateId = 82;
+            } else if (item.id == 562) {
+                templateId = 80;
+            } else if (item.id == 563) {
+                templateId = 84;
+            } else if (item.id == 1139) {
+                templateId = 85;
+            } else if (item.id == 1136) {
+                templateId = 86;
+            } else if (item.id == 1137) {
+                templateId = 87;
+            } else if (item.id == 1134) {
+                templateId = 88;
+            } else if (item.id == 1138) {
+                templateId = 89;
+            } else if (item.id == 1135) {
+                templateId = 90;
+            }
+            for (Skill my : vSkill) {
+                if (my.template.id == templateId) {
+                    serverDialog("Chiêu này đã học!");
+                    return;
+                }
+            }
+            Skill skill = GameData.getInstance().getSkill(this.classId, templateId, 1);
+            if (skill != null) {
+                vSkill.add(skill);
+                if (skill.template.type == Skill.SKILL_AUTO_USE) {
+                    vSupportSkill.add(skill);
+                    setAbility();
+                } else if ((skill.template.type == Skill.SKILL_CLICK_USE_ATTACK
+                        || skill.template.type == Skill.SKILL_CLICK_LIVE
+                        || skill.template.type == Skill.SKILL_CLICK_USE_BUFF
+                        || skill.template.type == Skill.SKILL_CLICK_NPC)
+                        && (skill.template.maxPoint == 0 || (skill.template.maxPoint > 0 && skill.point > 0))) {
+
+                    vSkillFight.add(skill);
+                }
+                getService().useBookSkill((byte) item.index, (short) skill.id);
+=== SOURCE SQL lines templates 85-90 / skills ===
+347:(85, '[{\"w\":63,\"x\":0,\"h\":72,\"y\":74,\"id\":0},{\"w\":63,\"x\":63,\"h\":73,\"y\":0,\"id\":1},{\"w\":69,\"x\":0,\"h\":72,\"y\":146,\"id\":2},{\"w\":63,\"x\":63,\"h\":73,\"y\":73,\"id\":3},{\"w\":63,\"x\":0,\"h\":74,\"y\":0,\"id\":4}]', '[[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":0,\"flip\":0}],[{\"dx\":-33,\"dy\":-81,\"onTop\":1,\"id\":1,\"flip\":0}],[{\"dx\":-34,\"dy\":-78,\"onTop\":1,\"id\":2,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":3,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":4,\"flip\":0}]]', '[0,1,2,3,4]', '[[],[],[],[]]'),
+348:(86, '[{\"w\":63,\"x\":0,\"h\":72,\"y\":74,\"id\":0},{\"w\":63,\"x\":63,\"h\":73,\"y\":0,\"id\":1},{\"w\":69,\"x\":0,\"h\":72,\"y\":146,\"id\":2},{\"w\":63,\"x\":63,\"h\":73,\"y\":73,\"id\":3},{\"w\":63,\"x\":0,\"h\":74,\"y\":0,\"id\":4}]', '[[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":0,\"flip\":0}],[{\"dx\":-33,\"dy\":-81,\"onTop\":1,\"id\":1,\"flip\":0}],[{\"dx\":-34,\"dy\":-78,\"onTop\":1,\"id\":2,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":3,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":4,\"flip\":0}]]', '[0,0,0,1,1,1,2,2,2,3,3,3,4,4,4]', '[[],[],[],[]]'),
+349:(87, '[{\"w\":63,\"x\":0,\"h\":72,\"y\":74,\"id\":0},{\"w\":63,\"x\":63,\"h\":73,\"y\":0,\"id\":1},{\"w\":69,\"x\":0,\"h\":72,\"y\":146,\"id\":2},{\"w\":63,\"x\":63,\"h\":73,\"y\":73,\"id\":3},{\"w\":63,\"x\":0,\"h\":74,\"y\":0,\"id\":4}]', '[[{\"dx\":-33,\"dy\":-75,\"onTop\":1,\"id\":0,\"flip\":0}],[{\"dx\":-33,\"dy\":-77,\"onTop\":1,\"id\":1,\"flip\":0}],[{\"dx\":-34,\"dy\":-74,\"onTop\":1,\"id\":2,\"flip\":0}],[{\"dx\":-33,\"dy\":-75,\"onTop\":1,\"id\":3,\"flip\":0}],[{\"dx\":-33,\"dy\":-75,\"onTop\":1,\"id\":4,\"flip\":0}]]', '[0,0,0,1,1,1,2,2,2,3,3,3,4,4,4]', '[[],[],[],[]]'),
+350:(88, '[{\"w\":63,\"x\":0,\"h\":72,\"y\":74,\"id\":0},{\"w\":63,\"x\":63,\"h\":73,\"y\":0,\"id\":1},{\"w\":69,\"x\":0,\"h\":72,\"y\":146,\"id\":2},{\"w\":63,\"x\":63,\"h\":73,\"y\":73,\"id\":3},{\"w\":63,\"x\":0,\"h\":74,\"y\":0,\"id\":4}]', '[[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":0,\"flip\":0}],[{\"dx\":-33,\"dy\":-81,\"onTop\":1,\"id\":1,\"flip\":0}],[{\"dx\":-34,\"dy\":-78,\"onTop\":1,\"id\":2,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":3,\"flip\":0}],[{\"dx\":-33,\"dy\":-79,\"onTop\":1,\"id\":4,\"flip\":0}]]', '[0,1,2,3,4]', '[[],[],[],[]]'),
+351:(89, '[{\"w\":63,\"x\":0,\"h\":72,\"y\":73,\"id\":0},{\"w\":63,\"x\":0,\"h\":73,\"y\":0,\"id\":1},{\"w\":69,\"x\":63,\"h\":72,\"y\":73,\"id\":2},{\"w\":63,\"x\":63,\"h\":73,\"y\":0,\"id\":3}]', '[[{\"dx\":-33,\"dy\":-83,\"onTop\":1,\"id\":0,\"flip\":0}],[{\"dx\":-32,\"dy\":-85,\"onTop\":1,\"id\":1,\"flip\":0}],[{\"dx\":-34,\"dy\":-82,\"onTop\":1,\"id\":2,\"flip\":0}],[{\"dx\":-33,\"dy\":-83,\"onTop\":1,\"id\":3,\"flip\":0}]]', '[0,0,0,1,1,1,2,2,2,3,3,3]', '[[],[],[],[]]'),
+352:(90, '[{\"w\":37,\"x\":210,\"h\":23,\"y\":32,\"id\":0},{\"w\":37,\"x\":208,\"h\":23,\"y\":97,\"id\":1},{\"w\":57,\"x\":131,\"h\":23,\"y\":125,\"id\":2},{\"w\":57,\"x\":188,\"h\":23,\"y\":125,\"id\":3},{\"w\":77,\"x\":101,\"h\":29,\"y\":65,\"id\":4},{\"w\":77,\"x\":77,\"h\":28,\"y\":97,\"id\":5},{\"w\":93,\"x\":0,\"h\":33,\"y\":0,\"id\":6},{\"w\":93,\"x\":93,\"h\":33,\"y\":0,\"id\":7},{\"w\":93,\"x\":0,\"h\":32,\"y\":33,\"id\":8},{\"w\":22,\"x\":186,\"h\":32,\"y\":0,\"id\":9},{\"w\":93,\"x\":93,\"h\":32,\"y\":33,\"id\":10},{\"w\":77,\"x\":24,\"h\":30,\"y\":65,\"id\":11},{\"w\":24,\"x\":0,\"h\":32,\"y\":65,\"id\":12},{\"w\":77,\"x\":0,\"h\":30,\"y\":97,\"id\":13},{\"w\":70,\"x\":0,\"h\":28,\"y\":127,\"id\":14},{\"w\":25,\"x\":208,\"h\":32,\"y\":0,\"id\":15},{\"w\":70,\"x\":178,\"h\":28,\"y\":65,\"id\":16},{\"w\":54,\"x\":154,\"h\":26,\"y\":97,\"id\":17},{\"w\":24,\"x\":186,\"h\":32,\"y\":32,\"id\":18},{\"w\":54,\"x\":77,\"h\":26,\"y\":125,\"id\":19}]', '[[{\"dx\":-15,\"dy\":-17,\"onTop\":1,\"id\":0,\"flip\":0},{\"dx\":-15,\"dy\":-17,\"onTop\":0,\"id\":1,\"flip\":0}],[{\"dx\":-26,\"dy\":-15,\"onTop\":1,\"id\":2,\"flip\":0},{\"dx\":-26,\"dy\":-15,\"onTop\":0,\"id\":3,\"flip\":0}],[{\"dx\":-37,\"dy\":-18,\"onTop\":1,\"id\":4,\"flip\":0},{\"dx\":-37,\"dy\":-17,\"onTop\":0,\"id\":5,\"flip\":0}],[{\"dx\":-48,\"dy\":-21,\"onTop\":1,\"id\":6,\"flip\":0},{\"dx\":-48,\"dy\":-21,\"onTop\":0,\"id\":7,\"flip\":0}],[{\"dx\":-43,\"dy\":-21,\"onTop\":1,\"id\":8,\"flip\":0},{\"dx\":-23,\"dy\":-36,\"onTop\":1,\"id\":9,\"flip\":0},{\"dx\":-43,\"dy\":-21,\"onTop\":0,\"id\":10,\"flip\":0}],[{\"dx\":-36,\"dy\":-19,\"onTop\":1,\"id\":11,\"flip\":0},{\"dx\":-21,\"dy\":-37,\"onTop\":1,\"id\":12,\"flip\":0},{\"dx\":-36,\"dy\":-19,\"onTop\":0,\"id\":13,\"flip\":0}],[{\"dx\":-35,\"dy\":-18,\"onTop\":1,\"id\":14,\"flip\":0},{\"dx\":-22,\"dy\":-39,\"onTop\":1,\"id\":15,\"flip\":0},{\"dx\":-35,\"dy\":-18,\"onTop\":0,\"id\":16,\"flip\":0}],[{\"dx\":-28,\"dy\":-19,\"onTop\":1,\"id\":17,\"flip\":0},{\"dx\":-21,\"dy\":-37,\"onTop\":1,\"id\":18,\"flip\":0},{\"dx\":-28,\"dy\":-19,\"onTop\":0,\"id\":19,\"flip\":0}]]', '[0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7]', '[[],[],[],[]]'),
+840:(85, 'Sách võ công Ouchia', 27, 2, '', 10, 818, -1, -1, 0),
+841:(86, 'Sách võ công Suishou', 27, 2, '', 15, 818, -1, -1, 0),
+842:(87, 'Sách võ công Oouchia', 27, 2, '', 20, 818, -1, -1, 0),
+843:(88, 'Sách võ công Kusenmono', 27, 2, '', 25, 818, -1, -1, 0),
+844:(89, 'Sách võ công Bakkuuchiha', 27, 2, '', 30, 818, -1, -1, 0),
+845:(90, 'Sách võ công Hayatemi', 27, 2, '', 35, 818, -1, -1, 0),
+2113:(85, 8, 'Độ tinh luyện: #'),
+2114:(86, 8, 'Chính xác: +#'),
+2115:(87, 8, 'Tấn công: +#'),
+2116:(88, 8, 'Hỏa công: +#'),
+2117:(89, 8, 'Băng công: +#'),
+2118:(90, 8, 'Phong lôi: +#'),
+2401:(85, 'Cửa Phong', '[{\"x\":507,\"y\":522,\"templateId\":27,\"status\":1}]', '[{\"next\":82,\"minY\":0,\"minX\":348,\"maxY\":8,\"maxX\":382,\"x\":90,\"y\":312},{\"next\":88,\"minY\":564,\"minX\":536,\"maxY\":588,\"maxX\":572,\"x\":35,\"y\":72}]', '[{\"boss\":false,\"x\":365,\"y\":72,\"templateId\":74},{\"boss\":false,\"x\":338,\"y\":144,\"templateId\":74},{\"boss\":false,\"x\":373,\"y\":144,\"templateId\":74},{\"boss\":false,\"x\":387,\"y\":168,\"templateId\":74},{\"boss\":false,\"x\":290,\"y\":216,\"templateId\":74},{\"boss\":false,\"x\":332,\"y\":216,\"templateId\":74},{\"boss\":false,\"x\":417,\"y\":216,\"templateId\":74},{\"boss\":false,\"x\":452,\"y\":216,\"templateId\":74},{\"boss\":false,\"x\":265,\"y\":240,\"templateId\":74},{\"boss\":false,\"x\":350,\"y\":240,\"templateId\":74},{\"boss\":false,\"x\":435,\"y\":240,\"templateId\":74},{\"boss\":false,\"x\":465,\"y\":240,\"templateId\":74},{\"boss\":false,\"x\":295,\"y\":312,\"templateId\":74},{\"boss\":false,\"x\":490,\"y\":288,\"templateId\":74},{\"boss\":false,\"x\":510,\"y\":288,\"templateId\":74},{\"boss\":false,\"x\":540,\"y\":288,\"templateId\":74},{\"boss\":false,\"x\":415,\"y\":432,\"templateId\":74},{\"boss\":false,\"x\":135,\"y\":360,\"templateId\":74},{\"boss\":false,\"x\":201,\"y\":408,\"templateId\":74},{\"boss\":false,\"x\":240,\"y\":456,\"templateId\":74},{\"boss\":false,\"x\":290,\"y\":456,\"templateId\":74},{\"boss\":false,\"x\":325,\"y\":345,\"templateId\":74},{\"boss\":false,\"x\":373,\"y\":456,\"templateId\":74},{\"boss\":false,\"x\":422,\"y\":432,\"templateId\":74},{\"boss\":false,\"x\":465,\"y\":480,\"templateId\":74},{\"boss\":false,\"x\":136,\"y\":528,\"templateId\":74},{\"boss\":false,\"x\":305,\"y\":72,\"templateId\":74},{\"boss\":false,\"x\":67,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":105,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":145,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":200,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":310,\"y\":264,\"templateId\":74},{\"boss\":false,\"x\":245,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":230,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":390,\"y\":552,\"templateId\":74},{\"boss\":false,\"x\":440,\"y\":552,\"templateId\":74}]', 0, '[]', 2, 0, 4, '[]', '[]', '[]', '[]'),
+2402:(86, 'Cửa Băng', '[{\"x\":637,\"y\":240,\"templateId\":27,\"status\":1}]', '[{\"next\":83,\"minY\":420,\"minX\":0,\"maxY\":444,\"maxX\":24,\"x\":805,\"y\":96},{\"next\":89,\"minY\":228,\"minX\":721,\"maxY\":252,\"maxX\":745,\"x\":35,\"y\":288}]', '[{\"boss\":false,\"x\":45,\"y\":384,\"templateId\":79},{\"boss\":false,\"x\":90,\"y\":384,\"templateId\":79},{\"boss\":false,\"x\":141,\"y\":409,\"templateId\":79},{\"boss\":false,\"x\":151,\"y\":456,\"templateId\":79},{\"boss\":false,\"x\":171,\"y\":456,\"templateId\":79},{\"boss\":false,\"x\":220,\"y\":456,\"templateId\":79},{\"boss\":false,\"x\":269,\"y\":456,\"templateId\":79},{\"boss\":false,\"x\":325,\"y\":456,\"templateId\":79},{\"boss\":false,\"x\":250,\"y\":408,\"templateId\":79},{\"boss\":false,\"x\":400,\"y\":432,\"templateId\":79},{\"boss\":false,\"x\":430,\"y\":432,\"templateId\":79},{\"boss\":false,\"x\":500,\"y\":432,\"templateId\":79},{\"boss\":false,\"x\":545,\"y\":432,\"templateId\":79},{\"boss\":false,\"x\":610,\"y\":432,\"templateId\":79},{\"boss\":false,\"x\":210,\"y\":360,\"templateId\":79},{\"boss\":false,\"x\":125,\"y\":336,\"templateId\":79},{\"boss\":false,\"x\":85,\"y\":336,\"templateId\":79},{\"boss\":false,\"x\":218,\"y\":312,\"templateId\":79},{\"boss\":false,\"x\":135,\"y\":264,\"templateId\":79},{\"boss\":false,\"x\":257,\"y\":240,\"templateId\":79},{\"boss\":false,\"x\":222,\"y\":192,\"templateId\":79},{\"boss\":false,\"x\":250,\"y\":120,\"templateId\":79},{\"boss\":false,\"x\":455,\"y\":288,\"templateId\":79},{\"boss\":false,\"x\":495,\"y\":288,\"templateId\":79}]', 0, '[]', 3, 0, 4, '[]', '[]', '[]', '[]'),
+2403:(87, 'Cửa Sa Mạc', '[{\"x\":60,\"y\":192,\"templateId\":27,\"status\":1}]', '[{\"next\":90,\"minY\":180,\"minX\":0,\"maxY\":204,\"maxX\":24,\"x\":1045,\"y\":312},{\"next\":84,\"minY\":180,\"minX\":817,\"maxY\":204,\"maxX\":841,\"x\":35,\"y\":360}]', '[{\"boss\":false,\"x\":645,\"y\":192,\"templateId\":73},{\"boss\":false,\"x\":600,\"y\":192,\"templateId\":73},{\"boss\":false,\"x\":565,\"y\":192,\"templateId\":73},{\"boss\":false,\"x\":495,\"y\":240,\"templateId\":73},{\"boss\":false,\"x\":445,\"y\":240,\"templateId\":73},{\"boss\":false,\"x\":375,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":230,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":285,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":222,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":170,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":131,\"y\":216,\"templateId\":73},{\"boss\":false,\"x\":285,\"y\":216,\"templateId\":81},{\"boss\":false,\"x\":222,\"y\":216,\"templateId\":81},{\"boss\":false,\"x\":170,\"y\":216,\"templateId\":81},{\"boss\":false,\"x\":131,\"y\":216,\"templateId\":81}]', 0, '[]', 3, 0, 4, '[]', '[]', '[]', '[]'),
+2404:(88, 'Cửa Đồi Núi', '[{\"x\":497,\"y\":672,\"templateId\":27,\"status\":1}]', '[{\"next\":85,\"minY\":30,\"minX\":16,\"maxY\":54,\"maxX\":40,\"x\":510,\"y\":552},{\"next\":90,\"minY\":690,\"minX\":541,\"maxY\":714,\"maxX\":565,\"x\":35,\"y\":48}]', '[{\"boss\":false,\"x\":60,\"y\":168,\"templateId\":78},{\"boss\":false,\"x\":110,\"y\":168,\"templateId\":78},{\"boss\":false,\"x\":60,\"y\":264,\"templateId\":78},{\"boss\":false,\"x\":110,\"y\":264,\"templateId\":78},{\"boss\":false,\"x\":110,\"y\":408,\"templateId\":78},{\"boss\":false,\"x\":244,\"y\":312,\"templateId\":78},{\"boss\":false,\"x\":270,\"y\":312,\"templateId\":78},{\"boss\":false,\"x\":310,\"y\":312,\"templateId\":78},{\"boss\":false,\"x\":262,\"y\":384,\"templateId\":78},{\"boss\":false,\"x\":290,\"y\":384,\"templateId\":78},{\"boss\":false,\"x\":50,\"y\":480,\"templateId\":78},{\"boss\":false,\"x\":95,\"y\":480,\"templateId\":78},{\"boss\":false,\"x\":270,\"y\":480,\"templateId\":78},{\"boss\":false,\"x\":310,\"y\":480,\"templateId\":78},{\"boss\":false,\"x\":395,\"y\":456,\"templateId\":78},{\"boss\":false,\"x\":436,\"y\":432,\"templateId\":78},{\"boss\":false,\"x\":465,\"y\":432,\"templateId\":78},{\"boss\":false,\"x\":480,\"y\":576,\"templateId\":78},{\"boss\":false,\"x\":490,\"y\":624,\"templateId\":78},{\"boss\":false,\"x\":222,\"y\":216,\"templateId\":78},{\"boss\":false,\"x\":56,\"y\":576,\"templateId\":78},{\"boss\":false,\"x\":105,\"y\":576,\"templateId\":78},{\"boss\":false,\"x\":176,\"y\":696,\"templateId\":78},{\"boss\":false,\"x\":225,\"y\":696,\"templateId\":78},{\"boss\":false,\"x\":290,\"y\":696,\"templateId\":78},{\"boss\":false,\"x\":340,\"y\":696,\"templateId\":78},{\"boss\":false,\"x\":390,\"y\":696,\"templateId\":78},{\"boss\":false,\"x\":225,\"y\":696,\"templateId\":81},{\"boss\":false,\"x\":290,\"y\":696,\"templateId\":81},{\"boss\":false,\"x\":340,\"y\":696,\"templateId\":81},{\"boss\":false,\"x\":390,\"y\":696,\"templateId\":81}]', 0, '[]', 2, 0, 4, '[]', '[]', '[]', '[]'),
+2405:(89, 'Cửa Đầm Lầy', '[{\"x\":818,\"y\":216,\"templateId\":27,\"status\":1}]', '[{\"next\":86,\"minY\":276,\"minX\":0,\"maxY\":300,\"maxX\":24,\"x\":709,\"y\":240},{\"next\":90,\"minY\":252,\"minX\":938,\"maxY\":276,\"maxX\":962,\"x\":35,\"y\":312}]', '[{\"boss\":false,\"x\":111,\"y\":312,\"templateId\":75},{\"boss\":false,\"x\":295,\"y\":312,\"templateId\":75},{\"boss\":false,\"x\":322,\"y\":264,\"templateId\":75},{\"boss\":false,\"x\":71,\"y\":168,\"templateId\":75},{\"boss\":false,\"x\":113,\"y\":168,\"templateId\":75},{\"boss\":false,\"x\":250,\"y\":96,\"templateId\":75},{\"boss\":false,\"x\":386,\"y\":120,\"templateId\":75},{\"boss\":false,\"x\":410,\"y\":120,\"templateId\":75},{\"boss\":false,\"x\":410,\"y\":240,\"templateId\":75},{\"boss\":false,\"x\":450,\"y\":240,\"templateId\":75},{\"boss\":false,\"x\":560,\"y\":288,\"templateId\":75},{\"boss\":false,\"x\":686,\"y\":312,\"templateId\":75},{\"boss\":false,\"x\":756,\"y\":264,\"templateId\":75},{\"boss\":false,\"x\":854,\"y\":312,\"templateId\":75},{\"boss\":false,\"x\":560,\"y\":288,\"templateId\":81},{\"boss\":false,\"x\":686,\"y\":312,\"templateId\":81},{\"boss\":false,\"x\":756,\"y\":264,\"templateId\":81},{\"boss\":false,\"x\":854,\"y\":312,\"templateId\":81}]', 0, '[]', 3, 0, 4, '[]', '[]', '[]', '[]'),
+2406:(90, 'Cửa Bùa Chú', '[]', '[{\"next\":89,\"minY\":300,\"minX\":0,\"maxY\":324,\"maxX\":24,\"x\":925,\"y\":264},{\"next\":87,\"minY\":300,\"minX\":1057,\"maxY\":324,\"maxX\":1081,\"x\":35,\"y\":192},{\"next\":88,\"minY\":0,\"minX\":35,\"maxY\":6,\"maxX\":57,\"x\":515,\"y\":672}]', '[{\"boss\":false,\"x\":589,\"y\":312,\"templateId\":82}]', 0, '[]', 1, 0, 4, '[]', '[]', '[]', '[]'),
+2681:(85, 'Ong đất', 45, 0, 4, 147470, 33, 1, 0, 3, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+2682:(86, 'Bọ ngựa ma', 45, 0, 1, 154140, 33, 1, 0, 3, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+2683:(87, 'Kỳ đà núi', 45, 0, 1, 164060, 33, 1, 0, 3, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+2684:(88, 'Ninja hắc ám', 39, 0, 1, 20350, 33, 1, 0, 4, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+2685:(89, 'Thiên vương', 49, 0, 1, 41030, 33, 1, 0, 4, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+2686:(90, 'Dơi xám', 0, 0, 4, 15350, 33, 1, 0, 3, '[]', '[]', '[]', '[]', '[]', '[]', '[]'),
+3106:(85, '[{\"dx\":-3,\"dy\":-40,\"id\":1390},{\"dx\":-1,\"dy\":-45,\"id\":1391},{\"dx\":-4,\"dy\":-31,\"id\":1390},{\"dx\":-1,\"dy\":-30,\"id\":1391},{\"dx\":0,\"dy\":-14,\"id\":305},{\"dx\":0,\"dy\":-24,\"id\":1392},{\"dx\":-1,\"dy\":-26,\"id\":1393},{\"dx\":1,\"dy\":-24,\"id\":1394},{\"dx\":-1,\"dy\":-16,\"id\":1395},{\"dx\":3,\"dy\":-23,\"id\":1386},{\"dx\":0,\"dy\":-13,\"id\":1387}]'),
+3107:(86, '[{\"dx\":0,\"dy\":0,\"id\":457},{\"dx\":0,\"dy\":0,\"id\":458},{\"dx\":0,\"dy\":0,\"id\":459},{\"dx\":2,\"dy\":-1,\"id\":1396},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":-13,\"dy\":-22,\"id\":457},{\"dx\":-13,\"dy\":-22,\"id\":458},{\"dx\":-13,\"dy\":-22,\"id\":459},{\"dx\":-13,\"dy\":-22,\"id\":1396},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":13,\"dy\":-25,\"id\":457},{\"dx\":13,\"dy\":-25,\"id\":458},{\"dx\":13,\"dy\":-25,\"id\":459},{\"dx\":13,\"dy\":-25,\"id\":1396},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+3108:(87, '[{\"dx\":0,\"dy\":0,\"id\":1398},{\"dx\":10,\"dy\":0,\"id\":1399},{\"dx\":19,\"dy\":-8,\"id\":1400},{\"dx\":25,\"dy\":-7,\"id\":1401},{\"dx\":39,\"dy\":-10,\"id\":1402},{\"dx\":38,\"dy\":-13,\"id\":1401},{\"dx\":42,\"dy\":-13,\"id\":1400},{\"dx\":53,\"dy\":-13,\"id\":1402}]'),
+3109:(88, '[{\"dx\":0,\"dy\":0,\"id\":1398},{\"dx\":0,\"dy\":0,\"id\":1399},{\"dx\":0,\"dy\":-10,\"id\":1392},{\"dx\":0,\"dy\":-7,\"id\":1393},{\"dx\":1,\"dy\":-5,\"id\":1394},{\"dx\":0,\"dy\":-1,\"id\":1395},{\"dx\":0,\"dy\":0,\"id\":1386},{\"dx\":1,\"dy\":0,\"id\":1387},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+3110:(89, '[{\"dx\":0,\"dy\":0,\"id\":1398},{\"dx\":0,\"dy\":0,\"id\":1399},{\"dx\":-16,\"dy\":-5,\"id\":1400},{\"dx\":-18,\"dy\":-4,\"id\":1401},{\"dx\":0,\"dy\":0,\"id\":1402},{\"dx\":-24,\"dy\":-5,\"id\":1400},{\"dx\":-28,\"dy\":-4,\"id\":1401},{\"dx\":-37,\"dy\":-13,\"id\":1402}]'),
+3111:(90, '[{\"dx\":18,\"dy\":-3,\"id\":1450},{\"dx\":18,\"dy\":-3,\"id\":1451},{\"dx\":28,\"dy\":-3,\"id\":1450},{\"dx\":28,\"dy\":-3,\"id\":1451},{\"dx\":38,\"dy\":-3,\"id\":1450},{\"dx\":38,\"dy\":-3,\"id\":1451},{\"dx\":46,\"dy\":-5,\"id\":305},{\"dx\":47,\"dy\":-5,\"id\":1452},{\"dx\":48,\"dy\":-7,\"id\":1399},{\"dx\":47,\"dy\":-4,\"id\":1453},{\"dx\":48,\"dy\":-5,\"id\":1454},{\"dx\":46,\"dy\":-2,\"id\":1455}]'),
+3316:(85, '{\"w\":20,\"x\":135,\"h\":10,\"y\":30,\"id\":0}'),
+3317:(86, '{\"w\":14,\"x\":211,\"h\":10,\"y\":166,\"id\":0}'),
+3318:(87, '{\"w\":21,\"x\":136,\"h\":10,\"y\":70,\"id\":0}'),
+3319:(88, '{\"w\":16,\"x\":162,\"h\":10,\"y\":206,\"id\":0}'),
+3320:(89, '{\"w\":11,\"x\":108,\"h\":14,\"y\":51,\"id\":0}'),
+3321:(90, '{\"w\":13,\"x\":95,\"h\":14,\"y\":51,\"id\":0}'),
+6528:(85, 2, '[{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":-3,\"dy\":1,\"id\":861},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6529:(86, 0, '[{\"dx\":2,\"dy\":2,\"id\":864},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6530:(87, 1, '[{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":-2,\"id\":865},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6531:(88, 2, '[{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":1,\"dy\":-1,\"id\":866},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6532:(89, 0, '[{\"dx\":2,\"dy\":3,\"id\":1057},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6533:(90, 1, '[{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":2,\"dy\":0,\"id\":1058},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0},{\"dx\":0,\"dy\":0,\"id\":0}]'),
+6949:(88, 'moneykichhoat', '20000'),
+6950:(89, 'chietkhau_card', '20'),
+6951:(90, 'chietkhau_momo', '0'),
+7474:(85, 9, 2, 53, 94, 750, 4, 65, 25, '[{\"param\":5,\"id\":24},{\"param\":150,\"id\":0},{\"param\":350,\"id\":2},{\"param\":240,\"id\":11},{\"param\":100,\"id\":33}]'),
+7475:(86, 9, 3, 54, 96, 700, 5, 65, 25, '[{\"param\":5,\"id\":24},{\"param\":160,\"id\":0},{\"param\":400,\"id\":2},{\"param\":260,\"id\":11},{\"param\":100,\"id\":33}]'),
+7476:(87, 9, 3, 55, 98, 650, 6, 65, 25, '[{\"param\":6,\"id\":24},{\"param\":170,\"id\":0},{\"param\":450,\"id\":2},{\"param\":280,\"id\":11},{\"param\":105,\"id\":33}]'),
+7477:(88, 9, 3, 56, 100, 600, 7, 65, 25, '[{\"param\":6,\"id\":24},{\"param\":180,\"id\":0},{\"param\":500,\"id\":2},{\"param\":300,\"id\":11},{\"param\":105,\"id\":33}]'),
+7478:(89, 9, 3, 57, 102, 550, 8, 65, 25, '[{\"param\":7,\"id\":24},{\"param\":190,\"id\":0},{\"param\":550,\"id\":2},{\"param\":320,\"id\":11},{\"param\":110,\"id\":33}]'),
+7479:(90, 9, 4, 58, 104, 500, 9, 65, 25, '[{\"param\":7,\"id\":24},{\"param\":200,\"id\":0},{\"param\":600,\"id\":2},{\"param\":340,\"id\":11},{\"param\":115,\"id\":33}]'),
+8691:(85, 229, 0, 14, 0, 0, 20, 0, 2592000000, '[]'),
+8692:(86, 241, 0, 14, 0, 0, 30, 0, 2592000000, '[]'),
+8693:(87, 240, 0, 14, 0, 0, 30, 0, 2592000000, '[]'),
+8694:(88, 36, 0, 14, 0, 0, 20, 0, 2592000000, '[]'),
+8695:(89, 37, 0, 14, 0, 0, 50, 0, 2592000000, '[]'),
+8696:(90, 248, 0, 14, 0, 0, 10, 0, 2592000000, '[]'),
+7388:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+7726:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+8106:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+8362:INSERT INTO `skill_option` (`id`, `name`) VALUES
+8456:INSERT INTO `skill_template` (`id`, `class`, `name`, `max_point`, `type`, `icon`, `description`) VALUES
+=== JAR table rows ===
+TABLE item OK
+item 1134 nums=[1134, 0, 27, 2, 0, 10, 2163, -1, -1, 1] strs=[null, Gạo, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+item 1135 nums=[1135, 0, 27, 2, 0, 10, 1271, -1, -1, 1] strs=[null, Muối, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+item 1136 nums=[1136, 0, 27, 2, 0, 10, 1269, -1, -1, 1] strs=[null, Bánh, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+item 1137 nums=[1137, 0, 27, 2, 0, 10, 1278, -1, -1, 1] strs=[null, Tiền giấy, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+item 1138 nums=[1138, 0, 27, 2, 0, 10, 2044, -1, -1, 1] strs=[null, Mâm cúng, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+item 1139 nums=[1139, 0, 27, 2, 0, 10, 2171, -1, -1, 1] strs=[null, Mâm cúng bạc, null, null, Vật phẩm sự kiện Tháng 7, null, null, null, null, null]
+TABLE skill OK
+skill 85 nums=[85, 9, 2, 53, 94, 750, 4, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":5,"id":24},{"param":150,"id":0},{"param":350,"id":2},{"param":240,"id":11},{"param":100,"id":33}]]
+skill 86 nums=[86, 9, 3, 54, 96, 700, 5, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":5,"id":24},{"param":160,"id":0},{"param":400,"id":2},{"param":260,"id":11},{"param":100,"id":33}]]
+skill 87 nums=[87, 9, 3, 55, 98, 650, 6, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":6,"id":24},{"param":170,"id":0},{"param":450,"id":2},{"param":280,"id":11},{"param":105,"id":33}]]
+skill 88 nums=[88, 9, 3, 56, 100, 600, 7, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":6,"id":24},{"param":180,"id":0},{"param":500,"id":2},{"param":300,"id":11},{"param":105,"id":33}]]
+skill 89 nums=[89, 9, 3, 57, 102, 550, 8, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":7,"id":24},{"param":190,"id":0},{"param":550,"id":2},{"param":320,"id":11},{"param":110,"id":33}]]
+skill 90 nums=[90, 9, 4, 58, 104, 500, 9, 65, 25, 0] strs=[null, null, null, null, null, null, null, null, null, [{"param":7,"id":24},{"param":200,"id":0},{"param":600,"id":2},{"param":340,"id":11},{"param":115,"id":33}]]
+TABLE skill_template OK
+skill_template 85 nums=[85, 1, 0, 1, 1, 26017, 0, 0] strs=[null, null, Hoả Hồn Long Trảm, null, null, null, Bí thuật định hình Chakra - Tạo ra những thanh kiếm năng lượng nhắm thẳng đến mục tiêu, [{"skillId":955,"maxFight":0,"dx":0,"level":110,"dy":0,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":0},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":956,"maxFight":6,"dx":120,"level":120,"dy":46,"manaUse":150,"options":[{"param":11,"id":24},{"param":550,"id":0},{"param":5500,"id":2},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+skill_template 86 nums=[86, 2, 0, 1, 1, 26018, 0, 0] strs=[null, null, Tiêu Hoả Phi Long, null, null, null, Bí thuật chuyển hóa Chakra thành chân hỏa - Phóng ra những lam hỏa tiêu cực mạnh về phía mục tiêu, [{"skillId":957,"maxFight":0,"dx":150,"level":120,"dy":150,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":1},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":958,"maxFight":6,"dx":150,"level":120,"dy":150,"manaUse":300,"options":[{"param":9,"id":24},{"param":470,"id":1},{"param":5000,"id":2},{"param":750,"id":11},{"param":300,"id":33}],"point":1,"coolDown":350}]]
+skill_template 87 nums=[87, 3, 0, 1, 1, 26019, 0, 0] strs=[null, null, Băng Hổ Bạch Long, null, null, null, Băng thuật tối thượng - Tạo ra hàng loạt vụ nổ năng lượng nhắm thẳng vào mục tiêu, [{"skillId":959,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":0},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":960,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":140,"options":[{"param":10,"id":25},{"param":550,"id":0},{"param":5500,"id":3},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+skill_template 88 nums=[88, 4, 0, 1, 1, 26020, 0, 0] strs=[null, null, Tiễn Ưng Vĩnh Cửu, null, null, null, Đưa Băng Chakra vào mũi tên, khi chạm đến mục tiêu sẽ phát nổ tạo ra một quả cầu năng lượng nhắm thẳng đến mục tiêu, [{"skillId":961,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":1},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":962,"maxFight":7,"dx":140,"level":120,"dy":140,"manaUse":280,"options":[{"param":11,"id":25},{"param":520,"id":1},{"param":5000,"id":3},{"param":780,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+skill_template 89 nums=[89, 5, 0, 1, 1, 26021, 0, 0] strs=[null, null, Vũ Đao Thiên Lôi, null, null, null, Phong lôi thần thuật, Triệu hồi thiên lôi nhắm thẳng vào mục tiêu gây 1 lượng sát thương cực lớn, [{"skillId":963,"maxFight":0,"dx":60,"level":120,"dy":60,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":0},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":964,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":160,"options":[{"param":10,"id":26},{"param":550,"id":0},{"param":5500,"id":4},{"param":800,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+skill_template 90 nums=[90, 6, 0, 1, 1, 26022, 0, 0] strs=[null, null, Thuật Phiến Cuồng Phong, null, null, null, Phiến thuật Phong Lôi - Triệu hồi thiên lôi tấn công thẳng vào mục tiêu gây ra sát thương cực lớn, [{"skillId":965,"maxFight":0,"dx":120,"level":120,"dy":100,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":1},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":966,"maxFight":7,"dx":120,"level":120,"dy":100,"manaUse":300,"options":[{"param":11,"id":26},{"param":580,"id":1},{"param":5000,"id":4},{"param":780,"id":11},{"param":350,"id":33}],"point":1,"coolDown":330}]]
+TABLE nj_skill OK
+nj_skill 85 NULL
+nj_skill 86 NULL
+nj_skill 87 NULL
+nj_skill 88 NULL
+nj_skill 89 NULL
+nj_skill 90 NULL
+TABLE nclass OK
+nclass 85 ERR java.lang.reflect.InvocationTargetException
+nclass 86 ERR java.lang.reflect.InvocationTargetException
+nclass 87 ERR java.lang.reflect.InvocationTargetException
+nclass 88 ERR java.lang.reflect.InvocationTargetException
+nclass 89 ERR java.lang.reflect.InvocationTargetException
+nclass 90 ERR java.lang.reflect.InvocationTargetException
+=== JAR classes with learn/book messages and 1134-1139 ===
+/home/runner/work/_temp/8409cd05-5d9b-4bee-acfb-f397cb4fd588.sh: line 34: printf: write error: Broken pipe
+/home/runner/work/_temp/8409cd05-5d9b-4bee-acfb-f397cb4fd588.sh: line 34: printf: write error: Broken pipe
+===== k8 =====
+292-     232: ireturn
+293-     233: ldc           #54                 // String Phần thưởng
+294-     235: invokestatic  #160                // Method g:()Ljava/lang/String;
+295-     238: invokestatic  #102                // Method DoHoang091.a:(Ljava/lang/String;Ljava/lang/String;)V
+296-     241: iconst_1
+297-     242: ireturn
+298-     243: ldc           #48                 // String Hướng Dẫn
+299-     245: invokestatic  #158                // Method e:()Ljava/lang/String;
+300-     248: invokestatic  #102                // Method DoHoang091.a:(Ljava/lang/String;Ljava/lang/String;)V
+301-     251: iconst_1
+302-     252: ireturn
+303-     253: iconst_0
+304-     254: ireturn
+305-
+306-  static boolean a(int, java.lang.String) throws java.lang.Exception;
+307-    Code:
+308-       0: iload_0
+309-       1: sipush        9999
+310-       4: if_icmpne     13
+311-       7: getstatic     #98                 // Field N:I
+312-      10: ifge          15
+313-      13: iconst_0
+314-      14: ireturn
+315-      15: getstatic     #98                 // Field N:I
+316-      18: istore_2
+317-      19: getstatic     #99                 // Field O:I
+318-      22: istore_3
+319-      23: iconst_m1
+320-      24: putstatic     #98                 // Field N:I
+321-      27: iconst_m1
+322-      28: putstatic     #99                 // Field O:I
+323-      31: iload_3
+324-      32: invokestatic  #105                // Method DoHoang091.s:()I
+325-      35: if_icmpne     49
+326-      38: aload_1
+327-      39: ifnull        49
+328-      42: aload_1
+329-      43: invokevirtual #123                // Method java/lang/String.length:()I
+330-      46: ifne          51
+331-      49: iconst_1
+332-      50: ireturn
+333-      51: iload_2
+334-      52: aload_1
+335-      53: invokestatic  #120                // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+336-      56: invokestatic  #152                // Method b:(II)V
+337-      59: goto          68
+338-      62: pop
+339-      63: ldc           #45                 // String Dữ liệu nhập không hợp lệ.
+340-      65: invokestatic  #100                // Method DoHoang091.a:(Ljava/lang/String;)V
+341-      68: iconst_1
+342-      69: ireturn
+343-    Exception table:
+344-       from    to  target type
+345-          51    59    62   Class java/lang/NumberFormatException
+346-
+347-  static void b(int, int) throws java.lang.Exception;
+348-    Code:
+349-       0: iload_0
+350-       1: tableswitch   { // 0 to 3
+351-                     0: 32
+352-                     1: 89
+353-                     2: 146
+354-                     3: 203
+355-               default: 230
+356-          }
+357-      32: iload_1
+358-      33: iconst_4
+359-      34: newarray       int
+360-      36: dup
+361-      37: iconst_0
+362:      38: sipush        1134
+363-      41: iastore
+364-      42: dup
+365-      43: iconst_1
+366:      44: sipush        1136
+367-      47: iastore
+368-      48: dup
+369-      49: iconst_2
+370:      50: sipush        1135
+371-      53: iastore
+372-      54: dup
+373-      55: iconst_3
+374:      56: sipush        1137
+375-      59: iastore
+376-      60: iconst_4
+377-      61: newarray       int
+378-      63: dup
+379-      64: iconst_0
+380-      65: iconst_5
+381-      66: iastore
+382-      67: dup
+383-      68: iconst_1
+384-      69: iconst_5
+385-      70: iastore
+386-      71: dup
+387-      72: iconst_2
+388-      73: iconst_5
+389-      74: iastore
+390-      75: dup
+391-      76: iconst_3
+392-      77: iconst_5
+393-      78: iastore
+394:      79: sipush        1138
+395-      82: iconst_0
+396-      83: invokestatic  #148                // Method a:(I[I[IIZ)V
+397-      86: goto          230
+398-      89: iload_1
+399-      90: iconst_4
+400-      91: newarray       int
+401-      93: dup
+402-      94: iconst_0
+403:      95: sipush        1134
+404-      98: iastore
+405-      99: dup
+406-     100: iconst_1
+407:     101: sipush        1136
+408-     104: iastore
+409-     105: dup
+410-     106: iconst_2
+411:     107: sipush        1135
+412-     110: iastore
+413-     111: dup
+414-     112: iconst_3
+415:     113: sipush        1137
+416-     116: iastore
+417-     117: iconst_4
+418-     118: newarray       int
+419-     120: dup
+420-     121: iconst_0
+421-     122: iconst_3
+422-     123: iastore
+423-     124: dup
+424-     125: iconst_1
+425-     126: iconst_4
+426-     127: iastore
+427-     128: dup
+428-     129: iconst_2
+429-     130: iconst_3
+430-     131: iastore
+431-     132: dup
+432-     133: iconst_3
+433-     134: iconst_4
+434-     135: iastore
+435:     136: sipush        1139
+436-     139: iconst_0
+437-     140: invokestatic  #148                // Method a:(I[I[IIZ)V
+438-     143: goto          230
+439-     146: iload_1
+440-     147: iconst_4
+441-     148: newarray       int
+442-     150: dup
+443-     151: iconst_0
+444:     152: sipush        1134
+445-     155: iastore
+446-     156: dup
+447-     157: iconst_1
+448:     158: sipush        1136
+449-     161: iastore
+450-     162: dup
+451-     163: iconst_2
+452:     164: sipush        1135
+453-     167: iastore
+454-     168: dup
+455-     169: iconst_3
+456:     170: sipush        1137
+457-     173: iastore
+458-     174: iconst_4
+459-     175: newarray       int
+460-     177: dup
+461-     178: iconst_0
+462-     179: iconst_4
+463-     180: iastore
+464-     181: dup
+465-     182: iconst_1
+466-     183: iconst_3
+467-     184: iastore
+468-     185: dup
+469-     186: iconst_2
+470-     187: iconst_4
+471-     188: iastore
+472-     189: dup
+473-     190: iconst_3
+474-     191: iconst_3
+475-     192: iastore
+476-     193: sipush        1140
+477-     196: iconst_1
+478-     197: invokestatic  #148                // Method a:(I[I[IIZ)V
+479-     200: goto          230
+480-     203: iload_1
+481-     204: iconst_1
+482-     205: newarray       int
+483-     207: dup
+484-     208: iconst_0
+485-     209: sipush        1141
+486-     212: iastore
+487-     213: iconst_1
+488-     214: newarray       int
+489-     216: dup
+490-     217: iconst_0
+491-     218: iconst_2
+492-     219: iastore
+493-     220: sipush        1143
+494-     223: iconst_0
+495-     224: invokestatic  #148                // Method a:(I[I[IIZ)V
+496-     227: goto          230
+497-     230: return
+498-
+499-  static boolean c(int, int) throws java.lang.Exception;
+500-    Code:
+501-       0: iload_1
+502-       1: tableswitch   { // 1138 to 1144
+503-                  1138: 44
+504-                  1139: 52
+505-                  1140: 60
+506-                  1141: 76
+507-                  1142: 76
+508-                  1143: 60
+509-                  1144: 68
+510-               default: 76
+511-          }
+512-      44: iload_0
+513-      45: iload_1
+514-      46: ldc           #41                 // String COHON_MAM
+515-      48: invokestatic  #146                // Method a:(IILjava/lang/String;)Z
+516-      51: ireturn
+517-      52: iload_0
+518-      53: iload_1
+519-      54: ldc           #46                 // String EVENT_COIN
+520-      56: invokestatic  #146                // Method a:(IILjava/lang/String;)Z
+521-      59: ireturn
+522-      60: iload_0
+523-      61: iload_1
+524-      62: ldc           #39                 // String COHON_GOLD2
+525-      64: invokestatic  #146                // Method a:(IILjava/lang/String;)Z
+526-      67: ireturn
+527-      68: iload_0
+528-      69: iload_1
+529-      70: ldc           #40                 // String COHON_LUCKY
+530-      72: invokestatic  #146                // Method a:(IILjava/lang/String;)Z
+531-      75: ireturn
+532-      76: iconst_0
+533-      77: ireturn
+534-
+535-  static void a(int, short, short) throws java.lang.Exception;
+536-    Code:
+537-       0: iload_0
+538-       1: invokestatic  #134                // Method k10.d:(I)Z
+539-       4: ifne          8
+540-       7: return
+541-       8: ldc           #42                 // String COHON_MONSTER
+542-      10: invokestatic  #149                // Method a:(Ljava/lang/String;)I
+543-      13: istore_3
+544-      14: iload_3
+545-      15: ifge          19
+546-      18: return
+547-      19: invokestatic  #143                // Method k2e.s:()I
+548-      22: ifle          37
+549-      25: iload_3
+550-      26: iconst_1
+551-      27: iconst_0
+552-      28: iconst_0
+553-      29: iconst_0
+554-      30: invokestatic  #136                // Method k16.a:(IIZBB)I
+555-      33: iflt          37
+556-      36: return
+557-      37: iload_3
+558-      38: iload_1
+559-      39: iload_2
+560-      40: invokestatic  #161                // Method kb.b:(ISS)V
+561-      43: return
+562-
+563-  static void b(int, short, short);
+564-    Code:
+565-       0: return
+566-
+567-  static int b(int);
+568-    Code:
+569-       0: iload_0
+570-       1: iflt          9
+571-       4: iload_0
+572-       5: iconst_3
+573-       6: if_icmplt     11
+574-       9: iconst_0
+575-      10: ireturn
+576-      11: invokestatic  #154                // Method c:()V
+577-      14: getstatic     #96                 // Field L:[I
+578-      17: invokestatic  #150                // Method b:()I
+579-      20: iload_0
+580-      21: iadd
+581-      22: iaload
+582-      23: ireturn
+583-
+584-  static void a();
+585-    Code:
+586-       0: iconst_m1
+587-       1: putstatic     #98                 // Field N:I
+588-       4: iconst_m1
+589-       5: putstatic     #99                 // Field O:I
+590-       8: aconst_null
+591-       9: putstatic     #96                 // Field L:[I
+592-      12: iconst_0
+593-      13: putstatic     #97                 // Field M:Z
+594-      16: return
+595-
+596-  private static void b(int, java.lang.String) throws java.lang.Exception;

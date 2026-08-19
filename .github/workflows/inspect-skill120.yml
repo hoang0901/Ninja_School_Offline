@@ -16,3 +16,40 @@ jobs:
           set -euo pipefail
           LOG="$GITHUB_WORKSPACE/skill120_report.txt"
           exec > >(tee "$LOG") 2>&1
+          git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git /tmp/ref >/dev/null 2>&1
+          ROOT=/tmp/ref/NinjaSchoolOffline_by_dohoang091
+          SRC="$ROOT/src/main/java"
+          echo '=== SOURCE SACH_VO_CONG_120 ==='
+          grep -RIn --include='*.java' -E 'SACH_VO_CONG_120|skill.?120|level.?120|120.*skill|skill.*120' "$SRC/Exe_Z" | head -n 500 || true
+          echo '=== SOURCE learning/check keywords ==='
+          grep -RIn --include='*.java' -E 'learnSkill|skillLearn|isLearn|da hoc|đã học|chưa học|chua hoc|SkillTemplate|SkillManager|skills\[' "$SRC/Exe_Z" | head -n 700 || true
+          echo '=== SOURCE item 838 / book 120 ==='
+          grep -RIn --include='*.java' -E '\b838\b|SACH_VO_CONG_120' "$SRC/Exe_Z" | head -n 300 || true
+          grep -RIn --include='*.sql' -E '\(838[,)]|Sách võ công 120|Sach vo cong 120|SACH_VO_CONG_120' "$ROOT/SQL" | head -n 100 || true
+          echo '=== SOURCE skill SQL rows level 120 ==='
+          grep -RIn --include='*.sql' -E '120' "$ROOT/SQL" | grep -Ei 'skill|ky nang|kỹ năng' | head -n 250 || true
+
+          echo '=== JAR candidate classes strings ==='
+          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
+          cd /tmp/jar
+          for c in *.class; do
+            s=$(strings "$c" | grep -Ei '120|skill|học|hoc|SACH_VO_CONG' | head -n 30 || true)
+            if [ -n "$s" ]; then echo "===== ${c%.class} ====="; echo "$s"; fi
+          done | head -n 1200
+          echo '=== JAR bytecode constants 838/120 and messages ==='
+          for c in *.class; do
+            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
+            if printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(838|120)|bipush[[:space:]]+120'; then
+              echo "===== ${c%.class} ====="
+              printf '%s\n' "$j" | grep -n -B35 -A70 -E 'sipush[[:space:]]+(838|120)|bipush[[:space:]]+120' | head -n 500 || true
+            fi
+          done | head -n 5000
+      - name: Commit report
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add skill120_report.txt || true
+          git commit -m 'chore: inspect skill 120 state flow' || exit 0
+          git push origin fix-skill120-learning

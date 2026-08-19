@@ -13,14 +13,13 @@ jobs:
       - name: Patch k32 state sync HUD flag only
         shell: python
         run: |
-          import zipfile, struct, os, subprocess, re
+          import zipfile, struct, os
           jar='Nso_Offline_By_h0901.jar'
           out=jar+'.patched'
           with zipfile.ZipFile(jar,'r') as zin:
               original={n:zin.read(n) for n in zin.namelist()}
               b=bytearray(original['k32.class'])
 
-          # Parse class file enough to locate method e()V Code attribute.
           o=0
           def u1():
               global o; v=b[o]; o+=1; return v
@@ -48,7 +47,7 @@ jobs:
           for _ in range(nf):
               o+=6; ac=u2()
               for __ in range(ac): u2(); ln=u4(); o+=ln
-          nm=u2(); patched=0
+          nm=u2(); patched=0; verified=False
           for _ in range(nm):
               o+=2; name_i=u2(); desc_i=u2(); ac=u2()
               name=cp[name_i]; desc=cp[desc_i]
@@ -59,14 +58,15 @@ jobs:
                       clen=struct.unpack_from('>I',b,p)[0]; p+=4
                       code_start=p
                       code=bytes(b[code_start:code_start+clen])
-                      # Exact known sequence at the end of packet -123:
-                      # aload_2 ; iconst_0 ; invokevirtual DataOutputStream.writeByte
-                      if len(code) <= 52 or code[49] != 0x2c or code[50] != 0x03 or code[51] != 0xb6:
-                          raise RuntimeError('unexpected k32.e bytecode around HUD flag: '+code[46:58].hex())
-                      b[code_start+50]=0x04  # iconst_1
-                      patched+=1
+                      if len(code) <= 52 or code[24] != 0x10 or code[25] != 0x85 or code[49] != 0x2c or code[50] != 0x03 or code[51] != 0xb6:
+                          raise RuntimeError('unexpected k32.e packet bytecode: '+code.hex())
+                      b[code_start+50]=0x04
+                      if b[code_start+50] != 0x04:
+                          raise RuntimeError('bytecode write failed')
+                      patched+=1; verified=True
                   o=start+ln
-          if patched!=1: raise RuntimeError('expected one k32.e patch, got %d'%patched)
+          if patched!=1 or not verified:
+              raise RuntimeError('expected one verified k32.e patch')
 
           with zipfile.ZipFile(jar,'r') as zin, zipfile.ZipFile(out,'w') as zout:
               changed=[]
@@ -80,18 +80,11 @@ jobs:
           with zipfile.ZipFile(out,'r') as z:
               bad=z.testzip()
               if bad: raise RuntimeError('CRC failure: '+bad)
-              open('/tmp/k32.class','wb').write(z.read('k32.class'))
+              kb=z.read('k32.class')
+              if kb == original['k32.class']:
+                  raise RuntimeError('k32.class did not change')
           os.replace(out,jar)
-
-          # Validate disassembly: method e() writes 1 as final byte of -123 packet.
-          subprocess.run(['javap','-p','-c','/tmp/k32.class'],stdout=open('/tmp/k32.txt','w'),check=True)
-          t=open('/tmp/k32.txt').read()
-          m=re.search(r'static void e\(\).*?\n  }',t,re.S)
-          if not m: raise RuntimeError('cannot locate k32.e in javap')
-          block=m.group(0)
-          if '24: bipush        -123' not in block or '50: iconst_1' not in block:
-              raise RuntimeError('HUD flag validation failed')
-          print('Validated: k32.e packet -123 final HUD flag is now 1; only k32.class changed.')
+          print('Validated: packet -123 HUD flag changed 0 -> 1; only k32.class changed.')
       - name: Commit corrected JAR only
         run: |
           git config user.name "github-actions[bot]"

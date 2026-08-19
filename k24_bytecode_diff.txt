@@ -1,0 +1,20 @@
+--- /tmp/k24_before.txt	2026-08-19 16:42:27.982015496 +0000
++++ /tmp/k24_after.txt	2026-08-19 16:42:28.253016529 +0000
+@@ -238,7 +238,7 @@
+        1: istore_2
+        2: goto          24
+        5: aload_0
+-       6: getfield      #13                 // Field e:[B
++       6: getfield      #17                 // Field i:[B
+        9: iload_2
+       10: baload
+       11: sipush        255
+@@ -250,7 +250,7 @@
+       21: iinc          2, 1
+       24: iload_2
+       25: aload_0
+-      26: getfield      #13                 // Field e:[B
++      26: getfield      #17                 // Field i:[B
+       29: arraylength
+       30: if_icmplt     5
+       33: iconst_m1

@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install audit dependency
+        run: python -m pip install --quiet openpyxl
       - name: Audit item IDs and skill-learning code
         shell: bash
         run: |
@@ -26,10 +28,11 @@ jobs:
           import openpyxl, os
           p=os.path.join(os.environ['GITHUB_WORKSPACE'],'Danh_sach_ID_vat_pham.xlsx')
           wb=openpyxl.load_workbook(p,data_only=True,read_only=True)
+          targets={str(i) for i in range(1125,1131)}
           for ws in wb.worksheets:
               for row in ws.iter_rows(values_only=True):
                   vals=list(row)
-                  if any(str(v).strip() in {str(i) for i in range(1125,1131)} for v in vals if v is not None):
+                  if any(str(v).strip() in targets for v in vals if v is not None):
                       print(ws.title, vals)
           PY
             echo
@@ -38,17 +41,19 @@ jobs:
             python - <<'PY'
           import re
           t=open('/tmp/k25.txt').read()
-          for pat in [r'static boolean g\(int, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))',
-                      r'static int k\(int, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))',
-                      r'static int c\(DoHoang091\$k0, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))']:
-              m=re.search(pat,t,re.S)
-              print(m.group(0) if m else 'NOT FOUND '+pat)
+          for sig in ['static boolean g(int, int)', 'static int k(int, int)', 'static int c(DoHoang091$k0, int)']:
+              i=t.find(sig)
+              print('SIGNATURE',sig,'AT',i)
+              if i>=0:
+                  j=t.find('\n  ',i+4)
+                  print(t[i:j if j>i else i+8000])
               print('\n---\n')
           PY
             echo
-            echo '=== constants 1125..1130 across javap ==='
+            echo '=== constants 1125..1130 across top-level classes ==='
             for c in *.class; do
-              javap -p -c "$c" 2>/dev/null | grep -E -B8 -A18 'sipush +112[5-9]|sipush +1130' && echo "CLASS=$c" || true
+              x="$(javap -p -c "$c" 2>/dev/null | grep -E -B8 -A18 'sipush +112[5-9]|sipush +1130' || true)"
+              if [ -n "$x" ]; then echo "CLASS=$c"; echo "$x"; fi
             done
             echo
             echo '=== k24 structure ==='

@@ -1,0 +1,389 @@
+=== private static int a(k24,int) ===
+  private static int a(k24, int);
+    Code:
+       0: aload_0
+       1: ifnonnull     6
+       4: iconst_m1
+       5: ireturn
+       6: iconst_m1
+       7: istore_2
+       8: iconst_m1
+       9: istore_3
+      10: iconst_0
+      11: istore        4
+      13: goto          74
+      16: aload_0
+      17: getfield      #119                // Field k24.f:[B
+      20: iload         4
+      22: baload
+      23: sipush        255
+      26: iand
+      27: iload_1
+      28: if_icmple     34
+      31: goto          71
+      34: aload_0
+      35: getfield      #118                // Field k24.e:[B
+      38: iload         4
+      40: baload
+      41: sipush        255
+      44: iand
+      45: istore        5
+      47: iload         5
+      49: iload_3
+      50: if_icmpgt     65
+      53: iload         5
+      55: iload_3
+      56: if_icmpne     71
+      59: iload         4
+      61: iload_2
+      62: if_icmple     71
+      65: iload         5
+      67: istore_3
+      68: iload         4
+      70: istore_2
+      71: iinc          4, 1
+      74: iload         4
+      76: aload_0
+      77: getfield      #118                // Field k24.e:[B
+      80: arraylength
+      81: if_icmplt     16
+      84: iload_2
+      85: ireturn
+
+  static int a(k25$k0, int);
+=== all calls to helper ===
+769-      84: iload         5
+770-      86: isub
+771-      87: putfield      #107                // Field DoHoang091$k0.y:I
+772-      90: bipush        -121
+773-      92: aload_1
+774-      93: getfield      #107                // Field DoHoang091$k0.y:I
+775-      96: invokestatic  #167                // Method DoHoang091.a:(BI)V
+776-      99: invokestatic  #165                // Method DoHoang091.G:()V
+777-     102: ldc2_w        #79                 // long 30000l
+778-     105: invokestatic  #170                // Method DoHoang091.b:(J)V
+779-     108: iconst_1
+780-     109: ireturn
+781-
+782-  static k25$k0 a(int, int) throws java.lang.Exception;
+783-    Code:
+784-       0: iload_0
+785-       1: invokestatic  #253                // Method g:(I)Lk24;
+786-       4: astore_2
+787-       5: aload_2
+788-       6: ifnull        21
+789-       9: aload_2
+790-      10: getfield      #116                // Field k24.c:B
+791-      13: sipush        255
+792-      16: iand
+793-      17: iconst_1
+794-      18: if_icmpeq     23
+795-      21: aconst_null
+796-      22: areturn
+797-      23: aload_2
+798-      24: iload_1
+799:      25: invokestatic  #226                // Method a:(Lk24;I)I
+800-      28: istore_3
+801-      29: iload_3
+802-      30: ifge          35
+803-      33: aconst_null
+804-      34: areturn
+805-      35: getstatic     #139                // Field m:Lk25$k0;
+806-      38: iload_0
+807-      39: aload_2
+808-      40: getfield      #114                // Field k24.a:B
+809-      43: sipush        255
+810-      46: iand
+811-      47: aload_2
+812-      48: iload_3
+813-      49: invokestatic  #229                // Method a:(Lk25$k0;IILk24;I)V
+814-      52: iload_1
+815-      53: putstatic     #141                // Field o:I
+816-      56: getstatic     #139                // Field m:Lk25$k0;
+817-      59: areturn
+818-
+819-  static k25$k0 b(int, int) throws java.lang.Exception;
+820-    Code:
+821-       0: iload_0
+822-       1: invokestatic  #253                // Method g:(I)Lk24;
+823-       4: astore_2
+824-       5: aload_2
+825-       6: ifnull        21
+826-       9: aload_2
+827-      10: getfield      #116                // Field k24.c:B
+828-      13: sipush        255
+829-      16: iand
+830-      17: iconst_1
+831-      18: if_icmpeq     23
+832-      21: aconst_null
+833-      22: areturn
+834-      23: aload_2
+835-      24: iload_1
+836-      25: invokevirtual #213                // Method k24.a:(I)I
+837-      28: istore_3
+838-      29: iload_3
+839-      30: ifge          35
+840-      33: aconst_null
+841-      34: areturn
+842-      35: getstatic     #139                // Field m:Lk25$k0;
+843-      38: iload_0
+844-      39: aload_2
+845-      40: getfield      #114                // Field k24.a:B
+846-      43: sipush        255
+847-      46: iand
+848-      47: aload_2
+849-      48: iload_3
+850-      49: invokestatic  #229                // Method a:(Lk25$k0;IILk24;I)V
+851-      52: sipush        -1000
+852-      55: iload_1
+853-      56: isub
+854-      57: putstatic     #141                // Field o:I
+855-      60: getstatic     #139                // Field m:Lk25$k0;
+856-      63: areturn
+857-
+858-  static int c(int, int) throws java.lang.Exception;
+859-    Code:
+860-       0: iload_0
+861-       1: invokestatic  #253                // Method g:(I)Lk24;
+862-       4: astore_2
+863-       5: aload_2
+864-       6: ifnonnull     11
+865-       9: iconst_0
+866-      10: ireturn
+867-      11: aload_2
+868-      12: iload_1
+869-      13: invokevirtual #213                // Method k24.a:(I)I
+870-      16: istore_3
+871-      17: iload_3
+872-      18: iflt          31
+873-      21: aload_2
+874-      22: getfield      #128                // Field k24.o:[[I
+875-      25: iload_3
+876-      26: aaload
+877-      27: arraylength
+878-      28: ifne          33
+879-      31: iconst_0
+--
+1130-       9: istore        4
+1131-      11: goto          118
+1132-      14: iload         4
+1133-      16: invokestatic  #253                // Method g:(I)Lk24;
+1134-      19: astore        5
+1135-      21: aload         5
+1136-      23: ifnull        115
+1137-      26: aload         5
+1138-      28: getfield      #114                // Field k24.a:B
+1139-      31: sipush        255
+1140-      34: iand
+1141-      35: iload_0
+1142-      36: if_icmpeq     42
+1143-      39: goto          115
+1144-      42: aload         5
+1145-      44: getfield      #116                // Field k24.c:B
+1146-      47: sipush        255
+1147-      50: iand
+1148-      51: istore        6
+1149-      53: iload         6
+1150-      55: ifeq          73
+1151-      58: iload         6
+1152-      60: iconst_2
+1153-      61: if_icmpeq     73
+1154-      64: iload         6
+1155-      66: iconst_4
+1156-      67: if_icmpeq     73
+1157-      70: goto          115
+1158-      73: aload         5
+1159-      75: iload_1
+1160:      76: invokestatic  #226                // Method a:(Lk24;I)I
+1161-      79: istore        7
+1162-      81: iload         7
+1163-      83: ifge          89
+1164-      86: goto          115
+1165-      89: iconst_1
+1166-      90: iload_3
+1167-      91: iconst_2
+1168-      92: imul
+1169-      93: iadd
+1170-      94: istore        8
+1171-      96: aload_2
+1172-      97: iload         8
+1173-      99: iload         4
+1174-     101: i2b
+1175-     102: bastore
+1176-     103: aload_2
+1177-     104: iload         8
+1178-     106: iconst_1
+1179-     107: iadd
+1180-     108: iload         7
+1181-     110: i2b
+1182-     111: bastore
+1183-     112: iinc          3, 1
+1184-     115: iinc          4, 1
+1185-     118: iload         4
+1186-     120: bipush        90
+1187-     122: if_icmple     14
+1188-     125: iconst_1
+1189-     126: iload_3
+1190-     127: iconst_2
+1191-     128: imul
+1192-     129: iadd
+1193-     130: newarray       byte
+1194-     132: astore        4
+1195-     134: aload         4
+1196-     136: iconst_0
+1197-     137: iload_3
+1198-     138: i2b
+1199-     139: bastore
+1200-     140: iload_3
+1201-     141: ifle          155
+1202-     144: aload_2
+1203-     145: iconst_1
+1204-     146: aload         4
+1205-     148: iconst_1
+1206-     149: iload_3
+1207-     150: iconst_2
+1208-     151: imul
+1209-     152: invokestatic  #203                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+1210-     155: aload         4
+1211-     157: areturn
+1212-
+1213-  static int[] f(int, int) throws java.lang.Exception;
+1214-    Code:
+1215-       0: bipush        72
+1216-       2: newarray       int
+1217-       4: astore_2
+1218-       5: iload_0
+1219-       6: iload_1
+1220-       7: invokestatic  #248                // Method e:(II)[B
+1221-      10: astore_3
+1222-      11: aload_3
+1223-      12: ifnull        21
+1224-      15: aload_3
+1225-      16: arraylength
+1226-      17: iconst_1
+1227-      18: if_icmpge     25
+1228-      21: iconst_0
+1229-      22: goto          32
+1230-      25: aload_3
+1231-      26: iconst_0
+1232-      27: baload
+1233-      28: sipush        255
+1234-      31: iand
+1235-      32: istore        4
+1236-      34: iconst_0
+1237-      35: istore        5
+1238-      37: goto          176
+1239-      40: iconst_1
+1240-      41: iload         5
+--
+3822-  static int a(int, int, int, int, int) throws java.lang.Exception;
+3823-    Code:
+3824-       0: getstatic     #139                // Field m:Lk25$k0;
+3825-       3: getfield      #144                // Field k25$k0.a:I
+3826-       6: iload_0
+3827-       7: if_icmpne     25
+3828-      10: getstatic     #141                // Field o:I
+3829-      13: iload_1
+3830-      14: if_icmpne     25
+3831-      17: getstatic     #139                // Field m:Lk25$k0;
+3832-      20: iload_2
+3833-      21: invokestatic  #228                // Method a:(Lk25$k0;I)I
+3834-      24: ireturn
+3835-      25: iload_0
+3836-      26: invokestatic  #239                // Method c:(I)Lk24;
+3837-      29: astore        5
+3838-      31: aload         5
+3839-      33: ifnull        49
+3840-      36: aload         5
+3841-      38: getfield      #116                // Field k24.c:B
+3842-      41: sipush        255
+3843-      44: iand
+3844-      45: iconst_1
+3845-      46: if_icmpeq     55
+3846-      49: iconst_1
+3847-      50: iload_2
+3848-      51: invokestatic  #193                // Method java/lang/Math.max:(II)I
+3849-      54: ireturn
+3850-      55: aload         5
+3851-      57: iload_1
+3852:      58: invokestatic  #226                // Method a:(Lk24;I)I
+3853-      61: istore        6
+3854-      63: iload         6
+3855-      65: ifge          76
+3856-      68: aload         5
+3857-      70: iconst_1
+3858-      71: invokevirtual #213                // Method k24.a:(I)I
+3859-      74: istore        6
+3860-      76: iload         6
+3861-      78: ifge          84
+3862-      81: iconst_0
+3863-      82: istore        6
+3864-      84: iconst_1
+3865-      85: iload_2
+3866-      86: invokestatic  #193                // Method java/lang/Math.max:(II)I
+3867-      89: i2l
+3868-      90: lstore        7
+3869-      92: lload         7
+3870-      94: lload         7
+3871-      96: aload         5
+3872-      98: getfield      #125                // Field k24.l:[I
+3873-     101: iload         6
+3874-     103: iaload
+3875-     104: i2l
+3876-     105: lmul
+3877-     106: ldc2_w        #73                 // long 100l
+3878-     109: ldiv
+3879-     110: ladd
+3880-     111: lstore        7
+3881-     113: lload         7
+3882-     115: aload         5
+3883-     117: getfield      #126                // Field k24.m:[I
+3884-     120: iload         6
+3885-     122: iaload
+3886-     123: i2l
+3887-     124: ladd
+3888-     125: lstore        7
+3889-     127: lload         7
+3890-     129: lconst_1
+3891-     130: lcmp
+3892-     131: ifge          136
+3893-     134: iconst_1
+3894-     135: ireturn
+3895-     136: lload         7
+3896-     138: ldc2_w        #83                 // long 2147483647l
+3897-     141: lcmp
+3898-     142: ifle          150
+3899-     145: ldc           #6                  // int 2147483647
+3900-     147: goto          153
+3901-     150: lload         7
+3902-     152: l2i
+3903-     153: ireturn
+3904-
+3905-  private static int a(k24, int);
+3906-    Code:
+3907-       0: aload_0
+3908-       1: ifnonnull     6
+3909-       4: iconst_m1
+3910-       5: ireturn
+3911-       6: iconst_m1
+3912-       7: istore_2
+3913-       8: iconst_m1
+3914-       9: istore_3
+3915-      10: iconst_0
+3916-      11: istore        4
+3917-      13: goto          74
+3918-      16: aload_0
+3919-      17: getfield      #119                // Field k24.f:[B
+3920-      20: iload         4
+3921-      22: baload
+3922-      23: sipush        255
+3923-      26: iand
+3924-      27: iload_1
+3925-      28: if_icmple     34
+3926-      31: goto          71
+3927-      34: aload_0
+3928-      35: getfield      #118                // Field k24.e:[B
+3929-      38: iload         4
+3930-      40: baload
+3931-      41: sipush        255
+3932-      44: iand

@@ -1,4 +1,4 @@
-name: Inspect legacy skill 120 book ids
+name: Patch skill 120 books and mapping
 on:
   push:
     branches: [fix-skill120-learning]
@@ -6,27 +6,184 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump legacy book items
+      - name: Patch level 120 skill books
+        id: patch
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_legacy.txt"
+          JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          WORK=/tmp/skill120_patch
+          LOG="$GITHUB_WORKSPACE/skill120_fix_validation.txt"
           exec > >(tee "$LOG") 2>&1
-          cat >/tmp/D.java <<'JAVA'
-          import java.lang.reflect.*;import java.util.*;
-          public class D{public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance("item");Method f=c.getDeclaredMethod("find",int.class);f.setAccessible(true);for(int id=1125;id<=1139;id++){Object r=f.invoke(t,id);Field n=r.getClass().getDeclaredField("numbers"),s=r.getClass().getDeclaredField("strings");n.setAccessible(true);s.setAccessible(true);System.out.println(id+" nums="+Arrays.toString((long[])n.get(r))+" strs="+Arrays.deepToString((Object[])s.get(r)));}}}
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          (cd "$WORK/jar" && jar xf "$JAR")
+
+          echo '=== PATCH k25 mapper, same bytecode length ==='
+          K25="$WORK/jar/k25.class" python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p=Path(os.environ['K25']); b=p.read_bytes()
+          old=bytes.fromhex('1a110465a100101a11046aa300091a11041064ac02ac')
+          new=bytes.fromhex('1a110465a100101a110473a300091b105460ac0002ac')
+          print('oldlen',len(old),'newlen',len(new),'matches',b.count(old))
+          if len(old)!=len(new) or b.count(old)!=1: raise SystemExit('k25 mapper signature mismatch')
+          p.write_bytes(b.replace(old,new,1))
+          PY
+
+          echo '=== EXTRACT item.idx/item.dat ==='
+          cat > "$WORK/tools/Extract.java" <<'JAVA'
+          import java.lang.reflect.*;import java.nio.file.*;
+          public class Extract{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class);r.setAccessible(true);
+              for(String p:new String[]{"/offline/full/item.idx","/offline/full/item.dat"}){
+                byte[] b=(byte[])r.invoke(null,p);if(b==null)throw new RuntimeException("missing "+p);
+                Path out=Paths.get(a[0],p.endsWith("idx")?"item.idx":"item.dat");Files.write(out,b);System.out.println(p+" len="+b.length);
+              }
+            }
+          }
           JAVA
-          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/D.java
-          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" D
-      - name: Commit report
+          javac -classpath "$JAR" "$WORK/tools/Extract.java"
+          java -classpath "$JAR:$WORK/tools" Extract "$WORK"
+
+          echo '=== PATCH exact source item rows 1134-1139 ==='
+          IDX="$WORK/item.idx" DAT="$WORK/item.dat" python3 - <<'PY'
+          from pathlib import Path
+          import os,struct
+          idxp=Path(os.environ['IDX']); datp=Path(os.environ['DAT']); idx=bytearray(idxp.read_bytes()); dat=datp.read_bytes()
+          count=struct.unpack_from('>I',idx,4)[0]
+          if len(idx)!=8+count*12: raise SystemExit(f'bad item.idx {len(idx)} count {count}')
+          rec=[]
+          for i in range(count):
+            p=8+i*12; rec.append([struct.unpack_from('>I',idx,p)[0],struct.unpack_from('>I',idx,p+4)[0],struct.unpack_from('>I',idx,p+8)[0]])
+          rows={
+            1134:("Sách võ công CUNG THUẬT",27,2,"",110,3509,-1,-1,0),
+            1135:("Sách võ công QUẠT THUẬT",27,2,"",110,3510,-1,-1,0),
+            1136:("Sách võ công TIÊU THUẬT",27,2,"",110,3511,-1,-1,0),
+            1137:("Sách võ công KUNAI THUẬT",27,2,"",110,3512,-1,-1,0),
+            1138:("Sách võ công ĐAO THUẬT",27,2,"",110,3513,-1,-1,0),
+            1139:("Sách võ công KIẾM THUẬT",27,2,"",110,3514,-1,-1,0),
+          }
+          def field_int(v): return b'\x01'+struct.pack('>i',v)
+          def field_str(s):
+            x=s.encode('utf-8');return b'\x03'+struct.pack('>I',len(x))+x
+          def encode(id,v):
+            name,typ,gender,desc,level,icon,part,fashion,up=v
+            fields=[field_int(id),field_str(name),field_int(typ),field_int(gender),field_str(desc),field_int(level),field_int(icon),field_int(part),field_int(fashion),field_int(up)]
+            return struct.pack('>H',len(fields))+b''.join(fields)
+          old_by_id={rid:(off,ln) for rid,off,ln in rec}
+          out=bytearray(); newrec=[]
+          for rid,off,ln in rec:
+            blob=encode(rid,rows[rid]) if rid in rows else dat[off:off+ln]
+            newrec.append([rid,len(out),len(blob)]);out+=blob
+          newidx=bytearray(idx[:8])
+          for rid,off,ln in newrec:newidx+=struct.pack('>III',rid,off,ln)
+          idxp.write_bytes(newidx);datp.write_bytes(out)
+          print('item.dat',len(dat),'->',len(out))
+          for rid in rows: print('PATCH_ITEM',rid,'old',old_by_id[rid],'new',next(x[1:] for x in newrec if x[0]==rid))
+          PY
+
+          echo '=== LOCATE embedded item resources in outer pack ==='
+          cat > "$WORK/tools/Locate.java" <<'JAVA'
+          import java.lang.reflect.*;
+          public class Locate{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k1e");Method n=c.getDeclaredMethod("normalize",String.class),h=c.getDeclaredMethod("hash",String.class),e=c.getDeclaredMethod("ensureIndex"),f=c.getDeclaredMethod("findIndex",String.class);n.setAccessible(true);h.setAccessible(true);e.setAccessible(true);f.setAccessible(true);e.invoke(null);
+              Field fk=c.getDeclaredField("kinds"),fc=c.getDeclaredField("chunks"),fo=c.getDeclaredField("offsets"),fl=c.getDeclaredField("lengths");for(Field x:new Field[]{fk,fc,fo,fl})x.setAccessible(true);
+              byte[] kinds=(byte[])fk.get(null),chunks=(byte[])fc.get(null);int[] offs=(int[])fo.get(null),lens=(int[])fl.get(null);
+              for(String p:new String[]{"/offline/full/item.idx","/offline/full/item.dat"}){String q=(String)n.invoke(null,p);int hs=(Integer)h.invoke(null,q),i=(Integer)f.invoke(null,q);System.out.println(p+","+hs+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offs[i]+","+lens[i]);}
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Locate.java"
+          java -classpath "$JAR:$WORK/tools" Locate | tee "$WORK/locate.csv"
+
+          echo '=== REBUILD affected outer packs and index ==='
+          INDEX="$WORK/jar/offline/packs/index.bin" PACKDIR="$WORK/jar/offline/packs" LOCATE="$WORK/locate.csv" ITEMIDX="$WORK/item.idx" ITEMDAT="$WORK/item.dat" python3 - <<'PY'
+          import os,struct
+          from pathlib import Path
+          idxp=Path(os.environ['INDEX']); packdir=Path(os.environ['PACKDIR']); raw=idxp.read_bytes()
+          if raw[:4]!=b'OPR1':raise SystemExit('bad OPR1')
+          n=struct.unpack_from('>I',raw,4)[0]; rec=[]
+          for i in range(n):
+            p=8+i*14; rec.append([struct.unpack_from('>i',raw,p)[0],raw[p+4],raw[p+5],struct.unpack_from('>I',raw,p+6)[0],struct.unpack_from('>I',raw,p+10)[0]])
+          loc={}
+          for line in Path(os.environ['LOCATE']).read_text().splitlines():
+            if not line.startswith('/offline/'):continue
+            p,hs,i,k,ch,off,ln=line.split(',');loc[p]=(int(hs),int(k),int(ch),int(off),int(ln))
+          replacements={'/offline/full/item.idx':Path(os.environ['ITEMIDX']).read_bytes(),'/offline/full/item.dat':Path(os.environ['ITEMDAT']).read_bytes()}
+          targets={v[0]: (path,replacements[path]) for path,v in loc.items()}
+          groups={}
+          for r in rec: groups.setdefault((r[1],r[2]),[]).append(r)
+          modified=[]
+          for key,rs in groups.items():
+            hit=[r for r in rs if r[0] in targets]
+            if not hit:continue
+            kind,ch=key; pack=packdir/(('s' if kind==0 else 'd')+f'{ch:02d}.pak'); old=pack.read_bytes(); ordered=sorted(rs,key=lambda x:x[3]); out=bytearray()
+            for r in ordered:
+              data=targets[r[0]][1] if r[0] in targets else old[r[3]:r[3]+r[4]]
+              r[3]=len(out);r[4]=len(data);out+=data
+            pack.write_bytes(out);modified.append(pack.name);print('PACK',pack.name,len(old),'->',len(out))
+          # Preserve original index hash ordering while rewriting changed offsets/lengths.
+          out=bytearray(b'OPR1'+struct.pack('>I',len(rec)))
+          for hs,k,ch,o,l in rec: out+=struct.pack('>iBBII',hs,k,ch,o,l)
+          idxp.write_bytes(out);Path('/tmp/skill120_patch/packs.txt').write_text('\n'.join(modified))
+          PY
+
+          echo '=== UPDATE JAR ==='
+          (cd "$WORK/jar" && jar uf "$JAR" k25.class offline/packs/index.bin $(sed 's#^#offline/packs/#' "$WORK/packs.txt"))
+
+          echo '=== VALIDATE mapper, books and skill templates ==='
+          cat > "$WORK/tools/Validate.java" <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Validate{
+            static Object table(String name)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);return ct.newInstance(name);}
+            static Object find(Object t,int id)throws Exception{Method m=t.getClass().getDeclaredMethod("find",int.class);m.setAccessible(true);return m.invoke(t,id);}
+            static void row(Object t,int id)throws Exception{Object r=find(t,id);Field n=r.getClass().getDeclaredField("numbers"),s=r.getClass().getDeclaredField("strings");n.setAccessible(true);s.setAccessible(true);System.out.println("ITEM "+id+" nums="+Arrays.toString((long[])n.get(r))+" strs="+Arrays.deepToString((Object[])s.get(r)));}
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25");Method k=c.getDeclaredMethod("k",int.class,int.class);k.setAccessible(true);
+              for(int item:new int[]{1125,1126,1127,1128,1129,1130,1134,1135,1136,1137,1138,1139})for(int cl=1;cl<=6;cl++){int got=(Integer)k.invoke(null,item,cl),exp=84+cl;if(got!=exp)throw new RuntimeException("map "+item+" class "+cl+" got "+got+" exp "+exp);}
+              if((Integer)k.invoke(null,1140,1)!=-1)throw new RuntimeException("1140 should not map");
+              System.out.println("MAPPING_OK old+new books -> class templates 85-90");
+              Object item=table("item");for(int id=1134;id<=1139;id++)row(item,id);
+              Object st=table("skill_template");for(int id=85;id<=90;id++){Object r=find(st,id);Field n=r.getClass().getDeclaredField("numbers"),s=r.getClass().getDeclaredField("strings");n.setAccessible(true);s.setAccessible(true);System.out.println("SKILL_TEMPLATE "+id+" nums="+Arrays.toString((long[])n.get(r))+" strs="+Arrays.deepToString((Object[])s.get(r)));}
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Validate.java"
+          java -classpath "$JAR:$WORK/tools" Validate | tee "$WORK/validate.txt"
+          VALID="$WORK/validate.txt" python3 - <<'PY'
+          from pathlib import Path
+          import os
+          t=Path(os.environ['VALID']).read_text()
+          expected={
+           1134:'Sách võ công CUNG THUẬT',1135:'Sách võ công QUẠT THUẬT',1136:'Sách võ công TIÊU THUẬT',1137:'Sách võ công KUNAI THUẬT',1138:'Sách võ công ĐAO THUẬT',1139:'Sách võ công KIẾM THUẬT'}
+          icons={1134:3509,1135:3510,1136:3511,1137:3512,1138:3513,1139:3514}
+          for id,name in expected.items():
+            needle=f'ITEM {id} nums=[{id}, 0, 27, 2, 0, 110, {icons[id]}, -1, -1, 0]'
+            if needle not in t or name not in t:raise SystemExit('item validation failed '+str(id))
+          for tid,cl,sid in [(85,1,956),(86,2,958),(87,3,960),(88,4,962),(89,5,964),(90,6,966)]:
+            if f'SKILL_TEMPLATE {tid} nums=[{tid}, {cl},' not in t or f'"skillId":{sid}' not in t or '"level":120' not in t:raise SystemExit('skill template validation failed '+str(tid))
+          print('VALIDATION_OK: six level-120 books + old aliases; templates 85-90 unchanged')
+          PY
+          jar tf "$JAR" >/dev/null
+          echo "FINAL_JAR_SIZE=$(stat -c %s "$JAR")"
+      - name: Commit patched JAR
+        if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_legacy.txt
-          git commit -m 'chore: inspect legacy skill 120 book ids' || exit 0
+          git add skill120_fix_validation.txt || true
+          if [ "${{ steps.patch.outcome }}" = success ]; then
+            git add Nso_Offline_By_h0901.jar
+            MSG='fix: enable level 120 skills for all classes'
+          else
+            MSG='chore: record skill 120 patch failure'
+          fi
+          git commit -m "$MSG" || exit 0
           git push origin fix-skill120-learning

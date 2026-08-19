@@ -1,8 +1,8 @@
 name: Patch Obito Sakura resources
 
 on:
-  push:
-    branches: [fix-obito-sakura]
+  pull_request:
+    branches: [main]
     paths:
       - '.github/workflows/inspect-obito-sakura.yml'
 
@@ -60,71 +60,38 @@ jobs:
           INDEX="$WORK/jar/offline/packs/index.bin" LOC="$WORK/locations.csv" SRCROOT="$SRC" PACKROOT="$WORK/jar/offline/packs" python3 - <<'PY'
           import os, struct
           from pathlib import Path
-
-          index_path=Path(os.environ['INDEX'])
-          pack_root=Path(os.environ['PACKROOT'])
-          src=Path(os.environ['SRCROOT'])
-          loc_path=Path(os.environ['LOC'])
-
+          index_path=Path(os.environ['INDEX']); pack_root=Path(os.environ['PACKROOT']); src=Path(os.environ['SRCROOT']); loc_path=Path(os.environ['LOC'])
           raw=bytearray(index_path.read_bytes())
           if raw[:4] != b'OPR1': raise SystemExit('Bad pack index magic')
           count=struct.unpack_from('>I',raw,4)[0]
           if len(raw) != 8 + count*14: raise SystemExit(f'Unexpected index length {len(raw)} count {count}')
-
           recs=[]
           for i in range(count):
-              pos=8+i*14
-              h=bytes(raw[pos:pos+4])
-              kind=raw[pos+4]; chunk=raw[pos+5]
-              off=struct.unpack_from('>I',raw,pos+6)[0]
-              length=struct.unpack_from('>I',raw,pos+10)[0]
+              pos=8+i*14; h=bytes(raw[pos:pos+4]); kind=raw[pos+4]; chunk=raw[pos+5]; off=struct.unpack_from('>I',raw,pos+6)[0]; length=struct.unpack_from('>I',raw,pos+10)[0]
               recs.append([h,kind,chunk,off,length])
-
           targets={}
           for line in loc_path.read_text().splitlines():
               id_s,idx_s,kind_s,chunk_s,off_s,len_s,path=line.split(',',6)
               rid=int(id_s); idx=int(idx_s); kind=int(kind_s); chunk=int(chunk_s)
               if kind != 0: raise SystemExit(f'Target {rid} unexpectedly in non-static pack kind={kind}')
               f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.png'
-              if not f.exists():
-                  f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.PNG'
+              if not f.exists(): f=src/'Data'/'Img'/'Small'/'1'/f'Small{rid}.PNG'
               if not f.exists(): raise SystemExit(f'Missing source sprite {rid}')
-              targets[idx]=f.read_bytes()
-              r=recs[idx]
-              if (r[1],r[2],r[3],r[4]) != (kind,chunk,int(off_s),int(len_s)):
-                  raise SystemExit(f'Index mismatch for {rid}')
-
+              targets[idx]=f.read_bytes(); r=recs[idx]
+              if (r[1],r[2],r[3],r[4]) != (kind,chunk,int(off_s),int(len_s)): raise SystemExit(f'Index mismatch for {rid}')
           touched=sorted({(recs[i][1],recs[i][2]) for i in targets})
           for kind,chunk in touched:
               if kind!=0: raise SystemExit('Only static packs supported')
-              p=pack_root/f's{chunk:02d}.pak'
-              old=p.read_bytes()
-              members=[i for i,r in enumerate(recs) if r[1]==kind and r[2]==chunk]
-              members.sort(key=lambda i: recs[i][3])
+              p=pack_root/f's{chunk:02d}.pak'; old=p.read_bytes(); members=[i for i,r in enumerate(recs) if r[1]==kind and r[2]==chunk]; members.sort(key=lambda i: recs[i][3])
               out=bytearray(); cursor=0
               for i in members:
                   h,k,ch,off,length=recs[i]
-                  if off < cursor or off+length > len(old):
-                      raise SystemExit(f'Bad resource range in {p.name}: idx={i} off={off} len={length}')
-                  out += old[cursor:off]
-                  new_off=len(out)
-                  data=targets.get(i, old[off:off+length])
-                  out += data
-                  recs[i][3]=new_off
-                  recs[i][4]=len(data)
-                  cursor=off+length
-              out += old[cursor:]
-              p.write_bytes(out)
-              print(f'patched {p.name}: {len(old)} -> {len(out)} bytes')
-
+                  if off < cursor or off+length > len(old): raise SystemExit(f'Bad resource range in {p.name}: idx={i} off={off} len={length}')
+                  out += old[cursor:off]; new_off=len(out); data=targets.get(i, old[off:off+length]); out += data; recs[i][3]=new_off; recs[i][4]=len(data); cursor=off+length
+              out += old[cursor:]; p.write_bytes(out); print(f'patched {p.name}: {len(old)} -> {len(out)} bytes')
           for i,(h,kind,chunk,off,length) in enumerate(recs):
-              pos=8+i*14
-              raw[pos:pos+4]=h
-              raw[pos+4]=kind; raw[pos+5]=chunk
-              struct.pack_into('>I',raw,pos+6,off)
-              struct.pack_into('>I',raw,pos+10,length)
-          index_path.write_bytes(raw)
-          print(f'patched {len(targets)} resources across {len(touched)} static packs')
+              pos=8+i*14; raw[pos:pos+4]=h; raw[pos+4]=kind; raw[pos+5]=chunk; struct.pack_into('>I',raw,pos+6,off); struct.pack_into('>I',raw,pos+10,length)
+          index_path.write_bytes(raw); print(f'patched {len(targets)} resources across {len(touched)} static packs')
           PY
 
           rm -f "$WORK/jar/LocateResources.java" "$WORK/jar/LocateResources.class"
@@ -135,17 +102,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          OFF="$GITHUB_WORKSPACE/offline"
-          SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
-          WORK="$RUNNER_TEMP/nso_validate"
-          JAR="$OFF/Nso_Offline_By_h0901.jar"
+          OFF="$GITHUB_WORKSPACE/offline"; SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"; WORK="$RUNNER_TEMP/nso_validate"; JAR="$OFF/Nso_Offline_By_h0901.jar"
           mkdir -p "$WORK"
           cat > "$WORK/ValidateResources.java" <<'JAVA'
           import java.lang.reflect.*; import java.security.*;
-          public class ValidateResources {
-            static String sha(byte[] b)throws Exception{byte[] h=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return s.toString();}
-            public static void main(String[] a)throws Exception{Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class);r.setAccessible(true);for(String s:a){int id=Integer.parseInt(s);String p="/offline/x1/small/Small"+id+".png";byte[] b=(byte[])r.invoke(null,p);if(b==null)throw new RuntimeException("missing "+p);System.out.println(id+","+b.length+","+sha(b));}}
-          }
+          public class ValidateResources { static String sha(byte[] b)throws Exception{byte[] h=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return s.toString();} public static void main(String[] a)throws Exception{Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class);r.setAccessible(true);for(String s:a){int id=Integer.parseInt(s);String p="/offline/x1/small/Small"+id+".png";byte[] b=(byte[])r.invoke(null,p);if(b==null)throw new RuntimeException("missing "+p);System.out.println(id+","+b.length+","+sha(b));}} }
           JAVA
           (cd "$WORK" && javac -classpath "$JAR" ValidateResources.java)
           IDS=$(seq 2715 2770; echo 3421; echo 3422)
@@ -153,9 +114,7 @@ jobs:
           ACT="$WORK/actual.csv" SRCROOT="$SRC" python3 - <<'PY'
           import os,hashlib
           from pathlib import Path
-          actual={int(a):h for a,l,h in (x.split(',') for x in Path(os.environ['ACT']).read_text().splitlines())}
-          src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'
-          bad=[]
+          actual={int(a):h for a,l,h in (x.split(',') for x in Path(os.environ['ACT']).read_text().splitlines())}; src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'; bad=[]
           for i in list(range(2715,2771))+[3421,3422]:
               f=src/f'Small{i}.png'
               if not f.exists(): f=src/f'Small{i}.PNG'
@@ -170,8 +129,7 @@ jobs:
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/offline"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add Nso_Offline_By_h0901.jar
           git commit -m 'fix: replace Obito and Sakura disguise sprites from Nso_Folder' || exit 0
           git push origin fix-obito-sakura

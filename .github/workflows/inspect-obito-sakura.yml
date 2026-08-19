@@ -1,0 +1,87 @@
+name: Inspect Obito Sakura resources
+
+on:
+  push:
+    branches: [fix-obito-sakura]
+    paths:
+      - '.github/workflows/inspect-obito-sakura.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout offline repo
+        uses: actions/checkout@v4
+        with:
+          ref: fix-obito-sakura
+          path: offline
+
+      - name: Checkout source/data repo
+        uses: actions/checkout@v4
+        with:
+          repository: hoang0901/Nso_Folder
+          ref: main
+          path: source
+
+      - name: Inspect source data and offline JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
+          OFF="$GITHUB_WORKSPACE/offline"
+          REPORT="$OFF/obito_sakura_report.txt"
+          WORK="$RUNNER_TEMP/nso_inspect"
+          mkdir -p "$WORK/offline_jar"
+          cd "$WORK/offline_jar"
+          jar xf "$OFF/Nso_Offline_By_h0901.jar"
+
+          {
+            echo '=== TEXT MATCHES IN SOURCE ==='
+            grep -RniEa 'obito|sakura|cải trang|cai trang' "$SRC" \
+              --exclude='*.jar' --exclude='*.class' --exclude='*.png' --exclude='*.gif' --exclude='*.jpg' 2>/dev/null || true
+
+            echo
+            echo '=== LIKELY ITEM/FASHION SOURCE FILES ==='
+            find "$SRC/src" -type f \( -iname '*item*' -o -iname '*fashion*' -o -iname '*template*' \) -print 2>/dev/null | sort || true
+
+            echo
+            echo '=== DATA/IMG TREE (filenames only) ==='
+            find "$SRC/Data/Img" -type f -printf '%P\n' 2>/dev/null | sort || true
+
+            echo
+            echo '=== OFFLINE JAR ENTRIES ==='
+            (cd "$WORK/offline_jar" && find . -type f -printf '%P\n' | sort)
+
+            echo
+            echo '=== SQL MATCHES VIA PYTHON (UTF-8/Latin-1 tolerant) ==='
+          } > "$REPORT"
+
+          python3 - <<'PY' >> "$REPORT"
+          from pathlib import Path
+          p = Path("$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql")
+          data = p.read_bytes()
+          text = data.decode('utf-8', errors='replace')
+          keys = ['obito','sakura','cải trang','cai trang','fashion']
+          for i,line in enumerate(text.splitlines(),1):
+              low=line.lower()
+              if any(k in low for k in keys):
+                  print(f'{i}: {line[:4000]}')
+          PY
+
+          echo >> "$REPORT"
+          echo '=== JAR STRING MATCHES ===' >> "$REPORT"
+          find "$WORK/offline_jar" -type f \( -name '*.class' -o -type f \) -print0 | \
+            xargs -0 strings 2>/dev/null | grep -iEa 'obito|sakura|cải trang|cai trang|fashion' | head -n 500 >> "$REPORT" || true
+
+      - name: Commit inspection report
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE/offline"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add obito_sakura_report.txt
+          git commit -m 'chore: add Obito Sakura resource inspection report' || exit 0
+          git push origin fix-obito-sakura

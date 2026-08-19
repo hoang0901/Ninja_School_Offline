@@ -1,0 +1,153 @@
+name: Patch Obito Sakura exact fashion assets
+on:
+  push:
+    branches: [fix-obito-sakura-final-v2]
+    paths: ['.github/workflows/patch-obito-sakura-assets-final.yml']
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add exact Nso_Folder hair body leg assets 230-235
+        id: patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          WORK=/tmp/fashion_final
+          LOG="$GITHUB_WORKSPACE/fashion_final_validation.txt"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git "$WORK/ref" >/dev/null 2>&1
+          (cd "$WORK/jar" && jar xf "$JAR")
+          INDEX="$WORK/jar/offline/packs/index.bin"
+          PACKDIR="$WORK/jar/offline/packs"
+          echo '=== existing packs ==='
+          ls -lh "$PACKDIR"
+
+          cat > "$WORK/tools/Hashes.java" <<'JAVA'
+          import java.lang.reflect.*;
+          public class Hashes{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k1e");
+              Method n=c.getDeclaredMethod("normalize",String.class),h=c.getDeclaredMethod("hash",String.class),e=c.getDeclaredMethod("ensureIndex"),f=c.getDeclaredMethod("findIndex",String.class),r=c.getDeclaredMethod("read",String.class);
+              n.setAccessible(true);h.setAccessible(true);e.setAccessible(true);f.setAccessible(true);r.setAccessible(true);e.invoke(null);
+              for(int z=1;z<=4;z++)for(int id=230;id<=235;id++){
+                String p="Data/Img/Effect/"+z+"/"+id+".png";String q=(String)n.invoke(null,p);int hash=(Integer)h.invoke(null,q);int idx=(Integer)f.invoke(null,q);Object b=r.invoke(null,p);
+                System.out.println(p+","+q+","+hash+","+idx+","+(b==null?-1:((byte[])b).length));
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Hashes.java"
+          java -classpath "$JAR:$WORK/tools" Hashes | tee "$WORK/hashes.csv"
+
+          INDEX="$INDEX" PACKDIR="$PACKDIR" HASHCSV="$WORK/hashes.csv" REFROOT="$WORK/ref/NinjaSchoolOffline_by_dohoang091" python3 - <<'PY'
+          import os,struct,re
+          from pathlib import Path
+          idxp=Path(os.environ['INDEX']); packdir=Path(os.environ['PACKDIR']); ref=Path(os.environ['REFROOT'])
+          raw=idxp.read_bytes()
+          if raw[:4]!=b'OPR1': raise SystemExit('bad OPR1 index')
+          count=struct.unpack_from('>I',raw,4)[0]
+          if len(raw)!=8+count*14: raise SystemExit(f'bad index size {len(raw)} count={count}')
+          rec=[]
+          for i in range(count):
+            p=8+i*14
+            hs=struct.unpack_from('>i',raw,p)[0]; kind=raw[p+4]; ch=raw[p+5]; off=struct.unpack_from('>I',raw,p+6)[0]; ln=struct.unpack_from('>I',raw,p+10)[0]
+            rec.append([hs,kind,ch,off,ln])
+          signed_sorted=all(rec[i][0]<=rec[i+1][0] for i in range(len(rec)-1))
+          unsigned_sorted=all((rec[i][0]&0xffffffff)<=(rec[i+1][0]&0xffffffff) for i in range(len(rec)-1))
+          print('index count',count,'signed_sorted',signed_sorted,'unsigned_sorted',unsigned_sorted)
+          if not (signed_sorted or unsigned_sorted): raise SystemExit('unknown index hash ordering')
+          existing={x[0] for x in rec}
+          rows=[]
+          for line in Path(os.environ['HASHCSV']).read_text().splitlines():
+            if not line.startswith('Data/Img/Effect/'): continue
+            path,norm,hs,oldidx,oldlen=line.rsplit(',',4); hs=int(hs);oldidx=int(oldidx);oldlen=int(oldlen)
+            src=ref/path
+            if not src.exists(): raise SystemExit('missing reference '+str(src))
+            data=src.read_bytes()
+            if oldidx>=0 or oldlen>=0: print('NOTE existing entry will be replaced',path,oldidx,oldlen)
+            rows.append((path,norm,hs,data))
+          if len(rows)!=24: raise SystemExit(f'expected 24 assets got {len(rows)}')
+
+          # Use the last existing data pack and append all exact assets.
+          data_packs=[]
+          for p in packdir.glob('d*.pak'):
+            m=re.fullmatch(r'd(\d+)\.pak',p.name)
+            if m:data_packs.append((int(m.group(1)),p))
+          if not data_packs: raise SystemExit('no data pack')
+          chunk,pack=max(data_packs)
+          if chunk>255: raise SystemExit('chunk out of range')
+          blob=bytearray(pack.read_bytes())
+          # Remove old entries if these hashes already exist, otherwise duplicate hashes break lookup.
+          target_hashes={x[2] for x in rows}
+          rec=[x for x in rec if x[0] not in target_hashes]
+          for path,norm,hs,data in rows:
+            off=len(blob); blob+=data
+            rec.append([hs,1,chunk,off,len(data)])
+            print('ADD',path,'hash',hs,'pack',pack.name,'offset',off,'len',len(data))
+          pack.write_bytes(blob)
+          if signed_sorted: rec.sort(key=lambda x:x[0])
+          else: rec.sort(key=lambda x:x[0]&0xffffffff)
+          out=bytearray(b'OPR1'+struct.pack('>I',len(rec)))
+          for hs,kind,ch,off,ln in rec:
+            out+=struct.pack('>iBBII',hs,kind,ch,off,ln)
+          idxp.write_bytes(out)
+          print('new index count',len(rec),'new pack size',len(blob),'pack',pack.name)
+          Path('/tmp/fashion_final/packname.txt').write_text(pack.name)
+          PY
+
+          PACKNAME=$(cat "$WORK/packname.txt")
+          (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "offline/packs/$PACKNAME")
+
+          cat > "$WORK/tools/Validate.java" <<'JAVA'
+          import java.lang.reflect.*;import java.security.*;import java.util.*;
+          public class Validate{
+            static String sha(byte[]b)throws Exception{MessageDigest d=MessageDigest.getInstance("SHA-256");StringBuilder s=new StringBuilder();for(byte x:d.digest(b))s.append(String.format("%02x",x));return s.toString();}
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k1e");Method r=c.getDeclaredMethod("read",String.class),n=c.getDeclaredMethod("normalize",String.class),f=c.getDeclaredMethod("findIndex",String.class),e=c.getDeclaredMethod("ensureIndex");r.setAccessible(true);n.setAccessible(true);f.setAccessible(true);e.setAccessible(true);e.invoke(null);
+              for(int z=1;z<=4;z++)for(int id=230;id<=235;id++){String p="Data/Img/Effect/"+z+"/"+id+".png";String q=(String)n.invoke(null,p);int idx=(Integer)f.invoke(null,q);byte[]b=(byte[])r.invoke(null,p);if(idx<0||b==null)throw new RuntimeException("missing "+p);System.out.println("OK "+p+" idx="+idx+" len="+b.length+" sha="+sha(b));}
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Validate.java"
+          java -classpath "$JAR:$WORK/tools" Validate | tee "$WORK/validate.txt"
+          jar tf "$JAR" >/dev/null
+          echo '=== compare exact reference sha256 ==='
+          while read -r line; do
+            set -- $line
+          done < /dev/null
+          python3 - <<'PY'
+          import hashlib,re
+          from pathlib import Path
+          txt=Path('/tmp/fashion_final/validate.txt').read_text()
+          ref=Path('/tmp/fashion_final/ref/NinjaSchoolOffline_by_dohoang091')
+          oks=0
+          for z in range(1,5):
+            for id in range(230,236):
+              p=f'Data/Img/Effect/{z}/{id}.png'; b=(ref/p).read_bytes(); h=hashlib.sha256(b).hexdigest();
+              m=re.search(r'^OK '+re.escape(p)+r' idx=\d+ len=(\d+) sha=([0-9a-f]+)$',txt,re.M)
+              if not m: raise SystemExit('validation line missing '+p)
+              if int(m.group(1))!=len(b) or m.group(2)!=h: raise SystemExit('asset mismatch '+p)
+              oks+=1
+          print('EXACT_ASSET_VALIDATION_OK',oks,'assets')
+          PY
+          echo "FINAL_JAR_SIZE=$(stat -c %s "$JAR")"
+      - name: Commit patched JAR
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add fashion_final_validation.txt
+          if [ "${{ steps.patch.outcome }}" = success ]; then
+            git add Nso_Offline_By_h0901.jar
+            MSG='fix: add exact Obito Sakura hair body leg assets'
+          else
+            MSG='chore: record Obito Sakura asset patch failure'
+          fi
+          git commit -m "$MSG" || exit 0
+          git push origin fix-obito-sakura-final-v2

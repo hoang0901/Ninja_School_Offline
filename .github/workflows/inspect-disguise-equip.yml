@@ -1,4 +1,4 @@
-name: Inspect disguise equip mapping
+name: Patch Obito Sakura equip mapping
 on:
   push:
     branches: [fix-obito-sakura-equip]
@@ -6,41 +6,154 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  patch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect offline item rows and bytecode
+      - name: Patch item 1173 and 1174 metadata
+        id: patch
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/nso/jar
-          (cd /tmp/nso/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
-          cat > /tmp/nso/jar/DumpRows.java <<'JAVA'
-          import java.lang.reflect.*; import java.util.*;
-          public class DumpRows {
-            static void dump(String table,int id)throws Exception{
-              Class<?> tc=Class.forName("k2c"); Constructor<?> ct=tc.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance(table);Method f=tc.getDeclaredMethod("find",int.class);f.setAccessible(true);Object r=f.invoke(t,id);System.out.println("=== "+table+" "+id+" ===");if(r==null){System.out.println("null");return;}for(Field x:r.getClass().getDeclaredFields()){x.setAccessible(true);Object v=x.get(r);if(v instanceof byte[])v=Arrays.toString((byte[])v);else if(v instanceof long[])v=Arrays.toString((long[])v);else if(v instanceof Object[])v=Arrays.deepToString((Object[])v);System.out.println(x.getName()+"="+v);} }
-            public static void main(String[]a)throws Exception{for(String t:new String[]{"item","nj_item","item_template"})for(int id:new int[]{1173,1174})try{dump(t,id);}catch(Throwable e){System.out.println("ERR "+t+" "+id+" "+e);} }
+          JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          WORK=/tmp/nso_fix_equip
+          LOG="$GITHUB_WORKSPACE/disguise_equip_fix.log"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf "$WORK" && mkdir -p "$WORK/jar" "$WORK/tools"
+          (cd "$WORK/jar" && jar xf "$JAR")
+
+          cat > "$WORK/tools/ExtractAndLocate.java" <<'JAVA'
+          import java.lang.reflect.*; import java.nio.file.*;
+          public class ExtractAndLocate {
+            public static void main(String[] a)throws Exception{
+              Class<?> c=Class.forName("k1e");
+              Method read=c.getDeclaredMethod("read",String.class);read.setAccessible(true);
+              Method norm=c.getDeclaredMethod("normalize",String.class);norm.setAccessible(true);
+              Method ensure=c.getDeclaredMethod("ensureIndex");ensure.setAccessible(true);ensure.invoke(null);
+              Method find=c.getDeclaredMethod("findIndex",String.class);find.setAccessible(true);
+              Field fk=c.getDeclaredField("kinds"),fc=c.getDeclaredField("chunks"),fo=c.getDeclaredField("offsets"),fl=c.getDeclaredField("lengths");
+              fk.setAccessible(true);fc.setAccessible(true);fo.setAccessible(true);fl.setAccessible(true);
+              byte[] kinds=(byte[])fk.get(null),chunks=(byte[])fc.get(null);int[] offs=(int[])fo.get(null),lens=(int[])fl.get(null);
+              for(String raw:new String[]{"/offline/full/item.idx","/offline/full/item.dat"}){
+                byte[] b=(byte[])read.invoke(null,raw); if(b==null)throw new RuntimeException("missing "+raw);
+                String fn=raw.endsWith(".idx")?"item.idx":"item.dat"; Files.write(Paths.get(a[0],fn),b);
+                String p=(String)norm.invoke(null,raw); int i=(Integer)find.invoke(null,p); if(i<0)throw new RuntimeException("not indexed "+p);
+                System.out.println(fn+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offs[i]+","+lens[i]+","+p);
+              }
+            }
           }
           JAVA
-          (cd /tmp/nso/jar && javac -classpath . DumpRows.java && java -classpath . DumpRows) > "$GITHUB_WORKSPACE/disguise_equip_report.txt" 2>&1 || true
-          {
-            echo; echo '=== CLASSES CONTAINING fashion / 1173 / 1174 / 230 / 233 ==='
-            cd /tmp/nso/jar
-            for c in *.class; do
-              if strings "$c" | grep -qiE 'fashion|1173|1174|ID_HAIR|ID_BODY|ID_LEG'; then
-                echo "===== ${c%.class} ====="
-                strings "$c" | grep -iE 'fashion|1173|1174|ID_HAIR|ID_BODY|ID_LEG|equip|item' | head -n 100 || true
-                javap -classpath . -c -p "${c%.class}" 2>/dev/null | head -n 1200 || true
-              fi
-            done
-          } >> "$GITHUB_WORKSPACE/disguise_equip_report.txt"
-      - name: Commit report
+          javac -classpath "$JAR" "$WORK/tools/ExtractAndLocate.java"
+          java -classpath "$JAR:$WORK/tools" ExtractAndLocate "$WORK" | tee "$WORK/outer.csv"
+
+          IDX="$WORK/item.idx" DAT="$WORK/item.dat" python3 - <<'PY'
+          import os,struct
+          from pathlib import Path
+          idxp=Path(os.environ['IDX']); datp=Path(os.environ['DAT'])
+          idx=bytearray(idxp.read_bytes()); dat=datp.read_bytes()
+          if len(idx)<8: raise SystemExit('short item.idx')
+          magic,n=struct.unpack_from('>II',idx,0)
+          if len(idx)!=8+n*12: raise SystemExit(f'bad item.idx size={len(idx)} count={n}')
+          rec=[]
+          for i in range(n):
+              p=8+i*12; rid,off,ln=struct.unpack_from('>iii',idx,p); rec.append([rid,off,ln])
+          def enc(rid,name,typ,gender,desc,level,icon,part,fashion,uptoup):
+              fields=[(1,rid),(3,name),(1,typ),(1,gender),(3,desc),(1,level),(1,icon),(1,part),(1,fashion),(1,uptoup)]
+              out=bytearray(struct.pack('>H',len(fields)))
+              for t,v in fields:
+                  out.append(t)
+                  if t==1: out+=struct.pack('>i',int(v))
+                  elif t==3:
+                      b=str(v).encode('utf-8'); out+=struct.pack('>i',len(b))+b
+              return bytes(out)
+          repl={
+            1173:enc(1173,'Obito',2,1,'Dùng thay đổi diện mạo',20,3422,-1,230,0),
+            1174:enc(1174,'Sakura',2,0,'Dùng thay đổi diện mạo',20,3421,-1,233,0),
+          }
+          found={r[0] for r in rec if r[0] in repl}
+          if found!=set(repl): raise SystemExit(f'missing target item rows {set(repl)-found}')
+          order=sorted(range(n),key=lambda i:rec[i][1])
+          out=bytearray(); cursor=0
+          for i in order:
+              rid,off,ln=rec[i]
+              if off<cursor or off+ln>len(dat): raise SystemExit(f'bad item.dat range id={rid} off={off} len={ln}')
+              out+=dat[cursor:off]
+              rec[i][1]=len(out)
+              row=repl.get(rid,dat[off:off+ln]); out+=row; rec[i][2]=len(row)
+              cursor=off+ln
+          out+=dat[cursor:]
+          for i,(rid,off,ln) in enumerate(rec): struct.pack_into('>iii',idx,8+i*12,rid,off,ln)
+          idxp.write_bytes(idx); datp.write_bytes(out)
+          print(f'Patched item rows 1173/1174; item.dat {len(dat)} -> {len(out)} bytes')
+          PY
+
+          INDEX="$WORK/jar/offline/packs/index.bin" LOC="$WORK/outer.csv" PACKROOT="$WORK/jar/offline/packs" NEWROOT="$WORK" python3 - <<'PY'
+          import os,struct
+          from pathlib import Path
+          idxp=Path(os.environ['INDEX']); root=Path(os.environ['PACKROOT']); newroot=Path(os.environ['NEWROOT'])
+          raw=bytearray(idxp.read_bytes())
+          if raw[:4]!=b'OPR1': raise SystemExit('bad outer index magic')
+          n=struct.unpack_from('>I',raw,4)[0]
+          if len(raw)!=8+n*14: raise SystemExit('bad outer index size')
+          rec=[]
+          for i in range(n):
+              p=8+i*14; rec.append([bytes(raw[p:p+4]),raw[p+4],raw[p+5],struct.unpack_from('>I',raw,p+6)[0],struct.unpack_from('>I',raw,p+10)[0]])
+          targets={}
+          for line in Path(os.environ['LOC']).read_text().splitlines():
+              fn,ri,k,ch,o,l,path=line.split(',',6); ri=int(ri);k=int(k);ch=int(ch);o=int(o);l=int(l)
+              if tuple(rec[ri][1:])!=(k,ch,o,l): raise SystemExit(f'outer index mismatch {fn}')
+              targets[ri]=(fn,(newroot/fn).read_bytes())
+          groups=sorted({(rec[i][1],rec[i][2]) for i in targets})
+          touched=[]
+          for kind,chunk in groups:
+              prefix='s' if kind==0 else 'd'; p=root/f'{prefix}{chunk:02d}.pak'; old=p.read_bytes()
+              members=sorted((i for i,r in enumerate(rec) if r[1]==kind and r[2]==chunk),key=lambda i:rec[i][3])
+              out=bytearray(); cursor=0
+              for i in members:
+                  h,k,ch,off,ln=rec[i]
+                  if off<cursor or off+ln>len(old): raise SystemExit(f'bad outer range {p.name} idx={i}')
+                  out+=old[cursor:off]; rec[i][3]=len(out)
+                  data=targets[i][1] if i in targets else old[off:off+ln]
+                  out+=data; rec[i][4]=len(data); cursor=off+ln
+              out+=old[cursor:]; p.write_bytes(out); touched.append(str(p.relative_to(Path(os.environ['PACKROOT']).parent.parent)))
+              print(f'Patched {p.name}: {len(old)} -> {len(out)} bytes')
+          for i,(h,k,ch,o,l) in enumerate(rec):
+              p=8+i*14;raw[p:p+4]=h;raw[p+4]=k;raw[p+5]=ch;struct.pack_into('>I',raw,p+6,o);struct.pack_into('>I',raw,p+10,l)
+          idxp.write_bytes(raw)
+          Path('/tmp/nso_fix_equip/touched.txt').write_text('\n'.join(touched))
+          PY
+
+          mapfile -t TOUCHED < "$WORK/touched.txt"
+          (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "${TOUCHED[@]}")
+
+          cat > "$WORK/tools/Validate.java" <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Validate{
+            static Object row(int id)throws Exception{Class<?>c=Class.forName("k2c");Constructor<?>ct=c.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance("item");Method f=c.getDeclaredMethod("find",int.class);f.setAccessible(true);return f.invoke(t,id);}
+            static String val(Object r,String f)throws Exception{Field x=r.getClass().getDeclaredField(f);x.setAccessible(true);Object v=x.get(r);if(v instanceof byte[])return Arrays.toString((byte[])v);if(v instanceof long[])return Arrays.toString((long[])v);if(v instanceof Object[])return Arrays.deepToString((Object[])v);return String.valueOf(v);}
+            public static void main(String[]a)throws Exception{for(int id:new int[]{1173,1174}){Object r=row(id);System.out.println(id+" types="+val(r,"types"));System.out.println(id+" numbers="+val(r,"numbers"));System.out.println(id+" strings="+val(r,"strings"));}}
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/tools/Validate.java"
+          java -classpath "$JAR:$WORK/tools" Validate | tee "$WORK/validation.txt"
+          grep -Fq '1173 numbers=[1173, 0, 2, 1, 0, 20, 3422, -1, 230, 0]' "$WORK/validation.txt"
+          grep -Fq '1174 numbers=[1174, 0, 2, 0, 0, 20, 3421, -1, 233, 0]' "$WORK/validation.txt"
+          grep -Fq '1173 strings=[null, Obito, null, null, Dùng thay đổi diện mạo' "$WORK/validation.txt"
+          grep -Fq '1174 strings=[null, Sakura, null, null, Dùng thay đổi diện mạo' "$WORK/validation.txt"
+          jar tf "$JAR" >/dev/null
+          echo "VALIDATION_OK: Obito fashion=230, Sakura fashion=233; JAR size=$(stat -c %s "$JAR")"
+      - name: Commit result
+        if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add disguise_equip_report.txt
-          git commit -m 'chore: inspect disguise equip mapping' || exit 0
+          git add disguise_equip_fix.log
+          if [ "${{ steps.patch.outcome }}" = success ]; then
+            git add Nso_Offline_By_h0901.jar
+            MSG='fix: restore Obito Sakura fashion item metadata'
+          else
+            MSG='chore: record disguise equip patch failure'
+          fi
+          git commit -m "$MSG" || exit 0
           git push origin fix-obito-sakura-equip

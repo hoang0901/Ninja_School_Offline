@@ -1,0 +1,755 @@
+=== Char.learnSkill 7280-7460 ===
+    public void hoiSinh(Message ms) {
+        try {
+            if (zone.tilemap.isNotRivival()) {
+                serverMessage("Không thể sử dụng thuật này tại đây.");
+                return;
+            }
+            if (this.classId == 6 && !this.isDead) {
+                int charId = ms.reader().readInt();
+                Char _char = zone.findCharById(charId);
+                if (_char != null && _char.isDead) {
+                    for (Skill my : vSkill) {
+                        if (my.template.id == 49) {
+                            if (!my.isCooldown()) {
+                                my.lastTimeUseThisSkill = System.currentTimeMillis();
+                                ArrayList<Char> chars = new ArrayList<>();
+                                chars.add(_char);
+                                addMp(-my.manaUse);
+                                getService().updateMp();
+                                zone.getService().setSkillPaint_2(chars, this, (byte) selectedSkill.template.id);
+                                int d = NinjaUtils.getDistance(my.dx, my.dy, 0, 0);
+                                int distance = NinjaUtils.getDistance(this.x, this.y, _char.x, _char.y);
+                                if (distance > d) {
+                                    serverMessage("Khoảng cách quá xa");
+                                    return;
+                                }
+
+                                _char.isDead = false;
+                                _char.hp = _char.maxHP;
+                                _char.mp = _char.maxMP;
+                                _char.getService().meLive();
+                                zone.getService().returnPointMap(_char);
+                                for (SkillOption option : my.options) {
+                                    if (option.optionTemplate.id == 28) {
+                                        Effect effect = new Effect(11, 5000, option.param);
+                                        _char.em.setEffect(effect);
+                                        _char.setAbility();
+                                    }
+                                }
+
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.error("err: " + e.getMessage(), e);
+        }
+    }
+
+    public void learnSkill(Item item) {
+        if (item.id == 547 && !isHuman) {
+            serverDialog("Thứ thân không thể chiêu này.");
+            return;
+        }
+        if ((item.id >= 40 && item.id <= 93) || (item.id >= 311 && item.id <= 316) || (item.id >= 375 && item.id <= 380)
+                || item.id == 547 || (item.id >= 552 && item.id <= 563) || (item.id >= 1134 && item.id <= 1139)) {
+            short templateId = (short) (item.id - 39);
+            if (item.id == 311) {
+                templateId = 55;
+            } else if (item.id == 312) {
+                templateId = 56;
+            } else if (item.id == 313) {
+                templateId = 57;
+            } else if (item.id == 314) {
+                templateId = 58;
+            } else if (item.id == 315) {
+                templateId = 59;
+            } else if (item.id == 316) {
+                templateId = 60;
+            } else if (item.id == 375) {
+                templateId = 61;
+            } else if (item.id == 376) {
+                templateId = 62;
+            } else if (item.id == 377) {
+                templateId = 63;
+            } else if (item.id == 378) {
+                templateId = 64;
+            } else if (item.id == 379) {
+                templateId = 65;
+            } else if (item.id == 380) {
+                templateId = 66;
+            } else if (item.id == 547) {
+                switch (this.classId) {
+                    case 1:
+                        templateId = 67;
+                        break;
+
+                    case 2:
+                        templateId = 68;
+                        break;
+
+                    case 3:
+                        templateId = 69;
+                        break;
+
+                    case 4:
+                        templateId = 70;
+                        break;
+
+                    case 5:
+                        templateId = 71;
+                        break;
+
+                    case 6:
+                        templateId = 72;
+                        break;
+                }
+            } else if (item.id == 552) {
+                templateId = 73;
+            } else if (item.id == 553) {
+                templateId = 78;
+            } else if (item.id == 554) {
+                templateId = 75;
+            } else if (item.id == 555) {
+                templateId = 76;
+            } else if (item.id == 556) {
+                templateId = 74;
+            } else if (item.id == 557) {
+                templateId = 77;
+            } else if (item.id == 558) {
+                templateId = 79;
+            } else if (item.id == 559) {
+                templateId = 83;
+            } else if (item.id == 560) {
+                templateId = 81;
+            } else if (item.id == 561) {
+                templateId = 82;
+            } else if (item.id == 562) {
+                templateId = 80;
+            } else if (item.id == 563) {
+                templateId = 84;
+            } else if (item.id == 1139) {
+                templateId = 85;
+            } else if (item.id == 1136) {
+                templateId = 86;
+            } else if (item.id == 1137) {
+                templateId = 87;
+            } else if (item.id == 1134) {
+                templateId = 88;
+            } else if (item.id == 1138) {
+                templateId = 89;
+            } else if (item.id == 1135) {
+                templateId = 90;
+            }
+            for (Skill my : vSkill) {
+                if (my.template.id == templateId) {
+                    serverDialog("Chiêu này đã học!");
+                    return;
+                }
+            }
+            Skill skill = GameData.getInstance().getSkill(this.classId, templateId, 1);
+            if (skill != null) {
+                vSkill.add(skill);
+                if (skill.template.type == Skill.SKILL_AUTO_USE) {
+                    vSupportSkill.add(skill);
+                    setAbility();
+                } else if ((skill.template.type == Skill.SKILL_CLICK_USE_ATTACK
+                        || skill.template.type == Skill.SKILL_CLICK_LIVE
+                        || skill.template.type == Skill.SKILL_CLICK_USE_BUFF
+                        || skill.template.type == Skill.SKILL_CLICK_NPC)
+                        && (skill.template.maxPoint == 0 || (skill.template.maxPoint > 0 && skill.point > 0))) {
+
+                    vSkillFight.add(skill);
+                }
+                getService().useBookSkill((byte) item.index, (short) skill.id);
+                getService().loadSkill();
+                if (selectedSkill == null && skill.template.type == 1) {
+                    selectSkill(templateId);
+                }
+                if (taskId == TaskName.NV_GIA_TANG_SUC_MANH && taskMain != null && taskMain.index == 0) {
+                    taskNext();
+                    taskNext();
+                }
+                removeItem(item.index, item.getQuantity(), false);
+            } else {
+                serverDialog("Sách nay không phù hợp!");
+            }
+        }
+    }
+
+=== Char surrounding useItem calls 3540-3620 ===
+                }
+            } else {
+                getService().endDlg(true);
+                zone.getService().chat(this.id, "Sao mình có thể thông minh vậy được");
+            }
+
+        } else if (item.id == ItemName.THE_DOI_TEN) {
+            if (!isHuman) {
+                warningClone();
+                serverDialog("Phân thân không thể sử dụng chức năng này");
+            } else {
+                changeCharname();
+            }
+        } else if (item.id == ItemName.RUONG_DANH_VONG) {
+
+            // Lấy ra ngẫu nhiên một số từ 0 đến 9
+            int randomIndex = NinjaUtils.nextInt(10);
+            int randPoint = NinjaUtils.nextInt(1, 5);
+            switch (randomIndex) {
+                case 0:
+                    pointNon += randPoint;
+                    break;
+                case 1:
+                    pointVuKhi += randPoint;
+                    break;
+                case 2:
+                    pointAo += randPoint;
+                    break;
+                case 3:
+                    pointLien += randPoint;
+                    break;
+                case 4:
+                    pointGangTay += randPoint;
+                    break;
+                case 5:
+                    pointNhan += randPoint;
+                    break;
+                case 6:
+                    pointQuan += randPoint;
+                    break;
+                case 7:
+                    pointNgocBoi += randPoint;
+                    break;
+                case 8:
+                    pointGiay += randPoint;
+                    break;
+                case 9:
+                    pointPhu += randPoint;
+                    break;
+            }
+            String[] arrPointName = {"Nón", "Vũ khí", "Áo", "Liên", "Găng tay", "Nhẫn", "Quần", "Ngọc bội", "Giày", "Phù"};
+
+            serverMessage("Bạn nhận được " + randPoint + " điểm danh vọng " + arrPointName[randomIndex]);
+            removeItem(item.index, 1, true);
+        } else {
+            learnSkill(item);
+        }
+
+        if (item.id == ItemName.CAN_CAU_CA) {
+            if (Events.event != Events.SUMMER) {
+                serverMessage("Vật phẩm này chỉ sử dụng được trong sự kiện hè.");
+                return;
+            }
+            if (this.isCatchItem) {
+                return;
+            }
+            if (zone.tilemap.tileTypeAt(this.x, this.y - 12, TileMap.T_WATERFLOW)) {
+                if (getSlotNull() > 0) {
+                    removeItem(item.index, 1, true);
+                    isCatchItem = true;
+                    Char _char = this;
+                    threadPool.submit(new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                getService().endDlg(true);
+                                serverMessage("Đang thả câu...");
+                                Thread.sleep(1000L);
+                                if (!isCleaned) {
+                                    int[] idItem = {895, 896, 899, 898, 897, 900, 901};
+                                    int[] percent = {20, 20, 20, 20, 10, 5, 5};
+                                    int index = NinjaUtils.randomWithRate(percent, 100);
+=== Char surrounding second learnSkill 4890-4980 ===
+            if (addExpForBijuu(200, (byte) 0)) {
+                removeItem(item.index, 1, true);
+            }
+        } else if (item.id == ItemName.QUA_CHAKA_TIM) {
+            Item bijuu = this.bijuu[4];
+            if (this.bijuu[4] == null) {
+                serverMessage("Hãy Sử Dụng Vĩ Thú.");
+                return;
+            }
+            if (bijuu.getItemOption(151).param >= 9700) {
+                serverMessage("Hãy dùng Ngũ Hành Quả để nâng cấp.");
+                return;
+            }
+            if (addExpForBijuu(300, (byte) 0)) {
+                removeItem(item.index, 1, true);
+            }
+        } else if (item.id == ItemName.NGU_HANH_QUA) {
+            Item bijuu = this.bijuu[4];
+            if (this.bijuu[4] == null) {
+                serverMessage("Hãy Sử Dụng Vĩ Thú.");
+                return;
+            }
+            if (bijuu.getItemOption(151).param <= 9700) {
+                serverMessage("Vĩ thú chưa đạt 99% kinh nghiệm.");
+                return;
+            }
+            if (this.user.gold < 500) {
+                serverMessage("Cần 500 lượng để dùng.");
+                return;
+            }
+            if (addExpForBijuu(300, (byte) 0)) {
+                this.addGold(-500);
+                removeItem(item.index, 1, true);
+            }
+        } else if (item.id == ItemName.NGU_HANH_HOA) {
+            Item bijuu = this.bijuu[4];
+            if (this.bijuu[4] == null) {
+                serverMessage("Hãy Sử Dụng Vĩ Thú.");
+                return;
+            }
+            if (bijuu != null) {
+                if (bijuu.template.isTypeBijuu() && bijuu.template.type == 10) {
+                    updateHPBijuu(150);
+                    getService().onBijuuInfo(this.id, this.bijuu);
+                    removeItem(item.index, 1, true);
+                } else {
+                    serverDialog("Không thể dùng cho Vĩ Thú.");
+                }
+            } else {
+                serverDialog("Bạn chưa sử dụng Vĩ Thú.");
+            }
+        } else {
+            learnSkill(item);
+        }
+    }
+
+    public void useItem(Message ms) {
+        lockItem.lock();
+        try {
+            if (isDead) {
+                return;
+            }
+            if (trade != null) {
+                warningTrade();
+                return;
+            }
+            byte indexUI = ms.reader().readByte();
+            if (indexUI >= 0 && indexUI <= numberCellBag) {
+                Item item = bag[indexUI];
+                if (item != null && item.has()) {
+                    if (this.level < item.template.level) {
+                        return;
+                    }
+                    if (item.isExpired()) {
+                        removeItem(item.index, 1, true);
+                        return;
+                    }
+                    if ((item.template.gender == 0 || item.template.gender == 1)
+                            && item.template.gender != this.gender) {
+                        return;
+                    }
+                    if (item.template.isTypeBody()) {
+                        if (this.zone.tilemap.isFujukaSanctuary()) {
+                            serverMessage("Không thể trang bị trong khu vực này");
+                            return;
+                        }
+                        if (item.template.id == ItemName.SANTA_CLAUS) {
+                            menus.clear();
+                            menus.add(new Menu(CMDMenu.EXECUTE, "Trang bị", () -> {
+                                useEquipment(item);
+                            }));
+=== GameData skill loading/template APIs ===
+                SkillOptionTemplate template = new SkillOptionTemplate();
+                template.id = resultSet.getInt("id");
+                template.name = resultSet.getString("name");
+                optionTemplates.add(template);
+            }
+            resultSet.close();
+            stmt.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void loadClass() {
+        try {
+            clazzs.clear();
+            Connection conn = DbManager.getInstance().getConnection(DbManager.SERVER);
+            PreparedStatement ps = conn.prepareStatement(SQLStatement.LOAD_CLASS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Clazz clazz = Clazz.builder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .build();
+                PreparedStatement ps2 = conn.prepareStatement(SQLStatement.LOAD_SKILL_TEMPLATE);
+                ps2.setInt(1, clazz.getId());
+                ResultSet rs2 = ps2.executeQuery();
+                while (rs2.next()) {
+                    SkillTemplate skillTemplate = new SkillTemplate();
+                    skillTemplate.id = rs2.getInt("id");
+                    skillTemplate.name = rs2.getString("name");
+                    skillTemplate.maxPoint = rs2.getByte("max_point");
+                    skillTemplate.type = rs2.getByte("type");
+                    skillTemplate.iconId = rs2.getShort("icon");
+                    skillTemplate.description = rs2.getString("description");
+                    PreparedStatement ps3 = conn.prepareStatement(SQLStatement.LOAD_SKILL);
+                    ps3.setInt(1, skillTemplate.id);
+                    ResultSet rs3 = ps3.executeQuery();
+                    while (rs3.next()) {
+                        Skill skill = new Skill();
+                        skill.id = rs3.getInt("id");
+                        skill.point = (byte) rs3.getInt("point");
+                        skill.level = (byte) rs3.getInt("level");
+                        skill.coolDown = rs3.getInt("cooldown");
+                        skill.dx = (short) rs3.getInt("dx");
+                        skill.dy = (short) rs3.getInt("dy");
+                        skill.manaUse = (short) rs3.getInt("mana_use");
+                        skill.maxFight = (byte) rs3.getInt("max_fight");
+                        skill.template = skillTemplate;
+                        JSONArray array = new JSONArray(rs3.getString("options"));
+                        skill.options = new SkillOption[array.length()];
+                        for (int i = 0; i < skill.options.length; i++) {
+                            JSONObject obj = array.getJSONObject(i);
+                            SkillOption skillOption = new SkillOption(obj.getInt("id"), obj.getInt("param"));
+                            skill.options[i] = skillOption;
+                        }
+                        skillTemplate.addSkill(skill);
+                    }
+                    rs3.close();
+                    ps3.close();
+                    clazz.addSkillTemplate(skillTemplate);
+                }
+                clazzs.add(clazz);
+                rs2.close();
+                ps2.close();
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(GameData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(GameData.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void writeDataMobNew(DataOutputStream ds, MobTemplate mob) throws IOException {
+        ds.writeByte(mob.imgInfo.length);
+        for (ImageInfo image : mob.imgInfo) {
+            ds.writeByte(image.id);
+            ds.writeByte(image.x0);
+            ds.writeByte(image.y0);
+            ds.writeByte(image.w);
+            ds.writeByte(image.h);
+        }
+        ds.writeShort(mob.frameBoss.length);
+        for (Frame frame : mob.frameBoss) {
+            ds.writeByte(frame.idImg.length);
+            for (int i = 0; i < frame.idImg.length; i++) {
+                ds.writeShort(frame.dx[i]);
+                ds.writeShort(frame.dy[i]);
+                ds.writeByte(frame.idImg[i]);
+                ds.writeByte(frame.flip[i]);
+                ds.writeByte(frame.onTop[i]);
+            }
+        }
+        ds.writeByte(mob.sequence.length);
+        for (short value : mob.sequence) {
+            ds.writeShort(value);
+        }
+        ds.writeByte(mob.frameChar.length);
+        for (byte[] frameC : mob.frameChar) {
+            ds.writeByte(frameC.length);
+            for (byte value : frameC) {
+                ds.writeByte(value);
+            }
+        }
+        for (byte index : mob.indexSplash) {
+            ds.writeByte(index);
+        }
+    }
+
+    public void writeDataMobOld(DataOutputStream ds, MobTemplate mob) throws IOException {
+        ds.writeByte(mob.imgInfo.length);
+        for (ImageInfo image : mob.imgInfo) {
+            ds.writeByte(image.id);
+            ds.writeByte(image.x0);
+            ds.writeByte(image.y0);
+            ds.writeByte(image.w);
+            ds.writeByte(image.h);
+        }
+        ds.writeShort(mob.frameBoss.length);
+        for (Frame frame : mob.frameBoss) {
+            ds.writeByte(frame.idImg.length);
+            for (int i = 0; i < frame.idImg.length; i++) {
+                ds.writeShort(frame.dx[i]);
+                ds.writeShort(frame.dy[i]);
+                ds.writeByte(frame.idImg[i]);
+            }
+        }
+        ds.writeShort(0);
+    }
+
+    public Clazz findClass(byte classId) {
+        return clazzs.get(classId);
+    }
+
+    public ArrayList<Skill> getAllSkill(byte clazz, int level) {
+        ArrayList<Skill> skills = new ArrayList<>();
+        Clazz nClass = clazzs.get(clazz);
+        for (SkillTemplate skillTemplate : nClass.getSkillTemplates()) {
+            int levelRequire = 0;
+            Skill skilla = null;
+            for (Skill skill : skillTemplate.skills) {
+                if (skill.level <= level && (skilla == null || skill.level > levelRequire)) {
+                    levelRequire = skill.level;
+                    skilla = skill;
+                }
+            }
+            if (skilla != null) {
+                skills.add(Converter.getInstance().newSkill(skilla));
+            }
+        }
+        return skills;
+    }
+
+    public Skill getSkill(int classId, int templateId, int point) {
+        SkillTemplate tem = getTemplate(classId, templateId);
+        if (tem != null) {
+            for (Skill skill : tem.skills) {
+                if (skill.point == point) {
+                    return Converter.getInstance().newSkill(skill);// khởi tạo skill
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Skill getSkillWithLevel(int classId, int level) {
+        Clazz n = clazzs.get(classId);
+        if (n != null) {
+            for (SkillTemplate tem : n.getSkillTemplates()) {
+                if (tem != null && tem.skills.get(1).level == level) {
+                    return tem.skills.get(1);
+                }
+            }
+        }
+        return null;
+    }
+
+    public Skill getSkill(int id, int point) {
+        for (Clazz nC : clazzs) {
+            for (SkillTemplate template : nC.getSkillTemplates()) {
+                if (template.id == id) {
+                    for (Skill skill : template.skills) {
+                        if (skill.point == point) {
+                            return skill;
+                        }
+                    }
+                }
+            }
+
+        }
+        return null;
+    }
+
+    public SkillTemplate getTemplate(int classId, int templateId) {
+        Clazz n = clazzs.get(classId);
+        if (n != null) {
+            for (SkillTemplate tem : n.getSkillTemplates()) {
+                if (tem != null && tem.id == templateId) {
+                    return tem;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public ArrayList<Skill> getSkills(Char _char) {
+        ArrayList<Skill> skills = new ArrayList<Skill>();
+        Clazz n = clazzs.get(_char.classId);
+        if (n != null) {
+            for (SkillTemplate tem : n.getSkillTemplates()) {
+                for (Skill skill : tem.skills) {
+                    if (skill.point == 1) {
+                        skills.add(skill);
+                    }
+                }
+            }
+        }
+        return skills;
+    }
+
+    @Override
+    public void run() {
+        while (running) {
+            long l1 = System.currentTimeMillis();
+            update();
+            long l2 = System.currentTimeMillis();
+            if (l2 - l1 < 5000) {
+                try {
+                    Thread.sleep(5000 - (l2 - l1));
+=== Skill.java ===
+package Exe_Z.skill;
+
+import Exe_Z.option.SkillOption;
+
+import org.json.simple.JSONObject;
+
+public class Skill {
+
+    public static final byte SKILL_AUTO_USE = 0;
+    public static final byte SKILL_CLICK_USE_ATTACK = 1;
+    public static final byte SKILL_CLICK_USE_BUFF = 2;
+    public static final byte SKILL_CLICK_NPC = 3;
+    public static final byte SKILL_CLICK_LIVE = 4;
+
+    public int id;
+    public byte point;
+    public byte level;
+    public short manaUse;
+    public int coolDown;
+    public short dx;
+    public short dy;
+    public byte maxFight;
+    public SkillOption[] options;
+    public long lastTimeUseThisSkill;
+    public SkillTemplate template;
+
+    public JSONObject toJSONObject() {
+        JSONObject obj = new JSONObject();
+        obj.put("id", this.template.id);
+        obj.put("point", this.point);
+        return obj;
+    }
+
+    public boolean isCooldown() {
+        long currentTimeMillis = System.currentTimeMillis();
+        long num = currentTimeMillis - lastTimeUseThisSkill;
+        return num < (long) this.coolDown;
+    }
+}
+=== SkillTemplate.java ===
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Exe_Z.skill;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ * @author Administrator
+ */
+public class SkillTemplate {
+
+    public int id;
+    public String name;
+    public byte maxPoint;
+    public byte type;
+    public short iconId;
+    public String description;
+
+    public final List<Skill> skills = new ArrayList<>();
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+}
+=== item rows likely skill books level 120 ===
+1006:(251, 'Mảnh giấy vụn', 27, 2, 'Dùng để đổi sách tiềm năng hoặc sách kỹ năng', 1, 1201, -1, -1, 1),
+1007:(252, 'Sách kỹ năng sơ cấp', 27, 2, 'Học xong sẽ tăng 1 điểm kỹ năng, được học tối đa 3 quyển', 10, 1202, -1, -1, 1),
+1008:(253, 'Sách tiềm năng sơ cấp', 27, 2, 'Học xong sẽ tăng 10 điểm tiềm năng, được học tối đa 3 quyển', 10, 1203, -1, -1, 1),
+=== all item rows around 1177-1190 ===
+1933:(1177, 'Bạc tinh luyện', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 10, 17042, -1, -1, 1),
+1934:(1178, 'Thiên thạch sao thủy', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 20, 17043, -1, -1, 1),
+1935:(1179, 'Đá ảo giác', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 30, 17044, -1, -1, 1),
+1936:(1180, 'Ngọc trai thô', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 1, 17045, -1, -1, 1),
+1937:(1181, 'Thép tinh luyện', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 10, 17046, -1, -1, 1),
+1938:(1182, 'Thiên thạch sao kim', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 20, 17047, -1, -1, 1),
+1939:(1183, 'Đá thiên hà', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 30, 17048, -1, -1, 1),
+1940:(1184, 'Xà cừ thô', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 1, 17049, -1, -1, 1),
+1941:(1185, 'Thạch anh tím', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 10, 17050, -1, -1, 1),
+1942:(1186, 'Thiên thạch sao hỏa', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 20, 17051, -1, -1, 1),
+1943:(1187, 'Đá phù thủy', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 30, 17052, -1, -1, 1),
+1944:(1188, 'Thạch anh tím thô', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 1, 17053, -1, -1, 1),
+1945:(1189, 'Đồng tinh luyện', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 10, 17054, -1, -1, 1),
+1946:(1190, 'Thiên thạch sao mộc', 27, 2, 'Dùng để chế tạo và nâng cấp linh ấn', 20, 17055, -1, -1, 1),
+4409:(1177, '{\"w\":16,\"x\":176,\"h\":16,\"y\":208,\"id\":4}'),
+4410:(1178, '{\"w\":16,\"x\":190,\"h\":16,\"y\":169,\"id\":4}'),
+4411:(1179, '{\"w\":16,\"x\":191,\"h\":16,\"y\":185,\"id\":4}'),
+4412:(1180, '{\"w\":14,\"x\":241,\"h\":20,\"y\":38,\"id\":0}'),
+4413:(1181, '{\"w\":12,\"x\":240,\"h\":12,\"y\":14,\"id\":0}'),
+4414:(1182, '{\"w\":12,\"x\":241,\"h\":12,\"y\":26,\"id\":0}'),
+4415:(1183, '{\"w\":19,\"x\":230,\"h\":9,\"y\":57,\"id\":2}'),
+4416:(1184, '{\"w\":16,\"x\":160,\"h\":16,\"y\":226,\"id\":4}'),
+4417:(1185, '{\"w\":5,\"x\":225,\"h\":5,\"y\":51,\"id\":2}'),
+4418:(1186, '{\"w\":9,\"x\":141,\"h\":9,\"y\":188,\"id\":2}'),
+4419:(1187, '{\"w\":11,\"x\":240,\"h\":11,\"y\":243,\"id\":2}'),
+4420:(1188, '{\"w\":5,\"x\":230,\"h\":5,\"y\":48,\"id\":2}'),
+4421:(1189, '{\"w\":9,\"x\":235,\"h\":9,\"y\":48,\"id\":2}'),
+4422:(1190, '{\"w\":11,\"x\":236,\"h\":11,\"y\":18,\"id\":2}'),
+=== configs referencing SACH_VO_CONG_120 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:18:    public static final int[] id_ngoc_tho = new int[]{1176, 1180, 1184, 1188, 1192, 1196, 1200, 1204, 1208, 1212};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:19:    public static final int[] id_tinh_che = new int[]{1177, 1181, 1185, 1189, 1193, 1197, 1201, 1205, 1209, 1213};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:20:    public static final int[] id_thien_thach = new int[]{1178, 1182, 1186, 1190, 1194, 1198, 1202, 1206, 1210};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/LinhAn.java:21:    public static final int[] id_da_huyen_bi = new int[]{1179, 1183, 1187, 1191, 1195, 1199, 1203, 1207, 1211, 1215, 1214};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:83:    public static  RandomCollection<Integer> SACH_VO_CONG_120 = new RandomCollection<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:993:        loadItems("item_roi/loai_khac/SACH_VO_CONG_120.json", "SACH_VO_CONG_120");
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1134:                        case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1135:                            SACH_VO_CONG_120.add(percent, id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1229:            case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1230:                SACH_VO_CONG_120 = new RandomCollection<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:9713:                            int[] yens = new int[]{150000, 247500, 408375, 673819, 1111801, 2056832, 4010822, 7420021, 12243035};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:9948://                                int[] yens = new int[]{150000, 247500, 408375, 673819, 1111801, 2056832, 4010822,
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1129:    public static final int BAC_TINH_LUYEN = 1177;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1130:    public static final int THIEN_THACH_SAO_THUY = 1178;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1131:    public static final int DA_AO_GIAC = 1179;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1132:    public static final int NGOC_TRAI_THO = 1180;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1133:    public static final int THEP_TINH_LUYEN = 1181;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1134:    public static final int THIEN_THACH_SAO_KIM = 1182;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1135:    public static final int DA_THIEN_HA = 1183;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1136:    public static final int XA_CU_THO = 1184;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1137:    public static final int THACH_ANH_TIM = 1185;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1138:    public static final int THIEN_THACH_SAO_HOA = 1186;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1139:    public static final int DA_PHU_THUY = 1187;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1140:    public static final int THACH_ANH_TIM_THO = 1188;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1141:    public static final int DONG_TINH_LUYEN = 1189;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:1142:    public static final int THIEN_THACH_SAO_MOC = 1190;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:58:        3932160, 11796480};
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:59:    public static final int[] COIN_UP_CLOTHE = {120, 270, 990, 3960, 5310, 7680, 19680, 86400, 119040, 180480,
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:2:    { "id": 1182, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:3:    { "id": 1183, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:4:    { "id": 1184, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:5:    { "id": 1185, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:6:    { "id": 1185, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:7:    { "id": 1187, "rate": 5, "expire": -1, "quantity": 1 },
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/item_roi/LatHinh/Lat_Hinh_VIP.json:8:    { "id": 1188, "rate": 5, "expire": -1, "quantity": 1 },
+=== sql schema/table lines for skill ===
+6755:CREATE TABLE `nj_skill` (
+6768:INSERT INTO `nj_skill` (`id`, `skillId`, `effId`, `numEff`, `skillStand`, `skillFly`) VALUES
+6787:INSERT INTO `nj_skill` (`id`, `skillId`, `effId`, `numEff`, `skillStand`, `skillFly`) VALUES
+6805:INSERT INTO `nj_skill` (`id`, `skillId`, `effId`, `numEff`, `skillStand`, `skillFly`) VALUES
+6823:INSERT INTO `nj_skill` (`id`, `skillId`, `effId`, `numEff`, `skillStand`, `skillFly`) VALUES
+7158:INSERT INTO `players` (`id`, `user_id`, `server_id`, `name`, `gender`, `clan`, `class`, `data`, `point`, `potential`, `spoint`, `skill`, `equiped`, `fashion`, `bijuu`, `map`, `saveCoordinate`, `head`, `head2`, `weapon`, `body`, `leg`, `xu`, `xuInBox`, `yen`, `numberCellBag`, `numberCellBox`, `bag`, `box`, `onCSkill`, `onOSkill`, `onKSkill`, `mount`, `effect`, `friends`, `enemies`, `taskId`, `task`, `rewardPB`, `event_point`, `spending_point`, `message`, `giftcode_unpaid`, `last_login_time`, `last_logout_time`, `online`, `mask_box`, `collection_box`, `activated`, `created_at`, `updated_at`, `tongnap`, `napdau`, `fancung`, `loantin`, `rewardMOC`, `quatop`, `rewardtop`, `countvxmm`, `amount_unpaid`, `deleted_at`, `topBoss`, `topvxmm`, `thannong`) VALUES
+7371:CREATE TABLE `skill` (
+7388:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+7726:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+8106:INSERT INTO `skill` (`id`, `template_id`, `max_fight`, `level`, `mana_use`, `cooldown`, `point`, `dx`, `dy`, `options`) VALUES
+8353:CREATE TABLE `skill_option` (
+8362:INSERT INTO `skill_option` (`id`, `name`) VALUES
+8439:-- Table structure for table `skill_template`
+8442:CREATE TABLE `skill_template` (
+8453:-- Dumping data for table `skill_template`
+8456:INSERT INTO `skill_template` (`id`, `class`, `name`, `max_point`, `type`, `icon`, `description`) VALUES
+10033:-- Indexes for table `skill_template`
+10035:ALTER TABLE `skill_template`
+=== skill-related config files ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/option/SkillOption.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/SkillName.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillFactory.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillOptionTemplate.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillPaint.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillTemplate.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillInfoPaint.java
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/Skill.java

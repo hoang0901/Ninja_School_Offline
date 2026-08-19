@@ -1,0 +1,25 @@
+=== BEFORE ===
+T 85 pointField=[0, 1] skillIds=[955, 956] lookup1=-1
+T 86 pointField=[0, 1] skillIds=[957, 958] lookup1=-1
+T 87 pointField=[0, 1] skillIds=[959, 960] lookup1=-1
+T 88 pointField=[0, 1] skillIds=[961, 962] lookup1=-1
+T 89 pointField=[0, 1] skillIds=[963, 964] lookup1=-1
+T 90 pointField=[0, 1] skillIds=[965, 966] lookup1=-1
+=== PATCH k24.a(int): search point array i[] instead of wrong e[] ===
+2ab4000d1c33 matches 1
+2ab4000dbe matches 1
+=== AFTER ===
+T 85 pointField=[0, 1] skillIds=[955, 956] lookup1=1
+T 86 pointField=[0, 1] skillIds=[957, 958] lookup1=1
+T 87 pointField=[0, 1] skillIds=[959, 960] lookup1=1
+T 88 pointField=[0, 1] skillIds=[961, 962] lookup1=1
+T 89 pointField=[0, 1] skillIds=[963, 964] lookup1=1
+T 90 pointField=[0, 1] skillIds=[965, 966] lookup1=1
+OK 85 point1 index 1 skill 956
+OK 86 point1 index 1 skill 958
+OK 87 point1 index 1 skill 960
+OK 88 point1 index 1 skill 962
+OK 89 point1 index 1 skill 964
+OK 90 point1 index 1 skill 966
+VALIDATION_OK skill120 books 1125-1130 resolve point 1 correctly
+FINAL_JAR_SIZE=5268125

@@ -1,4 +1,4 @@
-name: Trace offline skill 120 state mutation
+name: Inspect k8 skill 120 handler
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,43 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump relevant offline bytecode
+      - name: Dump k8 and state API
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_logic.txt"
+          LOG="$GITHUB_WORKSPACE/skill120_k8.txt"
           exec > >(tee "$LOG") 2>&1
           rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
           cd /tmp/jar
-          echo '=== k8 FULL ==='
-          javap -classpath . -c -p -verbose k8
-          echo '=== k7 FULL ==='
-          javap -classpath . -c -p -verbose k7
-          echo '=== k18 FULL ==='
-          javap -classpath . -c -p -verbose k18
-          echo '=== k24 FULL ==='
-          javap -classpath . -c -p -verbose k24
-          echo '=== k25 FULL ==='
-          javap -classpath . -c -p -verbose k25
-          echo '=== Classes referencing CSkill/KSkill/OSkill and IDs 955-966 ==='
-          for c in *.class; do
-            s=$(strings "$c" | grep -E 'CSkill|KSkill|OSkill|skill_wire|SKILL' | head -n 30 || true)
-            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
-            if [ -n "$s" ] || printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(955|956|957|958|959|960|961|962|963|964|965|966)'; then
-              echo "===== ${c%.class} STRINGS ====="; echo "$s"
-              echo "===== ${c%.class} CODE MATCH ====="
-              printf '%s\n' "$j" | grep -n -B70 -A160 -E 'sipush[[:space:]]+(955|956|957|958|959|960|961|962|963|964|965|966)|CSkill|KSkill|OSkill' | head -n 2500 || true
-            fi
-          done | head -n 15000
-          echo '=== DoHoang091 state fields ==='
-          javap -classpath . -p DoHoang091 | grep -E 'Skill|\[S|\[I|boolean|int|short' | head -n 600 || true
-          javap -classpath . -p 'DoHoang091$k0' | head -n 500 || true
+          echo '=== K8 ==='
+          javap -classpath . -c -p k8
+          echo '=== K8 STRINGS ==='
+          strings k8.class
+          echo '=== STATE ==='
+          javap -classpath . -p 'DoHoang091$k0'
+          echo '=== K16 ==='
+          javap -classpath . -c -p k16
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_logic.txt || true
-          git commit -m 'chore: trace offline skill 120 state mutation' || exit 0
+          git add skill120_k8.txt || true
+          git commit -m 'chore: inspect k8 skill 120 handler' || exit 0
           git push origin fix-skill120-learning

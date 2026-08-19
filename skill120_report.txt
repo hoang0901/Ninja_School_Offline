@@ -1,0 +1,4771 @@
+=== SOURCE SACH_VO_CONG_120 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:83:    public static  RandomCollection<Integer> SACH_VO_CONG_120 = new RandomCollection<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:993:        loadItems("item_roi/loai_khac/SACH_VO_CONG_120.json", "SACH_VO_CONG_120");
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1134:                        case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1135:                            SACH_VO_CONG_120.add(percent, id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1229:            case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1230:                SACH_VO_CONG_120 = new RandomCollection<>();
+=== SOURCE learning/check keywords ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Clazz.java:8:import Exe_Z.skill.SkillTemplate;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Clazz.java:27:    private List<SkillTemplate> skillTemplates = new ArrayList<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Clazz.java:29:    public void addSkillTemplate(SkillTemplate skillTemplate) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:3595:            learnSkill(item);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:4942:            learnSkill(item);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7330:    public void learnSkill(Item item) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/Char.java:7427:                    serverDialog("Chiêu này đã học!");
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/task/Text.java:106:            "Bạn đã học kĩ năng này rồi", // 91
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/admin/AdminService.java:536:                    p.serverMessage("Chiêu này đã học!");
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/Server.java:54:import Exe_Z.skill.SkillTemplate;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/Server.java:834:                List<SkillTemplate> templates = clazz.getSkillTemplates();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/Server.java:837:                for (SkillTemplate template : templates) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:21:import Exe_Z.skill.SkillTemplate;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:177:                    SkillTemplate skillTemplate = new SkillTemplate();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:209:                    clazz.addSkillTemplate(skillTemplate);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:288:        for (SkillTemplate skillTemplate : nClass.getSkillTemplates()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:305:        SkillTemplate tem = getTemplate(classId, templateId);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:319:            for (SkillTemplate tem : n.getSkillTemplates()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:330:            for (SkillTemplate template : nC.getSkillTemplates()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:344:    public SkillTemplate getTemplate(int classId, int templateId) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:347:            for (SkillTemplate tem : n.getSkillTemplates()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/server/GameData.java:361:            for (SkillTemplate tem : n.getSkillTemplates()) {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/SkillTemplate.java:15:public class SkillTemplate {
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/skill/Skill.java:25:    public SkillTemplate template;
+=== SOURCE item 838 / book 120 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:83:    public static  RandomCollection<Integer> SACH_VO_CONG_120 = new RandomCollection<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:993:        loadItems("item_roi/loai_khac/SACH_VO_CONG_120.json", "SACH_VO_CONG_120");
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1134:                        case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1135:                            SACH_VO_CONG_120.add(percent, id);
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1229:            case "SACH_VO_CONG_120" ->
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/model/RandomItem.java:1230:                SACH_VO_CONG_120 = new RandomCollection<>();
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/constants/ItemName.java:845:    public static final int MANH_SACH_CO = 838;
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:1594:(838, 'Mảnh sách cổ', 27, 2, 'Sử dụng 100 mảnh để đổi lấy sách võ công 100', 110, 3508, -1, -1, 1),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:4069:(838, '{\"w\":19,\"x\":222,\"h\":15,\"y\":109,\"id\":1}'),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:8229:(838, 76, 0, 80, 0, 0, 0, 0, 0, '[{\"param\":0,\"id\":25},{\"param\":0,\"id\":1},{\"param\":0,\"id\":3},{\"param\":0,\"id\":11},{\"param\":0,\"id\":33}]'),
+=== SOURCE skill SQL rows level 120 ===
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:1006:(251, 'Mảnh giấy vụn', 27, 2, 'Dùng để đổi sách tiềm năng hoặc sách kỹ năng', 1, 1201, -1, -1, 1),
+/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql:1007:(252, 'Sách kỹ năng sơ cấp', 27, 2, 'Học xong sẽ tăng 1 điểm kỹ năng, được học tối đa 3 quyển', 10, 1202, -1, -1, 1),
+=== JAR candidate classes strings ===
+===== Class_by =====
+****** SKILL VERSION: Server 
+CSkill
+GET UPDATE_SKILL 
+KSkill
+LOAD XONG ME LOAD SKILL 
+OSkill
+nj_skill
+skill
+skillVersion
+skillnhanban
+===== Class_ch =====
+nj_skill
+skill
+===== Class_ct =====
+/hd/skill.png
+CSkill
+KSkill
+OSkill
+nj_skill
+skillVersion
+===== Class_cy =====
+loi paint charskill
+===== Class_dt =====
+ng skill
+ng skill 
+m lan skill
+===== Class_gd =====
+IFor keyboard phones, assign shortcut keys 7,8,9 (or Q,W,E) to use skills.
+Read the basic skill book: 
+Skill
+Skill point
+KYou are run out off skill points. Upgrade your level for more skill points.
+#You do not have any special skills.
+skill point
+===== Class_gs =====
+!Err DataSkillEff  paintBottomEff:
+===== Class_gv =====
+!Err DataSkillEff  paintBottomEff:
+===== DoHoang091 =====
+%Unexpected ME_LOAD_ALL skill template
+too many saved skills
+===== k18 =====
+CSkill
+KSkill
+OSkill
+===== k1c =====
+c Chocolate: 2 B
+t + 1 Chocolate.
+nh chocolate : 
+nh chocolate
+c chocolate
+ top chocolate
+nh chocolate
+===== k24 =====
+skill wire trailing bytes
+===== k25 =====
+CSkill
+KSkill
+ NINJA_SCHOOL_OFFLINE_SKILL_TICK 
+OSkill
+bot_skill_wire
+skill_wire
+===== k26 =====
+SACH_VO_CONG_120
+===== k2b =====
+a + 3 Kem chocolate + 2 Kem d
+===== k7 =====
+CSkill
+KSkill
+OSkill
+===== kf =====
+BANH_KHUC_CAY_CHOCOLATE
+=== JAR bytecode constants 838/120 and messages ===
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+===== Class_aq =====
+653-     792: ifeq          977
+654-     795: getstatic     #72                 // Field Class_fx.d:Ljava/lang/String;
+655-     798: ldc           #5                  // String ,
+656-     800: invokestatic  #99                 // Method Class_dt.c:(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;
+657-     803: astore_3
+658-     804: getstatic     #49                 // Field h:[I
+659-     807: iconst_0
+660-     808: iaload
+661-     809: istore        4
+662-     811: iload         4
+663-     813: aload_3
+664-     814: arraylength
+665-     815: invokestatic  #86                 // Method g:(II)Z
+666-     818: ifeq          947
+667-     821: getstatic     #50                 // Field Class_ct.bi:LClass_dj;
+668-     824: iload_1
+669-     825: invokevirtual #96                 // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+670-     828: checkcast     #11                 // class Class_cy
+671-     831: dup
+672-     832: astore        5
+673-     834: getfield      #56                 // Field Class_cy.dx:Ljava/lang/String;
+674-     837: aload_3
+675-     838: iload         4
+676-     840: aaload
+677-     841: invokevirtual #114                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+678-     844: invokestatic  #81                 // Method e:(I)Z
+679-     847: ifeq          924
+680-     850: aload         5
+681-     852: astore_2
+682-     853: ldc           #1                  // String
+683-     855: invokevirtual #115                // Method java/lang/String.length:()I
+684-     858: pop
+685-     859: bipush        55
+686-     861: sipush        130
+687-     864: iadd
+688:     865: bipush        120
+689-     867: isub
+690-     868: bipush        68
+691-     870: iadd
+692-     871: bipush        81
+693-     873: sipush        157
+694-     876: iadd
+695-     877: sipush        212
+696-     880: isub
+697-     881: sipush        156
+698-     884: iadd
+699-     885: ixor
+700-     886: bipush        22
+701-     888: bipush        42
+702-     890: iadd
+703-     891: bipush        35
+704-     893: isub
+705-     894: sipush        130
+706-     897: iadd
+707-     898: sipush        166
+708-     901: bipush        33
+709-     903: iadd
+710-     904: sipush        146
+711-     907: isub
+712-     908: bipush        119
+713-     910: iadd
+714-     911: ixor
+715-     912: ldc           #2                  // String
+716-     914: invokevirtual #115                // Method java/lang/String.length:()I
+717-     917: ineg
+718-     918: ixor
+719-     919: iand
+720-     920: ifeq          947
+721-     923: return
+722-     924: iinc          4, 1
+723-     927: ldc           #1                  // String
+724-     929: invokevirtual #115                // Method java/lang/String.length:()I
+725-     932: pop
+726-     933: bipush        29
+727-     935: bipush        25
+728-     937: ixor
+729-     938: ldc           #2                  // String
+730-     940: invokevirtual #115                // Method java/lang/String.length:()I
+731-     943: if_icmpne     811
+732-     946: return
+733-     947: iinc          1, 1
+734-     950: ldc           #1                  // String
+735-     952: invokevirtual #115                // Method java/lang/String.length:()I
+736-     955: pop
+737-     956: bipush        56
+738-     958: bipush        9
+739-     960: ixor
+740-     961: bipush        20
+741-     963: bipush        33
+742-     965: ixor
+743-     966: ixor
+744-     967: ldc           #2                  // String
+745-     969: invokevirtual #115                // Method java/lang/String.length:()I
+746-     972: ineg
+747-     973: if_icmpne     782
+748-     976: return
+749-     977: aload_2
+750-     978: invokestatic  #75                 // Method a:(Ljava/lang/Object;)Z
+751-     981: ifeq          1044
+752-     984: invokestatic  #116                // Method java/lang/System.currentTimeMillis:()J
+753-     987: ldc2_w        #26                 // long 1000l
+754-     990: ldiv
+755-     991: l2i
+756-     992: istore_3
+757-     993: invokestatic  #88                 // Method Class_ct.ag:()LClass_ct;
+758-     996: getfield      #51                 // Field Class_ct.fr:I
+===== Class_as =====
+640-      56: iload_2
+641-      57: aload_0
+642-      58: getfield      #69                 // Field w:[[I
+643-      61: iload         4
+644-      63: aaload
+645-      64: getstatic     #71                 // Field y:[I
+646-      67: iconst_3
+647-      68: iaload
+648-      69: iaload
+649-      70: aload_0
+650-      71: getfield      #70                 // Field x:I
+651-      74: iadd
+652-      75: iadd
+653-      76: istore_2
+654-      77: iinc          3, 1
+655-      80: ldc           #1                  // String
+656-      82: invokevirtual #100                // Method java/lang/String.length:()I
+657-      85: pop
+658-      86: ldc           #2                  // String
+659-      88: invokevirtual #100                // Method java/lang/String.length:()I
+660-      91: ldc           #3                  // String
+661-      93: invokevirtual #100                // Method java/lang/String.length:()I
+662-      96: if_icmplt     12
+663-      99: bipush        112
+664-     101: bipush        22
+665-     103: ixor
+666-     104: bipush        56
+667-     106: bipush        27
+668-     108: ixor
+669-     109: ixor
+670-     110: bipush        46
+671-     112: sipush        227
+672-     115: iadd
+673-     116: sipush        162
+674-     119: isub
+675:     120: bipush        120
+676-     122: iadd
+677-     123: bipush        97
+678-     125: bipush        125
+679-     127: iadd
+680-     128: bipush        63
+681-     130: isub
+682-     131: iconst_3
+683-     132: iadd
+684-     133: ixor
+685-     134: ldc           #2                  // String
+686-     136: invokevirtual #100                // Method java/lang/String.length:()I
+687-     139: ineg
+688-     140: ixor
+689-     141: iand
+690-     142: ireturn
+691-     143: iload_2
+692-     144: ireturn
+693-
+694-  private static boolean b(int, int);
+695-    Code:
+696-       0: iload_0
+697-       1: iload_1
+698-       2: if_icmpne     9
+699-       5: iconst_1
+700-       6: goto          10
+701-       9: iconst_0
+702-      10: ireturn
+703-
+704-  public final Class_dj a(java.lang.String, int);
+705-    Code:
+706-       0: new           #33                 // class Class_dj
+707-       3: dup
+708-       4: invokespecial #86                 // Method Class_dj."<init>":()V
+709-       7: astore_3
+710-       8: ldc           #1                  // String
+711-      10: astore        4
+712-      12: getstatic     #71                 // Field y:[I
+713-      15: iconst_0
+714-      16: iaload
+715-      17: istore        5
+716-      19: iload         5
+717-      21: aload_1
+718-      22: invokevirtual #100                // Method java/lang/String.length:()I
+719-      25: invokestatic  #84                 // Method d:(II)Z
+720-      28: ifeq          305
+721-      31: aload_1
+722-      32: iload         5
+723-      34: invokevirtual #97                 // Method java/lang/String.charAt:(I)C
+724-      37: getstatic     #71                 // Field y:[I
+725-      40: bipush        7
+726-      42: iaload
+727-      43: invokestatic  #80                 // Method b:(II)Z
+728-      46: ifeq          83
+729-      49: aload_3
+730-      50: aload         4
+731-      52: invokevirtual #87                 // Method Class_dj.addElement:(Ljava/lang/Object;)V
+732-      55: ldc           #1                  // String
+733-      57: astore        4
+734-      59: ldc           #1                  // String
+735-      61: invokevirtual #100                // Method java/lang/String.length:()I
+736-      64: pop
+737-      65: bipush        126
+738-      67: bipush        27
+739-      69: ixor
+740-      70: sipush        215
+741-      73: sipush        182
+742-      76: ixor
+743-      77: ixor
+744-      78: ifge          286
+745-      81: aconst_null
+--
+1043-     148: aload_0
+1044-     149: getfield      #69                 // Field w:[[I
+1045-     152: iload_2
+1046-     153: aaload
+1047-     154: getstatic     #71                 // Field y:[I
+1048-     157: iconst_4
+1049-     158: iaload
+1050-     159: iaload
+1051-     160: istore_3
+1052-     16/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+1: aload_0
+1053-     162: iload_3
+1054-     163: putfield      #72                 // Field z:I
+1055-     166: iinc          2, 1
+1056-     169: ldc           #1                  // String
+1057-     171: invokevirtual #100                // Method java/lang/String.length:()I
+1058-     174: pop
+1059-     175: ldc           #2                  // String
+1060-     177: invokevirtual #100                // Method java/lang/String.length:()I
+1061-     180: ldc           #2                  // String
+1062-     182: invokevirtual #100                // Method java/lang/String.length:()I
+1063-     185: ineg
+1064-     186: if_icmpgt     59
+1065-     189: aconst_null
+1066-     190: athrow
+1067-     191: ldc           #1                  // String
+1068-     193: invokevirtual #100                // Method java/lang/String.length:()I
+1069-     196: pop
+1070-     197: bipush        26
+1071-     199: bipush        59
+1072-     201: ixor
+1073-     202: bipush        15
+1074-     204: bipush        108
+1075-     206: ixor
+1076-     207: ixor
+1077-     208: bipush        116
+1078:     210: bipush        120
+1079-     212: iadd
+1080-     213: sipush        200
+1081-     216: isub
+1082-     217: sipush        158
+1083-     220: iadd
+1084-     221: bipush        19
+1085-     223: bipush        107
+1086-     225: iadd
+1087-     226: bipush        57
+1088-     228: isub
+1089-     229: bipush        59
+1090-     231: iadd
+1091-     232: ixor
+1092-     233: ldc           #2                  // String
+1093-     235: invokevirtual #100                // Method java/lang/String.length:()I
+1094-     238: ineg
+1095-     239: ixor
+1096-     240: iand
+1097-     241: ifeq          283
+1098-     244: aconst_null
+1099-     245: athrow
+1100-     246: ldc           #1                  // String
+1101-     248: invokevirtual #100                // Method java/lang/String.length:()I
+1102-     251: pop2
+1103-     252: aload_1
+1104-     253: invokevirtual #91                 // Method java/io/DataInputStream.close:()V
+1105-     256: ldc           #1                  // String
+1106-     258: invokevirtual #100                // Method java/lang/String.length:()I
+1107-     261: pop
+1108-     262: bipush        24
+1109-     264: bipush        29
+1110-     266: ixor
+1111-     267: ifgt          283
+1112-     270: aconst_null
+1113-     271: athrow
+1114-     272: dup
+1115-     273: astore_3
+1116-     274: invokevirtual #107                // Method java/lang/Throwable.printStackTrace:()V
+1117-     277: return
+1118-     278: dup
+1119-     279: astore_1
+1120-     280: invokevirtual #107                // Method java/lang/Throwable.printStackTrace:()V
+1121-     283: return
+1122-    Exception table:
+1123-       from    to  target type
+1124-          26   191   246   Class java/lang/Exception
+1125-         252   256   272   Class java/io/IOException
+1126-           4   277   278   Class java/lang/Exception
+1127-
+1128-  private static boolean b(int);
+1129-    Code:
+1130-       0: iload_0
+1131-       1: ifne          8
+1132-       4: iconst_1
+1133-       5: goto          9
+1134-       8: iconst_0
+1135-       9: ireturn
+1136-
+1137-  public final void a(Class_dg, java.lang.String, int, int, int);
+1138-    Code:
+1139-       0: aload_2
+1140-       1: invokevirtual #100                // Method java/lang/String.length:()I
+1141-       4: istore        6
+1142-       6: iload         5
+1143-       8: invokestatic  #79                 // Method b:(I)Z
+1144-      11: ifeq          40
+1145-      14: iload_3
+1146-      15: istore        5
+1147-      17: ldc           #1                  // String
+1148-      19: invokevirtual #100                // Method java/lang/String.length:()I
+===== Class_au =====
+142-     106: iadd
+143-     107: bipush        35
+144-     109: isub
+145-     110: bipush        11
+146-     112: iadd
+147-     113: isub
+148-     114: sipush        194
+149-     117: sipush        141
+150-     120: ixor
+151-     121: iadd
+152-     122: iastore
+153-     123: return
+154-
+155-  public final void a();
+156-    Code:
+157-       0: aload_0
+158-       1: getfield      #13                 // Field b:LClass_dj;
+159-       4: invokevirtual #37                 // Method java/util/Vector.size:()I
+160-       7: getstatic     #16                 // Field e:[I
+161-      10: iconst_0
+162-      11: iaload
+163-      12: invokestatic  #26                 // Method c:(II)Z
+164-      15: ifeq          70
+165-      18: aload_0
+166-      19: getfield      #13                 // Field b:LClass_dj;
+167-      22: getstatic     #16                 // Field e:[I
+168-      25: iconst_1
+169-      26: iaload
+170-      27: invokevirtual #32                 // Method Class_dj.removeElementAt:(I)V
+171-      30: ldc           #1                  // String
+172-      32: invokevirtual #36                 // Method java/lang/String.length:()I
+173-      35: pop
+174-      36: ldc           #2                  // String
+175-      38: invokevirtual #36                 // Method java/lang/String.length:()I
+176-      41: bipush        33
+177:      43: bipush        120
+178-      45: iadd
+179-      46: sipush        152
+180-      49: isub
+181-      50: sipush        163
+182-      53: iadd
+183-      54: bipush        83
+184-      56: bipush        41
+185-      58: iadd
+186-      59: bipush        -21
+187-      61: isub
+188-      62: bipush        15
+189-      64: iadd
+190-      65: ixor
+191-      66: if_icmplt     0
+192-      69: return
+193-      70: return
+194-
+195-  public final void a(java.lang.String);
+196-    Code:
+197-       0: getstatic     #16                 // Field e:[I
+198-       3: iconst_2
+199-       4: iaload
+200-       5: istore_2
+201-       6: getstatic     #18                 // Field Class_ct.eb:Z
+202-       9: invokestatic  #21                 // Method a:(I)Z
+203-      12: ifeq          56
+204-      15: invokestatic  #33                 // Method Class_eh.e:()LClass_eh;
+205-      18: invokevirtual #34                 // Method Class_eh.f:()LClass_au;
+206-      21: aload_0
+207-      22: invokestatic  #23                 // Method a:(Ljava/lang/Object;Ljava/lang/Object;)Z
+208-      25: ifeq          56
+209-      28: getstatic     #17                 // Field Class_ct.du:I
+210-      31: aload_0
+211-      32: getfield      #13                 // Field b:LClass_dj;
+212-      35: invokevirtual #37                 // Method java/util/Vector.size:()I
+213-      38: getstatic     #16                 // Field e:[I
+214-      41: iconst_1
+215-      42: iaload
+216-      43: isub
+217-      44: invokestatic  #22                 // Method a:(II)Z
+218-      47: ifeq          56
+219-      50: getstatic     #16                 // Field e:[I
+220-      53: iconst_1
+221-      54: iaload
+222-      55: istore_2
+223-      56: getstatic     #11                 // Field Class_as.l:LClass_as;
+224-      59: aload_1
+225-      60: getstatic     #16                 // Field e:[I
+226-      63: iconst_3
+227-      64: iaload
+228-      65: invokevirtual #19                 // Method Class_as.a:(Ljava/lang/String;I)LClass_dj;
+229-      68: astore_1
+230-      69: getstatic     #16                 // Field e:[I
+231-      72: iconst_2
+232-      73: iaload
+233-      74: istore_3
+234-      75: iload_3
+235-      76: aload_1
+236-      77: invokevirtual #37                 // Method java/util/Vector.size:()I
+237-      80: invokestatic  #25                 // Method b:(II)Z
+238-      83: ifeq          112
+239-      86: aload_0
+240-      87: getfield      #13                 // Field b:LClass_dj;
+241-      90: aload_1
+242-      91: iload_3
+243-      92: invokevirtual #31                 // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+244-      95: invokevirtual #30                 // Method Class_dj.addElement:(Ljava/lang/Object;)V
+245-      98: iinc          3, 1
+246-     101: ldc           #1                  // String
+247-     103: invokevirtual #36                 // Method java/lang/String.length:()I
+===== Class_ax =====
+1386-     127: isub
+1387-     128: bipush        63
+1388-     130: iadd
+1389-     131: iastore
+1390-     132: getstatic     #46                 // Field d:[I
+1391-     135: bipush        7
+1392-     137: ldc           #3             /home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+     // String
+1393-     139: invokevirtual #143                // Method java/lang/String.length:()I
+1394-     142: iastore
+1395-     143: getstatic     #46                 // Field d:[I
+1396-     146: bipush        8
+1397-     148: sipush        248
+1398-     151: sipush        194
+1399-     154: ixor
+1400-     155: sipush        165
+1401-     158: sipush        155
+1402-     161: ixor
+1403-     162: ixor
+1404-     163: iastore
+1405-     164: getstatic     #46                 // Field d:[I
+1406-     167: bipush        9
+1407-     169: bipush        62
+1408-     171: sipush        145
+1409-     174: iadd
+1410-     175: bipush        62
+1411-     177: isub
+1412-     178: bipush        21
+1413-     180: iadd
+1414-     181: bipush        42
+1415-     183: bipush        104
+1416-     185: ixor
+1417-     186: iadd
+1418-     187: bipush        62
+1419-     189: bipush        106
+1420-     191: iadd
+1421:     192: bipush        120
+1422-     194: isub
+1423-     195: bipush        85
+1424-     197: iadd
+1425-     198: isub
+1426-     199: bipush        41
+1427-     201: bipush        76
+1428-     203: ixor
+1429-     204: iadd
+1430-     205: iastore
+1431-     206: getstatic     #46                 // Field d:[I
+1432-     209: bipush        10
+1433-     211: bipush        97
+1434-     213: bipush        118
+1435-     215: ixor
+1436-     216: bipush        58
+1437-     218: bipush        37
+1438-     220: ixor
+1439-     221: iadd
+1440-     222: bipush        98
+1441-     224: bipush        116
+1442-     226: ixor
+1443-     227: isub
+1444-     228: sipush        187
+1445-     231: sipush        197
+1446-     234: ixor
+1447-     235: iadd
+1448-     236: iastore
+1449-     237: getstatic     #46                 // Field d:[I
+1450-     240: bipush        11
+1451:     242: bipush        120
+1452-     244: bipush        68
+1453-     246: ixor
+1454-     247: bipush        68
+1455-     249: bipush        119
+1456-     251: ixor
+1457-     252: iadd
+1458-     253: bipush        37
+1459-     255: bipush        43
+1460-     257: ixor
+1461-     258: isub
+1462-     259: sipush        165
+1463-     262: sipush        155
+1464-     265: ixor
+1465-     266: iadd
+1466-     267: iastore
+1467-     268: getstatic     #46                 // Field d:[I
+1468-     271: bipush        12
+1469-     273: sipush        245
+1470-     276: sipush        131
+1471-     279: ixor
+1472-     280: bipush        96
+1473-     282: bipush        16
+1474-     284: ixor
+1475-     285: ixor
+1476-     286: iastore
+1477-     287: getstatic     #46                 // Field d:[I
+1478-     290: bipush        13
+1479-     292: sipush        221
+1480-     295: sipush        175
+1481-     298: ixor
+1482-     299: bipush        114
+1483-     301: bipush        50
+1484-     303: ixor
+1485-     304: ixor
+1486-     305: iastore
+1487-     306: getstatic     #46                 // Field d:[I
+1488-     309: bipush        14
+1489-     311: bipush        59
+1490-     313: bipush        9
+1491-     315: iadd
+1492-     316: bipush        17
+1493-     318: isub
+1494-     319: sipush        182
+1495-     322: iadd
+1496-     323: bipush        113
+1497-     325: sipush        167
+1498-     328: iadd
+1499-     329: sipush        199
+1500-     332: isub
+1501-     333: bipush        89
+1502-     335: iadd
+1503-     336: ixor
+1504-     337: iastore
+1505-     338: getstatic     #46                 // Field d:[I
+1506-     341: bipush        15
+1507-     343: sipush        235
+1508-     346: sipush        194
+1509-     349: ixor
+1510-     350: iconst_5
+1511-     351: bipush        100
+1512-     353: ixor
+1513-     354: ixor
+1514-     355: iastore
+1515-     356: getstatic     #46                 // Field d:[I
+1516-     359: bipush        16
+1517-     361: bipush        12
+1518-     363: bipush        19
+1519-     365: ixor
+1520-     366: iastore
+1521-     367: getstatic     #46                 // Field d:[I
+===== Class_bq =====
+568-     116: ixor
+569-     117: iastore
+570-     118: getstatic     #8                  // Field b:[I
+571-     121: bipush        7
+572-     123: sipush        251
+573-     126: s/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+ipush        199
+574-     129: ixor
+575-     130: sipush        183
+576-     133: sipush        141
+577-     136: ixor
+578-     137: ixor
+579-     138: iastore
+580-     139: getstatic     #8                  // Field b:[I
+581-     142: bipush        8
+582-     144: sipush        169
+583-     147: sipush        174
+584-     150: ixor
+585-     151: iastore
+586-     152: getstatic     #8                  // Field b:[I
+587-     155: bipush        9
+588-     157: bipush        68
+589-     159: bipush        85
+590-     161: ixor
+591-     162: bipush        39
+592-     164: bipush        62
+593-     166: ixor
+594-     167: ixor
+595-     168: iastore
+596-     169: getstatic     #8                  // Field b:[I
+597-     172: bipush        10
+598-     174: sipush        142
+599-     177: sipush        154
+600-     180: iadd
+601-     181: sipush        256
+602-     184: isub
+603:     185: bipush        120
+604-     187: iadd
+605-     188: bipush        119
+606-     190: bipush        45
+607-     192: iadd
+608-     193: bipush        68
+609-     195: isub
+610-     196: bipush        73
+611-     198: iadd
+612-     199: ixor
+613-     200: iastore
+614-     201: getstatic     #8                  // Field b:[I
+615-     204: bipush        11
+616-     206: bipush        92
+617-     208: bipush        86
+618-     210: ixor
+619-     211: iastore
+620-     212: getstatic     #8                  // Field b:[I
+621-     215: bipush        12
+622-     217: bipush        76
+623-     219: bipush        71
+624-     221: ixor
+625-     222: iastore
+626-     223: getstatic     #8                  // Field b:[I
+627-     226: bipush        13
+628-     228: bipush        73
+629-     230: bipush        69
+630-     232: ixor
+631-     233: iastore
+632-     234: getstatic     #8                  // Field b:[I
+633-     237: bipush        14
+634-     239: bipush        34
+635-     241: bipush        73
+636-     243: ixor
+637-     244: bipush        45
+638-     246: bipush        75
+639-     248: ixor
+640-     249: ixor
+641-     250: iastore
+642-     251: getstatic     #8                  // Field b:[I
+643-     254: bipush        15
+644-     256: bipush        108
+645-     258: bipush        61
+646-     260: iadd
+647-     261: bipush        57
+648-     263: isub
+649-     264: bipush        46
+650-     266: iadd
+651-     267: bipush        23
+652-     269: bipush        76
+653-     271: iadd
+654-     272: bipush        -27
+655-     274: isub
+656-     275: bipush        18
+657-     277: iadd
+658-     278: ixor
+659-     279: iastore
+660-     280: getstatic     #8                  // Field b:[I
+661-     283: bipush        16
+662-     285: sipush        190
+663-     288: sipush        177
+664-     291: ixor
+665-     292: bipush        60
+666-     294: bipush        14
+667-     296: ixor
+668-     297: sipush        142
+669-     300: sipush        188
+670-     303: ixor
+671-     304: iconst_m1
+672-     305: ixor
+673-     306: iand
+===== Class_bz =====
+1001-     273: iastore
+1002-     274: getstatic     #30                 // Field k:[I
+1003-     277: bipush        15
+1004-     279: bipush        125
+1005-     281: bipush        117
+1006-     283: ixor
+1007-     284: iastore
+1008-     285: getstatic     #30                 // Field k:[I
+1009-     288: bipush        16
+1010-     290: sipush        221
+1011-     293: sipush        153
+1012-     296: ixor
+1013-     297: sipush        193
+1014-     300: sipush        140
+1015-     303: ixor
+1016-     304: ixor
+1017-     305: iastore
+1018-     306: getstatic     #30                 // Field k:[I
+1019-     309: bipush        17
+1020-     311: sipush        156
+1021-     314: sipush        150
+1022-     317: ixor
+1023-     318: iastore
+1024-     319: getstatic     #30                 // Field k:[I
+1025-     322: bipush        18
+1026-     324: bipush        85
+1027-     326: bipush        94
+1028-     328: ixor
+1029-     329: iastore
+1030-     330: getstatic     #30                 // Field k:[I
+1031-     333: bipush        19
+1032-     335: sipush        150
+1033-     338: sipush        161
+1034-     341: ixor
+1035-     342:/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+ bipush        67
+1036:     344: bipush        120
+1037-     346: ixor
+1038-     347: ixor
+1039-     348: iastore
+1040-     349: getstatic     #30                 // Field k:[I
+1041-     352: bipush        20
+1042-     354: bipush        106
+1043-     356: bipush        22
+1044-     358: ixor
+1045-     359: bipush        90
+1046-     361: bipush        43
+1047-     363: ixor
+1048-     364: ixor
+1049-     365: iastore
+1050-     366: getstatic     #30                 // Field k:[I
+1051-     369: bipush        21
+1052-     371: sipush        200
+1053-     374: sipush        198
+1054-     377: ixor
+1055-     378: iastore
+1056-     379: getstatic     #30                 // Field k:[I
+1057-     382: bipush        22
+1058-     384: bipush        85
+1059-     386: bipush        90
+1060-     388: ixor
+1061-     389: iastore
+1062-     390: getstatic     #30                 // Field k:[I
+1063-     393: bipush        23
+1064-     395: bipush        92
+1065-     397: bipush        91
+1066-     399: ixor
+1067-     400: bipush        16
+1068-     402: bipush        7
+1069-     404: ixor
+1070-     405: ixor
+1071-     406: iastore
+1072-     407: getstatic     #30                 // Field k:[I
+1073-     410: bipush        24
+1074-     412: sipush        -26695
+1075-     415: sipush        27975
+1076-     418: iand
+1077-     419: ineg
+1078-     420: sipush        -4098
+1079-     423: ldc           #10                 // int 5619695
+1080-     425: iand
+1081-     426: iand
+1082-     427: iastore
+1083-     428: getstatic     #30                 // Field k:[I
+1084-     431: bipush        25
+1085-     433: sipush        -5126
+1086-     436: ldc           #8                  // int 4756733
+1087-     438: iand
+1088-     439: iastore
+1089-     440: getstatic     #30                 // Field k:[I
+1090-     443: bipush        26
+1091-     445: sipush        -4497
+1092-     448: sipush        14333
+1093-     451: iand
+1094-     452: ineg
+1095-     453: sipush        -2180
+1096-     456: ldc           #1                  // int 1064703
+1097-     458: iand
+1098-     459: iand
+1099-     460: iastore
+1100-     461: getstatic     #30                 // Field k:[I
+1101-     464: bipush        27
+1102-     466: sipush        -1033
+1103-     469: ldc           #4                  // int 2082813
+1104-     471: iand
+1105-     472: iastore
+1106-     473: getstatic     #30                 // Field k:[I
+===== Class_ch =====
+464-     115: iaload
+465-     116: aaload
+466-     117: invokestatic  #53                 // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+467-     120: putfield      #35                 // Field e:I
+468-     123: aload_2
+469-     124: aload_0
+470-     125: getstatic     #39                 // Field i:[I
+471-     128: bipush        6
+472-     130: iaload
+473-     131: aaload
+474-     132: invokestatic  #53                 // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+475-     135: putfield      #37                 // Field g:I
+476-     138: aload_2
+477-     139: aload_0
+478-     140: getstatic     #39                 // Field i:[I
+479-     143: bipush        7
+480-     145: iaload
+481-     146: aaload
+482-     147: invokestatic  #53                 // Method java/lang/Integer.parseInt:(Ljava/lang/String;)I
+483-     150: putfield      #33                 // Field c:I
+484-     153: ldc           #1                  // String
+485-     155: invokevirtual #58                 // Method java/lang/String.length:()I
+486-     158: pop
+487-     159: sipush        214
+488-     162: bipush        102
+489-     164: iadd
+490-     165: sipush        271
+491-     168: isub
+492-     169: sipush        189
+493-     172: iadd
+494-     173: sipush        149
+495-     176: sipush        139
+496-     179: iadd
+497-     180: sipush        215
+498-     183: isub
+499:     184: bipush        120
+500-     186: iadd
+501-     187: ixor
+502-     188: sipush        140
+503-     191: sipush        136
+504-     194: ixor
+505-     195: bipush        127
+506-     197: bipush        80
+507-     199: ixor
+508-     200: ixor
+509-     201: ldc           #2    /home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+              // String
+510-     203: invokevirtual #58                 // Method java/lang/String.length:()I
+511-     206: ineg
+512-     207: ixor
+513-     208: iand
+514-     209: sipush        189
+515-     212: sipush        128
+516-     215: ixor
+517-     216: bipush        71
+518-     218: bipush        98
+519-     220: ixor
+520-     221: ixor
+521-     222: sipush        146
+522-     225: sipush        140
+523-     228: iadd
+524-     229: sipush        239
+525-     232: isub
+526-     233: bipush        110
+527-     235: iadd
+528-     236: sipush        128
+529-     239: bipush        113
+530-     241: iadd
+531-     242: sipush        158
+532-     245: isub
+533-     246: bipush        50
+534-     248: iadd
+535-     249: ixor
+536-     250: ldc           #2                  // String
+537-     252: invokevirtual #58                 // Method java/lang/String.length:()I
+538-     255: ineg
+539-     256: ixor
+540-     257: iand
+541-     258: if_icmpge     287
+542-     261: aconst_null
+543-     262: areturn
+544-     263: ldc           #1                  // String
+545-     265: invokevirtual #58                 // Method java/lang/String.length:()I
+546-     268: pop2
+547-     269: aload_2
+548-     270: getstatic     #39                 // Field i:[I
+549-     273: iconst_1
+550-     274: iaload
+551-     275: putfield      #35                 // Field e:I
+552-     278: aload_2
+553-     279: getstatic     #39                 // Field i:[I
+554-     282: iconst_1
+555-     283: iaload
+556-     284: putfield      #37                 // Field g:I
+557-     287: aload_2
+558-     288: getfield      #38                 // Field h:I
+559-     291: invokestatic  #45                 // Method b:(I)Z
+560-     294: ifeq          309
+561-     297: aload_2
+562-     298: getfield      #37                 // Field g:I
+563-     301: invokestatic  #45                 // Method b:(I)Z
+564-     304: ifeq          309
+565-     307: aconst_null
+566-     308: areturn
+567-     309: aload_2
+568-     310: areturn
+569-    Exception table:
+===== Class_cm =====
+56-      54: iaload
+57-      55: putfield      #13                 // Field h:I
+58-      58: aload_0
+59-      59: getstatic     #15                 // Field j:[I
+60-      62: bipush        6
+61-      64: iaload
+62-      65: putfield      #10                 // Field e:I
+63-      68: aload_0
+64-      69: getstatic     #15                 // Field j:[I
+65-      72: bipush        7
+66-      74: iaload
+67-      75: putfield      #12                 // Field g:I
+68-      78: aload_0
+69-      79: getstatic     #15                 // Field j:[I
+70-      82: bipush        8
+71-      84: iaload
+72-      85: putfield      #9                  // Field d:I
+73-      88: return
+74-
+75-  private static void b();
+76-    Code:
+77-       0: bipush        9
+78-       2: newarray       int
+79-       4: putstatic     #15                 // Field j:[I
+80-       7: getstatic     #15                 // Field j:[I
+81-      10: iconst_0
+82-      11: sipush        212
+83-      14: sipush        152
+84-      17: ixor
+85-      18: ldc           #2                  // String
+86-      20: invokevirtual #20                 // Method java/lang/String.length:()I
+87-      23: ixor
+88-      24: sipush        173
+89-      27: sipush        180
+90-      30: iadd
+91:      31: bipush        120
+92-      33: isub
+93-      34: bipush        19
+94-      36: iadd
+95-      37: bipush        119
+96-      39: sipush        176
+97-      42: iadd
+98-      43: sipush        174
+99-      46: isub
+100-      47: bipush        57
+101-      49: iadd
+102-      50: ixor
+103-      51: ldc           #1                  // String
+104-      53: invokevirtual #20                 // Method java/lang/String.length:()I
+105-      56: ineg
+106-      57: ixor
+107-      58: iand
+108-      59: iastore
+109-      60: getstatic     #15                 // Field j:[I
+110-      63: iconst_1
+111-      64: bipush        126
+112-      66: bipush        115
+113-      68: ixor
+114-      69: iastore
+115-      70: getstatic     #15                 // Field j:[I
+116-      73: iconst_2
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+117-      74: bipush        84
+118-      76: bipush        68
+119-      78: ixor
+120-      79: bipush        57
+121-      81: bipush        47
+122-      83: ixor
+123-      84: ixor
+124-      85: iastore
+125-      86: getstatic     #15                 // Field j:[I
+126-      89: iconst_3
+127-      90: bipush        44
+128-      92: bipush        123
+129-      94: ixor
+130-      95: bipush        21
+131-      97: bipush        70
+132-      99: ixor
+133-     100: ixor
+134-     101: iastore
+135-     102: getstatic     #15                 // Field j:[I
+136-     105: iconst_4
+137-     106: bipush        78
+138-     108: bipush        125
+139-     110: ixor
+140-     111: sipush        176
+141-     114: sipush        136
+142-     117: ixor
+143-     118: ixor
+144-     119: iastore
+145-     120: getstatic     #15                 // Field j:[I
+146-     123: iconst_5
+147-     124: ldc           #2                  // String
+148-     126: invokevirtual #20                 // Method java/lang/String.length:()I
+149-     129: iastore
+150-     130: getstatic     #15                 // Field j:[I
+151-     133: bipush        6
+152-     135: sipush        128
+153-     138: sipush        161
+154-     141: iadd
+155-     142: sipush        194
+156-     145: isub
+157-     146: bipush        90
+158-     148: iadd
+159-     149: sipush        169
+160-     152: sipush        172
+161-     155: iadd
+===== Class_cr =====
+356-     576: getstatic     #29                 // Field a:[I
+357-     579: iconst_1
+358-     580: iaload
+359-     581: getstatic     #29                 // Field a:[I
+360-     584: iconst_1
+361-     585: iaload
+362-     586: invokespecial #63                 // Method Class_gv."<init>":(SZZZZZIIIIISSBBZZ)V
+363-     589: putfield      #34                 // Field Class_cy.cy:LClass_gv;
+364-     592: aload_2
+365-     593: getfield      #34                 // Field Class_cy.cy:LClass_gv;
+366-     596: getstatic     #29                 // Field a:[I
+367-     599: iconst_0
+368-     600: iaload
+369-     601: putfield      #43                 // Field Class_gv.b:I
+370-     604: ldc           #1                  // String
+371-     606: invokevirtual #71                 // Method java/lang/String.length:()I
+372-     609: pop
+373-     610: ldc           #2                  // String
+374-     612: invokevirtual #71                 // Method java/lang/String.length:()I
+375-     615: bipush        78
+376-     617: bipush        74
+377-     619: ixor
+378-     620: if_icmple     964
+379-     623: return
+380-     624: aload_2
+381-     625: aconst_null
+382-     626: putfield      #34                 // Field Class_cy.cy:LClass_gv;
+383-     629: ldc           #1                  // String
+384-     631: invokevirtual #71                 // Method java/lang/String.length:()I
+385-     634: pop
+386-     635: bipush        22
+387-     637: bipush        68
+388-     639: iadd
+389-     640: bipush        64
+390-     642: isub
+391:     643: bipush        120
+392-     645: iadd
+393-     646: bipush        91
+394-     648: bipush        40
+395-     650: iadd
+396-     651: bipush        74
+397-     653: isub
+398-     654: bipush        93
+399-     656: iadd
+400-     657: ixor
+401-     658: ineg
+402-     659: ifle          971
+403-     662: return
+404-     663: dup
+405-     664: astore_3
+406-     665: invokevirtual #73                 // Method java/lang/Throwable.printStackTrace:()V
+407-     668: return
+408-     669: aload_0
+409-     670: invokevirtual #57                 // Method Class_de.a:()Ljava/io/DataInputStream;
+410-     673: invokevirtual #67                 // Method java/io/DataInputStream.readShort:()S
+411-     676: istore_3
+412-     677: aload_0
+413-     678: invokevirtual #57                 // Method Class_de.a:()Ljava/io/DataInputStream;
+414-     681: invokevirtual #68                 // Method java/io/DataInputStream.readUTF:()Ljava/lang/String;
+415-     684: astore        4
+416-     686: aload_0
+417-     687: invokevirtual #57                 // Method Class_de.a:()Ljava/io/DataInputStream;
+418-     690: invokevirtual #65                 // Method java/io/DataInputStream.readInt:()I
+419-     693: istore        5
+420-     695: aload_0
+421-     696: invokevirtual #57                 // Method Class_de.a:()Ljava/io/DataInputStream;
+422-     699: invokevirtual #67                 // Method java/io/DataInputStream.readShort:()S
+423-     702: istore_1
+424-     703: aload_0
+425-     704: invokevirtual #57                 // Method Class_de.a:()Ljava/io/DataInputStream;
+426-     707: invokevirtual #64                 // Method java/io/DataInputStream.readByte:()B
+427-     710: istore        6
+428-     712: iload         5
+429-     714: invokestatic  #49                 // Method b:(I)Z
+430-     717: ifeq          955
+431-     720: getstatic     #29                 // Field a:[I
+432-     723: iconst_1
+433-     724: iaload
+434-     725: istore_0
+435-     726: iload_0
+436-     727: getstatic     #30                 // Field Class_ct.er:LClass_dj;
+437-     730: invokevirtual #74                 // Method java/util/Vector.size:()I
+438-     733: invokestatic  #50                 // Method b:(II)Z
+439-     736: ifeq          756
+440-     739: aconst_null
+441-     740: astore_0
+442-     741: ldc           #1                  // String
+443-     743: invokevirtual #71                 // Method java/lang/String.length:()I
+444-     746: pop
+445-     747: ldc           #4                  // String
+446-     749: invokevirtual #71                 // Method java/lang/String.length:()I
+447-     752: ifge          846
+448-     755: return
+449-     756: getstatic     #30                 // Field Class_ct.er:LClass_dj;
+450-     759: iload_0
+451-     760: invokevirtual #60                 // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+452-     763: checkcast     #5                  // class Class_ck
+453-     766: dup
+454-     767: astore_2
+455-     768: invokestatic  #51                 // Method b:(Ljava/lang/Object;)Z
+456-     771: ifeq          821
+457-     774: aload_2
+458-     775: getfield      #28                 // Field Class_ck.e:S
+459-     778: iload_3
+460-     779: invokestatic  #47                 // Method a:(II)Z
+461-     782: ifeq          821
+462-     785: aload_2
+463-     786: astore_0
+464-     787: ldc           #1                  // String
+465-     789: invokevirtual #71                 // Method java/lang/String.length:()I
+466-     792: pop
+467-     793: bipush        78
+468-     795: bipush        43
+469-     797: iadd
+470-     798: iconst_0
+471-     799: isub
+472-     800: bipush        29
+473-     802: iadd
+474-     803: bipush        89
+475-     805: sipush        143
+476-     808: iadd
+477:     809: bipush        120
+478-     811: isub
+479-     812: bipush        35
+480-     814: iadd
+481-     815: ixor
+482-     816: ineg
+483-     817: iflt          846
+484-     820: return
+485-     821: iinc          0, 1
+486-     824: ldc           #1                  // String
+487-     826: invokevirtual #71                 // Method java/lang/String.length:()I
+488-     829: pop
+489-     830: ldc           #3                  // String
+490-     832: invokevirtual #71                 // Method java/lang/String.length:()I
+491-     835: sipush        172
+492-     838: sipush        168
+493-     841: ixor
+494-     842: if_icmplt     726
+495-     845: return
+496-     846: aload_0
+497-     847: dup
+498-     848: astore_2
+499-     849: invokestatic  #48                 // Method a:(Ljava/lang/Object;)Z
+500-     852: ifeq          879
+501-     855: new           #5                  // class Class_ck
+502-     858: dup
+503-     859: iload_3
+504-     860: iload_1
+505-     861: iload         5
+506-     863: i2l
+507-     864: aload         4
+508-     866: iload         6
+509-     868: invokespecial #44                 // Method Class_ck."<init>":(SSJLjava/lang/String;B)V
+510-     871: astore_2
+511-     872: getstatic     #30                 // Field Class_ct.er:LClass_dj;
+512-     875: aload_2
+513-     876: invokevirtual #59                 // Method Class_dj.addElement:(Ljava/lang/Object;)V
+514-     879: aload_2
+515-     880: invokestatic  #51                 // Method b:(Ljava/lang/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/Object;)Z
+516-     883: ifeq          955
+517-     886: aload_2
+518-     887: aload         4
+519-     889: putfield      #27                 // Field Class_ck.d:Ljava/lang/String;
+520-     892: aload_2
+521-     893: iload_1
+522-     894: putfield      #24                 // Field Class_ck.a:S
+523-     897: iload         5
+524-     899: i2l
+525-     900: lstore        12
+526-     902: aload_2
+527-     903: invokestatic  #72                 // Method java/lang/System.currentTimeMillis:()J
+528-     906: lload         12
+529-     908: ldc2_w        #22                 // long 1000l
+530-     911: lmul
+531-     912: ladd
+532-     913: putfield      #25                 // Field Class_ck.b:J
+533-     916: iload         6
+534-     918: getstatic     #29                 // Field a:[I
+535-     921: bipush        7
+536-     923: iaload
+537-     924: invokestatic  #47                 // Method a:(II)Z
+538-     927: ifeq          955
+539-     930: aload_2
+540-     931: getstatic     #29                 // Field a:[I
+541-     934: iconst_5
+542-     935: iaload
+543-     936: putfield      #26                 // Field Class_ck.c:Z
+544-     939: ldc           #1                  // String
+545-     941: invokevirtual #71                 // Method java/lang/String.length:()I
+546-     944: pop
+547-     945: ldc           #4                  // String
+===== Class_cx =====
+142-     218: ixor
+143-     219: iastore
+144-     220: getstatic     #20                 // Field d:[I
+145-     223: bipush        14
+146-     225: ldc           #3                  // String
+147-     227: invokevirtual #32                 // Method java/lang/String.length:()I
+148-     230: iastore
+149-     231: getstatic     #20                 // Field d:[I
+150-     234: bipush        15
+151-     236: ldc           #4                  // String
+152-     238: invokevirtual #32                 // Method java/lang/String.length:()I
+153-     241: iastore
+154-     242: getstatic     #20                 // Field d:[I
+155-     245: bipush        16
+156-     247: bipush        51
+157-     249: bipush        79
+158-     251: ixor
+159-     252: bipush        88
+160-     254: bipush        32
+161-     256: ixor
+162-     257: ixor
+163-     258: iastore
+164-     259: getstatic     #20                 // Field d:[I
+165-     262: bipush        17
+166-     264: bipush        73
+167-     266: bipush        76
+168-     268: ixor
+169-     269: iastore
+170-     270: getstatic     #20                 // Field d:[I
+171-     273: bipush        18
+172-     275: bipush        31
+173-     277: bipush        68
+174-     279: iadd
+175-     280: bipush        43
+176-     282: isub
+177:     283: bipush        120
+178-     285: iadd
+179-     286: bipush        59
+180-     288: sipush        159
+181-     291: iadd
+182-     292: bipush        39
+183-     294: isub
+184-     295: bipush        8
+185-     297: iadd
+186-     298: ixor
+187-     299: iastore
+188-     300: getstatic     #20                 // Field d:[I
+189-     303: bipush        19
+190-     305: sipush        129
+191-     308: bipush        40
+192-     310: iadd
+193-     311: bipush        95
+194-     313: isub
+195-     314: bipush        111
+196-     316: iadd
+197-     317: bipush        59
+198-     319: sipush        180
+199-     322: iadd
+200-     323: sipush        212
+201-     326: isub
+202-     327: sipush        154
+203-     330: iadd
+204-     331: ixor
+205-     332: iastore
+206-     333: getstatic     #20                 // Field d:[I
+207-     336: bipush        20
+208-     338: bipush        99
+209-     340: bipush        16
+210-     342: iadd
+211-     343: bipush        31
+212-     345: isub
+213-     346: bipush        46
+214-     348: iadd
+215-     349: bipush        24
+216-     351: bipush        46
+217-     353: iadd
+218-     354: bipush        57
+219-     356: isub
+220-     357: sipush        130
+221-     360: iadd
+222-     361: ixor
+223-     362: iastore
+224-     363: getstatic     #20                 // Field d:[I
+225-     366: bipush        21
+226-     368: sipush        193
+227-     371: sipush        130
+228-     374: ixor/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+
+229-     375: bipush        10
+230-     377: bipush        71
+231-     379: ixor
+232-     380: ixor
+233-     381: iastore
+234-     382: getstatic     #20                 // Field d:[I
+235-     385: bipush        22
+236-     387: sipush        147
+237-     390: sipush        156
+238-     393: ixor
+239-     394: iastore
+240-     395: getstatic     #20                 // Field d:[I
+241-     398: bipush        23
+242-     400: bipush        113
+243-     402: bipush        96
+244-     404: ixor
+245-     405: iastore
+246-     406: getstatic     #20                 // Field d:[I
+247-     409: bipush        24
+===== Class_db =====
+852-     689: ldc           #2                  // String
+853-     691: invokevirtual #111                // Method java/lang/String.length:()I
+854-     694: pop
+855-     695: aconst_null
+856-     696: ifnull        860
+857-     699: return
+858-     700: ldc           #2                  // String
+859-     702: invokevirtual #111                // Method java/lang/String.length:()I
+860-     705: pop2
+861-     706: aload         4
+862-     708: invokevirtual #99                 // Method java/io/ByteArrayOutputStream.close:()V
+863-     711: aload_1
+864-     712: invokevirtual #102                // Method java/io/DataOutputStream.close:()V
+865-     715: ldc           #2                  // String
+866-     717: invokevirtual #111                // Method java/lang/String.length:()I
+867-     720: pop
+868-     721: bipush        23
+869-     723: bipush        19
+870-     725: ixor
+871-     726: bipush        33
+872-     728: bipush        37
+873-     730: ixor
+874-     731: if_icmpeq     860
+875-     734: return
+876-     735: ldc           #2                  // String
+877-     737: invokevirtual #111                // Method java/lang/String.length:()I
+878-     740: pop2
+879-     741: ldc           #2                  // String
+880-     743: invokevirtual #111                // Method java/lang/String.length:()I
+881-     746: pop
+882-     747: bipush        36
+883-     749: iconst_0
+884-     750: iadd
+885-     751: bipush        -16
+886-     753: isub
+887:     754: bipush        120
+888-     756: iadd
+889-     757: bipush        69
+890-     759: sipush        154
+891-     762: iadd
+892-     763: sipush        212
+893-     766: isub
+894-     767: sipush        157
+895-     770: iadd
+896-     771: ixor
+897-     772: bipush        77
+898-     774: bipush        124
+899-     776: iadd
+900-     777: sipush        130
+901-     780: isub
+902-     781: bipush        65
+903-     783: iadd
+904-     784: iconst_5
+905-     785: bipush        97
+906-     787: iadd
+907-     788: bipush        -34
+908-     790: isub
+909-     791: iconst_4
+910-     792: iadd
+911-     793: ixor
+912-     794: if_icmpeq     860
+913-     797: return
+914-     798: astore_2
+915-     799: aload         4
+916-     801: invokevirtual #99                 // Method java/io/ByteArrayOutputStream.close:()V
+917-     804: aload_1
+918-     805: invokevirtual #102                // Method java/io/DataOutputStream.close:()V
+919-     808: ldc           #2                  // String
+920-     810: invokevirtual #111                // Method java/lang/String.length:()I
+921-     813: pop
+922-     814: bipush        63
+923-     816: bipush        88
+924-     818: ixor
+925-     819: bipush        42
+926-     821: bipush        20
+927-     823: ixor
+928-     824: ixor
+929-     825: sipush        154
+930-     828: sipush        184
+931-     831: ixor
+932-     832: sipush        240
+933-     835: sipush        139
+934-     838: ixor
+935-     839: ixor
+936-     840: ldc           #3                  // String
+937-     842: invokevirtual #111                // Method java/lang/String.length:()I
+938-     845: ineg
+939-     846: ixor
+940-     847: iand
+941-     848: ifeq          858
+942-     851: return
+943-     852: ldc           #2                  // String
+944-     854: invokevirtual #111                // Method java/lang/String.length:()I
+945-     857: pop2
+946-     858: aload_2
+947-     859: athrow
+948-     860: invokestatic  #95                 // Method Class_do.b:()LClass_do;
+949-     863: invokestatic  #86                 // Method a:(Ljavax/microedition/lcdui/Displayable;)V
+950-     866: return
+951-    Exception table:
+952-       from    to  target type
+953-          22    29    49   Class java/lang/NumberFormatException
+954-         501   509   520   Class java/lang/NumberFormatException
+955-         663   672   683   Class java/io/IOException
+956-         587   663   700   Class java/io/IOException
+957-         706   715   735   Class java/io/IOException
+===== Class_dd =====
+129-     196: bipush        96
+130-     198: bipush        62
+131-     200: ixor
+132-     201: ixor
+133-     202: ldc           #2                  // String
+134-     204: invokevirtual #45                 // Method java/lang/String.length:()I
+135-     207: ineg
+136-     208: ixor
+137-     209: iand
+138-     210: ifeq          248
+139-     213: return
+140-     214: aload_1
+141-     215: getstatic     #19                 // Field b:[I
+142-     218: bipush        15
+143-     220: iaload
+144-     221: aload_0
+145-     222: getfield      #25                 // Field h:[I
+146-     225: iload_2
+147-     226: iaload
+148-     227: aload_0
+149-     228: getfield      #28                 // Field k:[I
+150-     231: iload_2
+151-     232: iaload
+152-     233: getstatic     #19                 // Field b:[I
+153-     236: bipush        6
+154-     238: iaload
+155-     239: getstatic     #19                 // Field b:[I
+156-     242: bipush        9
+157-     244: iaload
+158-     245: invokestatic  #40                 // Method Class_fu.a:(LClass_dg;IIIII)V
+159-     248: iinc          2, 1
+160-     251: ldc           #1                  // String
+161-     253: invokevirtual #45                 // Method java/lang/String.length:()I
+162-     256: pop
+163-     257: bipush        78
+164:     259: bipush        120
+165-     261: ixor
+166-     262: bipush        88
+167-     264: bipush        65
+168-     266: ixor
+169-     267: ixor
+170-     268: bipush        89
+171-     270: bipush        74
+172-     272: ixor
+173-     273: sipush        172
+174-     276: sipush        144
+175-     279: ixor
+176-     280: ixor
+177-     281: ldc           #2                  // String
+178-     283: invokevirtual #45                 // Method java/lang/String.length:()I
+179-     286: ineg
+180-     287: ixor
+181-     288: iand
+182-     289: ldc           #4                  // String
+183-     291: invokevirtual #45                 // Method java/lang/String.length:()I
+184-     294: if_icmplt     104
+185-     297: return
+186-     298: return
+187-
+188-  private static boolean a(java.lang.Object);
+189-    Code:
+190-       0: aload_0
+191-       1: ifnonnull     8
+192-       4: iconst_1
+193-       5: goto          9
+194-       8: iconst_0
+195-       9: ireturn
+196-
+197-  public Class_dd(int, int, Class_cy);
+198-    Code:
+199-       0: aload_0
+200-       1: invokespecial #44                 // Method java/lang/Object."<init>":()V
+201-       4: aload_0
+202-       5: iload_1
+203-       6: putfield      #26                 // Field i:I
+204-       9: aload_0
+205-      10: iload_2
+206-      11: putfield      #23                 // Field f:I
+207-      14: aload_0
+208-      15: iload_1
+209-      16: putfield      #22                 // Field e:I
+210-      19: aload_0
+211-      20: iload_2
+212-      21: getstatic     #19                 // Field b:[I
+213-      24: iconst_0
+214-      25: iaload
+215-      26: invokestatic  #42                 // Method Class_gu.c:(I)I
+216-      29: getstatic     #19                 // Field b:[I
+217-      32: iconst_1
+218-      33: iaload
+219-      34: iadd
+220-      35: isub
+221-      36: putfield      #21                 // Field d:I
+222-      39: aload_0
+223-      40: getstatic     #19                 // Field b:[I
+224-      43: iconst_2
+225-      44: iaload
+226-      45: putfield      #27                 // Field j:I
+227-      48: aload_0
+228-      49: getstatic     #19                 // Field b:[I
+229-      52: iconst_2
+230-      53: iaload
+231-      54: putfield      #18                 // Field a:I
+232-      57: aload_0
+233-      58: aload_3
+234-      59: putfield      #29                 // Field l:LClass_cy;
+--
+333-     167: sipush        167
+334-     170: sipush        139
+335-     173: iadd
+336-     174: sipush        135
+337-     177: isub
+338-     178: bipush        6
+339-     180: iadd
+340-     181: bipush        37
+341-     183: bipush        99
+342-     185: iadd
+343-     186: bipush        126
+344-     188: isub
+345-     189: sipush        177
+346-     192: iadd
+347-     193: ixor
+348-     194: iastore
+349-     195: getstatic     #19                 // Field b:[I
+350-     198: bipush        8
+351-     200: ldc           #2                  // String
+352-     202: invokevirtual #45                 // Method java/lang/String.length:()I
+353-     205: ineg
+354-     206: iastore
+355-     207: getstatic     #19                 // Field b:[I
+356-     210: bipush        9
+357-     212: ldc           #4                  // String
+358-     214: invokevirtual #45                 // Method java/lang/String.length:()I
+359-     217: iastore
+360-     218: getstatic     #19                 // Field b:[I
+361-     221: bipush        10
+362-     223: bipush        116
+363-     225: bipush        16
+364-     227: ixor
+365-     228: iastore
+366-     229: getstatic     #19                 // Field b:[I
+367-     232: bipush        11
+368:     234: bipush        120
+369-     236: bipush        74
+370-     238: ixor
+371-     239: iastore
+372-     240: getstatic     #19                 // Field b:[I
+373-     243: bipush        12
+374-     245: bipush        107
+375-     247: bipush        111
+376-     249: ixor
+377-     250: iastore
+378-     251: getstatic     #19                 // Field b:[I
+379-     254: bipush        13
+380-     256: bipush        59
+381-     258: bipush        69
+382-     260: ixor
+383-     261: bipush        80
+384-     263: bipush        43
+385-     265: ixor
+386-     266: ixor
+387-     267: ineg
+388-     268: iastore
+389-     269: getstatic     #19                 // Field b:[I
+390-     272: bipush        14
+391-     274: sipush        -4233
+392-     277: sipush        29359
+393-     280: iand
+394-     281: ineg
+395-     282: bipush        -65
+396-     284: sipush        26623
+397-     287: iand
+398-     288: iand
+399-     289: iastore
+400-     290: getstatic     #19                 // Field b:[I
+401-     293: bipush        15
+402-     295: sipush        -24577
+403-     298: sipush        26010
+404-     301: iand
+405-     302: iastore
+406-     303: return
+407-
+408-  private static boolean a(int, int);
+409-    Code:
+410-       0: iload_0
+411-       1: iload_1
+412-       2: if_icmple     9
+413-       5: iconst_1
+414-       6: goto          10
+415-       9: iconst_0
+416-      10: ireturn
+417-
+418-  public Class_dd(int, int);
+419-    Code:
+420-       0: aload_0
+421-       1: invokespecial #44                 // Method java/lang/Object."<init>":()V
+422-       4: aload_0
+423-       5: getstatic     #19                 // Field b:[I
+424-       8: iconst_2
+425-       9: iaload
+426-      10: putfield      #27                 // Field j:I
+427-      13: aload_0
+428-      14: getstatic     #19                 // Field b:[I
+429-      17: iconst_3
+430-      18: iaload
+431-      19: putfield      #18                 // Field a:I
+432-      22: aload_0
+433-      23: iload_1
+434-      24: putfield      #22                 // Field e:I
+435-      27: aload_0
+436-      28: iload_2
+437-      29: putfield      #21                 // Field d:I
+438-      32: aload_0
+===== Class_di =====
+207-     213: aconst_null
+208-     214: ifnull        294
+209-     217: aconst_null
+210-     218: athrow
+211-     219: aload_0
+212-     220: getstatic     #12                 // Field h:[I
+213-     223: iconst_4
+214-     224: iaload
+215-     225: putfield      #10                 // Field e:I
+216-     228: ldc           #1                  // String
+217-     230: invokevirtual #15                 // Method java/lang/String.length:()I
+218-     233: pop
+219-     234: bipush        16
+220-     236: bipush        24
+221-     238: ixor
+222-     239: bipush        43
+223-     241: bipush        35
+224-     243: ixor
+225-     244: iconst_m1
+226-     245: ixor
+227-     246: iand
+228-     247: ifge          294
+229-     250: aconst_null
+230-     251: athrow
+231-     252: aload_0
+232-     253: getstatic     #12                 // Field h:[I
+233-     256: iconst_5
+234-     257: iaload
+235-     258: putfield      #10                 // Field e:I
+236-     261: ldc           #1                  // String
+237-     263: invokevirtual #15                 // Method java/lang/String.length:()I
+238-     266: pop
+239-     267: bipush        45
+240-     269: bipush        13
+241-     271: ixor
+242:     272: bipush        120
+243-     274: bipush        92
+244-     276: ixor
+245-     277: ixor
+246-     278: ineg
+247-     279: iflt          294
+248-     282: aconst_null
+249-     283: athrow
+250-     284: aload_0
+251-     285: getstatic     #12                 // Field h:[I
+252-     288: bipush        6
+253-     290: iaload
+254-     291: putfield      #10                 // Field e:I
+255-     294: aload_0
+256-     295: iload_2
+257-     296: putfield      #8                  // Field c:I
+258-     299: aload_0
+259-     300: iload_3
+260-     301: putfield      #11                 // Field g:I
+261-     304: aload_0
+262-     305: aload         4
+263-     307: putfield      #6                  // Field a:Ljava/lang/String;
+264-     310: aload_0
+265-     311: iload         5
+266-     313: putfield      #7                  // Field b:I
+267-     316: aload_0
+268-     317: iload         6
+269-     319: putfield      #9                  // Field d:Z
+270-     322: return
+271-}
+===== Class_dk =====
+3175-     210: iand
+3176-     211: iastore
+3177-     212: getstatic     #61                 // Field ab:[I
+3178-     215: bipush        13
+3179-     217: sipush        -28734
+3180-     220: sipush        30717
+3181-     223: iand
+3182-     224: ineg
+3183-     225: iastore
+3184-     226: getstatic     #61                 // Field ab:[I
+3185-     229: bipush        14
+3186-     231: bipush        19
+3187-     233: bipush        25
+3188-     235: ixor
+3189-     236: iastore
+3190-     237: getstatic     #61                 // Field ab:[I
+3191-     240: bipush        15
+3192-     242: sipush        -419
+3193-     245: sipush        7587
+3194-     248: iand
+3195-     249: ineg
+3196-     250: sipush        -8211
+3197-     253: sipush        16378
+3198-     256: iand
+3199-     257: iand
+3200-     258: iastore
+3201-     259: getstatic     #61                 // Field ab:[I
+3202-     262: bipush        16
+3203-     264: sipush        206
+3204-     267: sipush        195
+3205-     270: ixor
+3206-     271: iastore
+3207-     272: getstatic     #61                 // Field ab:[I
+3208-     275: bipush        17
+3209-     277: bipush        99
+3210:     279: bipush        120
+3211-     281: ixor
+3212:     282: bipush        120
+3213-     284: bipush        75
+3214-     286: ixor
+3215-     287: ixor
+3216-     288: iastore
+3217-     289: getstatic     #61                 // Field ab:[I
+3218-     292: bipush        18
+3219-     294: sipush        130
+3220-     297: sipush        142
+3221-     300: ixor
+3222-     301: iastore
+3223-     302: getstatic     #61                 // Field ab:[I
+3224-     305: bipush        19
+3225-     307: bipush        79
+3226-     309: bipush        71
+3227-     311: ixor
+3228-     312: iastore
+3229-     313: getstatic     #61                 // Field ab:[I
+3230-     316: bipush        20
+3231-     318: iconst_3
+3232-     319: bipush        11
+3233-     321: ixor
+3234-     322: ineg
+3235-     323: iastore
+3236-     324: getstatic     #61                 // Field ab:[I
+3237-     327: bipush        21
+3238-     329: bipush        94
+3239-     331: bipush        56
+3240-     333: iadd
+3241-     334: bipush        77
+3242-     336: isub
+3243-     337: sipush        131
+3244-     340: iadd
+3245-     341: iastore
+3246-     342: getstatic     #61                 // Field ab:[I
+3247-     345: bipush        22
+3248-     347: bipush        121
+3249-     349: sipush        137
+3250-     352: iadd
+3251-     353: sipush        229
+3252-     356: isub
+3253-     357: sipush        154
+3254-     360: iadd
+3255-     361: sipush        152
+3256-     364: sipush        152
+3257-     367: iadd
+3258-     368: sipush        283
+3259-     371: isub
+3260-     372: sipush        133
+3261-     375: iadd
+3262-     376: ixor
+3263-     377: iastore
+3264-     378: getstatic     #61                 // Field ab:[I
+3265-     381: bipush        23
+3266-     383: bipush        26
+3267-     385: bipush        35
+3268-     387: ixor
+3269-     388: sipush        212
+3270-     391: sipush        178
+3271-     394: ixor
+3272-     395: ixor
+3273-     396: iastore
+3274-     397: getstatic     #61                 // Field ab:[I
+3275-     400: bipush        24
+3276-     402: bipush        105
+3277-     404: bipush        73
+3278-     406: ixor
+3279-     407: iastore
+3280-     408: getstatic     #61                 // Field ab:[I
+3281-     411: bipush        25
+3282-     413: sipush        167
+--
+3454-     727: iadd
+3455-     728: bipush        116
+3456-     730: bipush        16
+3457-     732: iadd
+3458-     733: bipush        23
+3459-     735: isub
+3460-     736: bipush        80
+3461-     738: iadd
+3462-     739: ixor
+3463-     740: iastore
+3464-     741: getstatic     #61                 // Field ab:[I
+3465-     744: bipush        42
+3466-     746: sipush        181
+3467-     749: sipush        128
+3468-     752: ixor
+3469-     753: bipush        116
+3470-     755: bipush        115
+3471-     757: ixor
+3472-     758: ixor
+3473-     759: iastore
+3474-     760: getstatic     #61                 // Field ab:[I
+3475-     763: bipush        43
+3476-     765: sipush        199
+3477-     768: sipush        153
+3478-     771: ixor
+3479-     772: bipush        50
+3480-     774: bipush        56
+3481-     776: ixor
+3482-     777: ixor
+3483-     778: iastore
+3484-     779: getstatic     #61                 // Field ab:[I
+3485-     782: bipush        44
+3486-     784: sipush        219
+3487-     787: sipush        170
+3488-     790: ixor
+3489:     791: bipush        120
+3490-     793: bipush        58
+3491-     795: ixor
+3492-     796: ixor
+3493-     797: iastore
+3494-     798: getstatic     #61                 // Field ab:[I
+3495-     801: bipush        45
+3496-     803: sipush        233
+3497-     806: sipush        188
+3498-     809: ixor
+3499-     810: iastore
+3500-     811: getstatic     #61                 // Field ab:[I
+3501-     814: bipush        46
+3502-     816: sipush        147
+3503-     819: sipush        167
+3504-     822: ixor
+3505-     823: iastore
+3506-     824: getstatic     #61                 // Field ab:[I
+3507-     827: bipush        47
+3508-     829: sipush        254
+3509-     832: sipush        191
+3510-     835: ixor
+3511-     836: sipush        134
+3512-     839: sipush        131
+3513-     842: ixor
+3514-     843: ixor
+3515-     844: iastore
+3516-     845: getstatic     #61                 // Field ab:[I
+3517-     848: bipush        48
+3518-     850: bipush        92
+3519-     852: bipush        40
+3520-     854: ixor
+3521-     855: bipush        83
+3522-     857: bipush        18
+3523-     859: ixor
+3524-     860: ixor
+3525-     861: iastore
+3526-     862: getstatic     #61                 // Field ab:[I
+3527-     865: bipush        49
+3528-     867: sipush        255
+3529-     870: sipush        184
+3530-     873: ixor
+3531-     874: iastore
+3532-     875: getstatic     #61                 // Field ab:[I
+3533-     878: bipush        50
+3534-     880: bipush        124
+3535-     882: bipush        49
+3536-     884: ixor
+3537-     885: bipush        71
+3538-     887: bipush        60
+3539-     889: ixor
+3540-     890: ixor
+3541-     891: iastore
+3542-     892: getstatic     #61                 // Field ab:[I
+3543-     895: bipush        51
+3544-     897: bipush        31
+3545-     899: sipush        129
+3546-     902: iadd
+3547-     903: bipush        67
+3548-     905: isub
+3549-     906: bipush        116
+3550-     908: iadd
+3551-     909: iconst_2
+3552-     910: bipush        85
+3553-     912: iadd
+3554-     913: bipush        -7
+3555-     915: i/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+sub
+3556-     916: bipush        61
+3557-     918: iadd
+3558-     919: ixor
+3559-     920: iastore
+===== Class_dm =====
+2073-     180: sipush        128
+2074-     183: iadd
+2075-     184: bipush        81
+2076-     186: isub
+2077-     187: bipush        19
+2078-     189: iadd
+2079-     190: ixor
+2080-     191: sipush        147
+2081-     194: sipush        165
+2082-     197: iadd
+2083-     198: sipush        171
+2084-     201: isub
+2085-     202: bipush        31
+2086-     204: iadd
+2087-     205: bipush        71
+2088-     207: bipush        14
+2089-     209: iadd
+2090-     210: bipush        -75
+2091-     212: isub
+2092-     213: bipush        20
+2093-     215: iadd
+2094-     216: ixor
+2095-     217: ldc           #2                  // String
+2096-     219: invokevirtual #108                // Method java/lang/String.length:()I
+2097-     222: ineg
+2098-     223: ixor
+2099-     224: iand
+2100-     225: ireturn
+2101-     226: iinc          2, 1
+2102-     229: ldc           #1                  // String
+2103-     231: invokevirtual #108                // Method java/lang/String.length:()I
+2104-     234: pop
+2105-     235: bipush        73
+2106-     237: bipush        101
+2107-     239: iadd
+2108:     240: bipush        120
+2109-     242: isub
+2110-     243: bipush        99
+2111-     245: iadd
+2112-     246: bipush        102
+2113-     248: bipush        58
+2114-     250: iadd
+2115-     251: sipush        137
+2116-     254: isub
+2117-     255: bipush        109
+2118-     257: iadd
+2119-     258: ixor
+2120-     259: sipush        152
+2121-     262: sipush        182
+2122-     265: ixor
+2123-     266: sipush        143
+2124-     269: sipush        188
+2125-     272: ixor
+2126-     273: ixor
+2127-     274: ldc           #2                  // String
+2128-     276: invokevirtual #108                // Method java/lang/String.length:()I
+2129-     279: ineg
+2130-     280: ixor
+2131-     281: iand
+2132-     282: ifeq          36
+2133-     285: sipush        173
+2134-     288: sipush        187
+2135-     291: ixor
+2136-     292: sipush        224
+2137-     295: sipush        185
+2138-     298: ixor
+2139-     299: ixor
+2140-     300: bipush        96
+2141-     302: bipush        52
+2142-     304: ixor
+2143-     305: sipush        191
+2144-     308: sipush        164
+2145-     311: ixor
+2146-     312: ixor
+2147-     313: ldc           #2                  // String
+2148-     315: invokevirtual #108                // Method java/lang/String.length:()I
+2149-     318: ineg
+2150-     319: ixor
+2151-     320: iand
+2152-     321: ireturn
+2153-     322: getstatic     #57                 // Field g:[I
+2154-     325: iconst_1
+2155-     326: iaload
+2156-     327: ireturn
+2157-     328: getstatic     #57                 // Field g:[I
+2158-     331: iconst_0
+2159-     332: iaload
+2160-     333: ireturn
+2161-
+2162-  static {};
+2163-    Code:
+2164-       0: invokestatic  #85                 // Method al:()V
+2165-       3: getstatic     #57                 // Field g:[I
+2166-       6: iconst_1
+2167-       7: iaload
+2168-       8: putstatic     #70                 // Field t:Z
+2169-      11: getstatic     #57                 // Field g:[I
+2170-      14: iconst_1
+2171-      15: iaload
+2172-      16: putstatic     #52                 // Field b:Z
+2173-      19: getstatic     #57                 // Field g:[I
+2174-      22: iconst_1
+2175-      23: iaload
+2176-      24: putstatic     #51                 // Field a:Z
+2177-      27: getstatic     #57                 // Field g:[I
+2178-      30: iconst_1
+===== Class_dw =====
+62-       4: putstatic     #32                 // Field l:[I
+63-       7: getstatic     #32                 // Field l:[I
+64-      10: iconst_0
+65-      11: bipush        45
+66-      13: bipush        124
+67-      15: ixor
+68-      16: bipush        72
+69-      18: bipush        25
+70-      20: ixor
+71-      21: iconst_m1
+72-      22: ixor
+73-      23: iand
+74-      24: iastore
+75-      25: getstatic     #32                 // Field l:[I
+76-      28: iconst_1
+77-      29: ldc           #3                  // String
+78-      31: invokevirtual #49                 // Method java/lang/String.length:()I
+79-      34: iastore
+80-      35: getstatic     #32                 // Field l:[I
+81-      38: iconst_2
+82-      39: ldc           #4                  // String
+83-      41: invokevirtual #49                 // Method java/lang/String.length:()I
+84-      44: iastore
+85-      45: getstatic     #32                 // Field l:[I
+86-      48: iconst_3
+87-      49: sipush        187
+88-      52: sipush        170
+89-      55: ixor
+90-      56: bipush        113
+91-      58: bipush        68
+92-      60: ixor
+93-      61: ixor
+94-      62: iastore
+95-      63: getstatic     #32                 // Field l:[I
+96-      66: iconst_4
+97:      67: bipush        120
+98-      69: bipush        126
+99-      71: ixor
+100-      72: iastore
+101-      73: getstatic     #32                 // Field l:[I
+102-      76: iconst_5
+103-      77: ldc           #2                  // String
+104-      79: invokevirtual #49                 // Method java/lang/String.length:()I
+105-      82: iastore
+106-      83: return
+107-
+108-  private static boolean a(java.lang.Object, java.lang.Object);
+109-    Code:
+110-       0: aload_0
+111-       1: aload_1
+112-       2: if_acmpeq     9
+113-       5: iconst_1
+114-       6: goto          10
+115-       9: iconst_0
+116-      10: ireturn
+117-
+118-  public final void a(Class_dg);
+119-    Code:
+120-       0: aload_0
+121-       1: getfield      #30                 // Field j:Ljavax/microedition/lcdui/Image;
+122-       4: invokestatic  #41                 // Method a:(Ljava/lang/Object;)Z
+123-       7: ifeq          60
+124-      10: aload_1
+125-      11: aload_0
+126-      12: getfield      #30                 // Field j:Ljavax/microedition/lcdui/Image;
+127-      15: aload_0
+128-      16: getfield      #25                 // Field e:I
+129-      19: aload_0
+130-      20: getfield      #30                 // Field j:Ljavax/microedition/lcdui/Image;
+131-      23: invokestatic  #38                 // Method Class_dg.b:(Ljavax/microedition/lcdui/Image;)I
+132-      26: getstatic     #32                 // Field l:[I
+133-      29: iconst_1
+134-      30: iaload
+135-      31: idiv
+136-      32: iadd
+137-      33: aload_0
+138-      34: getfield      #27                 // Field g:I
+139-      37: aload_0
+140-      38: getfield      #30                 // Field j:Ljavax/microedition/lcdui/Image;
+141-      41: invokestatic  #36                 // Method Class_dg.a:(Ljavax/microedition/lcdui/Image;)I
+142-      44: getstatic     #32                 // Field l:[I
+143-      47: iconst_1
+144-      48: iaload
+145-      49: idiv
+146-      50: iadd
+147-      51: getstatic     #32                 // Field l:[I
+148-      54: iconst_2
+149-      55: iaload
+150-      56: invokevirtual #37                 // Method Class_dg.a:(Ljavax/microedition/lcdui/Image;III)V
+151-      59: return
+152-      60: aload_0
+153-      61: getfield      #23                 // Field b:Ljava/lang/String;
+154-      64: ldc           #1                  // String
+155-      66: invokestatic  #42                 // Method a:(Ljava/lang/Object;Ljava/lang/Object;)Z
+156-      69: ifeq          211
+157-      72: aload_0
+158-      73: getfield      #26                 // Field f:Z
+159-      76: invokestatic  #44                 // Method b:(I)Z
+160-      79: ifeq          191
+161-      82: aload_1
+162-      83: getstatic     #18                 // Field Class_ct.fh:Ljavax/microedition/lcdui/Image;
+163-      86: aload_0
+164-      87: getfield      #25                 // Field e:I
+165-      90: aload_0
+166-      91: getfield      #27                 // Field g:I
+167-      94: getstatic     #32                 // Field l:[I
+===== Class_ei =====
+1835-     588: iadd
+1836-     589: bipush        51
+1837-     591: bipush        53
+1838-     593: iadd
+1839-     594: bipush        72
+1840-     596: isub
+1841-     597: bipush        113
+1842-     599: iadd
+1843-     600: ixor
+1844-     601: iastore
+1845-     602: getstatic     #79                 // Field q:[I
+1846-     605: bipush        32
+1847-     607: bipush        73
+1848-     609: bipush        76
+1849-     611: ixor
+1850-     612: ineg
+1851-     613: iastore
+1852-     614: getstatic     #79                 // Field q:[I
+1853-     617: bipush        33
+1854-     619: sipush        -2051
+1855-     622: sipush        3039
+1856-     625: iand
+1857-     626: iastore
+1858-     627: getstatic     #79                 // Field q:[I
+1859-     630: bipush        34
+1860-     632: bipush        57
+1861-     634: bipush        112
+1862-     636: ixor
+1863-     637: bipush        52
+1864-     639: bipush        119
+1865-     641: ixor
+1866-     642: ixor
+1867-     643: iastore
+1868-     644: getstatic     #79                 // Field q:[I
+1869-     647: bipush        35
+1870:     649: bipush        120
+1871-     651: bipush        7
+1872-     653: iadd
+1873-     654: iconst_1
+1874-     655: isub
+1875-     656: bipush        67
+1876-     658: iadd
+1877-     659: sipush        188
+1878-     662: bipush        92
+1879-     664: iadd
+1880-     665: sipush        279
+1881-     668: isub
+1882-     669: sipush        197
+1883-     672: iadd
+1884-     673: ixor
+1885-     674: iastore
+1886-     675: getstatic     #79                 // Field q:[I
+1887-     678: bipush        36
+1888-     680: ldc           #4                  // String
+1889-     682: invokevirtual #134                // Method java/lang/String.length:()I
+1890-     685: bipush        36
+1891-     687: bipush        107
+1892-     689: ixor
+1893-     690: ixor
+1894-     691: iastore
+1895-     692: getstatic     #79                 // Field q:[I
+1896-     695: bipush        37
+1897-     697: iconst_5
+1898-     698: bipush        10
+1899-     700: ixor
+1900-     701: iastore
+1901-     702: getstatic     #79                 // Field q:[I
+1902-     705: bipush        38
+1903-     707: bipush        66
+1904-     709: bipush        23
+1905-     711: ixor
+1906-     712: iastore
+1907-     713: getstatic     #79                 // Field q:[I
+1908-     716: bipush        39
+1909-     718: bipush        90
+1910-     720: bipush        24
+1911-     722: ixor
+1912-     723: iastore
+1913-     724: getstatic     #79                 // Field q:[I
+1914-     727: bipush        40
+1915-     729: bipush        127
+1916-     731: sipush        185
+1917-     734: iadd
+1918-     735: sipush        145
+1919-     738: isub
+1920-     739: bipush        20
+1921-     741: iadd
+1922-     742: bipush        29
+1923-     744: bipush        58
+1924-     746: iadd
+1925-     747: bipush        57
+1926-     749: isub
+1927-     750: sipush        146
+1928-     753: iadd
+1929-     754: ixor
+1930-     755: iastore
+1931-     756: getstatic     #79                 // Field q:[I
+1932-     759: bipush        41
+1933-     761: bipush        7
+1934-     763: bipush        28
+1935-     765: ixor
+1936-     766: iastore
+1937-     767: getstatic     #79                 // Field q:[I
+1938-     770: bipush        42
+1939-     772: bipush        122
+1940-     774: bipush        102
+===== Class_ek =====
+387-      68: getstatic     #22                 // Field e:[I
+388-      71: iconst_4
+389-      72: bipush        8
+390-      74: bipush        14
+391-      76: ixor
+392-      77: iastore
+393-      78: getstatic     #22                 // Field e:[I
+394-      81: iconst_5
+395-      82: sipush        217
+396-      85: sipush        144
+397-      88: ixor
+398-      89: sipush        201
+399-      92: sipush        128
+400-      95: ixor
+401-      96: iconst_m1
+402-      97: ixor
+403-      98: iand
+404-      99: iastore
+405-     100: getstatic     #22                 // Field e:[I
+406-     103: bipush        6
+407-     105: sipush        178
+408-     108: sipush        191
+409-     111: ixor
+410-     112: bipush        40
+411-     114: bipush        46
+412-     116: ixor
+413-     117: ixor
+414-     118: iastore
+415-     119: getstatic     #22                 // Field e:[I
+416-     122: bipush        7
+417-     124: ldc           #4                  // String
+418-     126: invokevirtual #40                 // Method java/lang/String.length:()I
+419-     129: iastore
+420-     130: getstatic     #22                 // Field e:[I
+421-     133: bipush        8
+422:     135: bipush        120
+423-     137: bipush        114
+424-     139: ixor
+425-     140: iastore
+426-     141: getstatic     #22                 // Field e:[I
+427-     144: bipush        9
+428-     146: bipush        15
+429-     148: bipush        8
+430-     150: iadd
+431-     151: bipush        -71
+432-     153: isub
+433-     154: bipush        71
+434-     156: iadd
+435-     157: bipush        12
+436-     159: bipush        50
+437-     161: iadd
+438-     162: bipush        -2
+439-     164: isub
+440-     165: bipush        96
+441-     167: iadd
+442-     168: ixor
+443-     169: iastore
+444-     170: return
+445-
+446-  static {};
+447-    Code:
+448-       0: invokestatic  #33                 // Method b:()V
+449-       3: getstatic     #22                 // Field e:[I
+450-       6: bipush        7
+451-       8: iaload
+452-       9: newarray       int
+453-      11: dup
+454-      12: getstatic     #22                 // Field e:[I
+455-      15: iconst_5
+456-      16: iaload
+457-      17: getstatic     #22                 // Field e:[I
+458-      20: bipush        8
+459-      22: iaload
+460-      23: iastore
+461-      24: dup
+462-      25: getstatic     #22                 // Field e:[I
+463-      28: iconst_3
+464-      29: iaload
+465-      30: getstatic     #22                 // Field e:[I
+466-      33: bipush        9
+467-      35: iaload
+468-      36: iastore
+469-      37: getstatic     #22                 // Field e:[I
+470-      40: iconst_1
+471-      41: iaload
+472-      42: getstatic     #22                 // Field e:[I
+473-      45: bipush        6
+474-      47: iaload
+475-      48: iastore
+476-      49: getstatic     #22                 // Field e:[I
+477-      52: bipush        7
+478-      54: iaload
+479-      55: newarray       int
+480-      57: dup
+481-      58: getstatic     #22                 // Field e:[I
+482-      61: iconst_5
+483-      62: iaload
+484-      63: getstatic     #22                 // Field e:[I
+485-      66: bipush        8
+486-      68: iaload
+487-      69: iastore
+488-      70: dup
+489-      71: getstatic     #22                 // Field e:[I
+490-      74: iconst_3
+491-      75: iaload
+492-      76: getstatic     #22                 // Field e:[I
+===== Class_eq =====
+2043-     520: sipush        -17587
+2044-     523: sipush        19899
+2045-     526: iand
+2046-     527: ineg
+2047-     528: sipush        -548
+2048-     531: ldc           #9                  // int 13950975
+2049-     533: iand
+2050-     534: iand
+2051-     535: iastore
+2052-     536: getstatic     #58                 // Field g:[I
+2053-     539: bipush        29
+2054-     541: sipush        -8721
+2055-     544: ldc           #4                  // int 5729113
+2056-     546: iand
+2057-     547: iastore
+2058-     548: getstatic     #58                 // Field g:[I
+2059-     551: bipush        30
+2060-     553: sipush        -30461
+2061-     556: sipush        32767
+2062-     559: iand
+2063-     560: ineg
+2064-     561: sipush        -5358
+2065-     564: ldc           #5                  // int 6569967
+2066-     566: iand
+2067-     567: iand
+2068-     568: iastore
+2069-     569: getstatic     #58                 // Field g:[I
+2070-     572: bipush        31
+2071-     574: sipush        -17426
+2072-     577: ldc           #7                  // int 9598481
+2073-     579: iand
+2074-     580: iastore
+2075-     581: getstatic     #58                 // Field g:[I
+2076-     584: bipush        32
+2077-     586: sipush        -1089
+2078:     589: sipush        12002
+2079-     592: iand
+2080-     593: ineg
+2081-     594: sipush        -273
+2082-     597: ldc           #3                  // int 3948465
+2083-     599: iand
+2084-     600: iand
+2085-     601: iastore
+2086-     602: getstatic     #58                 // Field g:[I
+2087-     605: bipush        33
+2088-     607: sipush        -1049
+2089-     610: sipush        5181
+2090-     613: iand
+2091-     614: ineg
+2092-     615: sipush        -8346
+2093-     618: ldc           #10                 // int 15237053
+2094-   /home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+  620: iand
+2095-     621: iand
+2096-     622: iastore
+2097-     623: getstatic     #58                 // Field g:[I
+2098-     626: bipush        34
+2099-     628: ldc           #17                 // String
+2100-     630: invokevirtual #78                 // Method java/lang/String.length:()I
+2101-     633: ineg
+2102-     634: iconst_m1
+2103-     635: ldc           #14                 // int 16777215
+2104-     637: iand
+2105-     638: iand
+2106-     639: iastore
+2107-     640: getstatic     #58                 // Field g:[I
+2108-     643: bipush        35
+2109-     645: sipush        162
+2110-     648: sipush        179
+2111-     651: ixor
+2112-     652: sipush        145
+2113-     655: sipush        152
+2114-     658: ixor
+2115-     659: ixor
+2116-     660: iastore
+2117-     661: return
+2118-
+2119-  private static boolean a(int, int);
+2120-    Code:
+2121-       0: iload_0
+2122-       1: iload_1
+2123-       2: if_icmpge     9
+2124-       5: iconst_1
+2125-       6: goto          10
+2126-       9: iconst_0
+2127-      10: ireturn
+2128-
+2129-  private static boolean b(int, int);
+2130-    Code:
+2131-       0: iload_0
+2132-       1: iload_1
+2133-       2: if_icmpne     9
+2134-       5: iconst_1
+2135-       6: goto          10
+2136-       9: iconst_0
+2137-      10: ireturn
+2138-}
+===== Class_es =====
+260-       9: aload_0
+261-      10: aload_2
+262-      11: putfield      #26                 // Field d:LClass_dj;
+263-      14: return
+264-
+265-  public final void a();
+266-    Code:
+267-       0: new           #15                 // class java/lang/Thread
+268-       3: dup
+269-       4: aload_0
+270-       5: invokespecial #43                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+271-       8: invokevirtual #44                 // Method java/lang/Thread.start:()V
+272-      11: return
+273-
+274-  private static void b();
+275-    Code:
+276-       0: iconst_2
+277-       1: newarray       int
+278-       3: putstatic     #25                 // Field c:[I
+279-       6: getstatic     #25                 // Field c:[I
+280-       9: iconst_0
+281-      10: bipush        93
+282-      12: bipush        47
+283-      14: ixor
+284-      15: bipush        125
+285-      17: bipush        68
+286-      19: ixor
+287-      20: ixor
+288-      21: bipush        96
+289-      23: bipush        23
+290-      25: iadd
+291-      26: bipush        74
+292-      28: isub
+293-      29: sipush        173
+294-      32: iadd
+295:      33: bipush        120
+296-      35: bipush        9
+297-      37: iadd
+298-      38: bipush        78
+299-      40: isub
+300-      41: bipush        94
+301-      43: iadd
+302-      44: ixor
+303-      45: ldc           #2                  // String
+304-      47: invokevirtual #40                 // Method java/lang/String.length:()I
+305-      50: ineg
+306-      51: ixor
+307-      52: iand
+308-      53: iastore
+309-      54: getstatic     #25                 // Field c:[I
+310-      57: iconst_1
+311-      58: ldc           #2                  // String
+312-      60: invokevirtual #40                 // Method java/lang/String.length:()I
+313-      63: iastore
+314-      64: return
+315-
+316-  private static boolean a(int, int);
+317-    Code:
+318-       0: iload_0
+319-       1: iload_1
+320-       2: if_icmpge     9
+321-       5: iconst_1
+322-       6: goto          10
+323-       9: iconst_0
+324-      10: ireturn
+325-}
+===== Class_fg =====
+257-      97: isub
+258-      98: sipush        144
+259-     101: iadd
+260-     102: bipush        89
+261-     104: bipush        112
+262-     106: iadd
+263-     107: bipush        40
+264-     109: isub
+265-     110: bipush        12
+266-     112: iadd
+267-     113: ixor
+268-     114: iastore
+269-     115: getstatic     #40                 // Field h:[I
+270-     118: iconst_5
+271-     119: bipush        65
+272-     121: bipush        116
+273-     123: iadd
+274-     124: bipush        68
+275-     126: isub
+276-     127: bipush        100
+277-     129: iadd
+278-     130: bipush        48
+279-     132: sipush        153
+280-     135: iadd
+281-     136: bipush        87
+282-     138: isub
+283-     139: bipush        83
+284-     141: iadd
+285-     142: ixor
+286-     143: iastore
+287-     144: getstatic     #40                 // Field h:[I
+288-     147: bipush        6
+289-     149: sipush        178
+290-     152: sipush        189
+291-     155: ixor
+292:     156: bipush        120
+293-     158: bipush        87
+294-     160: ixor
+295-     161: ixor
+296-     162: iastore
+297-     163: getstatic     #40                 // Field h:[I
+298-     166: bipush        7
+299-     168: ldc           #3                  // String
+300-     170: invokevirtual #66                 // Method java/lang/String.length:()I
+301-     173: iastore
+302-     174: getstatic     #40                 // Field h:[I
+303-     177: bipush        8
+304-     179: iconst_3
+305-     180: bipush        103
+306-     182: ixor
+307-     183: iastore
+308-     184: return
+309-
+310-  protected Class_fg();
+311-    Code:
+312-       0: aload_0
+313-       1: invokespecial #64                 // Method java/lang/Object."<init>":()V
+314-       4: aload_0
+315-       5: getstatic     #40                 // Field h:[I
+316-       8: iconst_0
+317-       9: iaload
+318-      10: putfield      #36                 // Field d:Z
+319-      13: aload_0
+320-      14: lconst_0
+321-      15: putfield      #42                 // Field j:J
+322-      18: aload_0
+323-      19: new           #11                 // class Class_dw
+324-      22: dup
+325-      23: getstatic     #43                 // Field Class_gd.dm:Ljava/lang/String;
+326-      26: aload_0
+327-      27: getstatic     #40                 // Field h:[I
+328-      30: iconst_1
+329-      31: iaload
+330-      32: aconst_null
+331-      33: getstatic     #40                 // Field h:[I
+332-      36: iconst_2
+333-      37: iaload
+334-      38: getstatic     #30                 // Field Class_ds.k:I
+335-      41: getstatic     #19                 // Field Class_aw.a:I
+336-      44: isub
+337-      45: getstatic     #40                 // Field h:[I
+338-      48: iconst_2
+339-      49: iaload
+340-      50: iadd
+341-      51: invokespecial #55                 // Method Class_dw."<init>":(Ljava/lang/String;LClass_bx;ILjava/lang/Object;II)V
+342-      54: putfield      #33                 // Field a:LClass_dw;
+343-      57: aload_0
+344-      58: new           #11                 // class Class_dw
+345-      61: dup
+346-      62: getstatic     #45                 // Field Class_gd.ro:Ljava/lang/String;
+347-      65: aload_0
+348-      66: getstatic     #40                 // Field h:[I
+349-      69: iconst_3
+350-      70: iaload
+351-      71: aconst_null
+352-      72: getstatic     #29                 // Field Class_ds.d:I
+353-      75: getstatic     #40                 // Field h:[I
+354-      78: iconst_4
+355-      79: iaload
+356-      80: isub
+357-      81: getstatic     #30                 // Field Class_ds.k:I
+358-      84: getstatic     #19                 // Field Class_aw.a:I
+359-      87: isub
+360-      88: getstatic     #40                 // Field h:[I
+361-      91: iconst_2
+362-      92: iaload
+===== Class_fo =====
+100-     164: aload_0
+101-     165: dup
+102-     166: getfield      #32                 // Field h:S
+103-     169: getstatic     #30                 // Field f:[I
+104-     172: iconst_0
+105-     173: iaload
+106-     174: isub
+107-     175: i2s
+108-     176: putfield      #32                 // Field h:S
+109-     179: aload_0
+110-     180: getfield      #32                 // Field h:S
+111-     183: invokestatic  #53                 // Method d:(I)Z
+112-     186: ifeq          251
+113-     189: aload_0
+114-     190: getfield      #35                 // Field k:LClass_cu;
+115-     193: getfield      #23                 // Field Class_cu.a:I
+116-     196: getstatic     #30                 // Field f:[I
+117-     199: iconst_5
+118-     200: iaload
+119-     201: invokestatic  #45                 // Method a:(II)Z
+120-     204: ifeq          215
+121-     207: getstatic     #30                 // Field f:[I
+122-     210: iconst_1
+123-     211: iaload
+124-     212: putstatic     #28                 // Field Class_ds.v/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+:Z
+125-     215: getstatic     #17                 // Field Class_ao.c:LClass_dj;
+126-     218: aload_0
+127-     219: invokevirtual #41                 // Method Class_dj.removeElement:(Ljava/lang/Object;)Z
+128-     222: ldc           #1                  // String
+129-     224: invokevirtual #55                 // Method java/lang/String.length:()I
+130-     227: pop2
+131-     228: ldc           #1                  // String
+132-     230: invokevirtual #55                 // Method java/lang/String.length:()I
+133-     233: pop
+134-     234: bipush        110
+135:     236: bipush        120
+136-     238: ixor
+137-     239: bipush        127
+138-     241: bipush        105
+139-     243: ixor
+140-     244: iconst_m1
+141-     245: ixor
+142-     246: iand
+143-     247: ifeq          260
+144-     250: return
+145-     251: aload_0
+146-     252: getstatic     #30                 // Field f:[I
+147-     255: iconst_1
+148-     256: iaload
+149-     257: putfield      #34                 // Field j:I
+150-     260: getstatic     #27                 // Field Class_ds.s:I
+151-     263: getstatic     #30                 // Field f:[I
+152-     266: bipush        6
+153-     268: iaload
+154-     269: irem
+155-     270: invokestatic  #44                 // Method a:(I)Z
+156-     273: ifeq          328
+157-     276: aload_0
+158-     277: getfield      #36                 // Field l:LClass_cy;
+159-     280: invokestatic  #47                 // Method a:(Ljava/lang/Object;)Z
+160-     283: ifeq          328
+161-     286: aload_0
+162-     287: getfield      #36                 // Field l:LClass_cy;
+163-     290: invokestatic  #39                 // Method Class_cy.aa:()LClass_cy;
+164-     293: invokestatic  #48                 // Method a:(Ljava/lang/Object;Ljava/lang/Object;)Z
+165-     296: ifeq          328
+166-     299: getstatic     #21                 // Field Class_ct.bi:LClass_dj;
+167-     302: aload_0
+168-     303: getfield      #36                 // Field l:LClass_cy;
+169-     306: invokevirtual #57                 // Method java/util/Vector.contains:(Ljava/lang/Object;)Z
+170-     309: invokestatic  #44                 // Method a:(I)Z
+171-     312: ifeq          328
+172-     315: getstatic     #17                 // Field Class_ao.c:LClass_dj;
+173-     318: aload_0
+174-     319: invokevirtual #41                 // Method Class_dj.removeElement:(Ljava/lang/Object;)Z
+175-     322: ldc           #1                  // String
+176-     324: invokevirtual #55                 // Method java/lang/String.length:()I
+177-     327: pop2
+178-     328: return
+179-
+180-  private static boolean a(java.lang.Object, java.lang.Object);
+181-    Code:
+182-       0: aload_0
+183-       1: aload_1
+184-       2: if_acmpeq     9
+185-       5: iconst_1
+186-       6: goto          10
+187-       9: iconst_0
+188-      10: ireturn
+189-
+190-  private static boolean a(int, int);
+191-    Code:
+192-       0: iload_0
+193-       1: iload_1
+194-       2: if_icmpne     9
+195-       5: iconst_1
+196-       6: goto          10
+197-       9: iconst_0
+198-      10: ireturn
+199-
+200-  private static boolean a(java.lang.Object);
+201-    Code:
+202-       0: aload_0
+203-       1: ifnull        8
+204-       4: iconst_1
+205-       5: goto          9
+===== Class_ft =====
+438-     139: ixor
+439-     140: sipush        213
+440-     143: sipush        165
+441-     146: ixor
+442-     147: ixor
+443-     148: iastore
+444-     149: getstatic     #38                 // Field f:[I
+445-     152: bipush        8
+446-     154: ldc           #2                  // String
+447-     156: invokevirtual #66                 // Method java/lang/String.length:()I
+448-     159: ineg
+449-     160: iastore
+450-     161: getstatic     #38                 // Field f:[I
+451-     164: bipush        9
+452-     166: bipush        76
+453-     168: bipush        18
+454-     170: iadd
+455-     171: bipush        -4
+456-     173: isub
+457-     174: bipush        29
+458-     176: iadd
+459-     177: bipush        112
+460-     179: bipush        10
+461-     181: ixor
+462-     182: ixor
+463-     183: iastore
+464-     184: /home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+getstatic     #38                 // Field f:[I
+465-     187: bipush        10
+466-     189: bipush        97
+467-     191: bipush        127
+468-     193: iadd
+469-     194: sipush        188
+470-     197: isub
+471-     198: sipush        175
+472-     201: iadd
+473:     202: bipush        120
+474-     204: sipush        165
+475-     207: iadd
+476-     208: sipush        168
+477-     211: isub
+478-     212: bipush        80
+479-     214: iadd
+480-     215: ixor
+481-     216: iastore
+482-     217: return
+483-
+484-  private static boolean d(int, int);
+485-    Code:
+486-       0: iload_0
+487-       1: iload_1
+488-       2: if_icmpeq     9
+489-       5: iconst_1
+490-       6: goto          10
+491-       9: iconst_0
+492-      10: ireturn
+493-
+494-  public Class_ft(Class_dj, Class_dj, int);
+495-    Code:
+496-       0: aload_0
+497-       1: invokespecial #48                 // Method Class_eo."<init>":()V
+498-       4: aload_0
+499-       5: getstatic     #38                 // Field f:[I
+500-       8: iconst_0
+501-       9: iaload
+502-      10: putfield      #34                 // Field b:I
+503-      13: aload_0
+504-      14: getstatic     #38                 // Field f:[I
+505-      17: iconst_1
+506-      18: iaload
+507-      19: putfield      #33                 // Field a:I
+508-      22: aload_0
+509-      23: iload_3
+510-      24: putfield      #37                 // Field e:I
+511-      27: aload_0
+512-      28: aload_1
+513-      29: putfield      #36                 // Field d:LClass_dj;
+514-      32: aload_0
+515-      33: aload_2
+516-      34: putfield      #35                 // Field c:LClass_dj;
+517-      37: return
+518-
+519-  private static boolean a(java.lang.Object);
+520-    Code:
+521-       0: aload_0
+522-       1: ifnull        8
+523-       4: iconst_1
+524-       5: goto          9
+525-       8: iconst_0
+526-       9: ireturn
+527-
+528-  private static boolean f(int);
+529-    Code:
+530-       0: iload_0
+531-       1: ifgt          8
+532-       4: iconst_1
+533-       5: goto          9
+534-       8: iconst_0
+535-       9: ireturn
+536-
+537-  public final java.lang.String toString();
+538-    Code:
+539-       0: ldc           #4                  // String PKBoss S
+540-       2: areturn
+541-
+542-  private static boolean g(int);
+543-    Code:
+===== Class_ga =====
+1918-    2326: sipush        194
+1919-    2329: iadd
+1920-    2330: sipush        250
+1921-    2333: isub
+1922-    2334: sipush        233
+1923-    2337: iadd
+1924-    2338: sipush        150
+1925-    2341: bipush        9
+1926-    2343: iadd
+1927-    2344: bipush        32
+1928-    2346: isub
+1929-    2347: bipush        50
+1930-    2349: iadd
+1931-    2350: ixor
+1932-    2351: ldc           #2                  // String
+1933-    2353: invokevirtual #62                 // Method java/lang/String.length:()I
+1934-    2356: ineg
+1935-    2357: ixor
+1936-    2358: iand
+1937-    2359: if_icmpgt     2570
+1938-    2362: aconst_null
+1939-    2363: areturn
+1940-    2364: aload         5
+1941-    2366: getfield      #23                 // Field f:I
+1942-    2369: aload         5
+1943-    2371: getfield      #30                 // Field m:I
+1944-    2374: invokestatic  #57                 // Method d:(II)Z
+1945-    2377: ifeq          2411
+1946-    2380: aload         5
+1947-    2382: aload         5
+1948-    2384: getfield      #30                 // Field m:I
+1949-    2387: putfield      #41                 // Field x:I
+1950-    2390: ldc           #1                  // String
+1951-    2392: invokevirtual #62                 // Method java/lang/String.length:()I
+1952-    2395: pop
+1953:    2396: bipush        120
+1954-    2398: bipush        124
+1955-    2400: ixor
+1956-    2401: ldc           #3                  // String
+1957-    2403: invokevirtual #62                 // Method java/lang/String.length:()I
+1958-    2406: if_icmpge     2570
+1959-    2409: aconst_null
+1960-    2410: areturn
+1961-    2411: getstatic     #13                 // Field Class_ds.ae:I
+1962-    2414: aload         5
+1963-    2416: getfield      #33                 // Field p:[I
+1964-    2419: ge/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+tstatic     #26                 // Field i:[I
+1965-    2422: iconst_2
+1966-    2423: iaload
+1967-    2424: iaload
+1968-    2425: isub
+1969-    2426: aload         5
+1970-    2428: getfield      #33                 // Field p:[I
+1971-    2431: getstatic     #26                 // Field i:[I
+1972-    2434: iconst_2
+1973-    2435: iaload
+1974-    2436: iaload
+1975-    2437: aload         5
+1976-    2439: getfield      #33                 // Field p:[I
+1977-    2442: getstatic     #26                 // Field i:[I
+1978-    2445: iconst_1
+1979-    2446: iaload
+1980-    2447: iaload
+1981-    2448: isub
+1982-    2449: iadd
+1983-    2450: aload         5
+1984-    2452: getfield      #33                 // Field p:[I
+1985-    2455: getstatic     #26                 // Field i:[I
+1986-    2458: iconst_1
+1987-    2459: iaload
+1988-    2460: iaload
+1989-    2461: aload         5
+1990-    2463: getfield      #33                 // Field p:[I
+1991-    2466: getstatic     #26                 // Field i:[I
+1992-    2469: bipush        6
+1993-    2471: iaload
+1994-    2472: iaload
+1995-    2473: isub
+1996-    2474: iadd
+1997-    2475: dup
+1998-    2476: istore_2
+1999-    2477: getstatic     #26                 // Field i:[I
+2000-    2480: bipush        8
+2001-    2482: iaload
+2002-    2483: invokestatic  #57                 // Method d:(II)Z
+2003-    2486: ifeq          2518
+2004-    2489: getstatic     #26                 // Field i:[I
+2005-    2492: bipush        8
+2006-    2494: iaload
+2007-    2495: istore_1
+2008-    2496: ldc           #1                  // String
+2009-    2498: invokevirtual #62                 // Method java/lang/String.length:()I
+2010-    2501: pop
+2011-    2502: ldc           #2                  // String
+2012-    2504: invokevirtual #62                 // Method java/lang/String.length:()I
+2013-    2507: ldc           #2                  // String
+2014-    2509: invokevirtual #62                 // Method java/lang/String.length:()I
+2015-    2512: ineg
+2016-    2513: if_icmpgt     2556
+2017-    2516: aconst_null
+2018-    2517: areturn
+2019-    2518: iload_2
+2020-    2519: getstatic     #26                 // Field i:[I
+2021-    2522: bipush        9
+2022-    2524: iaload
+2023-    2525: invokestatic  #50                 // Method a:(II)Z
+===== Class_gf =====
+1819-     889: iadd
+1820-     890: bipush        30
+1821-     892: isub
+1822-     893: iconst_3
+1823-     894: iadd
+1824-     895: ixor
+1825-     896: iastore
+1826-     897: getstatic     #126                // Field c:[I
+1827-     900: bipush        47
+1828-     902: sipush        -525
+1829-     905: sipush        25357
+1830-     908: iand
+1831-     909: ineg
+1832-     910: bipush        -45
+1833-     912: sipush        32751
+1834-     915: iand
+1835-     916: iand
+1836-     917: iastore
+1837-     918: getstatic     #126                // Field c:[I
+1838-     921: bipush        48
+1839-     923: bipush        98
+1840-     925: bipush        116
+1841-     927: ixor
+1842-     928: ldc           #17                 // String
+1843-     930: invokevirtual #189                // Method java/lang/String.length:()I
+1844-     933: ixor
+1845-     934: iastore
+1846-     935: getstatic     #126                // Field c:[I
+1847-     938: bipush        49
+1848-     940: bipush        119
+1849-     942: bipush        26
+1850-     944: ixor
+1851-     945: iastore
+1852-     946: getstatic     #126                // Field c:[I
+1853-     949: bipush        50
+1854:     951: bipush        120
+1855-     953: bipush        32
+1856-     955: ixor
+1857-     956: bipush        91
+1858-     958: bipush        21
+1859-     960: ixor
+1860-     961: ixor
+1861-     962: iastore
+1862-     963: getstatic     #126                // Field c:[I
+1863-     966: bipush        51
+1864-     968: bipush        79
+1865-     970: bipush        71
+1866-     972: ixor
+1867-     973: bipush        102
+1868-     975: bipush        121
+1869-     977: ixor
+1870-     978: ixor
+1871-     979: iastore
+1872-     980: getstatic     #126                // Field c:[I
+1873-     983: bipush        52
+1874-     985: sipush        193
+1875-     988: bipush        78
+1876-     990: iadd
+1877-     991: sipush        128
+1878-     994: isub
+1879-     995: bipush        63
+1880-     997: iadd
+1881-     998: bipush        76
+1882-    1000: bipush        48
+1883-    1002: iadd
+1884-    1003: bipush        -16
+1885-    1005: isub
+1886-    1006: bipush        14
+1887-    1008: iadd
+1888-    1009: ixor
+1889-    1010: iastore
+1890-    1011: getstatic     #126                // Field c:[I
+1891-    1014: bipush        53
+1892-    1016: bipush        31
+1893-    1018: bipush        7
+1894-    1020: ixor
+1895-    1021: iastore
+1896-    1022: getstatic     #126                // Field c:[I
+1897-    1025: bipush        54
+1898-    1027: bipush        40
+1899-    1029: bipush        49
+1900-    1031: ixor
+1901-    1032: iastore
+1902-    1033: getstatic     #126                // Field c:[I
+1903-    1036: bipush        55
+1904-    1038: sipush        131
+1905-    1041: bipush        26
+1906-    1043: iadd
+1907-    1044: bipush        122
+1908-    1046: isub
+1909-    1047: bipush        98
+1910-    1049: iadd
+1911-    1050: bipush        86
+1912-    1052: bipush        20
+1913-    1054: iadd
+1914-    1055: bipush        45
+1915-    1057: isub
+1916-    1058: bipush        98
+1917-    1060: iadd
+1918-    1061: ixor
+1919-    1062: iastore
+1920-    1063: getstatic     #126                // Field c:[I
+1921-    1066: bipush        56
+1922-    1068: sipush        255
+1923-    1071: sipush        173
+1924-    1074: ixor
+--
+1992-    1211: sipush        220
+1993-    1214: sipush        188
+1994-    1217: ixor
+1995-    1218: ixor
+1996-    1219: iastore
+1997-    1220: getstatic     #126                // Field c:[I
+1998-    1223: bipush        64
+1999-    1225: bipush        40
+2000-    1227: bipush        28
+2001-    1229: ixor
+2002-    1230: bipush        113
+2003-    1232: bipush        102
+2004-    1234: ixor
+2005-    1235: ixor
+2006-    1236: iastore
+2007-    1237: getstatic     #126                // Field c:[I
+2008-    1240: bipush        65
+2009-    1242: sipush        168
+2010-    1245: sipush        151
+2011-    1248: iadd
+2012-    1249: sipush        151
+2013-    1252: isub
+2014-    1253: bipush        41
+2015-    1255: iadd
+2016-    1256: bipush        38
+2017-    1258: bipush        103
+2018-    1260: iadd
+2019-    1261: bipush        66
+2020-    1263: isub
+2021-    1264: bipush        84
+2022-    1266: iadd
+2023-    1267: ixor
+2024-    1268: iastore
+2025-    1269: getstatic     #126                // Field c:[I
+2026-    1272: bipush        66
+2027:    1274: bipush        120
+2028-    1276: bipush        92
+2029-    1278: ixor
+2030-    1279: iastore
+2031-    1280: getstatic     #126                // Field c:[I
+2032-    1283: bipush        67
+2033-    1285: sipush        -513
+2034-    1288: sipush        25389
+2035-    1291: iand
+2036-    1292: ineg
+2037-    1293: iconst_m1
+2038-    1294: sipush        32765
+2039-    1297: iand
+2040-    1298: iand
+2041-    1299: iastore
+2042-    1300: getstatic     #126                // Field c:[I
+2043-    1303: bipush        68
+2044-    1305: sipush        173
+2045-    1308: sipush        159
+2046-    1311: ixor
+2047-    1312: sipush        157
+2048-    1315: sipush        138
+2049-    1318: ixor
+2050-    1319: ixor
+2051-    1320: iastore
+2052-    1321: getstatic     #126                // Field c:[I
+2053-    1324: bipush        69
+2054-    1326: sipush        -3074
+2055-    1329: sipush        11955
+2056-    1332: iand
+2057-    1333: iastore
+2058-    1334: getstatic     #126                // Field c:[I
+2059-    1337: bipush        70
+2060-    1339: sipush        -8930
+2061-    1342: sipush        26339
+2062-    1345: iand
+2063-    1346: ineg
+2064-    1347: sipush        -257
+2065-    1350: ldc           #11                 // int 5631983
+2066-    1352: iand
+2067-    1353: iand
+2068-    1354: iastore
+2069-    1355: getstatic     #126                // Field c:[I
+2070-    1358: bipush        71
+2071-    1360: sipush        -32259
+2072-    1363: ldc           #9                  // int 4783866
+2073-    1365: iand
+2074-    1366: iastore
+2075-    1367: getstatic     #126                // Field c:[I
+2076-    1370: bipush        72
+2077-    1372: sipush        -25509
+2078-    1375: ldc           #1                  // int 1078196
+2079-    1377: iand
+2080-    1378: iastore
+2081-    1379: getstatic     #126                // Field c:[I
+2082-    1382: bipush        73
+2083-    1384: sipush        -13313
+2084-    1387: ldc           #5                  // int 2095093
+2085-    1389: iand
+2086-    1390: iastore
+2087-    1391: getstatic     #126                // Field c:[I
+2088-    1394: bipush        74
+2089-    1396: sipush        -4121
+2090-    1399: sipush        13597
+2091-    1402: iand
+2092-    1403: ineg
+2093-    1404: sipush        -513
+2094-    1407: ldc           #12                 // int 10551292
+2095-    1409: iand
+2096-    1410: iand
+2097-    1411: iastore
+===== Class_gh =====
+339-      88: iload         8
+340-      90: invokevirtual #48                 // Method Class_dj.elementAt:(I)Ljava/lang/Object;
+341-      93: checkcast     #11                 // class Class_dv
+342-      96: astore        9
+343-      98: aload         7
+344-     100: getfield      #26                 // Field Class_dv.a:I
+345-     103: aload         9
+346-     105: getfield      #26                 // Field Class_dv.a:I
+347-     108: invokestatic  #64                 // Method c:(II)Z
+348-     111: ifeq          136
+349-     114: aload         4
+350-     116: aload         7
+351-     118: iload         8
+352-     120: invokevirtual #78                 // Method java/util/Vector.setElementAt:(Ljava/lang/Object;I)V
+353-     123: aload         4
+354-     125: aload         9
+355-     127: iload         6
+356-     129: invokevirtual #78                 // Method java/util/Vector.setElementAt:(Ljava/lang/Object;I)V
+357-     132: aload         9
+358-     134: astore        7
+359-     136: iinc          8, 1
+360-     139: ldc           #3                  // String
+361-     141: invokevirtual #75                 // Method java/lang/String.length:()I
+362-     144: pop
+363-     145: aconst_null
+364-     146: ifnull        76
+365-     149: return
+366-     150: iinc          6, 1
+367-     153: ldc           #3                  // String
+368-     155: invokevirtual #75                 // Method java/lang/String.length:()I
+369-     158: pop
+370-     159: bipush        102
+371-     161: bipush        83
+372-     163: ixor
+373-     164: bipush        77
+374:     166: bipush        120
+375-     168: ixor
+376-     169: iconst_m1
+377-     170: ixor
+378-     171: iand
+379-     172: ldc           #5                  // String
+380-     174: invokevirtual #75                 // Method java/lang/String.length:()I
+381-     177: if_icmple     38
+382-     180: return
+383-     181: aload_0
+384-     182: aload_1
+385-     183: putfield      #31                 // Field e:LClass_dj;
+386-     186: aload_0
+387-     187: aload_2
+388-     188: putfield      #39                 // Field m:LClass_dv;
+389-     191: aload_0
+390-     192: aload_1
+391-     193: invokevirtual #79                 // Method java/util/Vector.size:()I
+392-     196: anewarray     #9                  // class Class_dj
+393-     199: putfield      #40                 // Field n:[LClass_dj;
+394-     202: getstatic     #33                 // Field g:[I
+395-     205: iconst_1
+396-     206: iaload
+397-     207: istore        9
+398-     209: iload         9
+399-     211: aload_0
+400-     212: getfield      #40                 // Field n:[LClass_dj;
+401-     215: arraylength
+402-     216: invokestatic  #67                 // Method e:(II)Z
+403-     219: ifeq          250
+404-     222: aload_0
+405-     223: getfield      #40                 // Field n:[LClass_dj;
+406-     226: iload         9
+407-     228: new           #9                  // class Class_dj
+408-     231: dup
+409-     232: invokespecial #46                 // Method Class_dj."<init>":()V
+410-     235: aastore
+411-     236: iinc          9, 1
+412-     239: ldc           #3                  // String
+413-     241: invokevirtual #75                 // Metho/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+d java/lang/String.length:()I
+414-     244: pop
+415-     245: aconst_null
+416-     246: ifnull        209
+417-     249: return
+418-     250: aload_2
+419-     251: getstatic     #33                 // Field g:[I
+420-     254: bipush        8
+421-     256: iaload
+422-     257: putfield      #27                 // Field Class_dv.b:B
+423-     260: aload_0
+424-     261: getfield      #40                 // Field n:[LClass_dj;
+425-     264: getstatic     #33                 // Field g:[I
+426-     267: iconst_1
+427-     268: iaload
+428-     269: aaload
+429-     270: aload_2
+430-     271: invokevirtual #47                 // Method Class_dj.addElement:(Ljava/lang/Object;)V
+431-     274: getstatic     #33                 // Field g:[I
+432-     277: bipush        8
+433-     279: iaload
+434-     280: istore        9
+435-     282: getstatic     #33                 // Field g:[I
+436-     285: iconst_1
+437-     286: iaload
+438-     287: istore        10
+439-     289: iload         10
+440-     291: aload_1
+441-     292: invokevirtual #79                 // Method java/util/Vector.size:()I
+442-     295: invokestatic  #67                 // Method e:(II)Z
+443-     298: ifeq          925
+444-     301: aload_2
+===== Class_he =====
+308-     251: getstatic     #23                 // Field c:[I
+309-     254: bipush        15
+310-     256: bipush        116
+311-     258: bipush        119
+312-     260: iadd
+313-     261: bipush        72
+314-     263: isub
+315-     264: bipush        33
+316-     266: iadd
+317-     267: bipush        50
+318-     269: sipush        165
+319-     272: iadd
+320-     273: sipush        178
+321-     276: isub
+322-     277: sipush        158
+323-     280: iadd
+324-     281: ixor
+325-     282: iastore
+326-     283: getstatic     #23                 // Field c:[I
+327-     286: bipush        16
+328-     288: bipush        107
+329-     290: bipush        93
+330-     292: ixor
+331-     293: bipush        51
+332-     295: bipush        42
+333-     297: ixor
+334-     298: ixor
+335-     299: iastore
+336-     300: getstatic     #23                 // Field c:[I
+337-     303: bipush        17
+338-     305: sipush        144
+339-     308: sipush        137
+340-     311: iadd
+341-     312: sipush        241
+342-     315: isub
+343:     316: bipush        120
+344-     318: iadd
+345-     319: bipush        104
+346-     321: bipush        82
+347-     323: iadd
+348-     324: bipush        118
+349-     326: isub
+350-     327: bipush        100
+351-     329: iadd
+352-     330: ixor
+353-     331: iastore
+354-     332: getstatic     #23                 // Field c:[I
+355-     335: bipush        18
+356-     337: sipush        170
+357-     340: sipush        163
+358-     343: ixor
+359-     344: iastore
+360-     345: getstatic     #23                 // Field c:[I
+361-     348: bipush        19
+362-     350: bipush        109
+363-     352: bipush        103
+364-     354: ixor
+365-     355: iastore
+366-     356: getstatic     #23                 // Field c:[I
+367-     359: bipush        20
+368-     361: bipush        109
+369-     363: bipush        66
+370-     365: iadd
+371-     366: bipush        111
+372-     368: isub
+373-     369: sipush        147
+374-     372: iadd
+375-     373: bipush        100
+376-     375: bipush        26
+377-     377: iadd
+378-     378: bipush        20
+379-     380: isub
+380-     381: bipush        59
+381-     383: iadd
+382-     384: ixor
+383-     385: iastore
+384-     386: getstatic     #23                 // Field c:[I
+385-     389: bipush        21
+386-     391: bipush        38
+387-     393: bipush        13
+388-     395: iadd
+389-     396: bipush        -84
+390-     398: isub
+391-     399: bipush        26
+392-     401: iadd
+393-     402: sipush        128
+394-     405: bipush        113
+395-     407: iadd
+396-     408: sipush        140
+397-     411: isub
+398-     412: bipush        69
+399-     414: iadd
+400-     415: ixor
+401-     416: iastore
+402-     417: getstatic     #23                 // Field c:[I
+403-     420: bipush        22
+404-     422: bipush        58
+405-     424: sipush        128
+406-     42/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+7: iadd
+407-     428: sipush        152
+408-     431: isub
+409-     432: bipush        100
+410-     434: iadd
+411-     435: bipush        9
+412-     437: bipush        41
+413-     439: iadd
+===== k1 =====
+2759-     403: iconst_0
+2760-     404: bipush        100
+2761-     406: sipush        200
+2762-     409: sipush        300
+2763-     412: sipush        400
+2764-     415: sipush        500
+2765-     418: sipush        600
+2766-     421: sipush        700
+2767-     424: sipush        800
+2768-     427: sipush        1100
+2769-     430: invokestatic  #123                // Method a:(IIIIIIIIIII)I
+2770-     433: goto          439
+2771-     436: sipush        -200
+2772-     439: iadd
+2773-     440: iastore
+2774-     441: goto          706
+2775-     444: iload         7
+2776-     446: bipush        103
+2777-     448: if_icmpne     503
+2778-     451: aload_2
+2779-     452: iload         6
+2780-     454: dup2
+2781-     455: iaload
+2782-     456: iload         8
+2783-     458: ifle          495
+2784-     461: iload_3
+2785-     462: iconst_0
+2786-     463: bipush        100
+2787-     465: sipush        200
+2788-     468: sipush        300
+2789-     471: sipush        400
+2790-     474: sipush        500
+2791-     477: sipush        600
+2792-     480: sipush        700
+2793-     483: sipush        800
+2794:     486: sipush        1200
+2795-     489: invokestatic  #123                // Method a:(IIIIIIIIIII)I
+2796-     492: goto          498
+2797-     495: sipush        -150
+2798-     498: iadd
+2799-     499: iastore
+2800-     500: goto          706
+2801-     503: iload         7
+2802-     505: bipush        117
+2803-     507: if_icmpeq     517
+2804-     510: iload         7
+2805-     512: bipush        125
+2806-     514: if_icmpne     564
+2807-     517: aload_2
+2808-     518: iload         6
+2809-     520: dup2
+2810-     521: iaload
+2811-     522: iload         8
+2812-     524: ifle          556
+2813-     527: iload_3
+2814-     528: iconst_0
+2815-     529: bipush        20
+2816-     531: bipush        30
+2817-     533: bipush        40
+2818-     535: bipush        60
+2819-     537: bipush        80
+2820:     539: bipush        120
+2821-     541: sipush        150
+2822-     544: sipush        200
+2823-     547: sipush        250
+2824-     550: invokestatic  #123                // Method a:(IIIIIIIIIII)I
+2825-     553: goto          559
+2826-     556: sipush        -150
+2827-     559: iadd
+2828-     560: iastore
+2829-     561: goto          706
+2830-     564: iload         7
+2831-     566: bipush        116
+2832-     568: if_icmpne     615
+2833-     571: aload_2
+2834-     572: iload         6
+2835-     574: dup2
+2836-     575: iaload
+2837-     576: iload         8
+2838-     578: ifle          608
+2839-     581: iload_3
+2840-     582: iconst_0
+2841-     583: bipush        10
+2842-     585: bipush        20
+2843-     587: bipush        30
+2844-     589: bipush        40
+2845-     591: bipush        50
+2846-     593: bipush        60
+2847-     595: bipush        70
+2848-     597: bipush        80
+2849-     599: sipush        130
+2850-     602: invokestatic  #123                // Method a:(IIIIIIIIIII)I
+2851-     605: goto          610
+2852-     608: bipush        -100
+2853-     610: iadd
+2854-     611: iastore
+2855-     612: goto          706
+2856-     615: iload         7
+2857-     617: bipush        119
+2858-     619: if_icmpeq     630
+2859-     622: iload         7
+2860-     624: sipush        229
+2861-     627: if_icmpne     674
+2862-     630: aload_2
+2863-     631: iload         6
+2864-     633: dup2
+2865-     634: iaload
+2866-     635: iload         8
+2867-     637: ifle          667
+2868-     640: iload_3
+2869-     641: iconst_0
+2870-     642: bipush        10
+2871-     644: bipush        20
+2872-     646: bipush        30
+2873-     648: bipush        40
+2874-     650: bipush        50
+2875-     652: bipush        60
+2876-     654: bipush        70
+2877-     656: bipush        80
+2878-     658: sipush        130
+2879-     661: invokestatic  #123                // Method a:(IIIIIIIIIII)I
+2880-     664: goto          669
+2881-     667: bipush        -10
+2882-     669: iadd
+2883-     670: iastore
+2884-     671: goto          706
+2885-     674: iload         7
+2886-     676: bipush        104
+2887-     678: if_icmpne     690
+2888-     681: aload_2
+2889-     682: iload         6
+2890-     684: iload         5
+===== k12 =====
+78-      72: bipush        48
+79-      74: iastore
+80-      75: dup
+81-      76: bipush        13
+82-      78: sipush        162
+83-      81: iastore
+84-      82: dup
+85-      83: bipush        14
+86-      85: sipush        138
+87-      88: iastore
+88-      89: putstatic     #10                 // Field e:[I
+89-      92: bipush        15
+90-      94: newarray       short
+91-      96: dup
+92-      97: iconst_0
+93-      98: sipush        1426
+94-     101: sastore
+95-     102: dup
+96-     103: iconst_1
+97-     104: sipush        784
+98-     107: sastore
+99-     108: dup
+100-     109: iconst_2
+101-     110: sipush        502
+102-     113: sastore
+103-     114: dup
+104-     115: iconst_3
+105-     116: sipush        1863
+106-     119: sastore
+107-     120: dup
+108-     121: iconst_4
+109-     122: sipush        2048
+110-     125: sastore
+111-     126: dup
+112-     127: iconst_5
+113:     128: sipush        1207
+114-     131: sastore
+115-     132: dup
+116-     133: bipush        6
+117-     135: sipush        1427
+118-     138: sastore
+119-     139: dup
+120-     140: bipush        7
+121-     142: sipush        621
+122-     145: sastore
+123-     146: dup
+124-     147: bipush        8
+125-     149: sipush        1804
+126-     152: sastore
+127-     153: dup
+128-     154: bipush        9
+129-     156: sipush        320
+130-     159: sastore
+131-     160: dup
+132-     161: bipush        10
+133-     163: sipush        626
+134-     166: sastore
+135-     167: dup
+136-     168: bipush        11
+137-     170: sipush        360
+138-     173: sastore
+139-     174: dup
+140-     175: bipush        12
+141-     177: sipush        921
+142-     180: sastore
+143-     181: dup
+144-     182: bipush        13
+145-     184: sipush        583
+146-     187: sastore
+147-     188: dup
+148-     189: bipush        14
+149-     191: sipush        611
+150-     194: sastore
+151-     195: putstatic     #11                 // Field f:[S
+152-     198: bipush        15
+153-     200: newarray       short
+154-     202: dup
+155-     203: iconst_0
+156-     204: sipush        552
+157-     207: sastore
+158-     208: dup
+159-     209: iconst_1
+160-     210: sipush        648
+161-     213: sastore
+162-     214: dup
+163-     215: iconst_2
+164-     216: sipush        408
+165-     219: sastore
+166-     220: dup
+167-     221: iconst_3
+168-     222: sipush        360
+169-     225: sastore
+170-     226: dup
+171-     227: iconst_4
+172-     228: sipush        360
+173-     231: sastore
+174-     232: dup
+175-     233: iconst_5
+176-     234: sipush        168
+177-     237: sastore
+178-     238: dup
+179-     239: bipush        6
+180-     241: sipush        264
+181-     244: sastore
+182-     245: dup
+183-     246: bipush        7
+--
+231-     325: bipush        27
+232-     327: iastore
+233-     328: dup
+234-     329: iconst_4
+235-     330: bipush        27
+236-     332: iastore
+237-     333: dup
+238-     334: iconst_5
+239-     335: iconst_1
+240-     336: iastore
+241-     337: putstatic     #13                 // Field h:[I
+242-     340: bipush        6
+243-     342: newarray       short
+244-     344: dup
+245-     345: iconst_0
+246-     346: sipush        1426
+247-     349: sastore
+248-     350: dup
+249-     351: iconst_1
+250-     352: sipush        784
+251-     355: sastore
+252-     356: dup
+253-     357: iconst_2
+254-     358: sipush        502
+255-     361: sastore
+256-     362: dup
+257-     363: iconst_3
+258-     364: sipush        1863
+259-     367: sastore
+260-     368: dup
+261-     369: iconst_4
+262-     370: sipush        2048
+263-     373: sastore
+264-     374: dup
+265-     375: iconst_5
+266:     376: sipush        1207
+267-     379: sastore
+268-     380: putstatic     #14                 // Field i:[S
+269-     383: bipush        6
+270-     385: newarray       short
+271-     387: dup
+272-     388: iconst_0
+273-     389: sipush        552
+274-     392: sastore
+275-     393: dup
+276-     394: iconst_1
+277-     395: sipush        648
+278-     398: sastore
+279-     399: dup
+280-     400: iconst_2
+281-     401: sipush        408
+282-     404: sastore
+283-     405: dup
+284-     406: iconst_3
+285-     407: sipush        360
+286-     410: sastore
+287-     411: dup
+288-     412: iconst_4
+289-     413: sipush        360
+290-     416: sastore
+291-     417: dup
+292-     418: iconst_5
+293-     419: sipush        168
+294-     422: sastore
+295-     423: putstatic     #15                 // Field j:[S
+296-     426: bipush        6
+297-     428: newarray       int
+298-     430: dup
+299-     431: iconst_0
+300-     432: bipush        10
+301-     434: iastore
+302-     435: dup
+303-     436: iconst_1
+304-     437: bipush        11
+305-     439: iastore
+306-     440: dup
+307-     441: iconst_2
+308-     442: bipush        10
+309-     444: iastore
+310-     445: dup
+311-     446: iconst_3
+312-     447: bipush        10
+313-     449: iastore
+314-     450: dup
+315-     451: iconst_4
+316-     452: bipush        10
+317-     454: iastore
+318-     455: dup
+319-     456: iconst_5
+320-     457: bipush        10
+321-     459: iastore
+322-     460: putstatic     #16                 // Field k:[I
+323-     463: return
+324-
+325-  private k12();
+326-    Code:
+327-       0: aload_0
+328-       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+329-       4: return
+330-
+331-  static int a(int);
+332-    Code:
+333-       0: iconst_0
+334-       1: istore_1
+335-       2: invokestatic  #22                 // Method ke.u:()Z
+336-       5: ifeq          38
+===== k15 =====
+1446-     244: iastore
+1447-     245: dup
+1448-     246: iconst_1
+1449-     247: sipush        500
+1450-     250: iastore
+1451-     251: dup
+1452-     252: iconst_2
+1453-     253: sipush        150
+1454-     256: iastore
+1455-     257: dup
+1456-     258: iconst_3
+1457-     259: sipush        150
+1458-     262: iastore
+1459-     263: dup
+1460-     264: iconst_4
+1461-     265: sipush        150
+1462-     268: iastore
+1463-     269: dup
+1464-     270: iconst_5
+1465-     271: bipush        100
+1466-     273: iastore
+1467-     274: dup
+1468-     275: bipush        6
+1469-     277: sipush        2000
+1470-     280: iastore
+1471-     281: dup
+1472-     282: bipush        7
+1473-     284: sipush        200
+1474-     287: iastore
+1475-     288: dup
+1476-     289: bipush        8
+1477-     291: sipush        200
+1478-     294: iastore
+1479-     295: dup
+1480-     296: bipush        9
+1481:     298: bipush        120
+1482-     300: iastore
+1483-     301: dup
+1484-     302: bipush        10
+1485-     304: bipush        30
+1486-     306: iastore
+1487-     307: dup
+1488-     308: bipush        11
+1489-     310: sipush        5000
+1490-     313: iastore
+1491-     314: astore        6
+1492-     316: bipush        12
+1493-     318: newarray       int
+1494-     320: dup
+1495-     321: iconst_0
+1496-     322: sipush        200
+1497-     325: iastore
+1498-     326: dup
+1499-     327: iconst_1
+1500-     328: sipush        200
+1501-     331: iastore
+1502-     332: dup
+1503-     333: iconst_2
+1504-     334: bipush        100
+1505-     336: iastore
+1506-     337: dup
+1507-     338: iconst_3
+1508-     339: bipush        100
+1509-     341: iastore
+1510-     342: dup
+1511-     343: iconst_4
+1512-     344: bipush        100
+1513-     346: iastore
+1514-     347: dup
+1515-     348: iconst_5
+1516-     349: bipush        50
+1517-     351: iastore
+1518-     352: dup
+1519-     353: bipush        6
+1520-     355: sipush        1000
+1521-     358: iastore
+1522-     359: dup
+1523-     360: bipush        7
+1524-     362: bipush        50
+1525-     364: iastore
+1526-     365: dup
+1527-     366: bipush        8
+1528-     368: bipush        50
+1529-     370: iastore
+1530-     371: dup
+1531-     372: bipush        9
+1532-     374: bipush        80
+1533-     376: iastore
+1534-     377: dup
+1535-     378: bipush        10
+1536-     380: bipush        20
+1537-     382: iastore
+1538-     383: dup
+1539/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+-     384: bipush        11
+1540-     386: sipush        1000
+1541-     389: iastore
+1542-     390: astore        7
+1543-     392: bipush        7
+1544-     394: newarray       byte
+1545-     396: astore        8
+1546-     398: bipush        7
+1547-     400: newarray       int
+1548-     402: astore        9
+1549-     404: aload         5
+1550-     406: arraylength
+1551-     407: istore        10
+===== k22 =====
+100-      77: bipush        43
+101-      79: iastore
+102-      80: dup
+103-      81: bipush        14
+104-      83: bipush        48
+105-      85: iastore
+106-      86: dup
+107-      87: bipush        15
+108-      89: sipush        162
+109-      92: iastore
+110-      93: dup
+111-      94: bipush        16
+112-      96: sipush        138
+113-      99: iastore
+114-     100: putstatic     #57                 // Field n:[I
+115-     103: bipush        17
+116-     105: newarray       short
+117-     107: dup
+118-     108: iconst_0
+119-     109: sipush        1426
+120-     112: sastore
+121-     113: dup
+122-     114: iconst_1
+123-     115: sipush        705
+124-     118: sastore
+125-     119: dup
+126-     120: iconst_2
+127-     121: sipush        502
+128-     124: sastore
+129-     125: dup
+130-     126: iconst_3
+131-     127: sipush        1621
+132-     130: sastore
+133-     131: dup
+134-     132: iconst_4
+135:     133: sipush        1207
+136-     136: sastore
+137-     137: dup
+138-     138: iconst_5
+139-     139: sipush        227
+140-     142: sastore
+141-     143: dup
+142-     144: bipush        6
+143-     146: sipush        1330
+144-     149: sastore
+145-     150: dup
+146-     151: bipush        7
+147-     153: sipush        2051
+148-     156: sastore
+149-     157: dup
+150-     158: bipush        8
+151-     160: sipush        494
+152-     163: sastore
+153-     164: dup
+154-     165: bipush        9
+155-     167: sipush        621
+156-     170: sastore
+157-     171: dup
+158-     172: bipush        10
+159-     174: sipush        1804
+160-     177: sastore
+161-     178: dup
+162-     179: bipush        11
+163-     181: sipush        320
+164-     184: sastore
+165-     185: dup
+166-     186: bipush        12
+167-     188: sipush        626
+168-     191: sastore
+169-     192: dup
+170-     193: bipush        13
+171-     195: sipush        360
+172-     198: sastore
+173-     199: dup
+174-     200: bipush        14
+175-     202: sipush        921
+176-     205: sastore
+177-     206: dup
+178-     207: bipush        15
+179-     209: sipush        583
+180-     212: sastore
+181-     213: dup
+182-     214: bipush        16
+183-     216: sipush        611
+184-     219: sastore
+185-     220: putstatic     #58                 // Field o:[S
+186-     223: bipush        17
+187-     225: newarray       short
+188-     227: dup
+189-     228: iconst_0
+190-     229: sipush        552
+191-     232: sastore
+192-     233: dup
+193-     234: iconst_1
+194-     235: sipush        672
+195-     238: sastore
+196-     239: dup
+197-     240: iconst_2
+198-     241: sipush        408
+199-     244: sastore
+200-     245: dup
+201-     246: iconst_3
+202-     247: sipush        384
+203-     250: sastore
+204-     251: dup
+205-     252: iconst_4
+===== k26 =====
+51-      55: bipush        8
+52-      57: sipush        1168
+53-      60: sastore
+54-      61: dup
+55-      62: bipush        9
+56-      64: sipush        1172
+57-      67: sastore
+58-      68: dup
+59-      69: bipush        10
+60-      71: sipush        1173
+61-      74: sastore
+62-      75: dup
+63-      76: bipush        11
+64-      78: sipush        1174
+65-      81: sastore
+66-      82: dup
+67-      83: bipush        12
+68-      85: sipush        1175
+69-      88: sastore
+70-      89: dup
+71-      90: bipush        13
+72-      92: sipush        1176
+73-      95: sastore
+74-      96: putstatic     #23                 // Field f:[S
+75-      99: return
+76-
+77-  private k26();
+78-    Code:
+79-       0: aload_0
+80-       1: invokespecial #28                 // Method java/lang/Object."<init>":()V
+81-       4: return
+82-
+83-  static boolean a(int, int) throws java.lang.Exception;
+84-    Code:
+85-       0: iload_1
+86:       1: sipush        838
+87-       4: if_icmpne     13
+88-       7: iload_0
+89-       8: invokestatic  #34                 // Method a:(I)V
+90-      11: iconst_1
+91-      12: ireturn
+92-      13: iload_1
+93-      14: sipush        1177
+94-      17: if_icmplt     34
+95-      20: iload_1
+96-      21: sipush        1190
+97-      24: if_icmpgt     34
+98-      27: iload_0
+99-      28: iload_1
+100-      29: invokestatic  #35                 // Method b:(II)V
+101-      32: iconst_1
+102-      33: ireturn
+103-      34: iload_1
+104-      35: sipush        536
+105-      38: if_icmpeq     48
+106-      41: iload_1
+107-      42: sipush        535
+108-      45: if_icmpne     55
+109-      48: iload_0
+110-      49: iload_1
+111-      50: invokestatic  #36                 // Method c:(II)V
+112-      53: iconst_1
+113-      54: ireturn
+114-      55: iconst_0
+115-      56: ireturn
+116-
+117-  private static boolean a() throws java.lang.Exception;
+118-    Code:
+119-       0: invokestatic  #27                 // Method DoHoang091.z:()LDoHoang091$k0;
+120-       3: getfield      #21                 // Field DoHoang091$k0.K:[S
+121-       6: invokestatic  #31                 // Method k16.a:([S)I
+122-       9: iflt          14
+123-      12: iconst_1
+124-      13: ireturn
+125-      14: ldc           #9                  // String Hành trang không còn chỗ trống.
+126-      16: invokestatic  #24                 // Method DoHoang091.a:(Ljava/lang/String;)V
+127-      19: iconst_0
+128-      20: ireturn
+129-
+130-  private static void a(int) throws java.lang.Exception;
+131-    Code:
+132-       0: invokestatic  #33                 // Method a:()Z
+133-       3: ifne          7
+134-       6: return
+135-       7: invokestatic  #27                 // Method DoHoang091.z:()LDoHoang091$k0;
+136-      10: astore_1
+137-      11: aload_1
+138-      12: getfield      #22                 // Field DoHoang091$k0.L:[S
+139-      15: iload_0
+140-      16: saload
+141-      17: ldc           #6                  // int 65535
+142-      19: iand
+143-      20: bipush        100
+144-      22: if_icmpge     31
+145-      25: ldc           #7                  // String Bạn cần thu thập đủ 100 mảnh sách cổ.
+146-      27: invokestatic  #25                 // Method DoHoang091.b:(Ljava/lang/String;)V
+147-      30: return
+148-      31: ldc           #12                 // String SACH_VO_CONG_120
+149-      33: invokestatic  #37                 // Method kb.a:(Ljava/lang/String;)I
+150-      36: istore_2
+151-      37: iload_2
+152-      38: iflt          52
+153-      41: iload_2
+154-      42: iconst_1
+155-      43: iconst_0
+156-      44: iconst_0
+===== k27 =====
+204-     215: iadd
+205-     216: istore_3
+206-     217: iload_3
+207-     218: i2l
+208-     219: invokestatic  #126                // Method k32.b:(J)I
+209-     222: pop
+210-     223: new           #41                 // class java/lang/StringBuffer
+211-     226: dup
+212-     227: ldc           #16                 // String Bạn nhận được
+213-     229: invokespecial #98                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+214-     232: iload_3
+215-     233: i2l
+216-     234: invokestatic  #122                // Method c:(J)Ljava/lang/String;
+217-     237: invokevirtual #102                // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+218-     240: ldc           #14                 // String  yên
+219-     242: invokevirtual #102                // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+220-     245: invokevirtual #103                // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+221-     248: invokestatic  #82                 // Method DoHoang091.b:(Ljava/lang/String;)V
+222-     251: iload_0
+223-     252: iconst_1
+224-     253: invokestatic  #107                // Method k16.c:(II)I
+225-     256: pop
+226-     257: iconst_1
+227-     258: ireturn
+228-     259: iload_1
+229-     260: invokestatic  #121                // Method c:(I)I
+230-     263: istore_3
+231-     264: iload_3
+232-  /home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+/home/runner/work/_temp/899ccdcb-e545-47ed-ae61-916ceed2f4c1.sh: line 27: printf: write error: Broken pipe
+   265: iflt          275
+233-     268: iload_0
+234-     269: iload_1
+235-     270: invokestatic  #119                // Method b:(II)V
+236-     273: iconst_1
+237-     274: ireturn
+238-     275: iload_1
+239:     276: sipush        1208
+240-     279: if_icmpne     296
+241-     282: invokestatic  #109                // Method k16.e:()I
+242-     285: iflt          294
+243-     288: iload_0
+244-     289: iconst_1
+245-     290: invokestatic  #107                // Method k16.c:(II)I
+246-     293: pop
+247-     294: iconst_1
+248-     295: ireturn
+249-     296: iconst_0
+250-     297: ireturn
+251-
+252-  static long a(long) throws java.lang.Exception;
+253-    Code:
+254-       0: lload_0
+255-       1: lconst_0
+256-       2: lcmp
+257-       3: ifgt          8
+258-       6: lload_0
+259-       7: lreturn
+260-       8: invokestatic  #85                 // Method DoHoang091.z:()LDoHoang091$k0;
+261-      11: astore_2
+262-      12: aload_2
+263-      13: invokestatic  #115                // Method a:(LDoHoang091$k0;)J
+264-      16: lstore_3
+265-      17: lload_3
+266-      18: lconst_0
+267-      19: lcmp
+268-      20: ifgt          25
+269-      23: lload_0
+270-      24: lreturn
+271-      25: lload_0
+272-      26: lload_3
+273-      27: lcmp
+274-      28: ifge          35
+275-      31: lload_0
+276-      32: goto          36
+277-      35: lload_3
+278-      36: lstore        5
+279-      38: aload_2
+280-      39: lload_3
+281-      40: lload         5
+282-      42: lsub
+283-      43: invokestatic  #116                // Method a:(LDoHoang091$k0;J)V
+284-      46: lload         5
+285-      48: invokestatic  #120                // Method b:(J)V
+286-      51: invokestatic  #75                 // Method DoHoang091.G:()V
+287-      54: lload_0
+288-      55: lload         5
+289-      57: lsub
+290-      58: lreturn
+291-
+292-  static long a(DoHoang091$k0);
+293-    Code:
+294-       0: aload_0
+295-       1: ifnull        14
+296-       4: aload_0
+297-       5: getfield      #66                 // Field DoHoang091$k0.cb:[I
+298-       8: arraylength
+299-       9: bipush        106
+300-      11: if_icmpgt     16
+301-      14: lconst_0
+302-      15: lreturn
+303-      16: aload_0
+304-      17: getfield      #66                 // Field DoHoang091$k0.cb:[I
+305-      20: bipush        106
+306-      22: iaload
+307-      23: i2l
+308-      24: bipush        32
+309-      26: lshl
+===== k9 =====
+241-     347: bastore
+242-     348: dup
+243-     349: bipush        60
+244-     351: bipush        33
+245-     353: bastore
+246-     354: dup
+247-     355: bipush        61
+248-     357: bipush        33
+249-     359: bastore
+250-     360: dup
+251-     361: bipush        62
+252-     363: bipush        33
+253-     365: bastore
+254-     366: dup
+255-     367: bipush        63
+256-     369: bipush        33
+257-     371: bastore
+258-     372: dup
+259-     373: bipush        64
+260-     375: bipush        33
+261-     377: bastore
+262-     378: dup
+263-     379: bipush        65
+264-     381: bipush        33
+265-     383: bastore
+266-     384: dup
+267-     385: bipush        67
+268-     387: bipush        33
+269-     389: bastore
+270-     390: dup
+271-     391: bipush        68
+272-     393: bipush        33
+273-     395: bastore
+274-     396: dup
+275-     397: bipush        69
+276:     399: bipush        120
+277-     401: bastore
+278-     402: dup
+279-     403: bipush        71
+280:     405: bipush        120
+281-     407: bastore
+282-     408: dup
+283-     409: bipush        72
+284-     411: bipush        33
+285-     413: bastore
+286-     414: dup
+287-     415: bipush        73
+288-     417: bipush        33
+289-     419: bastore
+290-     420: dup
+291-     421: bipush        74
+292-     423: bipush        33
+293-     425: bastore
+294-     426: dup
+295-     427: bipush        75
+296-     429: bipush        33
+297-     431: bastore
+298-     432: dup
+299-     433: bipush        76
+300-     435: bipush        33
+301-     437: bastore
+302-     438: dup
+303-     439: bipush        77
+304-     441: bipush        33
+305-     443: bastore
+306-     444: dup
+307-     445: bipush        78
+308-     447: bipush        33
+309-     449: bastore
+310-     450: dup
+311-     451: bipush        79
+312-     453: bipush        33
+313-     455: bastore
+314-     456: dup
+315-     457: bipush        80
+316-     459: bipush        33
+317-     461: bastore
+318-     462: dup
+319-     463: bipush        82
+320:     465: bipush        120
+321-     467: bastore
+322-     468: dup
+323-     469: bipush        83
+324-     471: bipush        33
+325-     473: bastore
+326-     474: dup
+327-     475: bipush        84
+328-     477: bipush        33
+329-     479: bastore
+330-     480: dup
+331-     481: bipush        85
+332-     483: bipush        33
+333-     485: bastore
+334-     486: dup
+335-     487: bipush        86
+336-     489: bipush        33
+337-     491: bastore
+338-     492: dup
+339-     493: bipush        87
+340-     495: bipush        33
+341-     497: bastore
+342-     498: dup
+343-     499: bipush        88
+344-     501: bipush        33
+345-     503: bastore
+346-     504: dup
+347-     505: bipush        89
+348-     507: bipush        33
+349-     509: bastore
+350-     510: dup
+351-     511: bipush        90
+352-     513: bipush        33
+353-     515: bastore
+354-     516: dup
+355-     517: bipush        91
+356-     519: bipush        33
+357-     521: bastore
+358-     522: dup
+359-     523: bipush        92
+360-     525: bipush        33
+361-     527: bastore
+362-     528: dup
+363-     529: bipush        93
+364-     531: bipush        33
+365-     533: bastore
+366-     534: dup
+367-     535: bipush        94
+368-     537: bipush        33
+369-     539: bastore
+370-     540: dup
+371-     541: bipush        95
+372-     543: bipush        33
+373-     545: bastore
+374-     546: dup
+375-     547: bipush        96
+376-     549: bipush        33
+377-     551: bastore
+378-     552: dup
+379-     553: bipush        97
+380-     555: bipush        33
+381-     557: bastore
+382-     558: dup
+383-     559: bipush        100
+384-     561: bipush        33
+385-     563: bastore
+386-     564: dup
+387-     565: bipush        101
+388-     567: bipush        33
+389-     569: bastore
+390-     570: dup
+391-     571: bipush        102
+392-     573: bipush        33
+393-     575: bastore
+394-     576: dup
+395-     577: bipush        103
+396-     579: bipush        33
+397-     581: bastore
+398-     582: dup
+399-     583: bipush        104
+400-     585: bipush        33
+401-     587: bastore
+402-     588: dup
+403-     589: bipush        105
+404:     591: bipush        120
+405-     593: bastore
+406-     594: dup
+407-     595: bipush        106
+408-     597: bipush        33
+409-     599: bastore
+410-     600: dup
+411-     601: bipush        107
+412-     603: bipush        33
+413-     605: bastore
+414-     606: dup
+415-     607: bipush        108
+416-     609: bipush        33
+417-     611: bastore
+418-     612: dup
+419-     613: bipush        109
+420-     615: bipush        33
+421-     617: bastore
+422-     618: dup
+423-     619: bipush        110
+424-     621: bipush        33
+425-     623: bastore
+426-     624: dup
+427-     625: bipush        111
+428-     627: bipush        33
+429-     629: bastore
+430-     630: dup
+431-     631: bipush        112
+432-     633: bipush        33
+433-     635: bastore
+434-     636: dup
+435-     637: bipush        114
+436-     639: bipush        33
+437-     641: bastore
+438-     642: dup
+439-     643: bipush        115
+440-     645: bipush        33
+441-     647: bastore
+442-     648: dup
+443-     649: bipush        116
+444-     651: bipush        33
+445-     653: bastore
+446-     654: dup
+447-     655: bipush        117
+448-     657: bipush        33
+449-     659: bastore
+450-     660: dup
+451-     661: bipush        118
+452-     663: bipush        33
+453-     665: bastore
+454-     666: dup
+455-     667: bipush        119
+456-     669: bipush        33
+457-     671: bastore
+458-     672: dup
+459:     673: bipush        120
+460-     675: bipush        33
+461-     677: bastore
+462-     678: dup
+463-     679: bipush        121
+464-     681: bipush        33
+465-     683: bastore
+466-     684: dup
+467-     685: bipush        122
+468-     687: bipush        33
+469-     689: bastore
+470-     690: dup
+471-     691: bipush        123
+472-     693: bipush        33
+473-     695: bastore
+474-     696: dup
+475-     697: bipush        124
+476-     699: bipush        33
+477-     701: bastore
+478-     702: dup
+479-     703: bipush        125
+480-     705: bipush        33
+481-     707: bastore
+482-     708: dup
+483-     709: bipush        126
+484-     711: bipush        33
+485-     713: bastore
+486-     714: dup
+487-     715: bipush        127
+488-     717: bipush        33
+489-     719: bastore
+490-     720: dup
+491-     721: sipush        128
+492-     724: bipush        33
+493-     726: bastore
+494-     727: dup
+495-     728: sipush        129
+496-     731: bipush        33
+497-     733: bastore
+498-     734: dup
+499-     735: sipush        130
+500-     738: bipush        33
+501-     740: bastore
+502-     741: dup
+503-     742: sipush        131
+504-     745: bipush        33
+505-     747: bastore
+506-     748: dup
+507-     749: sipush        132
+508-     752: bipush        33
+509-     754: bastore
+510-     755: dup
+511-     756: sipush        133
+512-     759: bipush        33
+513-     761: bastore
+514-     762: dup
+515-     763: sipush        134
+516-     766: bipush        33
+517-     768: bastore
+518-     769: dup
+519-     770: sipush        135
+520-     773: bipush        33
+521-     775: bastore
+522-     776: dup
+523-     777: sipush        136
+524-     780: bipush        33
+525-     782: bastore
+526-     783: dup
+527-     784: sipush        137
+528-     787: bipush        33
+529-     789: bastore
+--
+885-    1410: bastore
+886-    1411: dup
+887-    1412: sipush        228
+888-    1415: bipush        70
+889-    1417: bastore
+890-    1418: dup
+891-    1419: sipush        229
+892-    1422: bipush        33
+893-    1424: bastore
+894-    1425: dup
+895-    1426: sipush        230
+896-    1429: bipush        70
+897-    1431: bastore
+898-    1432: dup
+899-    1433: sipush        231
+900-    1436: bipush        70
+901-    1438: bastore
+902-    1439: dup
+903-    1440: sipush        232
+904-    1443: bipush        70
+905-    1445: bastore
+906-    1446: dup
+907-    1447: sipush        233
+908-    1450: bipush        70
+909-    1452: bastore
+910-    1453: dup
+911-    1454: sipush        234
+912-    1457: bipush        70
+913-    1459: bastore
+914-    1460: dup
+915-    1461: sipush        235
+916-    1464: bipush        33
+917-    1466: bastore
+918-    1467: dup
+919-    1468: sipush        236
+920:    1471: bipush        120
+921-    1473: bastore
+922-    1474: dup
+923-    1475: sipush        237
+924:    1478: bipush        120
+925-    1480: bastore
+926-    1481: dup
+927-    1482: sipush        238
+928-    1485: bipush        72
+929-    1487: bastore
+930-    1488: dup
+931-    1489: sipush        239
+932:    1492: bipush        120
+933-    1494: bastore
+934-    1495: dup
+935-    1496: sipush        240
+936:    1499: bipush        120
+937-    1501: bastore
+938-    1502: dup
+939-    1503: sipush        241
+940:    1506: bipush        120
+941-    1508: bastore
+942-    1509: dup
+943-    1510: sipush        242
+944:    1513: bipush        120
+945-    1515: bastore
+946-    1516: dup
+947-    1517: sipush        243
+948:    1520: bipush        120
+949-    1522: bastore
+950-    1523: dup
+951-    1524: sipush        244
+952:    1527: bipush        120
+953-    1529: bastore
+954-    1530: dup
+955-    1531: sipush        245
+956:    1534: bipush        120
+957-    1536: bastore
+958-    1537: dup
+959-    1538: sipush        246
+960:    1541: bipush        120
+961-    1543: bastore
+962-    1544: dup
+963-    1545: sipush        247
+964:    1548: bipush        120
+965-    1550: bastore
+966-    1551: dup
+967-    1552: sipush        248
+968:    1555: bipush        120
+969-    1557: bastore
+970-    1558: dup
+971-    1559: sipush        249
+972:    1562: bipush        120
+973-    1564: bastore
+974-    1565: dup
+975-    1566: sipush        250
+976:    1569: bipush        120
+977-    1571: bastore
+978-    1572: dup
+979-    1573: sipush        251
+980:    1576: bipush        120
+981-    1578: bastore
+982-    1579: dup
+983-    1580: sipush        252
+984:    1583: bipush        120
+985-    1585: bastore
+986-    1586: dup
+987-    1587: sipush        253
+988:    1590: bipush        120
+989-    1592: bastore
+990-    1593: dup
+991-    1594: sipush        254
+992:    1597: bipush        120
+993-    1599: bastore
+994-    1600: dup
+995-    1601: sipush        255
+996:    1604: bipush        120
+997-    1606: bastore
+998-    1607: dup
+999-    1608: sipush        256
+1000:    1611: bipush        120
+1001-    1613: bastore
+1002-    1614: putstatic     #9                  // Field a:[B
+1003-    1617: sipush        258
+1004-    1620: newarray       byte
+1005-    1622: dup
+1006-    1623: iconst_1
+1007-    1624: iconst_1
+1008-    1625: bastore
+1009-    1626: dup
+1010-    1627: iconst_2
+1011-    1628: iconst_2
+1012-    1629: bastore
+1013-    1630: dup
+1014-    1631: iconst_3
+1015-    1632: iconst_1
+1016-    1633: bastore
+1017-    1634: dup
+1018-    1635: iconst_4
+1019-    1636: iconst_2
+1020-    1637: bastore
+1021-    1638: dup
+1022-    1639: iconst_5
+1023-    1640: iconst_3
+1024-    1641: bastore
+1025-    1642: dup
+1026-    1643: bipush        6
+1027-    1645: iconst_1
+1028-    1646: bastore
+1029-    1647: dup
+1030-    1648: bipush        7
+1031-    1650: iconst_1
+1032-    1651: bastore
+1033-    1652: dup
+1034-    1653: bipush        8
+1035-    1655: iconst_5
+1036-    1656: bastore
+1037-    1657: dup
+1038-    1658: bipush        9
+1039-    1660: iconst_2
+1040-    1661: bastore
+1041-    1662: dup
+1042-    1663: bipush        10
+1043-    1665: iconst_4
+1044-    1666: bastore
+1045-    1667: dup
+1046-    1668: bipush        11
+1047-    1670: iconst_5
+1048-    1671: bastore
+1049-    1672: dup
+1050-    1673: bipush        12
+1051-    1675: iconst_2
+1052-    1676: bastore
+1053-    1677: dup
+1054-    1678: bipush        13
+1055-    1680: iconst_4
+1056-    1681: bastore
+1057-    1682: dup
+1058-    1683: bipush        14
+1059-    1685: iconst_4
+1060-    1686: bastore
+1061-    1687: dup
+1062-    1688: bipush        15
+1063-    1690: iconst_1
+1064-    1691: bastore
+1065-    1692: dup
+1066-    1693: bipush        16
+1067-    1695: iconst_1
+1068-    1696: bastore
+1069-    1697: dup
+1070-    1698: bipush        17
+--
+1415-    2130: iconst_3
+1416-    2131: bastore
+1417-    2132: dup
+1418-    2133: bipush        111
+1419-    2135: iconst_4
+1420-    2136: bastore
+1421-    2137: dup
+1422-    2138: bipush        112
+1423-    2140: iconst_3
+1424-    2141: bastore
+1425-    2142: dup
+1426-    2143: bipush        114
+1427-    2145: iconst_1
+1428-    2146: bastore
+1429-    2147: dup
+1430-    2148: bipush        115
+1431-    2150: iconst_4
+1432-    2151: bastore
+1433-    2152: dup
+1434-    2153: bipush        116
+1435-    2155: iconst_1
+1436-    2156: bastore
+1437-    2157: dup

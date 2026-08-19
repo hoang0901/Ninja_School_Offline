@@ -1,0 +1,354 @@
+=== k24 signatures ===
+final class k24 {
+  byte a;
+  byte b;
+  byte c;
+  short[] d;
+  byte[] e;
+  byte[] f;
+  short[] g;
+  int[] h;
+  byte[] i;
+  short[] j;
+  short[] k;
+  int[] l;
+  int[] m;
+  byte[][] n;
+  int[][] o;
+  private k24();
+  static k24 a(byte[]) throws java.lang.Exception;
+  int a(int);
+  int a(int, int);
+  int b(int, int);
+}
+=== k24 bytecode ===
+final class k24 {
+  byte a;
+
+  byte b;
+
+  byte c;
+
+  short[] d;
+
+  byte[] e;
+
+  byte[] f;
+
+  short[] g;
+
+  int[] h;
+
+  byte[] i;
+
+  short[] j;
+
+  short[] k;
+
+  int[] l;
+
+  int[] m;
+
+  byte[][] n;
+
+  int[][] o;
+
+  private k24();
+    Code:
+       0: aload_0
+       1: invokespecial #32                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  static k24 a(byte[]) throws java.lang.Exception;
+    Code:
+       0: aload_0
+       1: ifnonnull     6
+       4: aconst_null
+       5: areturn
+       6: new           #5                  // class java/io/DataInputStream
+       9: dup
+      10: new           #4                  // class java/io/ByteArrayInputStream
+      13: dup
+      14: aload_0
+      15: invokespecial #24                 // Method java/io/ByteArrayInputStream."<init>":([B)V
+      18: invokespecial #25                 // Method java/io/DataInputStream."<init>":(Ljava/io/InputStream;)V
+      21: astore_1
+      22: new           #8                  // class k24
+      25: dup
+      26: invokespecial #33                 // Method "<init>":()V
+      29: astore_2
+      30: aload_2
+      31: aload_1
+      32: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+      35: putfield      #9                  // Field a:B
+      38: aload_2
+      39: aload_1
+      40: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+      43: putfield      #10                 // Field b:B
+      46: aload_2
+      47: aload_1
+      48: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+      51: putfield      #11                 // Field c:B
+      54: aload_1
+      55: invokevirtual #30                 // Method java/io/DataInputStream.readUnsignedByte:()I
+      58: istore_3
+      59: aload_2
+      60: iload_3
+      61: newarray       short
+      63: putfield      #12                 // Field d:[S
+      66: aload_2
+      67: iload_3
+      68: newarray       byte
+      70: putfield      #13                 // Field e:[B
+      73: aload_2
+      74: iload_3
+      75: newarray       byte
+      77: putfield      #14                 // Field f:[B
+      80: aload_2
+      81: iload_3
+      82: newarray       short
+      84: putfield      #15                 // Field g:[S
+      87: aload_2
+      88: iload_3
+      89: newarray       int
+      91: putfield      #16                 // Field h:[I
+      94: aload_2
+      95: iload_3
+      96: newarray       byte
+      98: putfield      #17                 // Field i:[B
+     101: aload_2
+     102: iload_3
+     103: newarray       short
+     105: putfield      #18                 // Field j:[S
+     108: aload_2
+     109: iload_3
+     110: newarray       short
+     112: putfield      #19                 // Field k:[S
+     115: aload_2
+     116: iload_3
+     117: newarray       int
+     119: putfield      #20                 // Field l:[I
+     122: aload_2
+     123: iload_3
+     124: newarray       int
+     126: putfield      #21                 // Field m:[I
+     129: aload_2
+     130: iload_3
+     131: anewarray     #2                  // class "[B"
+     134: putfield      #22                 // Field n:[[B
+     137: aload_2
+     138: iload_3
+     139: anewarray     #3                  // class "[I"
+     142: putfield      #23                 // Field o:[[I
+     145: iconst_0
+     146: istore        4
+     148: goto          336
+     151: aload_2
+     152: getfield      #12                 // Field d:[S
+     155: iload         4
+     157: aload_1
+     158: invokevirtual #29                 // Method java/io/DataInputStream.readShort:()S
+     161: sastore
+     162: aload_2
+     163: getfield      #13                 // Field e:[B
+     166: iload         4
+     168: aload_1
+     169: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+     172: bastore
+     173: aload_2
+     174: getfield      #14                 // Field f:[B
+     177: iload         4
+     179: aload_1
+     180: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+     183: bastore
+     184: aload_2
+     185: getfield      #15                 // Field g:[S
+     188: iload         4
+     190: aload_1
+     191: invokevirtual #29                 // Method java/io/DataInputStream.readShort:()S
+     194: sastore
+     195: aload_2
+     196: getfield      #16                 // Field h:[I
+     199: iload         4
+     201: aload_1
+     202: invokevirtual #28                 // Method java/io/DataInputStream.readInt:()I
+     205: iastore
+     206: aload_2
+     207: getfield      #17                 // Field i:[B
+     210: iload         4
+     212: aload_1
+     213: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+     216: bastore
+     217: aload_2
+     218: getfield      #18                 // Field j:[S
+     221: iload         4
+     223: aload_1
+     224: invokevirtual #29                 // Method java/io/DataInputStream.readShort:()S
+     227: sastore
+     228: aload_2
+     229: getfield      #19                 // Field k:[S
+     232: iload         4
+     234: aload_1
+     235: invokevirtual #29                 // Method java/io/DataInputStream.readShort:()S
+     238: sastore
+     239: aload_2
+     240: getfield      #20                 // Field l:[I
+     243: iload         4
+     245: aload_1
+     246: invokevirtual #28                 // Method java/io/DataInputStream.readInt:()I
+     249: iastore
+     250: aload_2
+     251: getfield      #21                 // Field m:[I
+     254: iload         4
+     256: aload_1
+     257: invokevirtual #28                 // Method java/io/DataInputStream.readInt:()I
+     260: iastore
+     261: aload_1
+     262: invokevirtual #30                 // Method java/io/DataInputStream.readUnsignedByte:()I
+     265: istore        5
+     267: aload_2
+     268: getfield      #22                 // Field n:[[B
+     271: iload         4
+     273: iload         5
+     275: newarray       byte
+     277: aastore
+     278: aload_2
+     279: getfield      #23                 // Field o:[[I
+     282: iload         4
+     284: iload         5
+     286: newarray       int
+     288: aastore
+     289: iconst_0
+     290: istore        6
+     292: goto          326
+     295: aload_2
+     296: getfield      #22                 // Field n:[[B
+     299: iload         4
+     301: aaload
+     302: iload         6
+     304: aload_1
+     305: invokevirtual #27                 // Method java/io/DataInputStream.readByte:()B
+     308: bastore
+     309: aload_2
+     310: getfield      #23                 // Field o:[[I
+     313: iload         4
+     315: aaload
+     316: iload         6
+     318: aload_1
+     319: invokevirtual #28                 // Method java/io/DataInputStream.readInt:()I
+     322: iastore
+     323: iinc          6, 1
+     326: iload         6
+     328: iload         5
+     330: if_icmplt     295
+     333: iinc          4, 1
+     336: iload         4
+     338: iload_3
+     339: if_icmplt     151
+     342: aload_1
+     343: invokevirtual #26                 // Method java/io/DataInputStream.available:()I
+     346: ifeq          359
+     349: new           #6                  // class java/lang/Exception
+     352: dup
+     353: ldc           #1                  // String skill wire trailing bytes
+     355: invokespecial #31                 // Method java/lang/Exception."<init>":(Ljava/lang/String;)V
+     358: athrow
+     359: aload_2
+     360: areturn
+
+  int a(int);
+    Code:
+       0: iconst_0
+       1: istore_2
+       2: goto          24
+       5: aload_0
+       6: getfield      #13                 // Field e:[B
+       9: iload_2
+      10: baload
+      11: sipush        255
+      14: iand
+      15: iload_1
+      16: if_icmpne     21
+      19: iload_2
+      20: ireturn
+      21: iinc          2, 1
+      24: iload_2
+      25: aload_0
+      26: getfield      #13                 // Field e:[B
+      29: arraylength
+      30: if_icmplt     5
+      33: iconst_m1
+      34: ireturn
+
+  int a(int, int);
+    Code:
+       0: iload_1
+       1: iflt          13
+       4: iload_1
+       5: aload_0
+       6: getfield      #23                 // Field o:[[I
+       9: arraylength
+      10: if_icmplt     15
+      13: iconst_0
+      14: ireturn
+      15: iload_2
+      16: iflt          30
+      19: iload_2
+      20: aload_0
+      21: getfield      #23                 // Field o:[[I
+      24: iload_1
+      25: aaload
+      26: arraylength
+      27: if_icmplt     32
+      30: iconst_0
+      31: ireturn
+      32: aload_0
+      33: getfield      #23                 // Field o:[[I
+      36: iload_1
+      37: aaload
+      38: iload_2
+      39: iaload
+      40: ireturn
+
+  int b(int, int);
+    Code:
+       0: iload_1
+       1: iflt          13
+       4: iload_1
+       5: aload_0
+       6: getfield      #22                 // Field n:[[B
+       9: arraylength
+      10: if_icmplt     15
+      13: iconst_0
+      14: ireturn
+      15: iconst_0
+      16: istore_3
+      17: goto          48
+      20: aload_0
+      21: getfield      #22                 // Field n:[[B
+      24: iload_1
+      25: aaload
+      26: iload_3
+      27: baload
+      28: sipush        255
+      31: iand
+      32: iload_2
+      33: if_icmpne     45
+      36: aload_0
+      37: getfield      #23                 // Field o:[[I
+      40: iload_1
+      41: aaload
+      42: iload_3
+      43: iaload
+      44: ireturn
+      45: iinc          3, 1
+      48: iload_3
+      49: aload_0
+      50: getfield      #22                 // Field n:[[B
+      53: iload_1
+      54: aaload
+      55: arraylength
+      56: if_icmplt     20
+      59: iconst_0
+      60: ireturn
+}

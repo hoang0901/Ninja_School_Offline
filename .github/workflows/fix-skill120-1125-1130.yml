@@ -1,4 +1,4 @@
-name: Inspect k24 point lookup
+name: Locate skill120 wire records
 on:
   push:
     branches: [fix-skill120-1125-1130]
@@ -10,27 +10,42 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump k24 lookup
+      - name: Locate skill wire records
         shell: bash
         run: |
           set -euo pipefail
           JAR="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          LOG="$GITHUB_WORKSPACE/skill120_k24_lookup.txt"
-          rm -rf /tmp/k24 && mkdir /tmp/k24 && (cd /tmp/k24 && jar xf "$JAR")
-          cd /tmp/k24
-          {
-            echo '=== k24 signatures ==='
-            javap -classpath . -p k24
-            echo '=== k24 bytecode ==='
-            javap -classpath . -c -p k24
-          } > "$LOG"
-          cat "$LOG"
+          WORK=/tmp/s120wire
+          LOG="$GITHUB_WORKSPACE/skill120_wire_locate.txt"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf "$WORK" && mkdir -p "$WORK"
+          cat > "$WORK/Dump.java" <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Dump{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25");Method g=c.getDeclaredMethod("g",int.class);g.setAccessible(true);
+              for(int id=85;id<=90;id++){
+                Object t=g.invoke(null,id);Class<?> k=t.getClass();
+                System.out.print("T "+id);
+                for(String fn:new String[]{"a","b","c","d","e","f","g","h","i","j","k","l","m"}){Field f=k.getDeclaredField(fn);f.setAccessible(true);Object v=f.get(t);if(v!=null&&v.getClass().isArray()){if(v instanceof byte[])System.out.print(" "+fn+"="+Arrays.toString((byte[])v));else if(v instanceof short[])System.out.print(" "+fn+"="+Arrays.toString((short[])v));else if(v instanceof int[])System.out.print(" "+fn+"="+Arrays.toString((int[])v));}else System.out.print(" "+fn+"="+v);}System.out.println();
+              }
+            }
+          }
+          JAVA
+          javac -classpath "$JAR" "$WORK/Dump.java"
+          java -classpath "$JAR:$WORK" Dump
+          rm -rf "$WORK/jar" && mkdir "$WORK/jar" && (cd "$WORK/jar" && jar xf "$JAR")
+          cd "$WORK/jar"
+          echo '=== k25 g(int) ==='
+          javap -classpath . -c -p k25 | awk '/private static k24 g\(int\)/{p=1} p{print} p&&/^  [^ ]/&&seen&&!/private static k24 g\(int\)/{exit} p{seen=1}'
+          echo '=== skill_wire strings ==='
+          strings k25.class | grep -n -Ei 'skill_wire|offline|skill' || true
       - name: Commit report
         if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_k24_lookup.txt || true
-          git commit -m 'chore: inspect k24 point lookup' || exit 0
+          git add skill120_wire_locate.txt || true
+          git commit -m 'chore: locate skill120 wire records' || exit 0
           git push origin fix-skill120-1125-1130

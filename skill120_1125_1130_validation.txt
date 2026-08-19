@@ -1,0 +1,444 @@
+=== BEFORE mapper ===
+ITEM 1125 class1=85 class2=85 class3=85 class4=85 class5=85 class6=85
+ITEM 1126 class1=86 class2=86 class3=86 class4=86 class5=86 class6=86
+ITEM 1127 class1=87 class2=87 class3=87 class4=87 class5=87 class6=87
+ITEM 1128 class1=88 class2=88 class3=88 class4=88 class5=88 class6=88
+ITEM 1129 class1=89 class2=89 class3=89 class4=89 class5=89 class6=89
+ITEM 1130 class1=90 class2=90 class3=90 class4=90 class5=90 class6=90
+=== PATCH k25 mapping 1125-1130: map each book to its fixed template 85-90 ===
+mapper signature matches 1
+=== VALIDATE book rows and templates ===
+MAP item=1125 class=1 -> 85
+ITEM 1125 nums=[1125, 0, 27, 2, 0, 120, 26000, -1, -1, 0] strs=[null, Sách võ công Hoả Hồn Long Trảm, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 85 nums=[85, 1, 0, 1, 1, 26017, 0, 0] strs=[null, null, Hoả Hồn Long Trảm, null, null, null, Bí thuật định hình Chakra - Tạo ra những thanh kiếm năng lượng nhắm thẳng đến mục tiêu, [{"skillId":955,"maxFight":0,"dx":0,"level":110,"dy":0,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":0},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":956,"maxFight":6,"dx":120,"level":120,"dy":46,"manaUse":150,"options":[{"param":11,"id":24},{"param":550,"id":0},{"param":5500,"id":2},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+MAP item=1126 class=2 -> 86
+ITEM 1126 nums=[1126, 0, 27, 2, 0, 120, 26001, -1, -1, 0] strs=[null, Sách võ công Tiêu Hoả Phi Long, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 86 nums=[86, 2, 0, 1, 1, 26018, 0, 0] strs=[null, null, Tiêu Hoả Phi Long, null, null, null, Bí thuật chuyển hóa Chakra thành chân hỏa - Phóng ra những lam hỏa tiêu cực mạnh về phía mục tiêu, [{"skillId":957,"maxFight":0,"dx":150,"level":120,"dy":150,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":1},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":958,"maxFight":6,"dx":150,"level":120,"dy":150,"manaUse":300,"options":[{"param":9,"id":24},{"param":470,"id":1},{"param":5000,"id":2},{"param":750,"id":11},{"param":300,"id":33}],"point":1,"coolDown":350}]]
+MAP item=1127 class=3 -> 87
+ITEM 1127 nums=[1127, 0, 27, 2, 0, 120, 26002, -1, -1, 0] strs=[null, Sách võ công Băng Hổ Bạch Long, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 87 nums=[87, 3, 0, 1, 1, 26019, 0, 0] strs=[null, null, Băng Hổ Bạch Long, null, null, null, Băng thuật tối thượng - Tạo ra hàng loạt vụ nổ năng lượng nhắm thẳng vào mục tiêu, [{"skillId":959,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":0},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":960,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":140,"options":[{"param":10,"id":25},{"param":550,"id":0},{"param":5500,"id":3},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+MAP item=1128 class=4 -> 88
+ITEM 1128 nums=[1128, 0, 27, 2, 0, 120, 26003, -1, -1, 0] strs=[null, Sách võ công Tiễn Ưng Vĩnh Cửu, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 88 nums=[88, 4, 0, 1, 1, 26020, 0, 0] strs=[null, null, Tiễn Ưng Vĩnh Cửu, null, null, null, Đưa Băng Chakra vào mũi tên, khi chạm đến mục tiêu sẽ phát nổ tạo ra một quả cầu năng lượng nhắm thẳng đến mục tiêu, [{"skillId":961,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":1},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":962,"maxFight":7,"dx":140,"level":120,"dy":140,"manaUse":280,"options":[{"param":11,"id":25},{"param":520,"id":1},{"param":5000,"id":3},{"param":780,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+MAP item=1129 class=5 -> 89
+ITEM 1129 nums=[1129, 0, 27, 2, 0, 120, 26004, -1, -1, 0] strs=[null, Sách võ công Vũ Đao Thiên Lôi, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 89 nums=[89, 5, 0, 1, 1, 26021, 0, 0] strs=[null, null, Vũ Đao Thiên Lôi, null, null, null, Phong lôi thần thuật, Triệu hồi thiên lôi nhắm thẳng vào mục tiêu gây 1 lượng sát thương cực lớn, [{"skillId":963,"maxFight":0,"dx":60,"level":120,"dy":60,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":0},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":964,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":160,"options":[{"param":10,"id":26},{"param":550,"id":0},{"param":5500,"id":4},{"param":800,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+MAP item=1130 class=6 -> 90
+ITEM 1130 nums=[1130, 0, 27, 2, 0, 120, 26005, -1, -1, 0] strs=[null, Sách võ công Thuật Phiến Cuồng Phong, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 90 nums=[90, 6, 0, 1, 1, 26022, 0, 0] strs=[null, null, Thuật Phiến Cuồng Phong, null, null, null, Phiến thuật Phong Lôi - Triệu hồi thiên lôi tấn công thẳng vào mục tiêu gây ra sát thương cực lớn, [{"skillId":965,"maxFight":0,"dx":120,"level":120,"dy":100,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":1},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":966,"maxFight":7,"dx":120,"level":120,"dy":100,"manaUse":300,"options":[{"param":11,"id":26},{"param":580,"id":1},{"param":5000,"id":4},{"param":780,"id":11},{"param":350,"id":33}],"point":1,"coolDown":330}]]
+=== TRACE learning handler method signatures ===
+2635-      22: iconst_1
+2636-      23: baload
+2637-      24: sipush        255
+2638-      27: iand
+2639-      28: ior
+2640-      29: istore_1
+2641-      30: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+2642-      33: astore_2
+2643-      34: aload_2
+2644-      35: iload_1
+2645-      36: invokestatic  #241                // Method c:(LDoHoang091$k0;I)I
+2646-      39: iflt          55
+2647-      42: aload_2
+2648-      43: iload_1
+2649-      44: i2s
+2650-      45: putfield      #97                 // Field DoHoang091$k0.bH:S
+2651-      48: aload_2
+2652-      49: invokestatic  #206                // Method k0.a:(LDoHoang091$k0;)V
+2653-      52: invokestatic  #165                // Method DoHoang091.G:()V
+2654-      55: return
+2655-
+2656-  static boolean g(int, int) throws java.lang.Exception;
+2657-    Code:
+2658-       0: iload_1
+2659-       1: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+2660-       4: getfield      #98                 // Field DoHoang091$k0.bx:B
+2661-       7: sipush        255
+2662-      10: iand
+2663-      11: invokestatic  #259                // Method k:(II)I
+2664-      14: istore_2
+2665-      15: iload_2
+2666-      16: ifge          21
+2667-      19: iconst_0
+2668-      20: ireturn
+2669-      21: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+2670-      24: astore_3
+2671-      25: aload_3
+2672-      26: iload_2
+2673-      27: invokestatic  #241                // Method c:(LDoHoang091$k0;I)I
+2674-      30: iflt          40
+2675:      33: ldc           #14                 // String Chiêu này đã học.
+2676-      35: invokestatic  #169                // Method DoHoang091.a:(Ljava/lang/String;)V
+2677-      38: iconst_1
+2678-      39: ireturn
+2679-      40: iload_2
+2680-      41: invokestatic  #253                // Method g:(I)Lk24;
+2681-      44: astore        4
+2682-      46: aload         4
+2683-      48: ifnull        71
+2684-      51: aload         4
+2685-      53: getfield      #114                // Field k24.a:B
+2686-      56: sipush        255
+2687-      59: iand
+2688-      60: aload_3
+2689-      61: getfield      #98                 // Field DoHoang091$k0.bx:B
+2690-      64: sipush        255
+2691-      67: iand
+2692-      68: if_icmpeq     78
+2693-      71: ldc           #28                 // String Sách này không phù hợp với lớp hiện tại.
+2694-      73: invokestatic  #169                // Method DoHoang091.a:(Ljava/lang/String;)V
+2695-      76: iconst_1
+2696-      77: ireturn
+2697-      78: aload         4
+2698-      80: iconst_1
+2699-      81: invokevirtual #213                // Method k24.a:(I)I
+2700-      84: iflt          91
+2701-      87: iconst_1
+2702-      88: goto          92
+2703-      91: iconst_0
+2704-      92: istore        5
+2705-      94: aload         4
+2706-      96: iload         5
+2707-      98: invokevirtual #213                // Method k24.a:(I)I
+2708-     101: istore        6
+2709-     103: iload         6
+2710-     105: iflt          120
+2711-     108: aload_3
+2712-     109: getfield      #96                 // Field DoHoang091$k0.bG:I
+2713-     112: aload_3
+2714-     113: getfield      #94                 // Field DoHoang091$k0.bE:[B
+2715-     116: arraylength
+2716-     117: if_icmplt     122
+2717-     120: iconst_1
+2718-     121: ireturn
+2719-     122: aload_3
+2720-     123: getfield      #94                 // Field DoHoang091$k0.bE:[B
+2721-     126: aload_3
+2722-     127: getfield      #96                 // Field DoHoang091$k0.bG:I
+2723-     130: iload_2
+2724-     131: i2b
+2725-     132: bastore
+2726-     133: aload_3
+2727-     134: getfield      #95                 // Field DoHoang091$k0.bF:[B
+2728-     137: aload_3
+2729-     138: getfield      #96                 // Field DoHoang091$k0.bG:I
+2730-     141: iload         5
+2731-     143: i2b
+2732-     144: bastore
+2733-     145: aload_3
+2734-     146: dup
+2735-     147: getfield      #96                 // Field DoHoang091$k0.bG:I
+2736-     150: iconst_1
+2737-     151: iadd
+2738-     152: putfield      #96                 // Field DoHoang091$k0.bG:I
+2739-     155: aload_3
+2740-     156: getfield      #97                 // Field DoHoang091$k0.bH:S
+2741-     159: ifge          181
+2742-     162: aload         4
+2743-     164: getfield      #116                // Field k24.c:B
+2744-     167: sipush        255
+2745-     170: iand
+2746-     171: iconst_1
+2747-     172: if_icmpne     181
+2748-     175: aload_3
+2749-     176: iload_2
+2750-     177: i2s
+2751-     178: putfield      #97                 // Field DoHoang091$k0.bH:S
+2752-     181: aload_3
+2753-     182: invokestatic  #206                // Method k0.a:(LDoHoang091$k0;)V
+2754-     185: aload_3
+2755-     186: iload_0
+2756-     187: invokestatic  #210                // Method k16.a:(LDoHoang091$k0;I)V
+2757-     190: invokestatic  #165                // Method DoHoang091.G:()V
+2758-     193: invokestatic  #166                // Method DoHoang091.H:()V
+2759-     196: new           #47                 // class java/io/ByteArrayOutputStream
+2760-     199: dup
+2761-     200: iconst_4
+2762-     201: invokespecial #178                // Method java/io/ByteArrayOutputStream."<init>":(I)V
+2763-     204: astore        7
+2764-     206: new           #49                 // class java/io/DataOutputStream
+2765-     209: dup
+2766-     210: aload         7
+2767-     212: invokespecial #184                // Method java/io/DataOutputStream."<init>":(Ljava/io/OutputStream;)V
+2768-     215: astore        8
+2769-     217: aload         8
+2770-     219: bipush        -102
+2771-     221: invokevirtual #186                // Method java/io/DataOutputStream.writeByte:(I)V
+2772-     224: aload         8
+2773-     226: iload_0
+2774-     227: invokevirtual #186                // Method java/io/DataOutputStream.writeByte:(I)V
+2775-     230: aload         8
+2776-     232: aload         4
+2777-     234: getfield      #117                // Field k24.d:[S
+2778-     237: iload         6
+2779-     239: saload
+2780-     240: invokevirtual #189                // Method java/io/DataOutputStream.writeShort:(I)V
+2781-     243: aload         8
+2782-     245: invokevirtual #185                // Method java/io/DataOutputStream.flush:()V
+2783-     248: bipush        -30
+2784-     250: aload         7
+2785-     252: invokevirtual #179                // Method java/io/ByteArrayOutputStream.toByteArray:()[B
+2786-     255: invokestatic  #168                // Method DoHoang091.a:(B[B)V
+2787-     258: invokestatic  #252                // Method g:()V
+2788-     261: invokestatic  #262                // Method k2e.u:()V
+2789-     264: iconst_1
+2790-     265: ireturn
+2791-
+2792-  static boolean b(int, int, int) throws java.lang.Exception;
+2793-    Code:
+2794-       0: iload_0
+2795-       1: bipush        9
+2796-       3: if_icmplt     12
+2797-       6: iload_0
+2798-       7: bipush        11
+2799-       9: if_icmple     14
+2800-      12: iconst_0
+2801-      13: ireturn
+2802-      14: iload_1
+2803-      15: iconst_1
+2804-      16: if_icmpne     46
+2805-      19: iload_2
+2806-      20: iflt          46
+2807-      23: iload_2
+2808-      24: iconst_2
+2809-      25: if_icmpge     46
+2810-      28: iload_0
+2811-      29: bipush        9
+2812-      31: isub
+2813-      32: iconst_2
+2814-      33: imul
+2815-      34: iload_2
+2816-      35: iadd
+2817-      36: iconst_1
+2818-      37: iadd
+2819-      38: istore_3
+2820-      39: iload_3
+2821-      40: iload_0
+2822-      41: invokestatic  #257                // Method i:(II)V
+2823-      44: iconst_1
+2824-      45: ireturn
+2825-      46: iload_1
+2826-      47: iconst_2
+2827-      48: if_icmpne     61
+2828-      51: iload_2
+2829-      52: ifne          61
+2830-      55: iload_0
+2831-      56: invokestatic  #217                // Method a:(I)V
+2832-      59: iconst_1
+2833-      60: ireturn
+2834-      61: iload_1
+2835-      62: iconst_2
+2836-      63: if_icmpne     77
+2837-      66: iload_2
+2838-      67: iconst_1
+2839-      68: if_icmpne     77
+2840-      71: iload_0
+2841-      72: invokestatic  #232                // Method b:(I)V
+2842-      75: iconst_1
+2843-      76: ireturn
+2844-      77: iconst_0
+2845-      78: ireturn
+2846-
+2847-  static boolean h(int, int) throws java.lang.Exception;
+2848-    Code:
+2849-       0: iload_1
+2850-       1: sipush        240
+2851-       4: if_icmpeq     44
+2852-       7: iload_1
+2853-       8: sipush        241
+2854-      11: if_icmpeq     44
+2855-      14: iload_1
+=== PATCH ROOT CAUSE: learned check used template id but book-use path can arrive with item id ===
+: i2b
+     226: bastore
+     227: aload         4
+     229: aload         4
+     231: getfield      #100                // Field DoHoang091$k0.bz:S
+     234: ldc           #4                  // int 65535
+     236: iand
+     237: iload_3
+     238: isub
+     239: i2s
+     240: putfield      #100                // Field DoHoang091$k0.bz:S
+     243: aload         4
+     245: invokestatic  #206                // Method k0.a:(LDoHoang091$k0;)V
+     248: invokestatic  #165                // Method DoHoang091.G:()V
+     251: invokestatic  #166                // Method DoHoang091.H:()V
+     254: invokestatic  #252                // Method g:()V
+     257: invokestatic  #263                // Method k2e.v:()V
+     260: return
+
+  static void e(byte[]) throws java.lang.Exception;
+    Code:
+       0: aload_0
+       1: ifnull        10
+       4: aload_0
+       5: arraylength
+       6: iconst_2
+       7: if_icmpge     11
+      10: return
+      11: aload_0
+      12: iconst_0
+      13: baload
+      14: sipush        255
+      17: iand
+      18: bipush        8
+      20: ishl
+      21: aload_0
+      22: iconst_1
+      23: baload
+      24: sipush        255
+      27: iand
+      28: ior
+      29: istore_1
+      30: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+      33: astore_2
+      34: aload_2
+      35: iload_1
+      36: invokestatic  #241                // Method c:(LDoHoang091$k0;I)I
+      39: iflt          55
+      42: aload_2
+      43: iload_1
+      44: i2s
+      45: putfield      #97                 // Field DoHoang091$k0.bH:S
+      48: aload_2
+      49: invokestatic  #206                // Method k0.a:(LDoHoang091$k0;)V
+      52: invokestatic  #165                // Method DoHoang091.G:()V
+      55: return
+
+  static boolean g(int, int) throws java.lang.Exception;
+    Code:
+       0: iload_1
+       1: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+       4: getfield      #98                 // Field DoHoang091$k0.bx:B
+       7: sipush        255
+      10: iand
+      11: invokestatic  #259                // Method k:(II)I
+      14: istore_2
+      15: iload_2
+      16: ifge          21
+      19: iconst_0
+      20: ireturn
+      21: invokestatic  #164                // Method DoHoang091.A:()LDoHoang091$k0;
+      24: astore_3
+      25: aload_3
+      26: iload_2
+      27: invokestatic  #241                // Method c:(LDoHoang091$k0;I)I
+      30: iflt          40
+      33: ldc           #14                 // String Chiêu này đã học.
+      35: invokestatic  #169                // Method DoHoang091.a:(Ljava/lang/String;)V
+      38: iconst_1
+      39: ireturn
+      40: iload_2
+      41: invokestatic  #253                // Method g:(I)Lk24;
+      44: astore        4
+      46: aload         4
+      48: ifnull        71
+      51: aload         4
+      53: getfield      #114                // Field k24.a:B
+      56: sipush        255
+      59: iand
+      60: aload_3
+      61: getfield      #98                 // Field DoHoang091$k0.bx:B
+      64: sipush        255
+      67: iand
+      68: if_icmpeq     78
+      71: ldc           #28                 // String Sách này không phù hợp với lớp hiện tại.
+      73: invokestatic  #169                // Method DoHoang091.a:(Ljava/lang/String;)V
+      76: iconst_1
+      77: ireturn
+      78: aload         4
+      80: iconst_1
+      81: invokevirtual #213                // Method k24.a:(I)I
+      84: iflt          91
+      87: iconst_1
+      88: goto          92
+      91: iconst_0
+      92: istore        5
+      94: aload         4
+      96: iload         5
+      98: invokevirtual #213                // Method k24.a:(I)I
+     101: istore        6
+     103: iload         6
+     105: iflt          120
+     108: aload_3
+     109: getfield      #96                 // Field DoHoang091$k0.bG:I
+     112: aload_3
+     113: getfield      #94                 // Field DoHoang091$k0.bE:[B
+     116: arraylength
+     117: if_icmplt     122
+     120: iconst_1
+     121: ireturn
+     122: aload_3
+     123: getfield      #94                 // Field DoHoang091$k0.bE:[B
+     126: aload_3
+     127: getfield      #96                 // Field DoHoang091$k0.bG:I
+     130: iload_2
+     131: i2b
+     132: bastore
+     133: aload_3
+     134: getfield      #95                 // Field DoHoang091$k0.bF:[B
+     137: aload_3
+     138: getfield      #96                 // Field DoHoang091$k0.bG:I
+     141: iload         5
+     143: i2b
+     144: bastore
+     145: aload_3
+     146: dup
+     147: getfield      #96                 // Field DoHoang091$k0.bG:I
+     150: iconst_1
+     151: iadd
+     152: putfield      #96                 // Field DoHoang091$k0.bG:I
+     155: aload_3
+     156: getfield      #97                 // Field DoHoang091$k0.bH:S
+     159: ifge          181
+     162: aload         4
+     164: getfield      #116                // Field k24.c:B
+     167: sipush        255
+     170: iand
+     171: iconst_1
+     172: if_icmpne     181
+     175: aload_3
+     176: iload_2
+     177: i2s
+     178: putfield      #97                 // Field DoHoang091$k0.bH:S
+     181: aload_3
+     182: invokestatic  #206                // Method k0.a:(LDoHoang091$k0;)V
+     185: aload_3
+     186: iload_0
+     187: invokestatic  #210                // Method k16.a:(LDoHoang091$k0;I)V
+     190: invokestatic  #165                // Method DoHoang091.G:()V
+     193: invokestatic  #166                // Method DoHoang091.H:()V
+     196: new           #47                 // class java/io/ByteArrayOutputStream
+     199: dup
+     200: iconst_4
+     201: invokespecial #178                // Method java/io/ByteArrayOutputStream."<init>":(I)V
+     204: astore        7
+     206: new           #49                 // class java/io/DataOutputStream
+     209: dup
+     210: aload         7
+     212: invokespecial #184                // Method java/io/DataOutputStream."<init>":(Ljava/io/OutputStream;)V
+     215: astore        8
+     217: aload         8
+     219: bipus
+=== BYTECODE PATCH learned-check normalization ===
+=== FINAL functional validation ===
+MAP item=1125 class=1 -> 85
+ITEM 1125 nums=[1125, 0, 27, 2, 0, 120, 26000, -1, -1, 0] strs=[null, Sách võ công Hoả Hồn Long Trảm, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 85 nums=[85, 1, 0, 1, 1, 26017, 0, 0] strs=[null, null, Hoả Hồn Long Trảm, null, null, null, Bí thuật định hình Chakra - Tạo ra những thanh kiếm năng lượng nhắm thẳng đến mục tiêu, [{"skillId":955,"maxFight":0,"dx":0,"level":110,"dy":0,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":0},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":956,"maxFight":6,"dx":120,"level":120,"dy":46,"manaUse":150,"options":[{"param":11,"id":24},{"param":550,"id":0},{"param":5500,"id":2},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+MAP item=1126 class=2 -> 86
+ITEM 1126 nums=[1126, 0, 27, 2, 0, 120, 26001, -1, -1, 0] strs=[null, Sách võ công Tiêu Hoả Phi Long, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 86 nums=[86, 2, 0, 1, 1, 26018, 0, 0] strs=[null, null, Tiêu Hoả Phi Long, null, null, null, Bí thuật chuyển hóa Chakra thành chân hỏa - Phóng ra những lam hỏa tiêu cực mạnh về phía mục tiêu, [{"skillId":957,"maxFight":0,"dx":150,"level":120,"dy":150,"manaUse":0,"options":[{"param":0,"id":24},{"param":0,"id":1},{"param":0,"id":2},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":958,"maxFight":6,"dx":150,"level":120,"dy":150,"manaUse":300,"options":[{"param":9,"id":24},{"param":470,"id":1},{"param":5000,"id":2},{"param":750,"id":11},{"param":300,"id":33}],"point":1,"coolDown":350}]]
+MAP item=1127 class=3 -> 87
+ITEM 1127 nums=[1127, 0, 27, 2, 0, 120, 26002, -1, -1, 0] strs=[null, Sách võ công Băng Hổ Bạch Long, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 87 nums=[87, 3, 0, 1, 1, 26019, 0, 0] strs=[null, null, Băng Hổ Bạch Long, null, null, null, Băng thuật tối thượng - Tạo ra hàng loạt vụ nổ năng lượng nhắm thẳng vào mục tiêu, [{"skillId":959,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":0},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":960,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":140,"options":[{"param":10,"id":25},{"param":550,"id":0},{"param":5500,"id":3},{"param":770,"id":11},{"param":300,"id":33}],"point":1,"coolDown":300}]]
+MAP item=1128 class=4 -> 88
+ITEM 1128 nums=[1128, 0, 27, 2, 0, 120, 26003, -1, -1, 0] strs=[null, Sách võ công Tiễn Ưng Vĩnh Cửu, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 88 nums=[88, 4, 0, 1, 1, 26020, 0, 0] strs=[null, null, Tiễn Ưng Vĩnh Cửu, null, null, null, Đưa Băng Chakra vào mũi tên, khi chạm đến mục tiêu sẽ phát nổ tạo ra một quả cầu năng lượng nhắm thẳng đến mục tiêu, [{"skillId":961,"maxFight":0,"dx":0,"level":120,"dy":0,"manaUse":0,"options":[{"param":0,"id":25},{"param":0,"id":1},{"param":0,"id":3},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":962,"maxFight":7,"dx":140,"level":120,"dy":140,"manaUse":280,"options":[{"param":11,"id":25},{"param":520,"id":1},{"param":5000,"id":3},{"param":780,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+MAP item=1129 class=5 -> 89
+ITEM 1129 nums=[1129, 0, 27, 2, 0, 120, 26004, -1, -1, 0] strs=[null, Sách võ công Vũ Đao Thiên Lôi, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 89 nums=[89, 5, 0, 1, 1, 26021, 0, 0] strs=[null, null, Vũ Đao Thiên Lôi, null, null, null, Phong lôi thần thuật, Triệu hồi thiên lôi nhắm thẳng vào mục tiêu gây 1 lượng sát thương cực lớn, [{"skillId":963,"maxFight":0,"dx":60,"level":120,"dy":60,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":0},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":964,"maxFight":6,"dx":90,"level":120,"dy":46,"manaUse":160,"options":[{"param":10,"id":26},{"param":550,"id":0},{"param":5500,"id":4},{"param":800,"id":11},{"param":300,"id":33}],"point":1,"coolDown":330}]]
+MAP item=1130 class=6 -> 90
+ITEM 1130 nums=[1130, 0, 27, 2, 0, 120, 26005, -1, -1, 0] strs=[null, Sách võ công Thuật Phiến Cuồng Phong, null, null, Kỹ năng Đẹp và bá đạo không còn gì để nói, null, null, null, null, null]
+SKILL_TEMPLATE 90 nums=[90, 6, 0, 1, 1, 26022, 0, 0] strs=[null, null, Thuật Phiến Cuồng Phong, null, null, null, Phiến thuật Phong Lôi - Triệu hồi thiên lôi tấn công thẳng vào mục tiêu gây ra sát thương cực lớn, [{"skillId":965,"maxFight":0,"dx":120,"level":120,"dy":100,"manaUse":0,"options":[{"param":0,"id":26},{"param":0,"id":1},{"param":0,"id":4},{"param":0,"id":11},{"param":0,"id":33}],"point":0,"coolDown":0},{"skillId":966,"maxFight":7,"dx":120,"level":120,"dy":100,"manaUse":300,"options":[{"param":11,"id":26},{"param":580,"id":1},{"param":5000,"id":4},{"param":780,"id":11},{"param":350,"id":33}],"point":1,"coolDown":330}]]
+VALIDATION_OK books 1125-1130 map to templates 85-90 for classes 1-6; no unrelated data changed

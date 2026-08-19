@@ -1,0 +1,11 @@
+item.idx,5586,1,2,220206,14564,offline/full/item.idx
+item.dat,5585,1,2,110122,110084,offline/full/item.dat
+Patched item rows 1173/1174; item.dat 110084 -> 110098 bytes
+Patched d02.pak: 578078 -> 578092 bytes
+1173 types=[1, 3, 1, 1, 3, 1, 1, 1, 1, 1]
+1173 numbers=[1173, 0, 2, 1, 0, 20, 3422, -1, 230, 0]
+1173 strings=[null, Obito, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+1174 types=[1, 3, 1, 1, 3, 1, 1, 1, 1, 1]
+1174 numbers=[1174, 0, 2, 0, 0, 20, 3421, -1, 233, 0]
+1174 strings=[null, Sakura, null, null, Dùng thay đổi diện mạo, null, null, null, null, null]
+VALIDATION_OK: Obito fashion=230, Sakura fashion=233; JAR size=5250735

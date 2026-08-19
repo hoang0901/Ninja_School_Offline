@@ -1,4 +1,4 @@
-name: Temporary run fake class patch v2
+name: Temporary cleanup fake class files
 on:
   push:
     branches: [main]
@@ -6,30 +6,22 @@ on:
 permissions:
   contents: write
 jobs:
-  patch:
+  cleanup:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run corrected patch script
+      - name: Remove temporary audit and workflow files
         shell: bash
         run: |
           set -euo pipefail
-          python -m pip install -q pyyaml
-          python - <<'PY'
-          import yaml
-          p='.github/workflows/temp-add-fake-class-menu.yml'
-          doc=yaml.safe_load(open(p,encoding='utf-8'))
-          script=doc['jobs']['patch']['steps'][1]['run']
-          script=script.replace("grep -q 'Fake phái - Kiếm' menu.txt", "grep -q 'Fake phái - ' menu.txt\n          grep -q 'String Kiếm' menu.txt")
-          script=script.replace("grep -q 'Fake phái - Quạt' menu.txt", "grep -q 'String Quạt' menu.txt")
-          open('/tmp/fake_patch.sh','w',encoding='utf-8').write(script)
-          PY
-          bash /tmp/fake_patch.sh
-      - name: Commit JAR only
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Nso_Offline_By_h0901.jar
-          git diff --cached --quiet && { echo 'No JAR change'; exit 1; }
-          git commit -m "feat: add fake class menu and rename game"
+          rm -f audit_*.txt fake_class_audit.txt fake_build_debug.txt
+          rm -f .github/workflows/temp-audit-fake-class-menu.yml
+          rm -f .github/workflows/temp-add-fake-class-menu.yml
+          rm -f .github/workflows/temp-debug-fake-class-build.yml
+          rm -f .github/workflows/temp-run-fake-class-patch-v2.yml
+          git add -A
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: remove fake class temporary files"
           git push

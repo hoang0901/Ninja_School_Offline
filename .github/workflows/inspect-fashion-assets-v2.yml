@@ -10,35 +10,48 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Compare embedded fashion assets to Nso_Folder
+      - name: Trace real effect resource paths
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/fashion_assets_v2.txt"
+          LOG="$GITHUB_WORKSPACE/fashion_paths_v2.txt"
           exec > >(tee "$LOG") 2>&1
           git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git /tmp/ref >/dev/null 2>&1
-          echo '=== k1e methods/fields ==='
-          cat >/tmp/Inspect.java <<'JAVA'
-          import java.lang.reflect.*;import java.security.*;import java.util.*;
-          public class Inspect{
-            static String hex(byte[] b)throws Exception{if(b==null)return "null";MessageDigest d=MessageDigest.getInstance("SHA-256");byte[] h=d.digest(b);StringBuilder s=new StringBuilder();for(byte x:h)s.append(String.format("%02x",x));return b.length+" "+s;}
+          echo '=== REFERENCE source literals around Effect assets ==='
+          grep -RIn --include='*.java' -E 'Img[/\\]Effect|Effect[/\\]|Data[/\\]Img|loadFile\(' /tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z | head -n 300 || true
+          echo '=== TARGET strings containing effect/resource/offline ==='
+          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
+          cd /tmp/jar
+          for c in *.class; do
+            s=$(strings "$c" | grep -iE 'effect|resource|offline|image|img/' | head -n 80 || true)
+            if [ -n "$s" ]; then echo "===== ${c%.class} ====="; printf '%s\n' "$s"; fi
+          done
+          echo '=== TARGET callers of k1e.read/open ==='
+          for c in *.class; do
+            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
+            if printf '%s\n' "$j" | grep -qE 'k1e\.(read|open):'; then
+              echo "===== ${c%.class} ====="
+              printf '%s\n' "$j" | grep -n -B60 -A40 -E 'k1e\.(read|open):' | head -n 700 || true
+            fi
+          done
+          echo '=== k1e normalized candidates ==='
+          cat >/tmp/Candidates.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Candidates{
             public static void main(String[]a)throws Exception{
-              Class<?> c=Class.forName("k1e");for(Method m:c.getDeclaredMethods())System.out.println("M "+m);for(Field f:c.getDeclaredFields())System.out.println("F "+f);
-              Method read=c.getDeclaredMethod("read",String.class);read.setAccessible(true);Method norm=c.getDeclaredMethod("normalize",String.class);norm.setAccessible(true);Method ensure=c.getDeclaredMethod("ensureIndex");ensure.setAccessible(true);ensure.invoke(null);Method fi=c.getDeclaredMethod("findIndex",String.class);fi.setAccessible(true);
-              String[] roots={"/Data/Img/Effect/","Data/Img/Effect/","/data/img/effect/","data/img/effect/","/img/effect/","img/effect/"};
-              for(String root:roots)for(int z=1;z<=4;z++)for(int id=230;id<=235;id++){String p=root+z+"/"+id+".png";try{String n=(String)norm.invoke(null,p);int idx=(Integer)fi.invoke(null,n);byte[] b=(byte[])read.invoke(null,p);if(idx>=0||b!=null)System.out.println("PATH "+p+" norm="+n+" idx="+idx+" data="+hex(b));}catch(Throwable t){}}
+              Class<?> c=Class.forName("k1e");Method n=c.getDeclaredMethod("normalize",String.class),h=c.getDeclaredMethod("hash",String.class),e=c.getDeclaredMethod("ensureIndex"),f=c.getDeclaredMethod("findIndex",String.class);n.setAccessible(true);h.setAccessible(true);e.setAccessible(true);f.setAccessible(true);e.invoke(null);
+              String[] pats={"Data/Img/Effect/%d/%d.png","/Data/Img/Effect/%d/%d.png","Data/Img/Effect/%d/%d","/Data/Img/Effect/%d/%d","Img/Effect/%d/%d.png","/Img/Effect/%d/%d.png","effect/%d/%d.png","/effect/%d/%d.png","Effect/%d/%d.png","/Effect/%d/%d.png","res/effect/%d/%d.png","/res/effect/%d/%d.png","Data/Effect/%d/%d.png","/Data/Effect/%d/%d.png"};
+              for(String p:pats){String x=String.format(p,1,230);String z=(String)n.invoke(null,x);System.out.println(x+" -> "+z+" hash="+h.invoke(null,z)+" idx="+f.invoke(null,z));}
             }
           }
           JAVA
-          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/Inspect.java
-          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" Inspect
-          echo '=== reference hashes ==='
-          for z in 1 2 3 4; do for id in 230 231 232 233 234 235; do f="/tmp/ref/NinjaSchoolOffline_by_dohoang091/Data/Img/Effect/$z/$id.png"; printf 'REF /Data/Img/Effect/%s/%s.png ' "$z" "$id"; stat -c %s "$f"; sha256sum "$f"; done; done
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/Candidates.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" Candidates
       - name: Commit report
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add fashion_assets_v2.txt
-          git commit -m 'chore: inspect embedded fashion assets 230-235' || exit 0
+          git add fashion_paths_v2.txt
+          git commit -m 'chore: trace real embedded fashion paths' || exit 0
           git push origin fix-obito-sakura-assets-v2

@@ -1,0 +1,46 @@
+=== existing packs ===
+total 7.0M
+-rw-r--r-- 1 runner runner 226K Aug 18 19:02 d00.pak
+-rw-r--r-- 1 runner runner 645K Aug 18 19:02 d01.pak
+-rw-r--r-- 1 runner runner 565K Aug 19 13:55 d02.pak
+-rw-r--r-- 1 runner runner 221K Aug 18 19:02 d03.pak
+-rw-r--r-- 1 runner runner 656K Aug 18 19:02 d04.pak
+-rw-r--r-- 1 runner runner 697K Aug 18 19:02 d05.pak
+-rw-r--r-- 1 runner runner 700K Aug 18 19:02 d06.pak
+-rw-r--r-- 1 runner runner 177K Aug 18 19:02 d07.pak
+-rw-r--r-- 1 runner runner  82K Aug 19 13:55 index.bin
+-rw-r--r-- 1 runner runner  439 Aug 18 19:02 manifest.json
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s00.pak
+-rw-r--r-- 1 runner runner 120K Aug 18 19:02 s01.pak
+-rw-r--r-- 1 runner runner 126K Aug 18 19:02 s02.pak
+-rw-r--r-- 1 runner runner 121K Aug 18 19:02 s03.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s04.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s05.pak
+-rw-r--r-- 1 runner runner 126K Aug 18 19:02 s06.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s07.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s08.pak
+-rw-r--r-- 1 runner runner 126K Aug 18 19:02 s09.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s10.pak
+-rw-r--r-- 1 runner runner 126K Aug 18 19:02 s11.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s12.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s13.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s14.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s15.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s16.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s17.pak
+-rw-r--r-- 1 runner runner 128K Aug 19 13:37 s18.pak
+-rw-r--r-- 1 runner runner 131K Aug 19 13:37 s19.pak
+-rw-r--r-- 1 runner runner 134K Aug 19 13:37 s20.pak
+-rw-r--r-- 1 runner runner 126K Aug 18 19:02 s21.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s22.pak
+-rw-r--r-- 1 runner runner 128K Aug 18 19:02 s23.pak
+-rw-r--r-- 1 runner runner  23K Aug 18 19:02 s24.pak
+Exception in thread "main" java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at Hashes.main(Hashes.java:8)
+Caused by: java.lang.NullPointerException: Cannot invoke "String.length()" because "<parameter1>" is null
+	at k1e.hash(Unknown Source)
+	... 5 more

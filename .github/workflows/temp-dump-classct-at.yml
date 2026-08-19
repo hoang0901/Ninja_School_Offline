@@ -1,0 +1,34 @@
+name: Temporary dump Class_ct at
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-dump-classct-at.yml]
+permissions:
+  contents: write
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump Class_ct.at and packet context
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/ctdump && mkdir -p /tmp/ctdump && cd /tmp/ctdump
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          javap -p -c Class_ct.class > ct.txt
+          javap -p -c Class_by.class > by.txt
+          {
+            echo '=== METHOD at() ==='
+            awk '/^[[:space:]]*(public |private |protected |static |final )*void at\(\);/{p=1} p{print} p && /^[[:space:]]*$/ {exit}' ct.txt
+            echo
+            echo '=== ONLY Class_by at() caller context ==='
+            grep -n -B20 -A25 'Method Class_ct.at:()V' by.txt || true
+          } > "$GITHUB_WORKSPACE/classct_at_dump.txt"
+      - name: Commit dump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add classct_at_dump.txt
+          git commit -m "chore: inspect Class_ct at HUD reset"
+          git push

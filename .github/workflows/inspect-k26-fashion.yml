@@ -1,0 +1,42 @@
+name: Inspect k26 fashion mapping
+on:
+  push:
+    branches: [fix-obito-sakura-logic-v2]
+    paths: ['.github/workflows/inspect-k26-fashion.yml']
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump k26 and references
+        shell: bash
+        run: |
+          set -euo pipefail
+          LOG="$GITHUB_WORKSPACE/k26_fashion_report.txt"
+          exec > >(tee "$LOG") 2>&1
+          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
+          cd /tmp/jar
+          echo '=== K26 FULL JAVAP ==='
+          javap -classpath . -c -p -verbose k26 || true
+          echo '=== CLASSES REFERENCING k26 ==='
+          for c in *.class; do
+            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
+            if printf '%s\n' "$j" | grep -q 'k26'; then echo "===== ${c%.class} ====="; printf '%s\n' "$j" | grep -n -B60 -A100 'k26' | head -n 1000 || true; fi
+          done
+          echo '=== K26 REFLECTION ==='
+          cat >/tmp/R.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class R{public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k26");System.out.println(c);for(Field f:c.getDeclaredFields()){f.setAccessible(true);Object v=Modifier.isStatic(f.getModifiers())?f.get(null):null;if(v instanceof short[])v=Arrays.toString((short[])v);if(v instanceof int[])v=Arrays.toString((int[])v);System.out.println("F "+f+" = "+v);}for(Method m:c.getDeclaredMethods())System.out.println("M "+m);}}
+          JAVA
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/R.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" R || true
+      - name: Commit report
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add k26_fashion_report.txt
+          git commit -m 'chore: inspect k26 fashion mapping' || exit 0
+          git push origin fix-obito-sakura-logic-v2

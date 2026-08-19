@@ -10,41 +10,57 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect reference and offline model resources
+      - name: Trace reference fashion equip logic and target bytecode
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/model_v2_report.txt"
+          LOG="$GITHUB_WORKSPACE/model_v2_trace.txt"
           exec > >(tee "$LOG") 2>&1
-          echo '=== REFERENCE SOURCE MAPPING ==='
           git clone --depth 1 https://github.com/hoang0901/Nso_Folder.git /tmp/ref >/dev/null 2>&1
-          grep -n -A5 -B3 'case 230\|case 233' /tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java/Exe_Z/fashion/FashionFromEquip.java || true
-          echo '=== REFERENCE FILES 230-235 ==='
-          find /tmp/ref/NinjaSchoolOffline_by_dohoang091 -type f \( -name '230' -o -name '230.*' -o -name '231' -o -name '231.*' -o -name '232' -o -name '232.*' -o -name '233' -o -name '233.*' -o -name '234' -o -name '234.*' -o -name '235' -o -name '235.*' \) -printf '%p %s bytes\n' | sort || true
-          echo '=== REFERENCE PATHS CONTAINING part ==='
-          find /tmp/ref/NinjaSchoolOffline_by_dohoang091 -maxdepth 5 -type d -iname '*part*' -print || true
-          echo '=== REFERENCE SQL ROWS 1173/1174 ==='
-          grep -RIn --include='*.sql' -E '\(1173[,)]|\(1174[,)]|Obito|Sakura' /tmp/ref/NinjaSchoolOffline_by_dohoang091 | head -n 80 || true
-          echo '=== TARGET JAR ENTRIES ==='
+          SRC=/tmp/ref/NinjaSchoolOffline_by_dohoang091/src/main/java
+          echo '=== REFERENCE: fashion assignment/use ==='
+          grep -RIn --include='*.java' -E 'fashion\[|template\.fashion|ID_HAIR|ID_BODY|ID_LEG' "$SRC/Exe_Z" | head -n 350 || true
+          echo '=== REFERENCE: equip/use methods around fashion ==='
+          grep -RIn --include='*.java' -E 'isTypeBody\(|equipment\[|new Equip|Equip\(' "$SRC/Exe_Z/model" "$SRC/Exe_Z/item" | head -n 250 || true
+          echo '=== REFERENCE SQL fashion roots 174 177 230 233 ==='
+          python3 - <<'PY'
+          import re
+          p='/tmp/ref/NinjaSchoolOffline_by_dohoang091/SQL/nsoz.sql'
+          for line in open(p,encoding='utf-8',errors='ignore'):
+            if re.search(r',\s*(174|177|230|233),\s*[01]\)\s*[,;]?$',line.strip()): print(line.rstrip())
+          PY
+          echo '=== TARGET ITEM ROWS WITH fashion roots ==='
           mkdir -p /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
-          find /tmp/jar -type f | sed 's#^/tmp/jar/##' | grep -Ei 'part|230|231|232|233|234|235' | head -n 300 || true
-          echo '=== TARGET OFFLINE INDEX PATHS ==='
-          cat > /tmp/ListPaths.java <<'JAVA'
-          import java.lang.reflect.*;
-          public class ListPaths {
+          cat > /tmp/DumpFashionRows.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class DumpFashionRows{
             public static void main(String[]a)throws Exception{
-              Class<?> c=Class.forName("k1e"); Method ensure=c.getDeclaredMethod("ensureIndex");ensure.setAccessible(true);ensure.invoke(null);
-              for(Field f:c.getDeclaredFields()){f.setAccessible(true);Object v=f.get(null);if(v instanceof String[]){String[] s=(String[])v;System.out.println("FIELD "+f.getName()+" len="+s.length);for(String x:s)if(x!=null && (x.toLowerCase().contains("part")||x.matches(".*(^|[/_.-])(230|231|232|233|234|235)([/_.-]|$).*")))System.out.println(x);}}
+              Class<?> tc=Class.forName("k2c");Constructor<?> ct=tc.getDeclaredConstructor(String.class);ct.setAccessible(true);Object t=ct.newInstance("item");
+              Method f=tc.getDeclaredMethod("find",int.class);f.setAccessible(true);
+              for(int id=0;id<2000;id++)try{Object r=f.invoke(t,id);if(r==null)continue;Field ns=r.getClass().getDeclaredField("numbers"),ss=r.getClass().getDeclaredField("strings");ns.setAccessible(true);ss.setAccessible(true);long[] n=(long[])ns.get(r);Object[] s=(Object[])ss.get(r);if(n.length>8&&(n[8]==174||n[8]==177||n[8]==230||n[8]==233)){System.out.println(id+" nums="+Arrays.toString(n)+" strs="+Arrays.deepToString(s));}}catch(Throwable x){}
             }
           }
           JAVA
-          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/ListPaths.java
-          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" ListPaths || true
-      - name: Commit report
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/DumpFashionRows.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" DumpFashionRows || true
+          echo '=== TARGET BYTECODE constants 230/233 and fashion-like strings ==='
+          cd /tmp/jar
+          for c in *.class; do
+            j=$(javap -classpath . -c -p "${c%.class}" 2>/dev/null || true)
+            if printf '%s\n' "$j" | grep -qE 'sipush[[:space:]]+(230|231|232|233|234|235)|bipush[[:space:]]+(230|231|232|233|234|235)'; then
+              echo "===== ${c%.class} ====="
+              printf '%s\n' "$j" | grep -n -B18 -A30 -E 'sipush[[:space:]]+(230|231|232|233|234|235)|bipush[[:space:]]+(230|231|232|233|234|235)' | head -n 240 || true
+            fi
+          done
+          echo '=== TARGET CLASSES referencing item type/equip/fashion text ==='
+          for c in *.class; do
+            if strings "$c" | grep -qiE 'fashion|equip|costume|disguise'; then echo "--${c%.class}--"; strings "$c" | grep -iE 'fashion|equip|costume|disguise' | head -n 40; fi
+          done
+      - name: Commit trace
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add model_v2_report.txt
-          git commit -m 'chore: inspect Obito Sakura model resources v2' || exit 0
+          git add model_v2_trace.txt
+          git commit -m 'chore: trace disguise fashion application v2' || exit 0
           git push origin fix-obito-sakura-model-v2

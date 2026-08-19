@@ -30,12 +30,9 @@ jobs:
               Class<?> c=Class.forName("k1e");
               Method norm=c.getDeclaredMethod("normalize",String.class), hash=c.getDeclaredMethod("hash",String.class), ensure=c.getDeclaredMethod("ensureIndex"), find=c.getDeclaredMethod("findIndex",String.class);
               norm.setAccessible(true);hash.setAccessible(true);ensure.setAccessible(true);find.setAccessible(true);ensure.invoke(null);
-              Field fk=c.getDeclaredField("kinds"),fc=c.getDeclaredField("chunks"),fo=c.getDeclaredField("offsets"),fl=c.getDeclaredField("lengths");fk.setAccessible(true);fc.setAccessible(true);fo.setAccessible(true);fl.setAccessible(true);
-              byte[] kinds=(byte[])fk.get(null),chunks=(byte[])fc.get(null);int[] offs=(int[])fo.get(null),lens=(int[])fl.get(null);
-              for(int id=220;id<=245;id++){
+              for(int id=230;id<=235;id++){
                 String p="/offline/x1/effect/"+id+".png";String n=(String)norm.invoke(null,p);int h=(Integer)hash.invoke(null,n),i=(Integer)find.invoke(null,n);
-                if(i>=0) System.out.println(id+","+n+","+h+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offs[i]+","+lens[i]);
-                else System.out.println(id+","+n+","+h+",-1,-1,-1,-1,-1");
+                System.out.println(id+","+n+","+h+","+i);
               }
             }
           }
@@ -58,23 +55,24 @@ jobs:
           if not (signed or unsigned): raise SystemExit('index not sorted by recognized hash order')
           rows={}
           for line in locate.read_text().splitlines():
-            a=line.split(','); rows[int(a[0])]=dict(norm=a[1],hash=int(a[2]),idx=int(a[3]),kind=int(a[4]),chunk=int(a[5]),off=int(a[6]),ln=int(a[7]))
-          # Find nearest existing x1/effect assets around the missing target IDs.
-          anchors=[rows[i] for i in list(range(229,220,-1))+list(range(236,246)) if i in rows and rows[i]['idx']>=0]
-          if not anchors: raise SystemExit('no neighboring x1/effect asset found')
-          # Prefer an anchor whose kind/chunk is also used by multiple neighbors.
-          from collections import Counter
-          kc=Counter((x['kind'],x['chunk']) for x in anchors)
-          kind,chunk=kc.most_common(1)[0][0]
-          prefix='s' if kind==0 else 'd'; pack=packdir/f'{prefix}{chunk:02d}.pak'
-          if not pack.exists(): raise SystemExit(f'anchor pack missing {pack}')
-          print('ANCHOR',kind,chunk,pack.name,'neighbors',[(i,rows[i]['kind'],rows[i]['chunk']) for i in rows if rows[i]['idx']>=0 and 220<=i<=245])
+            a=line.split(','); rows[int(a[0])]=dict(norm=a[1],hash=int(a[2]),idx=int(a[3]))
+          # The target has no x1/effect neighbors in this ID range. Index entries can point to any valid data pack,
+          # so append only these six assets to the last existing dNN pack and register exact hash/offset/length.
+          packs=[]
+          for p in packdir.glob('d*.pak'):
+            m=re.fullmatch(r'd(\d+)\.pak',p.name)
+            if m: packs.append((int(m.group(1)),p))
+          if not packs: raise SystemExit('no data pack found')
+          chunk,pack=max(packs)
+          kind=1
+          if chunk>255: raise SystemExit('data pack chunk out of range')
+          print('TARGET_PACK',pack.name,'kind',kind,'chunk',chunk)
           blob=bytearray(pack.read_bytes())
           target_hashes={rows[i]['hash'] for i in range(230,236)}
           rec=[r for r in rec if r[0] not in target_hashes]
           for id in range(230,236):
             src=ref/f'Data/Img/Effect/1/{id}.png'
-            if not src.exists(): raise SystemExit(f'missing ref {src}')
+            if not src.exists(): raise SystemExit(f'missing reference {src}')
             data=src.read_bytes(); off=len(blob); blob+=data
             rec.append([rows[id]['hash'],kind,chunk,off,len(data)])
             print('ADD',id,rows[id]['norm'],'hash',rows[id]['hash'],'offset',off,'len',len(data))

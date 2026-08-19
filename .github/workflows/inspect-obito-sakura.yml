@@ -13,75 +13,62 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout offline repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: fix-obito-sakura
           path: offline
-
-      - name: Checkout source/data repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           repository: hoang0901/Nso_Folder
           ref: main
           path: source
-
-      - name: Inspect source data and offline JAR
+      - name: Map Obito and Sakura resources
         shell: bash
         run: |
           set -euo pipefail
           SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
           OFF="$GITHUB_WORKSPACE/offline"
-          REPORT="$OFF/obito_sakura_report.txt"
-          WORK="$RUNNER_TEMP/nso_inspect"
-          mkdir -p "$WORK/offline_jar"
-          cd "$WORK/offline_jar"
-          jar xf "$OFF/Nso_Offline_By_h0901.jar"
-
+          WORK="$RUNNER_TEMP/nso_focus"
+          REPORT="$OFF/obito_sakura_focus.txt"
+          mkdir -p "$WORK/jar"
+          (cd "$WORK/jar" && jar xf "$OFF/Nso_Offline_By_h0901.jar")
           {
-            echo '=== TEXT MATCHES IN SOURCE ==='
-            grep -RniEa 'obito|sakura|cải trang|cai trang' "$SRC" \
-              --exclude='*.jar' --exclude='*.class' --exclude='*.png' --exclude='*.gif' --exclude='*.jpg' 2>/dev/null || true
-
+            echo '=== SOURCE FILES WITH TARGET IDS IN NAME ==='
+            find "$SRC" -type f | grep -E '/(230|231|232|233|234|235|3421|3422)(\.[^/]+)?$|Small(230|231|232|233|234|235|3421|3422)\.' | sort || true
             echo
-            echo '=== LIKELY ITEM/FASHION SOURCE FILES ==='
-            find "$SRC/src" -type f \( -iname '*item*' -o -iname '*fashion*' -o -iname '*template*' \) -print 2>/dev/null | sort || true
-
+            echo '=== TARGET SMALL IMAGES ==='
+            for z in 1 2 3 4; do
+              for id in 230 231 232 233 234 235 3421 3422; do
+                f="$SRC/Data/Img/Small/$z/Small$id.png"
+                [ -f "$f" ] || f="$SRC/Data/Img/Small/$z/Small$id.PNG"
+                if [ -f "$f" ]; then
+                  printf '%s\t%s\t' "${f#$SRC/}" "$(stat -c %s "$f")"
+                  sha256sum "$f" | cut -d' ' -f1
+                fi
+              done
+            done
             echo
-            echo '=== DATA/IMG TREE ==='
-            find "$SRC/Data/Img" -type f -printf '%P\t%s bytes\n' 2>/dev/null | sort || true
-
+            echo '=== OFFLINE JAR TOP DIRECTORIES ==='
+            find "$WORK/jar" -mindepth 1 -maxdepth 2 -type d -printf '%P\n' | sort | head -n 300
             echo
-            echo '=== OFFLINE JAR ENTRIES ==='
-            (cd "$WORK/offline_jar" && find . -type f -printf '%P\t%s bytes\n' | sort)
-
+            echo '=== OFFLINE JAR ENTRIES WITH TARGET IDS ==='
+            find "$WORK/jar" -type f -printf '%P\t%s\n' | grep -E '(^|/|[^0-9])(230|231|232|233|234|235|3421|3422)([^0-9]|$)' | sort || true
             echo
-            echo '=== SQL MATCHES ==='
+            echo '=== OFFLINE PNG/GIF/JPG SAMPLE ==='
+            find "$WORK/jar" -type f \( -iname '*.png' -o -iname '*.gif' -o -iname '*.jpg' \) -printf '%P\t%s\n' | sort | head -n 500
+            echo
+            echo '=== OFFLINE RESOURCE EXTENSIONS ==='
+            find "$WORK/jar" -type f | sed 's#^.*/##' | awk -F. 'NF>1{print "."tolower($NF)} NF==1{print "[no extension]"}' | sort | uniq -c | sort -nr | head -n 100
+            echo
+            echo '=== TEXT REFERENCES TO PART IDS IN SOURCE ==='
+            grep -RniE '(head|body|leg|fashion|part).*(230|231|232|233|234|235)|(230|231|232|233|234|235).*(head|body|leg|fashion|part)' "$SRC/src" --include='*.java' 2>/dev/null | head -n 500 || true
           } > "$REPORT"
-
-          SQL_PATH="$SRC/SQL/nsoz.sql" python3 - <<'PY' >> "$REPORT"
-          import os
-          from pathlib import Path
-          p = Path(os.environ['SQL_PATH'])
-          text = p.read_bytes().decode('utf-8', errors='replace')
-          keys = ['obito', 'sakura', 'cải trang', 'cai trang', 'fashion']
-          for i, line in enumerate(text.splitlines(), 1):
-              low = line.lower()
-              if any(k in low for k in keys):
-                  print(f'{i}: {line[:8000]}')
-          PY
-
-          echo >> "$REPORT"
-          echo '=== OFFLINE JAR STRING MATCHES ===' >> "$REPORT"
-          find "$WORK/offline_jar" -type f -print0 | \
-            xargs -0 strings 2>/dev/null | grep -iEa 'obito|sakura|cải trang|cai trang|fashion' | head -n 1000 >> "$REPORT" || true
-
-      - name: Commit inspection report
+      - name: Commit focused report
         shell: bash
         run: |
           cd "$GITHUB_WORKSPACE/offline"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add obito_sakura_report.txt
-          git commit -m 'chore: add Obito Sakura resource inspection report' || exit 0
+          git add obito_sakura_focus.txt
+          git commit -m 'chore: add focused Obito Sakura mapping' || exit 0
           git push origin fix-obito-sakura

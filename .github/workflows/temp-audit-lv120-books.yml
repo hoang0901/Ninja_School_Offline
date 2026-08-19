@@ -1,0 +1,64 @@
+name: Temporary audit lv120 books
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-audit-lv120-books.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit item IDs and skill-learning code
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nsoaudit && mkdir -p /tmp/nsoaudit
+          cd /tmp/nsoaudit
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          {
+            echo '=== XLSX rows containing item IDs 1125..1130 ==='
+            python - <<'PY'
+          import openpyxl, os
+          p=os.path.join(os.environ['GITHUB_WORKSPACE'],'Danh_sach_ID_vat_pham.xlsx')
+          wb=openpyxl.load_workbook(p,data_only=True,read_only=True)
+          for ws in wb.worksheets:
+              for row in ws.iter_rows(values_only=True):
+                  vals=list(row)
+                  if any(str(v).strip() in {str(i) for i in range(1125,1131)} for v in vals if v is not None):
+                      print(ws.title, vals)
+          PY
+            echo
+            echo '=== k25 relevant methods ==='
+            javap -p -c k25.class > /tmp/k25.txt
+            python - <<'PY'
+          import re
+          t=open('/tmp/k25.txt').read()
+          for pat in [r'static boolean g\(int, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))',
+                      r'static int k\(int, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))',
+                      r'static int c\(DoHoang091\$k0, int\).*?(?=\n  (?:static|private|public|final|int|void|boolean|byte|short|long|float|double|java\.|k\d))']:
+              m=re.search(pat,t,re.S)
+              print(m.group(0) if m else 'NOT FOUND '+pat)
+              print('\n---\n')
+          PY
+            echo
+            echo '=== constants 1125..1130 across javap ==='
+            for c in *.class; do
+              javap -p -c "$c" 2>/dev/null | grep -E -B8 -A18 'sipush +112[5-9]|sipush +1130' && echo "CLASS=$c" || true
+            done
+            echo
+            echo '=== k24 structure ==='
+            javap -p -c k24.class
+          } > "$GITHUB_WORKSPACE/lv120_book_audit.txt"
+      - name: Commit audit
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lv120_book_audit.txt
+          git commit -m "chore: audit level 120 book mapping"
+          git push

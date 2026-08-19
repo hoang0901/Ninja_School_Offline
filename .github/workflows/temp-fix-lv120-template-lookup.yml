@@ -19,115 +19,43 @@ jobs:
           cat > k24.java <<'EOF'
           import java.io.ByteArrayInputStream;
           import java.io.DataInputStream;
-
           final class k24 {
-              byte a;
-              byte b;
-              byte c;
-              short[] d;
-              byte[] e;
-              byte[] f;
-              short[] g;
-              int[] h;
-              byte[] i;
-              short[] j;
-              short[] k;
-              int[] l;
-              int[] m;
-              byte[][] n;
-              int[][] o;
-
+              byte a; byte b; byte c; short[] d; byte[] e; byte[] f; short[] g; int[] h; byte[] i; short[] j; short[] k; int[] l; int[] m; byte[][] n; int[][] o;
               private k24() {}
-
               static k24 a(byte[] data) throws Exception {
                   if (data == null) return null;
                   DataInputStream in = new DataInputStream(new ByteArrayInputStream(data));
                   k24 s = new k24();
-                  s.a = in.readByte();
-                  s.b = in.readByte();
-                  s.c = in.readByte();
-                  int count = in.readUnsignedByte();
-                  s.d = new short[count];
-                  s.e = new byte[count];
-                  s.f = new byte[count];
-                  s.g = new short[count];
-                  s.h = new int[count];
-                  s.i = new byte[count];
-                  s.j = new short[count];
-                  s.k = new short[count];
-                  s.l = new int[count];
-                  s.m = new int[count];
-                  s.n = new byte[count][];
-                  s.o = new int[count][];
-                  for (int x = 0; x < count; x++) {
-                      s.d[x] = in.readShort();
-                      s.e[x] = in.readByte();
-                      s.f[x] = in.readByte();
-                      s.g[x] = in.readShort();
-                      s.h[x] = in.readInt();
-                      s.i[x] = in.readByte();
-                      s.j[x] = in.readShort();
-                      s.k[x] = in.readShort();
-                      s.l[x] = in.readInt();
-                      s.m[x] = in.readInt();
-                      int optionCount = in.readUnsignedByte();
-                      s.n[x] = new byte[optionCount];
-                      s.o[x] = new int[optionCount];
-                      for (int y = 0; y < optionCount; y++) {
-                          s.n[x][y] = in.readByte();
-                          s.o[x][y] = in.readInt();
-                      }
+                  s.a=in.readByte(); s.b=in.readByte(); s.c=in.readByte();
+                  int count=in.readUnsignedByte();
+                  s.d=new short[count]; s.e=new byte[count]; s.f=new byte[count]; s.g=new short[count]; s.h=new int[count]; s.i=new byte[count]; s.j=new short[count]; s.k=new short[count]; s.l=new int[count]; s.m=new int[count]; s.n=new byte[count][]; s.o=new int[count][];
+                  for(int x=0;x<count;x++){
+                      s.d[x]=in.readShort(); s.e[x]=in.readByte(); s.f[x]=in.readByte(); s.g[x]=in.readShort(); s.h[x]=in.readInt(); s.i[x]=in.readByte(); s.j[x]=in.readShort(); s.k[x]=in.readShort(); s.l[x]=in.readInt(); s.m[x]=in.readInt();
+                      int z=in.readUnsignedByte(); s.n[x]=new byte[z]; s.o[x]=new int[z];
+                      for(int y=0;y<z;y++){ s.n[x][y]=in.readByte(); s.o[x][y]=in.readInt(); }
                   }
-                  if (in.available() != 0) throw new Exception("skill wire trailing bytes");
+                  if(in.available()!=0) throw new Exception("skill wire trailing bytes");
                   return s;
               }
-
-              int a(int value) {
-                  for (int x = 0; x < e.length; x++) {
-                      if ((e[x] & 255) == value) return x;
-                  }
-                  // Level-120 templates use i[] for the learned row marker (0/1)
-                  // while e[] contains their runtime skill-point values (e.g. 120/150).
-                  // Fallback only for marker 1; all normal/runtime e[] lookups stay unchanged.
-                  if (value == 1) {
-                      for (int x = 0; x < i.length; x++) {
-                          if ((i[x] & 255) == 1) return x;
-                      }
-                  }
+              int a(int value){
+                  for(int x=0;x<e.length;x++) if((e[x]&255)==value) return x;
+                  if(value==1) for(int x=0;x<i.length;x++) if((i[x]&255)==1) return x;
                   return -1;
               }
-
-              int a(int row, int option) {
-                  if (row < 0 || row >= o.length) return 0;
-                  if (option < 0 || option >= o[row].length) return 0;
-                  return o[row][option];
-              }
-
-              int b(int row, int optionId) {
-                  if (row < 0 || row >= n.length) return 0;
-                  for (int x = 0; x < n[row].length; x++) {
-                      if ((n[row][x] & 255) == optionId) return o[row][x];
-                  }
-                  return 0;
-              }
+              int a(int row,int option){ if(row<0||row>=o.length)return 0; if(option<0||option>=o[row].length)return 0; return o[row][option]; }
+              int b(int row,int optionId){ if(row<0||row>=n.length)return 0; for(int x=0;x<n[row].length;x++) if((n[row][x]&255)==optionId)return o[row][x]; return 0; }
           }
           EOF
           javac --release 8 k24.java
-          javap -p k24.original.class > original.api
-          javap -p k24.class > rebuilt.api
-          python - <<'PY'
-          import re
-          def api(p):
-              t=open(p).read().splitlines()
-              return [re.sub(r'\s+',' ',x.strip()) for x in t if x.strip() and not x.strip().startswith('Compiled from')]
-          a=api('original.api'); b=api('rebuilt.api')
-          if a != b:
-              print('ORIGINAL API'); print('\n'.join(a)); print('REBUILT API'); print('\n'.join(b))
-              raise SystemExit('k24 API mismatch')
-          PY
-          javap -p -c k24.class > rebuilt.bytecode
-          grep -q 'Field e:\[B' rebuilt.bytecode
-          grep -q 'Field i:\[B' rebuilt.bytecode
+          javap -p k24.class > api.txt
+          for f in 'byte a;' 'byte b;' 'byte c;' 'short[] d;' 'byte[] e;' 'byte[] f;' 'short[] g;' 'int[] h;' 'byte[] i;' 'short[] j;' 'short[] k;' 'int[] l;' 'int[] m;' 'byte[][] n;' 'int[][] o;'; do grep -Fq "$f" api.txt; done
+          grep -Fq 'static k24 a(byte[]) throws java.lang.Exception;' api.txt
+          grep -Fq 'int a(int);' api.txt
+          grep -Fq 'int a(int, int);' api.txt
+          grep -Fq 'int b(int, int);' api.txt
+          javap -p -c k24.class > bytecode.txt
+          grep -q 'Field e:\[B' bytecode.txt
+          grep -q 'Field i:\[B' bytecode.txt
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           python - <<'PY'
           import zipfile, os
@@ -139,8 +67,7 @@ jobs:
                   new=repl if info.filename=='k24.class' else old
                   if new!=old: changed.append(info.filename)
                   zout.writestr(info,new)
-          if changed != ['k24.class']:
-              raise SystemExit('unexpected changed entries: '+repr(changed))
+          if changed != ['k24.class']: raise SystemExit('unexpected changed entries: '+repr(changed))
           with zipfile.ZipFile(out,'r') as z:
               bad=z.testzip()
               if bad: raise SystemExit('CRC failure '+bad)

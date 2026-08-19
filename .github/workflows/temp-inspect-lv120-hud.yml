@@ -1,0 +1,68 @@
+name: Temporary inspect lv120 HUD
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-inspect-lv120-hud.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect current JAR bytecode
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nso && mkdir -p /tmp/nso
+          cd /tmp/nso
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          {
+            echo '=== JAR entries of interest ==='
+            find . -maxdepth 2 -type f \( -name '*Offline*' -o -name 'k32.class' -o -name 'Class_cy.class' -o -name 'Class_ct.class' \) -print | sort
+            echo
+            echo '=== javap Class_cy ==='
+            javap -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" -c -p Class_cy || true
+            echo
+            echo '=== javap k32 ==='
+            javap -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" -c -p k32 || true
+            echo
+            echo '=== javap Class_ct selected ==='
+            javap -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" -c -p Class_ct || true
+          } > "$GITHUB_WORKSPACE/lv120_hud_javap.txt" 2>&1
+
+          python3 - <<'PY' > "$GITHUB_WORKSPACE/lv120_hud_scan.txt"
+          import os, re, subprocess
+          jar=os.environ['GITHUB_WORKSPACE']+'/Nso_Offline_By_h0901.jar'
+          classes=[]
+          out=subprocess.check_output(['jar','tf',jar],text=True)
+          for line in out.splitlines():
+              if line.endswith('.class') and '/' not in line:
+                  classes.append(line[:-6])
+          print('top_level_classes',len(classes))
+          needles=('Class_cy.gc','putstatic','bipush        -123','sipush        -123','iconst_0','iconst_1')
+          for c in classes:
+              try:
+                  txt=subprocess.check_output(['javap','-classpath',jar,'-c','-p',c],text=True,stderr=subprocess.DEVNULL,timeout=8)
+              except Exception:
+                  continue
+              if 'Class_cy.gc' in txt or '-123' in txt:
+                  print('\n===== '+c+' =====')
+                  lines=txt.splitlines()
+                  for i,l in enumerate(lines):
+                      if 'Class_cy.gc' in l or '-123' in l:
+                          a=max(0,i-12); b=min(len(lines),i+18)
+                          print('\n'.join(lines[a:b]))
+          PY
+
+      - name: Commit reports
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lv120_hud_javap.txt lv120_hud_scan.txt
+          git commit -m "chore: temporary lv120 HUD bytecode report"
+          git push

@@ -1,0 +1,286 @@
+Compiled from "OfflineDeleteMenu.java"
+public final class OfflineDeleteMenu {
+  private static boolean active;
+
+  private static int deleteIndex;
+
+  private static int clearBagIndex;
+
+  private OfflineDeleteMenu();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static byte[] extend(byte, byte[]);
+    Code:
+       0: iload_0
+       1: bipush        63
+       3: if_icmpne     10
+       6: aload_1
+       7: ifnonnull     12
+      10: aload_1
+      11: areturn
+      12: iconst_0
+      13: putstatic     #7                  // Field active:Z
+      16: iconst_m1
+      17: putstatic     #13                 // Field deleteIndex:I
+      20: iconst_m1
+      21: putstatic     #17                 // Field clearBagIndex:I
+      24: new           #20                 // class java/io/DataInputStream
+      27: dup
+      28: new           #22                 // class java/io/ByteArrayInputStream
+      31: dup
+      32: aload_1
+      33: invokespecial #24                 // Method java/io/ByteArrayInputStream."<init>":([B)V
+      36: invokespecial #27                 // Method java/io/DataInputStream."<init>":(Ljava/io/InputStream;)V
+      39: astore_2
+      40: new           #30                 // class java/util/Vector
+      43: dup
+      44: invokespecial #32                 // Method java/util/Vector."<init>":()V
+      47: astore_3
+      48: iconst_0
+      49: istore        4
+      51: iconst_0
+      52: istore        5
+      54: iconst_0
+      55: istore        6
+      57: iconst_0
+      58: istore        7
+      60: aload_2
+      61: invokevirtual #33                 // Method java/io/DataInputStream.available:()I
+      64: ifle          134
+      67: aload_2
+      68: invokevirtual #37                 // Method java/io/DataInputStream.readUTF:()Ljava/lang/String;
+      71: astore        8
+      73: aload_3
+      74: aload         8
+      76: invokevirtual #41                 // Method java/util/Vector.addElement:(Ljava/lang/Object;)V
+      79: ldc           #45                 // String Nhận vật phẩm
+      81: aload         8
+      83: invokevirtual #47                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      86: ifeq          92
+      89: iconst_1
+      90: istore        4
+      92: ldc           #53                 // String Nhận xu
+      94: aload         8
+      96: invokevirtual #47                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+      99: ifeq          105
+     102: iconst_1
+     103: istore        5
+     105: ldc           #55                 // String Nhận lượng
+     107: aload         8
+     109: invokevirtual #47                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     112: ifeq          118
+     115: iconst_1
+     116: istore        6
+     118: ldc           #57                 // String Nhận yên
+     120: aload         8
+     122: invokevirtual #47                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+     125: ifeq          131
+     128: iconst_1
+     129: istore        7
+     131: goto          60
+     134: iload         4
+     136: ifeq          154
+     139: iload         5
+     141: ifeq          154
+     144: iload         6
+     146: ifeq          154
+     149: iload         7
+     151: ifne          156
+     154: aload_1
+     155: areturn
+     156: new           #59                 // class java/io/ByteArrayOutputStream
+     159: dup
+     160: aload_1
+     161: arraylength
+     162: sipush        128
+     165: iadd
+     166: invokespecial #61                 // Method java/io/ByteArrayOutputStream."<init>":(I)V
+     169: astore        8
+     171: aload         8
+     173: aload_1
+     174: invokevirtual #64                 // Method java/io/ByteArrayOutputStream.write:([B)V
+     177: new           #67                 // class java/io/DataOutputStream
+     180: dup
+     181: aload         8
+     183: invokespecial #69                 // Method java/io/DataOutputStream."<init>":(Ljava/io/OutputStream;)V
+     186: astore        9
+     188: aload_3
+     189: invokevirtual #72                 // Method java/util/Vector.size:()I
+     192: putstatic     #13                 // Field deleteIndex:I
+     195: aload         9
+     197: ldc           #75                 // String Xóa nhân vật đang chơi
+     199: invokevirtual #77                 // Method java/io/DataOutputStream.writeUTF:(Ljava/lang/String;)V
+     202: aload_3
+     203: invokevirtual #72                 // Method java/util/Vector.size:()I
+     206: iconst_1
+     207: iadd
+     208: putstatic     #17                 // Field clearBagIndex:I
+     211: aload         9
+     213: ldc           #81                 // String Xóa toàn bộ vật phẩm trong hành trang
+     215: invokevirtual #77                 // Method java/io/DataOutputStream.writeUTF:(Ljava/lang/String;)V
+     218: aload         9
+     220: invokevirtual #83                 // Method java/io/DataOutputStream.flush:()V
+     223: iconst_1
+     224: putstatic     #7                  // Field active:Z
+     227: aload         8
+     229: invokevirtual #86                 // Method java/io/ByteArrayOutputStream.toByteArray:()[B
+     232: areturn
+     233: astore_2
+     234: iconst_0
+     235: putstatic     #7                  // Field active:Z
+     238: iconst_m1
+     239: putstatic     #13                 // Field deleteIndex:I
+     242: iconst_m1
+     243: putstatic     #17                 // Field clearBagIndex:I
+     246: aload_1
+     247: areturn
+    Exception table:
+       from    to  target type
+          24   155   233   Class java/lang/Throwable
+         156   232   233   Class java/lang/Throwable
+
+  public static boolean consume(byte, byte[]);
+    Code:
+       0: iload_0
+       1: bipush        29
+       3: if_icmpne     22
+       6: getstatic     #7                  // Field active:Z
+       9: ifeq          22
+      12: aload_1
+      13: ifnull        22
+      16: aload_1
+      17: arraylength
+      18: iconst_2
+      19: if_icmpge     24
+      22: iconst_0
+      23: ireturn
+      24: aload_1
+      25: arraylength
+      26: iconst_4
+      27: if_icmplt     49
+      30: aload_1
+      31: iconst_1
+      32: baload
+      33: sipush        255
+      36: iand
+      37: istore_2
+      38: aload_1
+      39: iconst_2
+      40: baload
+      41: sipush        255
+      44: iand
+      45: istore_3
+      46: goto          135
+      49: aload_1
+      50: arraylength
+      51: iconst_2
+      52: if_icmpne     74
+      55: aload_1
+      56: iconst_0
+      57: baload
+      58: sipush        255
+      61: iand
+      62: istore_2
+      63: aload_1
+      64: iconst_1
+      65: baload
+      66: sipush        255
+      69: iand
+      70: istore_3
+      71: goto          135
+      74: aload_1
+      75: iconst_0
+      76: baload
+      77: sipush        255
+      80: iand
+      81: istore        4
+      83: aload_1
+      84: iconst_1
+      85: baload
+      86: sipush        255
+      89: iand
+      90: istore        5
+      92: iload         4
+      94: bipush        37
+      96: if_icmpne     108
+      99: iload         4
+     101: istore_2
+     102: iload         5
+     104: istore_3
+     105: goto          135
+     108: iload         5
+     110: bipush        37
+     112: if_icmpne     129
+     115: iload         5
+     117: istore_2
+     118: aload_1
+     119: iconst_2
+     120: baload
+     121: sipush        255
+     124: iand
+     125: istore_3
+     126: goto          135
+     129: iload         4
+     131: istore_2
+     132: iload         5
+     134: istore_3
+     135: iconst_0
+     136: putstatic     #7                  // Field active:Z
+     139: iload_2
+     140: bipush        37
+     142: if_icmpne     173
+     145: iload_3
+     146: getstatic     #13                 // Field deleteIndex:I
+     149: if_icmpne     173
+     152: iconst_m1
+     153: putstatic     #13                 // Field deleteIndex:I
+     156: iconst_m1
+     157: putstatic     #17                 // Field clearBagIndex:I
+     160: invokestatic  #92                 // Method CharacterDelete.deleteCurrent:()Z
+     163: pop
+     164: goto          171
+     167: astore        4
+     169: iconst_1
+     170: ireturn
+     171: iconst_1
+     172: ireturn
+     173: iload_2
+     174: bipush        37
+     176: if_icmpne     207
+     179: iload_3
+     180: getstatic     #17                 // Field clearBagIndex:I
+     183: if_icmpne     207
+     186: iconst_m1
+     187: putstatic     #13                 // Field deleteIndex:I
+     190: iconst_m1
+     191: putstatic     #17                 // Field clearBagIndex:I
+     194: invokestatic  #98                 // Method InventoryClear.clearCurrentBag:()Z
+     197: pop
+     198: goto          205
+     201: astore        4
+     203: iconst_1
+     204: ireturn
+     205: iconst_1
+     206: ireturn
+     207: iconst_m1
+     208: putstatic     #13                 // Field deleteIndex:I
+     211: iconst_m1
+     212: putstatic     #17                 // Field clearBagIndex:I
+     215: iconst_0
+     216: ireturn
+    Exception table:
+       from    to  target type
+         160   164   167   Class java/lang/Throwable
+         194   198   201   Class java/lang/Throwable
+
+  static {};
+    Code:
+       0: iconst_m1
+       1: putstatic     #13                 // Field deleteIndex:I
+       4: iconst_m1
+       5: putstatic     #17                 // Field clearBagIndex:I
+       8: return
+}

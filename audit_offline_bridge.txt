@@ -1,0 +1,78 @@
+Compiled from "OfflineBridge.java"
+public final class OfflineBridge {
+  private OfflineBridge();
+    Code:
+       0: aload_0
+       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void connect(Class_fp, java.lang.String, int);
+    Code:
+       0: aload_1
+       1: putstatic     #7                  // Field Class_fp.n:Ljava/lang/String;
+       4: iload_2
+       5: putstatic     #13                 // Field Class_fp.h:I
+       8: aload_0
+       9: iconst_1
+      10: putfield      #17                 // Field Class_fp.j:Z
+      13: aload_0
+      14: iconst_0
+      15: putfield      #21                 // Field Class_fp.p:Z
+      18: invokestatic  #24                 // Method DoHoang091.connect:()V
+      21: invokestatic  #29                 // Method DoHoang091.startAsync:()V
+      24: aload_0
+      25: iconst_1
+      26: putfield      #32                 // Field Class_fp.c:Z
+      29: aload_0
+      30: iconst_0
+      31: putfield      #17                 // Field Class_fp.j:Z
+      34: aload_0
+      35: invokestatic  #35                 // Method java/lang/System.currentTimeMillis:()J
+      38: putfield      #41                 // Field Class_fp.q:J
+      41: return
+
+  public static void send(Class_fp, Class_de);
+    Code:
+       0: aload_0
+       1: invokestatic  #35                 // Method java/lang/System.currentTimeMillis:()J
+       4: putfield      #41                 // Field Class_fp.q:J
+       7: aload_1
+       8: invokevirtual #45                 // Method Class_de.c:()[B
+      11: astore_2
+      12: aload_1
+      13: getfield      #50                 // Field Class_de.a:B
+      16: aload_2
+      17: invokestatic  #54                 // Method OfflineDeleteMenu.consume:(B[B)Z
+      20: ifeq          24
+      23: return
+      24: aload_1
+      25: getfield      #50                 // Field Class_de.a:B
+      28: aload_2
+      29: invokestatic  #60                 // Method DoHoang091.post:(B[B)V
+      32: return
+
+  public static void close(Class_fp);
+    Code:
+       0: invokestatic  #64                 // Method DoHoang091.closeAsync:()V
+       3: invokestatic  #67                 // Method DoHoang091.flush:()V
+       6: aload_0
+       7: iconst_0
+       8: putfield      #32                 // Field Class_fp.c:Z
+      11: aload_0
+      12: iconst_0
+      13: putfield      #17                 // Field Class_fp.j:Z
+      16: aload_0
+      17: iconst_0
+      18: putfield      #21                 // Field Class_fp.p:Z
+      21: return
+
+  public static boolean tick(int);
+    Code:
+       0: invokestatic  #70                 // Method DoHoang091.pump:()V
+       3: iload_0
+       4: ifle          11
+       7: iconst_1
+       8: goto          12
+      11: iconst_0
+      12: ireturn
+}

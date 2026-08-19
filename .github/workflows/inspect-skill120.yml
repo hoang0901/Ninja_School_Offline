@@ -1,4 +1,4 @@
-name: Inspect offline skill persistence helpers
+name: Probe skill 120 book mapping
 on:
   push:
     branches: [fix-skill120-learning]
@@ -10,28 +10,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dump k25 k24 and state
+      - name: Probe k25 mapping
         shell: bash
         run: |
           set -euo pipefail
-          LOG="$GITHUB_WORKSPACE/skill120_persist.txt"
+          LOG="$GITHUB_WORKSPACE/skill120_mapping.txt"
           exec > >(tee "$LOG") 2>&1
-          rm -rf /tmp/jar && mkdir /tmp/jar && (cd /tmp/jar && jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar")
-          cd /tmp/jar
-          echo '=== K25 ==='
-          javap -classpath . -c -p -verbose k25
-          echo '=== K24 ==='
-          javap -classpath . -c -p -verbose k24
-          echo '=== STATE ==='
-          javap -classpath . -c -p 'DoHoang091$k0'
-          echo '=== DOHOANG SKILL SIGNATURES ==='
-          javap -classpath . -p DoHoang091 | grep -n -Ei 'skill|\[S|\[I|short|int|boolean' | head -n 1200 || true
+          cat >/tmp/Probe.java <<'JAVA'
+          import java.lang.reflect.*;import java.util.*;
+          public class Probe{
+            public static void main(String[]a)throws Exception{
+              Class<?> c=Class.forName("k25");
+              Method k=c.getDeclaredMethod("k",int.class,int.class); k.setAccessible(true);
+              for(int item=1134;item<=1139;item++){
+                StringBuilder s=new StringBuilder("ITEM "+item);
+                for(int cl=1;cl<=6;cl++)s.append(" class").append(cl).append("=").append(k.invoke(null,item,cl));
+                System.out.println(s);
+              }
+              System.out.println("=== METHODS ===");
+              for(Method m:c.getDeclaredMethods()) if(m.getName().equals("a")||m.getName().equals("k")||m.getName().equals("g")||m.getName().equals("c")) System.out.println(m);
+            }
+          }
+          JAVA
+          javac -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" /tmp/Probe.java
+          java -classpath "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar:/tmp" Probe
       - name: Commit report
-        if: always()
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add skill120_persist.txt || true
-          git commit -m 'chore: inspect offline skill persistence helpers' || exit 0
+          git add skill120_mapping.txt
+          git commit -m 'chore: probe skill 120 book mapping' || exit 0
           git push origin fix-skill120-learning

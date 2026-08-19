@@ -3,8 +3,7 @@ name: Patch Obito Sakura resources
 on:
   push:
     branches: [fix-obito-sakura]
-    paths:
-      - '.github/workflows/inspect-obito-sakura.yml'
+    paths: ['.github/workflows/inspect-obito-sakura.yml']
 
 permissions:
   contents: write
@@ -14,102 +13,95 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: fix-obito-sakura
-          path: offline
+        with: {ref: fix-obito-sakura, path: offline}
       - uses: actions/checkout@v4
-        with:
-          repository: hoang0901/Nso_Folder
-          ref: main
-          path: source
-
-      - name: Add and validate missing disguise sprites
+        with: {repository: hoang0901/Nso_Folder, ref: main, path: source}
+      - name: Patch packed disguise resources
         id: patch
         shell: bash
         run: |
           set -euo pipefail
-          OFF="$GITHUB_WORKSPACE/offline"
+          OFF="$GITHUB_WORKSPACE/offline"; SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"; WORK="$RUNNER_TEMP/nso_patch"; JAR="$OFF/Nso_Offline_By_h0901.jar"
           exec > >(tee "$OFF/patch_obito_sakura.log") 2>&1
-          SRC="$GITHUB_WORKSPACE/source/NinjaSchoolOffline_by_dohoang091"
-          WORK="$RUNNER_TEMP/nso_patch"
-          JAR="$OFF/Nso_Offline_By_h0901.jar"
-          mkdir -p "$WORK/jar/offline/x1/small" "$WORK/validate"
+          mkdir -p "$WORK/jar" "$WORK/validate"
           (cd "$WORK/jar" && jar xf "$JAR")
 
-          echo 'Copying Obito/Sakura model sprites Small2715-Small2770 from Nso_Folder...'
-          ADD=()
-          for id in $(seq 2715 2770); do
-            src="$SRC/Data/Img/Small/1/Small${id}.png"
-            [ -f "$src" ] || src="$SRC/Data/Img/Small/1/Small${id}.PNG"
-            [ -f "$src" ] || { echo "Missing source Small${id}"; exit 1; }
-            dst="offline/x1/small/Small${id}.png"
-            cp "$src" "$WORK/jar/$dst"
-            ADD+=("$dst")
-          done
-          (cd "$WORK/jar" && jar uf "$JAR" "${ADD[@]}")
-
-          echo 'Validating using k2.a(String), the complete offline image loader...'
-          cat > "$WORK/validate/ValidateK2.java" <<'JAVA'
+          cat > "$WORK/jar/Locate.java" <<'JAVA'
           import java.lang.reflect.*;
-          import java.security.*;
-          public class ValidateK2 {
-            static String sha(byte[] b)throws Exception{
-              byte[] h=MessageDigest.getInstance("SHA-256").digest(b);
-              StringBuilder s=new StringBuilder();
-              for(byte x:h)s.append(String.format("%02x",x));
-              return s.toString();
-            }
-            public static void main(String[] args)throws Exception{
-              Class<?> c=Class.forName("k2");
-              Method r=c.getDeclaredMethod("a",String.class);
-              r.setAccessible(true);
-              for(String s:args){
-                int id=Integer.parseInt(s);
-                String p="/offline/x1/small/Small"+id+".png";
-                byte[] b=(byte[])r.invoke(null,p);
-                if(b==null)throw new RuntimeException("missing Small"+id);
-                System.out.println(id+","+b.length+","+sha(b));
-              }
+          public class Locate {
+            public static void main(String[] a)throws Exception{
+              Class<?> c=Class.forName("k1e");
+              Method norm=c.getDeclaredMethod("normalize",String.class); norm.setAccessible(true);
+              Method ensure=c.getDeclaredMethod("ensureIndex"); ensure.setAccessible(true); ensure.invoke(null);
+              Method find=c.getDeclaredMethod("findIndex",String.class); find.setAccessible(true);
+              Field fk=c.getDeclaredField("kinds"),fc=c.getDeclaredField("chunks"),fo=c.getDeclaredField("offsets"),fl=c.getDeclaredField("lengths");
+              fk.setAccessible(true);fc.setAccessible(true);fo.setAccessible(true);fl.setAccessible(true);
+              byte[] kinds=(byte[])fk.get(null),chunks=(byte[])fc.get(null);int[] offs=(int[])fo.get(null),lens=(int[])fl.get(null);
+              for(String s:a){int id=Integer.parseInt(s);String raw="/offline/x1/small/Small"+id+".png";String p=(String)norm.invoke(null,raw);int i=(Integer)find.invoke(null,p);if(i<0)throw new RuntimeException("Missing "+id+" normalized="+p);System.out.println(id+","+i+","+(kinds[i]&255)+","+(chunks[i]&255)+","+offs[i]+","+lens[i]+","+p);}
             }
           }
           JAVA
-          IDS=$(seq 2715 2770)
-          (cd "$WORK/validate" && javac -classpath "$JAR" ValidateK2.java && java -classpath "$JAR:." ValidateK2 $IDS) > "$WORK/actual.csv"
+          (cd "$WORK/jar" && javac -classpath . Locate.java)
+          IDS=$(seq 2715 2770; echo 3421; echo 3422)
+          (cd "$WORK/jar" && java -classpath . Locate $IDS) > "$WORK/loc.csv"
+          echo "Located $(wc -l < "$WORK/loc.csv") resources"
+          cat "$WORK/loc.csv"
 
+          INDEX="$WORK/jar/offline/packs/index.bin" LOC="$WORK/loc.csv" SRCROOT="$SRC" PACKROOT="$WORK/jar/offline/packs" python3 - <<'PY'
+          import os,struct
+          from pathlib import Path
+          idx=Path(os.environ['INDEX']); raw=bytearray(idx.read_bytes()); root=Path(os.environ['PACKROOT']); src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'
+          assert raw[:4]==b'OPR1'; n=struct.unpack_from('>I',raw,4)[0]; assert len(raw)==8+n*14
+          rec=[]
+          for i in range(n):
+              p=8+i*14; rec.append([bytes(raw[p:p+4]),raw[p+4],raw[p+5],struct.unpack_from('>I',raw,p+6)[0],struct.unpack_from('>I',raw,p+10)[0]])
+          target={}
+          for line in Path(os.environ['LOC']).read_text().splitlines():
+              rid,ri,k,ch,o,l,path=line.split(',',6); rid=int(rid); ri=int(ri); k=int(k); ch=int(ch)
+              f=src/f'Small{rid}.png'
+              if not f.exists(): f=src/f'Small{rid}.PNG'
+              if not f.exists(): raise SystemExit(f'missing source Small{rid}')
+              if tuple(rec[ri][1:]) != (k,ch,int(o),int(l)): raise SystemExit(f'index mismatch {rid}')
+              target[ri]=f.read_bytes()
+          groups=sorted({(rec[i][1],rec[i][2]) for i in target})
+          for kind,chunk in groups:
+              p=root/(('s' if kind==0 else 'd')+f'{chunk:02d}.pak'); old=p.read_bytes(); members=sorted((i for i,r in enumerate(rec) if r[1]==kind and r[2]==chunk),key=lambda i:rec[i][3]); out=bytearray(); cursor=0
+              for i in members:
+                  h,k,ch,off,ln=rec[i]
+                  if off<cursor or off+ln>len(old): raise SystemExit(f'bad range {p.name} idx={i}')
+                  out+=old[cursor:off]; rec[i][3]=len(out); data=target.get(i,old[off:off+ln]); out+=data; rec[i][4]=len(data); cursor=off+ln
+              out+=old[cursor:]; p.write_bytes(out); print(f'patched {p.name} {len(old)}->{len(out)}')
+          for i,(h,k,ch,o,l) in enumerate(rec):
+              p=8+i*14; raw[p:p+4]=h;raw[p+4]=k;raw[p+5]=ch;struct.pack_into('>I',raw,p+6,o);struct.pack_into('>I',raw,p+10,l)
+          idx.write_bytes(raw); print(f'patched {len(target)} resources in {len(groups)} packs')
+          PY
+
+          mapfile -t FILES < <(awk -F, '{printf "offline/packs/%s%02d.pak\n",($3==0?"s":"d"),$4}' "$WORK/loc.csv" | sort -u)
+          (cd "$WORK/jar" && jar uf "$JAR" offline/packs/index.bin "${FILES[@]}")
+
+          cat > "$WORK/validate/V.java" <<'JAVA'
+          import java.lang.reflect.*;import java.security.*;
+          public class V{static String h(byte[]b)throws Exception{byte[]x=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte y:x)s.append(String.format("%02x",y));return s.toString();}public static void main(String[]a)throws Exception{Class<?>c=Class.forName("k2");Method m=c.getDeclaredMethod("a",String.class);m.setAccessible(true);for(String z:a){int id=Integer.parseInt(z);byte[]b=(byte[])m.invoke(null,"/offline/x1/small/Small"+id+".png");System.out.println(id+","+h(b));}}}
+          JAVA
+          (cd "$WORK/validate" && javac -classpath "$JAR" V.java && java -classpath "$JAR:." V $IDS) > "$WORK/actual.csv"
           ACT="$WORK/actual.csv" SRCROOT="$SRC" python3 - <<'PY'
           import os,hashlib
           from pathlib import Path
-          actual={int(a):h for a,l,h in (x.split(',') for x in Path(os.environ['ACT']).read_text().splitlines())}
-          src=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'
-          bad=[]
-          for i in range(2715,2771):
-              f=src/f'Small{i}.png'
-              if not f.exists(): f=src/f'Small{i}.PNG'
+          got={int(i):h for i,h in (x.split(',') for x in Path(os.environ['ACT']).read_text().splitlines())}; base=Path(os.environ['SRCROOT'])/'Data'/'Img'/'Small'/'1'; bad=[]
+          for i in list(range(2715,2771))+[3421,3422]:
+              f=base/f'Small{i}.png'
+              if not f.exists():f=base/f'Small{i}.PNG'
               want=hashlib.sha256(f.read_bytes()).hexdigest()
-              if actual.get(i)!=want: bad.append((i,actual.get(i),want))
-          if bad: raise SystemExit('Validation mismatch: '+repr(bad))
-          print('VALIDATION_OK: 56/56 Obito/Sakura model sprites match Nso_Folder')
+              if got.get(i)!=want:bad.append(i)
+          if bad:raise SystemExit('hash mismatch '+repr(bad))
+          print('VALIDATION_OK 58/58')
           PY
-
           jar tf "$JAR" >/dev/null
-          for id in 2715 2732 2741 2743 2760 2770; do
-            jar tf "$JAR" | grep -qx "offline/x1/small/Small${id}.png"
-          done
           echo "JAR_OK size=$(stat -c %s "$JAR")"
-
-      - name: Commit patched JAR and log
+      - name: Commit result
         if: always()
         shell: bash
         run: |
-          cd "$GITHUB_WORKSPACE/offline"
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add patch_obito_sakura.log
-          if [ "${{ steps.patch.outcome }}" = "success" ]; then
-            git add Nso_Offline_By_h0901.jar
-            MSG='fix: add missing Obito and Sakura disguise model sprites'
-          else
-            MSG='chore: record Obito Sakura patch failure'
-          fi
-          git commit -m "$MSG" || exit 0
-          git push origin fix-obito-sakura
+          cd "$GITHUB_WORKSPACE/offline"; git config user.name 'github-actions[bot]';git config user.email '41898282+github-actions[bot]@users.noreply.github.com';git add patch_obito_sakura.log
+          if [ "${{ steps.patch.outcome }}" = success ];then git add Nso_Offline_By_h0901.jar;MSG='fix: replace Obito and Sakura disguise data from Nso_Folder';else MSG='chore: record Obito Sakura patch failure';fi
+          git commit -m "$MSG" || exit 0;git push origin fix-obito-sakura

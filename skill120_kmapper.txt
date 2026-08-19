@@ -1,0 +1,119 @@
+  private static int k(int, int);
+    Code:
+       0: iload_0
+       1: bipush        40
+       3: if_icmplt     17
+       6: iload_0
+       7: bipush        93
+       9: if_icmpgt     17
+      12: iload_0
+      13: bipush        39
+      15: isub
+      16: ireturn
+      17: iload_0
+      18: sipush        311
+      21: if_icmplt     37
+      24: iload_0
+      25: sipush        316
+      28: if_icmpgt     37
+      31: iload_0
+      32: sipush        256
+      35: isub
+      36: ireturn
+      37: iload_0
+      38: sipush        375
+      41: if_icmplt     57
+      44: iload_0
+      45: sipush        380
+      48: if_icmpgt     57
+      51: iload_0
+      52: sipush        314
+      55: isub
+      56: ireturn
+      57: iload_0
+      58: sipush        547
+      61: if_icmpne     80
+      64: iload_1
+      65: iconst_1
+      66: if_icmplt     80
+      69: iload_1
+      70: bipush        6
+      72: if_icmpgt     80
+      75: bipush        66
+      77: iload_1
+      78: iadd
+      79: ireturn
+      80: iload_0
+      81: sipush        552
+      84: if_icmpne     90
+      87: bipush        73
+      89: ireturn
+      90: iload_0
+      91: sipush        553
+      94: if_icmpne     100
+      97: bipush        78
+      99: ireturn
+     100: iload_0
+     101: sipush        554
+     104: if_icmpne     110
+     107: bipush        75
+     109: ireturn
+     110: iload_0
+     111: sipush        555
+     114: if_icmpne     120
+     117: bipush        76
+     119: ireturn
+     120: iload_0
+     121: sipush        556
+     124: if_icmpne     130
+     127: bipush        74
+     129: ireturn
+     130: iload_0
+     131: sipush        557
+     134: if_icmpne     140
+     137: bipush        77
+     139: ireturn
+     140: iload_0
+     141: sipush        558
+     144: if_icmpne     150
+     147: bipush        79
+     149: ireturn
+     150: iload_0
+     151: sipush        559
+     154: if_icmpne     160
+     157: bipush        83
+     159: ireturn
+     160: iload_0
+     161: sipush        560
+     164: if_icmpne     170
+     167: bipush        81
+     169: ireturn
+     170: iload_0
+     171: sipush        561
+     174: if_icmpne     180
+     177: bipush        82
+     179: ireturn
+     180: iload_0
+     181: sipush        562
+     184: if_icmpne     190
+     187: bipush        80
+     189: ireturn
+     190: iload_0
+     191: sipush        563
+     194: if_icmpne     200
+     197: bipush        84
+     199: ireturn
+     200: iload_0
+     201: sipush        1125
+     204: if_icmplt     220
+     207: iload_0
+     208: sipush        1130
+     211: if_icmpgt     220
+     214: iload_0
+     215: sipush        1040
+     218: isub
+     219: ireturn
+     220: iconst_m1
+     221: ireturn
+
+  private static int c(DoHoang091$k0, int);

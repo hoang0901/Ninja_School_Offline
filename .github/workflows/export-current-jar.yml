@@ -1,6 +1,9 @@
 name: Export current JAR for HUD diagnosis
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - agent/fix-skill-hud

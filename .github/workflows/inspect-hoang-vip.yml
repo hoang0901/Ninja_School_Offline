@@ -1,4 +1,4 @@
-name: Inspect hoang vip starter
+name: Build hoang vip starter
 on:
   push:
     branches: [chatgpt/hoang-vip-starter]
@@ -6,48 +6,168 @@ on:
 permissions:
   contents: write
 jobs:
-  inspect:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: chatgpt/hoang-vip-starter
           fetch-depth: 0
-      - name: Inspect starter item APIs
+      - name: Patch hoang starter
         shell: bash
         run: |
           set -euo pipefail
-          echo rerun-2
-          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect && cd /tmp/nsoinspect
-          jar tf "$J" | grep '\.class$' | sed 's/\.class$//' > classes.txt
-          javap -classpath "$J" -p -c DoHoang091 > do.txt
-          javap -classpath "$J" -p -c 'DoHoang091$k0' > k0.txt
-          javap -classpath "$J" -p -c NativeCatalog > native.txt 2>/dev/null || true
-          javap -classpath "$J" -p -c NativeItemReceiver > recv.txt 2>/dev/null || true
-          javap -classpath "$J" -p -c ManualItemReceiver > manual.txt 2>/dev/null || true
-          {
-            echo '=== HOANG CREATION ==='
-            grep -n -B30 -A100 'String hoang' do.txt || true
-            echo '=== CLASS MAP ==='
-            grep -n -A80 -B3 'static java.lang.String a(byte)' do.txt || true
-            echo '=== K0 CTOR ==='
-            grep -n -A1200 'DoHoang091\$k0(java.lang.String, byte, short, int)' k0.txt || true
-            echo '=== NATIVE CATALOG ==='
-            cat native.txt
-            echo '=== RECEIVER CANDIDATES ==='
-            cat recv.txt manual.txt
-            echo '=== CLASSES REFERENCING GIVE/RECEIVE STRINGS ==='
-            for c in $(cat classes.txt); do
-              out=$(javap -classpath "$J" -p -verbose "$c" 2>/dev/null | grep -i -E 'Nhận|ID vật phẩm|số lượng|nâng cấp|nhận item|receive' || true)
-              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
-            done
-            echo '=== DO METHODS USING EQUIP ARRAYS ==='
-            grep -n -B20 -A80 -E 'Field DoHoang091\$k0\.(T|U|V|W|X|Y|Z|aa|ab):' do.txt || true
-            echo '=== LEVEL FIELD r USES ==='
-            grep -n -B30 -A70 'Field DoHoang091\$k0.r:I' do.txt || true
-          } > "$GITHUB_WORKSPACE/hoang_vip_inspect.txt"
+          cat > /tmp/PatchHoangVip.java <<'JAVA'
+          import java.io.*;
+          import java.nio.file.*;
+          import java.util.*;
+          import jdk.internal.org.objectweb.asm.*;
+          import jdk.internal.org.objectweb.asm.tree.*;
+
+          public class PatchHoangVip implements Opcodes {
+            static final String OWNER = "DoHoang091";
+            static final String K0 = "DoHoang091$k0";
+
+            public static void main(String[] args) throws Exception {
+              Path cls = Paths.get(args[0]);
+              byte[] in = Files.readAllBytes(cls);
+              ClassNode cn = new ClassNode();
+              new ClassReader(in).accept(cn, 0);
+
+              cn.methods.removeIf(m -> m.name.equals("zHoangVipStarter") && m.desc.equals("()V"));
+              MethodNode helper = new MethodNode(ACC_PRIVATE | ACC_STATIC, "zHoangVipStarter", "()V", null, null);
+              InsnList x = helper.instructions;
+              LabelNode ret = new LabelNode();
+              LabelNode loop = new LabelNode();
+              LabelNode next = new LabelNode();
+              LabelNode useExisting = new LabelNode();
+              LabelNode afterSeed = new LabelNode();
+
+              // Never run while ar() is temporarily parsing the embedded admin seed.
+              x.add(new FieldInsnNode(GETSTATIC, OWNER, "as", "[B"));
+              x.add(new JumpInsnNode(IFNONNULL, ret));
+              x.add(new FieldInsnNode(GETSTATIC, OWNER, "aj", "[L" + K0 + ";"));
+              x.add(new JumpInsnNode(IFNULL, ret));
+
+              // int i = 0
+              x.add(new InsnNode(ICONST_0));
+              x.add(new VarInsnNode(ISTORE, 0));
+              x.add(loop);
+              x.add(new VarInsnNode(ILOAD, 0));
+              x.add(new FieldInsnNode(GETSTATIC, OWNER, "aj", "[L" + K0 + ";"));
+              x.add(new InsnNode(ARRAYLENGTH));
+              x.add(new JumpInsnNode(IF_ICMPGE, ret));
+
+              // k0 c = aj[i]
+              x.add(new FieldInsnNode(GETSTATIC, OWNER, "aj", "[L" + K0 + ";"));
+              x.add(new VarInsnNode(ILOAD, 0));
+              x.add(new InsnNode(AALOAD));
+              x.add(new VarInsnNode(ASTORE, 1));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new JumpInsnNode(IFNULL, next));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new FieldInsnNode(GETFIELD, K0, "a", "Ljava/lang/String;"));
+              x.add(new JumpInsnNode(IFNULL, next));
+              x.add(new LdcInsnNode("hoang"));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new FieldInsnNode(GETFIELD, K0, "a", "Ljava/lang/String;"));
+              x.add(new MethodInsnNode(INVOKEVIRTUAL, "java/lang/String", "equalsIgnoreCase", "(Ljava/lang/String;)Z", false));
+              x.add(new JumpInsnNode(IFEQ, next));
+
+              // Already migrated: leave future player changes alone.
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new FieldInsnNode(GETFIELD, K0, "r", "I"));
+              x.add(new IntInsnNode(SIPUSH, 130));
+              x.add(new JumpInsnNode(IF_ICMPGE, ret));
+
+              // Load the embedded valid VIP/admin character, which contains native gear/options.
+              x.add(new MethodInsnNode(INVOKESTATIC, OWNER, "ar", "()L" + K0 + ";", false));
+              x.add(new VarInsnNode(ASTORE, 2));
+              x.add(new VarInsnNode(ALOAD, 2));
+              x.add(new JumpInsnNode(IFNULL, useExisting));
+              x.add(new VarInsnNode(ALOAD, 2));
+              x.add(new VarInsnNode(ASTORE, 1));
+              x.add(new JumpInsnNode(GOTO, afterSeed));
+              x.add(useExisting);
+              // Fallback keeps the current valid character if the seed cannot be decoded.
+              x.add(afterSeed);
+
+              // Force requested identity: Sword (1), female bun/head 2, max level 130.
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new InsnNode(ICONST_1));
+              x.add(new FieldInsnNode(PUTFIELD, K0, "p", "B"));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new InsnNode(ICONST_2));
+              x.add(new FieldInsnNode(PUTFIELD, K0, "q", "S"));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new IntInsnNode(SIPUSH, 130));
+              x.add(new FieldInsnNode(PUTFIELD, K0, "r", "I"));
+
+              // Rebuild derived/normalized character state using the game's own loader helper.
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new MethodInsnNode(INVOKESTATIC, OWNER, "l", "(L" + K0 + ";)V", false));
+
+              // Put migrated character back in the same slot and persist it.
+              x.add(new FieldInsnNode(GETSTATIC, OWNER, "aj", "[L" + K0 + ";"));
+              x.add(new VarInsnNode(ILOAD, 0));
+              x.add(new VarInsnNode(ALOAD, 1));
+              x.add(new InsnNode(AASTORE));
+              x.add(new InsnNode(ICONST_1));
+              x.add(new FieldInsnNode(PUTSTATIC, OWNER, "an", "Z"));
+              x.add(new MethodInsnNode(INVOKESTATIC, OWNER, "as", "()V", false));
+              x.add(new JumpInsnNode(GOTO, ret));
+
+              x.add(next);
+              x.add(new IincInsnNode(0, 1));
+              x.add(new JumpInsnNode(GOTO, loop));
+              x.add(ret);
+              x.add(new InsnNode(RETURN));
+              helper.maxLocals = 3;
+              helper.maxStack = 4;
+              cn.methods.add(helper);
+
+              boolean patchedLoad = false;
+              for (MethodNode m : cn.methods) {
+                if (m.name.equals("an") && m.desc.equals("()V")) {
+                  List<AbstractInsnNode> returns = new ArrayList<>();
+                  for (AbstractInsnNode n = m.instructions.getFirst(); n != null; n = n.getNext()) {
+                    if (n.getOpcode() == RETURN) returns.add(n);
+                  }
+                  for (AbstractInsnNode r : returns) {
+                    m.instructions.insertBefore(r, new MethodInsnNode(INVOKESTATIC, OWNER, "zHoangVipStarter", "()V", false));
+                  }
+                  patchedLoad = !returns.isEmpty();
+                }
+              }
+              if (!patchedLoad) throw new IllegalStateException("DoHoang091.an() not found");
+
+              ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
+              cn.accept(cw);
+              Files.write(cls, cw.toByteArray());
+            }
+          }
+          JAVA
+
+          javac --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+                --add-exports java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED \
+                /tmp/PatchHoangVip.java
+
+          rm -rf /tmp/jarpatch && mkdir /tmp/jarpatch
+          cd /tmp/jarpatch
+          jar xf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" DoHoang091.class
+          java --add-exports java.base/jdk.internal.org.objectweb.asm=ALL-UNNAMED \
+               --add-exports java.base/jdk.internal.org.objectweb.asm.tree=ALL-UNNAMED \
+               -cp /tmp PatchHoangVip DoHoang091.class
+          jar uf "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" DoHoang091.class
+
           cd "$GITHUB_WORKSPACE"
-          git add -- hoang_vip_inspect.txt
-          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect hoang starter item APIs'
+          # Bytecode validation: helper exists, max level is 130, Sword class mapping remains intact.
+          javap -classpath Nso_Offline_By_h0901.jar -p -c DoHoang091 > /tmp/verify.txt
+          grep -q 'zHoangVipStarter' /tmp/verify.txt
+          grep -A180 'zHoangVipStarter' /tmp/verify.txt | grep -q 'sipush        130'
+          grep -A80 'static java.lang.String a(byte)' /tmp/verify.txt | grep -q 'Ninja Kiếm'
+          jar tf Nso_Offline_By_h0901.jar | grep -q '^DoHoang091.class$'
+
+          git add -- Nso_Offline_By_h0901.jar
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: make hoang a max-level sword VIP starter'
           git push origin HEAD:chatgpt/hoang-vip-starter

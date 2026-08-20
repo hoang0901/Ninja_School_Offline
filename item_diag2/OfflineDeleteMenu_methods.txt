@@ -1,6 +1,0 @@
-  private OfflineDeleteMenu();
-  private static void resetIndexes();
-  public static byte[] extend(byte, byte[]);
-  private static int[] decode(byte[]);
-  private static void refreshFakeClass(int);
-  public static boolean consume(byte, byte[]);

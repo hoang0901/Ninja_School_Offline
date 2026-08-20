@@ -1,5 +1,0 @@
-8086-
-8087-  public static Class_fe b(short);
-8088:    descriptor: (S)LClass_fe;
-8089-}
-8090-public final class Class_do extends javax.microedition.lcdui.Canvas implements java.lang.Runnable {

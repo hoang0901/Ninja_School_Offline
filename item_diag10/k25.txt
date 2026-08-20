@@ -1,0 +1,269 @@
+1083-    static int b(DoHoang091.k0 k02) throws Exception {
+1084-        return k0.b((DoHoang091.k0)k02).b;
+1085-    }
+1086-
+1087-    static int c(DoHoang091.k0 k02) throws Exception {
+1088-        return k0.b((DoHoang091.k0)k02).c;
+1089-    }
+1090-
+1091-    static int c(int n, int n2, int n3) throws Exception {
+1092-        k0 k02 = k25.b(k25.a(n, n2, 0), n, n2, n3);
+1093-        return k02 == null ? -1 : k02.a;
+1094-    }
+1095-
+1096-    static int a(int n, int n2, int n3, int n4, int n5) throws Exception {
+1097-        if (k25.m.a == n && o == n2) {
+1098-            return k25.a(m, n3);
+1099-        }
+1100-        k24 k242 = k25.c(n);
+1101-        if (k242 == null || (k242.c & 0xFF) != 1) {
+1102-            return Math.max(1, n3);
+1103-        }
+1104-        int n6 = k25.a(k242, n2);
+1105-        if (n6 < 0) {
+1106-            n6 = k242.a(1);
+1107-        }
+1108-        if (n6 < 0) {
+1109-            n6 = 0;
+1110-        }
+1111-        long l = Math.max(1, n3);
+1112-        l += l * (long)k242.l[n6] / 100L;
+1113-        if ((l += (long)k242.m[n6]) < 1L) {
+1114-            return 1;
+1115-        }
+1116-        return l > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)l;
+1117-    }
+1118-
+1119-    private static int a(k24 k242, int n) {
+1120-        if (k242 == null) {
+1121-            return -1;
+1122-        }
+1123-        int n2 = -1;
+1124-        int n3 = -1;
+1125-        int n4 = 0;
+1126-        while (n4 < k242.e.length) {
+1127-            int n5;
+1128-            if ((k242.f[n4] & 0xFF) <= n && ((n5 = k242.e[n4] & 0xFF) > n3 || n5 == n3 && n4 > n2)) {
+1129-                n3 = n5;
+1130-                n2 = n4;
+1131-            }
+1132-            ++n4;
+1133-        }
+1134-        return n2;
+1135-    }
+1136-
+1137-    static int a(k0 k02, int n) {
+1138-        if (k02 == null) {
+1139-            return Math.max(1, n);
+1140-        }
+1141-        long l = Math.max(1, n);
+1142-        l += l * (long)k02.j / 100L;
+1143-        if ((l += (long)k02.k) < 1L) {
+1144-            return 1;
+1145-        }
+1146-        return l > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)l;
+1147-    }
+1148-
+1149-    static short a(DoHoang091.k0 k02, int n) throws Exception {
+1150-        int n2 = k25.c(k02, n);
+1151-        if (n2 < 0) {
+1152-            return -1;
+1153-        }
+1154-        k24 k242 = k25.g(n);
+1155-        int n3 = k242 == null ? -1 : k242.a(k02.bF[n2] & 0xFF);
+1156-        return n3 < 0 ? (short)-1 : k242.d[n3];
+1157-    }
+1158-
+1159-    private static void a(DataOutputStream dataOutputStream, DoHoang091.k0 k02) throws Exception {
+1160-        dataOutputStream.writeByte(k0.b((DoHoang091.k0)k02).E);
+1161-        dataOutputStream.writeInt(k25.a(k02));
+1162-        dataOutputStream.writeInt(k25.b(k02));
+1163-    }
+1164-
+1165-    private static int e(int n) {
+1166-        int n2 = n * 10;
+1167-        if (n >= 70) {
+1168-            n2 += (n - 70) * 10;
+1169-        }
+1170-        if (n >= 80) {
+1171-            n2 += (n - 80) * 10;
+1172-        }
+1173-        if (n >= 90) {
+1174-            n2 += (n - 90) * 10;
+1175-        }
+1176-        if (n >= 100) {
+1177-            n2 += (n - 100) * 10;
+1178-        }
+1179-        return n2;
+1180-    }
+1181-
+1182-    private static int d(DoHoang091.k0 k02) {
+1183-        int n = k02.r;
+1184-        int n2 = k25.e(n);
+1185-        if (n >= 130) {
+1186-            n2 += (n - 130) * 10;
+1187-        }
+1188-        if (n >= 145) {
+1189-            n2 += (n - 145) * 10;
+1190-        }
+1191-        return n2 += 10 * (k02.cb[76] + k02.cb[78]);
+1192-    }
+1193-
+1194-    private static boolean b(DoHoang091.k0 k02, int n) {
+1195-        int n2;
+1196-        int n3 = FakeClassState.resolve(k02.bx);
+1197-        int n4 = n2 = n3 < 1 || n3 > 6 ? 0 : (n3 - 1) / 2 + 1;
+1198-        return n == 9 && n2 == true || n == 10 && n2 == 2 || n == 11 && n2 == 3;
+1199-    }
+1200-
+1201-    private static String f(int n) {
+1202-        if (n == 11) {
+1203:            return "Ch\u00e0o m\u1eebng con \u0111\u1ebfn v\u1edbi tr\u01b0\u1eddng Haruna. Con h\u00e3y s\u1eed d\u1ee5ng v\u0169 kh\u00ed v\u00e0 \u0111\u1ecdc s\u00e1ch v\u00f5 c\u00f4ng m\u00e0 ta t\u1eb7ng (m\u1edf Menu/B\u1ea3n th\u00e2n/H\u00e0nh trang) \u0111\u1ec3 b\u01b0\u1edbc \u0111\u1ea7u chu\u1ea9n b\u1ecb cho vi\u1ec7c h\u1ecdc t\u1eadp";
+1204-        }
+1205-        if (n == 9) {
+1206:            return "Ch\u00e0o m\u1eebng con \u0111\u1ebfn v\u1edbi tr\u01b0\u1eddng Hirosaki. Con h\u00e3y s\u1eed d\u1ee5ng v\u0169 kh\u00ed v\u00e0 \u0111\u1ecdc s\u00e1ch v\u00f5 c\u00f4ng m\u00e0 ta t\u1eb7ng (m\u1edf Menu/B\u1ea3n th\u00e2n/H\u00e0nh trang) \u0111\u1ec3 b\u01b0\u1edbc \u0111\u1ea7u chu\u1ea9n b\u1ecb cho vi\u1ec7c h\u1ecdc t\u1eadp";
+1207-        }
+1208-        if (n == 10) {
+1209:            return "Ch\u00e0o m\u1eebng con \u0111\u1ebfn v\u1edbi tr\u01b0\u1eddng Ookaza. Con h\u00e3y s\u1eed d\u1ee5ng v\u0169 kh\u00ed v\u00e0 \u0111\u1ecdc s\u00e1ch v\u00f5 c\u00f4ng m\u00e0 ta t\u1eb7ng (m\u1edf Menu/B\u1ea3n th\u00e2n/H\u00e0nh trang) \u0111\u1ec3 b\u01b0\u1edbc \u0111\u1ea7u chu\u1ea9n b\u1ecb cho vi\u1ec7c h\u1ecdc t\u1eadp";
+1210-        }
+1211-        return null;
+1212-    }
+1213-
+1214-    private static int k(int n, int n2) {
+1215-        if (n >= 40 && n <= 93) {
+1216-            return n - 39;
+1217-        }
+1218-        if (n >= 311 && n <= 316) {
+1219-            return n - 256;
+1220-        }
+1221-        if (n >= 375 && n <= 380) {
+1222-            return n - 314;
+1223-        }
+1224-        if (n == 547 && n2 >= 1 && n2 <= 6) {
+1225-            return 66 + n2;
+1226-        }
+1227-        if (n == 552) {
+1228-            return 73;
+1229-        }
+1230-        if (n == 553) {
+1231-            return 78;
+1232-        }
+1233-        if (n == 554) {
+1234-            return 75;
+1235-        }
+1236-        if (n == 555) {
+1237-            return 76;
+1238-        }
+1239-        if (n == 556) {
+1240-            return 74;
+1241-        }
+1242-        if (n == 557) {
+1243-            return 77;
+1244-        }
+1245-        if (n == 558) {
+1246-            return 79;
+1247-        }
+1248-        if (n == 559) {
+1249-            return 83;
+1250-        }
+1251-        if (n == 560) {
+1252-            return 81;
+1253-        }
+1254-        if (n == 561) {
+1255-            return 82;
+1256-        }
+1257-        if (n == 562) {
+1258-            return 80;
+1259-        }
+1260-        if (n == 563) {
+1261-            return 84;
+1262-        }
+1263-        if (n >= 1125 && n <= 1130) {
+1264-            return n - 1040;
+1265-        }
+1266-        return -1;
+1267-    }
+1268-
+1269-    private static int c(DoHoang091.k0 k02, int n) {
+1270-        int n2 = 0;
+1271-        while (n2 < k02.bG) {
+1272-            if ((k02.bE[n2] & 0xFF) == n) {
+1273-                return n2;
+1274-            }
+1275-            ++n2;
+1276-        }
+1277-        return -1;
+1278-    }
+1279-
+1280-    private static void e(DoHoang091.k0 k02) {
+1281-        int n = 0;
+1282-        while (n < k02.bE.length) {
+1283-            k02.bE[n] = -1;
+1284-            k02.bF[n] = 0;
+1285-            ++n;
+1286-        }
+1287-    }
+1288-
+1289-    static k24 c(int n) throws Exception {
+1290-        if (n == p && q != null) {
+1291-            return q;
+1292-        }
+1293-        k24 k242 = k24.a(a.findShared(n));
+1294-        p = n;
+1295-        q = k242;
+1296-        return k242;
+1297-    }
+1298-
+1299-    private static int b(byte[] byArray, int n) {
+1300-        return (byArray[n] & 0xFF) << 8 | byArray[n + 1] & 0xFF;
+1301-    }
+1302-
+1303-    private static int c(byte[] byArray, int n) {
+1304-        return (byArray[n] & 0xFF) << 24 | (byArray[n + 1] & 0xFF) << 16 | (byArray[n + 2] & 0xFF) << 8 | byArray[n + 3] & 0xFF;
+1305-    }
+1306-
+1307-    private static k24 g(int n) throws Exception {
+1308-        return k25.c(n);
+1309-    }
+1310-
+1311-    private static short h(int n) {
+1312-        return (short)Math.max(0, Math.min(Short.MAX_VALUE, n));
+1313-    }
+1314-
+1315-    private static int a(long l) {
+1316-        return (int)Math.max(0L, Math.min(Integer.MAX_VALUE, l));
+1317-    }
+1318-
+1319-    static final class k0 {
+1320-        int a;
+1321-        int b;
+1322-        int c;
+1323-        int d;
+1324-        int e;
+1325-        int f;
+1326-        int g;
+1327-        int h;
+1328-        int i;
+1329-        int j;
+1330-        int k;
+1331-        int l;
+1332-
+1333-        k0() {
+1334-        }
+1335-    }
+1336-
+1337-    static final class k1 {
+1338-        int a;
+1339-        int b;
+1340-        int c;
+1341-        int d;
+1342-        int e;
+1343-        int f;
+1344-        int g;
+1345-        int h;
+1346-
+1347-        k1() {
+1348-        }
+1349-    }
+1350-}
+1351-

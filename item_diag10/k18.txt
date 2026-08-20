@@ -1,0 +1,1038 @@
+849-        int n3 = k02.K[n] & 0xFFFF;
+850-        if (n3 >= 292 && n3 <= 305) {
+851-            DoHoang091.a("Kh\u00f4ng th\u1ec3 giao v\u1eadt ph\u1ea9m n\u00e0y, ch\u1ec9 c\u00f3 th\u1ec3 b\u00e1n.");
+852-            return;
+853-        }
+854-        int n4 = k16.a(k02.T);
+855-        if (n4 < 0) {
+856-            DoHoang091.a("M\u1ed7i ng\u01b0\u1eddi ch\u1ec9 c\u00f3 th\u1ec3 b\u00e1n t\u1ed1i \u0111a 10 v\u1eadt ph\u1ea9m.");
+857-            return;
+858-        }
+859-        if (!k32.b(100000L, 0L, 0L)) {
+860-            DoHoang091.a("Ph\u00ed b\u00e1n v\u1eadt ph\u1ea9m l\u00e0 100.000 xu.");
+861-            return;
+862-        }
+863-        k02.T[n4] = k02.K[n];
+864-        k02.U[n4] = k02.L[n];
+865-        k02.V[n4] = k02.N[n];
+866-        k02.W[n4] = k02.O[n];
+867-        k02.X[n4] = n2;
+868-        k02.Y[n4] = System.currentTimeMillis() + 86400000L;
+869-        DoHoang091.a(k02.Q, k02.R, k02.S, n, k02.Z, k02.aa, k02.ab, n4);
+870-        DoHoang091.a(k02.aW, k02.aX, k02.aY, n, k02.ac, k02.ad, k02.ae, n4);
+871-        k16.a(k02, n);
+872-        k02.cb[52] = k02.cb[52] + 1;
+873-        DoHoang091.G();
+874-        DoHoang091.H();
+875-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(5);
+876-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+877-        dataOutputStream.writeByte(n);
+878-        dataOutputStream.writeInt(k02.A);
+879-        dataOutputStream.flush();
+880-        DoHoang091.a((byte)102, byteArrayOutputStream.toByteArray());
+881-    }
+882-
+883-    private static boolean a(DoHoang091.k0 k02, int n, long l) {
+884-        return n >= 0 && n < k02.T.length && k02.T[n] >= 0 && k02.X[n] > 0 && k02.Y[n] > l;
+885-    }
+886-
+887-    private static int b(DoHoang091.k0 k02, int n, long l) {
+888-        long l2 = k02.Y[n] - l;
+889-        if (l2 <= 0L) {
+890-            return 0;
+891-        }
+892-        long l3 = (l2 + 999L) / 1000L;
+893-        return l3 > Integer.MAX_VALUE ? Integer.MAX_VALUE : (int)l3;
+894-    }
+895-
+896-    private static int a(short s) throws Exception {
+897-        int n = k16.E(s & 0xFFFF);
+898-        if (n == 26) {
+899-            return 0;
+900-        }
+901-        if (n >= 0 && n <= 9) {
+902-            return n + 1;
+903-        }
+904-        return 11;
+905-    }
+906-
+907-    private static int k(byte[] byArray) throws Exception {
+908-        if (byArray == null || byArray.length < 4) {
+909-            return -1;
+910-        }
+911-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+912-        int n = dataInputStream.readInt();
+913-        return n > 0 ? n : -1;
+914-    }
+915-
+916-    private static void l(byte[] byArray) throws Exception {
+917-        int n = k18.k(byArray);
+918-        long l = System.currentTimeMillis();
+919-        if (k5.F(n)) {
+920-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(96);
+921-            DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+922-            if (!k5.b(n, dataOutputStream, l)) {
+923-                DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 b\u00e1n ho\u1eb7c h\u1ebft h\u1ea1n.");
+924-                return;
+925-            }
+926-            dataOutputStream.flush();
+927-            DoHoang091.a((byte)104, byteArrayOutputStream.toByteArray());
+928-            return;
+929-        }
+930-        int n2 = n > 0 ? n - 1 : -1;
+931-        DoHoang091.k0 k02 = DoHoang091.z();
+932-        if (!k18.a(k02, n2, l)) {
+933-            DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 b\u00e1n ho\u1eb7c h\u1ebft h\u1ea1n.");
+934-            return;
+935-        }
+936-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(96);
+937-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+938-        dataOutputStream.writeInt(n2 + 1);
+939-        dataOutputStream.writeInt(k16.M(k02.T[n2] & 0xFFFF));
+940-        if (k16.D(k02.T[n2] & 0xFFFF)) {
+941-            dataOutputStream.writeByte(k02.V[n2]);
+942-            dataOutputStream.writeByte(k02.W[n2]);
+943-            int n3 = k02.Z[n2] & 0xFF;
+944-            int n4 = 0;
+945-            while (n4 < n3) {
+946-                dataOutputStream.writeByte(k02.aa[n2][n4]);
+947-                dataOutputStream.writeInt(k02.ab[n2][n4]);
+948-                ++n4;
+949-            }
+950-        }
+951-        dataOutputStream.flush();
+952-        DoHoang091.a((byte)104, byteArrayOutputStream.toByteArray());
+953-    }
+954-
+955-    private static void m(byte[] byArray) throws Exception {
+956-        int n = k18.k(byArray);
+957-        long l = System.currentTimeMillis();
+958-        if (k5.F(n)) {
+959-            k18.a(n, l);
+960-            return;
+961-        }
+962-        int n2 = n > 0 ? n - 1 : -1;
+963-        DoHoang091.k0 k02 = DoHoang091.z();
+964-        if (!k18.a(k02, n2, l)) {
+965-            DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 b\u00e1n ho\u1eb7c h\u1ebft h\u1ea1n.");
+966-            return;
+967-        }
+968-        if (!k18.b(k02, n2)) {
+969:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+970-            return;
+971-        }
+972-        DoHoang091.G();
+973-        DoHoang091.H();
+974-        DoHoang091.a((byte)126, new byte[1]);
+975-    }
+976-
+977-    private static void a(int n, long l) throws Exception {
+978-        int n2 = k5.b(n, l);
+979-        int n3 = k5.c(n, l);
+980-        int n4 = k5.d(n, l);
+981-        if (n2 < 0 || n3 < 1 || n4 < 1) {
+982-            DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 b\u00e1n ho\u1eb7c h\u1ebft h\u1ea1n.");
+983-            return;
+984-        }
+985-        if (!k32.a(n4, 0L, 0L)) {
+986-            DoHoang091.a("B\u1ea1n kh\u00f4ng \u0111\u1ee7 xu.");
+987-            return;
+988-        }
+989-        if (k16.a(n2, n3, false, (byte)0, k5.G(n), k5.H(n)) < 0) {
+990:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+991-            return;
+992-        }
+993-        if (!k5.e(n, l)) {
+994-            DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 b\u00e1n ho\u1eb7c h\u1ebft h\u1ea1n.");
+995-            return;
+996-        }
+997-        k32.b(n4, 0L, 0L);
+998-        DoHoang091.G();
+999-        DoHoang091.H();
+1000-        DoHoang091.a((byte)126, new byte[1]);
+1001-    }
+1002-
+1003-    static boolean a(String string, long l) throws Exception {
+1004-        DoHoang091.k0 k02 = DoHoang091.z();
+1005-        int n = string == null ? 0 : (string.hashCode() & Integer.MAX_VALUE) % k02.T.length;
+1006-        int n2 = 0;
+1007-        while (n2 < k02.T.length) {
+1008-            long l2;
+1009-            int n3 = (n + n2) % k02.T.length;
+1010-            if (k18.a(k02, n3, l) && l - (l2 = k02.Y[n3] - 86400000L) >= 120000L) {
+1011-                int n4 = k02.X[n3];
+1012-                DoHoang091.c(k02, n3);
+1013-                k32.a(n4);
+1014-                k02.cb[52] = k02.cb[52] + 1;
+1015-                DoHoang091.G();
+1016-                DoHoang091.H();
+1017-                DoHoang091.b(String.valueOf(string == null ? "M\u1ed9t ninja" : string) + " \u0111\u00e3 mua v\u1eadt ph\u1ea9m \u1edf gian h\u00e0ng Shinwa.");
+1018-                return true;
+1019-            }
+1020-            ++n2;
+1021-        }
+1022-        return false;
+1023-    }
+1024-
+1025-    static int a(String string, int n, int n2, long l) throws Exception {
+1026-        int n3;
+1027-        DoHoang091.k0 k02 = DoHoang091.z();
+1028-        int n4 = -1;
+1029-        int n5 = -1;
+1030-        int n6 = Integer.MAX_VALUE;
+1031-        int n7 = 0;
+1032-        while (n7 < k02.T.length) {
+1033-            int n8;
+1034-            int n9;
+1035-            int n10;
+1036-            long l2;
+1037-            if (k18.a(k02, n7, l) && l - (l2 = k02.Y[n7] - 86400000L) >= 120000L && (n3 = k02.X[n7]) > 0 && n3 <= n2 && (n10 = k16.E(n9 = k02.T[n7] & 0xFFFF)) >= 0 && n10 <= 9 && k16.D(n9) && (n8 = k16.F(n9)) <= n + 10 && (n8 > n5 || n8 == n5 && n3 < n6)) {
+1038-                n4 = n7;
+1039-                n5 = n8;
+1040-                n6 = n3;
+1041-            }
+1042-            ++n7;
+1043-        }
+1044-        if (n4 < 0) {
+1045-            return -1;
+1046-        }
+1047-        n7 = k02.T[n4] & 0xFFFF;
+1048-        byte by = k02.V[n4];
+1049-        byte by2 = k02.W[n4];
+1050-        n3 = n7 | (by & 0xFF) << 12 | (by2 & 0xFF) << 20;
+1051-        DoHoang091.c(k02, n4);
+1052-        k32.a(n6);
+1053-        k02.cb[52] = k02.cb[52] + 1;
+1054-        DoHoang091.G();
+1055-        DoHoang091.H();
+1056-        DoHoang091.b(String.valueOf(string == null ? "M\u1ed9t ninja" : string) + " \u0111\u00e3 mua v\u1eadt ph\u1ea9m ph\u00f9 h\u1ee3p \u1edf gian h\u00e0ng Shinwa.");
+1057-        return n3;
+1058-    }
+1059-
+1060-    static boolean a(String string, int n, int n2, int n3) throws Exception {
+1061-        DoHoang091.k0 k02 = DoHoang091.z();
+1062-        if (!k18.g(k02) || !k5.f(string) || n < 0 || k16.E(n) < 0) {
+1063-            return false;
+1064-        }
+1065-        if (n2 < 1) {
+1066-            n2 = 1;
+1067-        }
+1068-        if (n3 < 1) {
+1069-            n3 = 1;
+1070-        }
+1071-        if (k18.a(k02, n, n2, false, (byte)0, (byte)0, -1L, null, null) < 0) {
+1072-            return false;
+1073-        }
+1074-        int n4 = k02.cb[103];
+1075-        int n5 = k02.cb[104];
+1076-        k02.cb[103] = n4 > Integer.MAX_VALUE - n3 ? Integer.MAX_VALUE : n4 + n3;
+1077-        k02.cb[104] = n5 > Integer.MAX_VALUE - n3 ? Integer.MAX_VALUE : n5 + n3;
+1078-        k18.a(k02, string, 2, n3);
+1079-        DoHoang091.G();
+1080-        DoHoang091.H();
+1081-        k18.j();
+1082-        k18.g();
+1083-        k18.h();
+1084-        k18.i();
+1085-        return true;
+1086-    }
+1087-
+1088-    private static int a(DoHoang091.k0 k02, long l) throws Exception {
+1089-        int n = 0;
+1090-        int n2 = 0;
+1091-        while (n2 < k02.T.length) {
+1092-            if (k02.T[n2] >= 0 && k02.Y[n2] <= l) {
+1093-                if (!k18.b(k02, n2)) break;
+1094-                ++n;
+1095-            }
+1096-            ++n2;
+1097-        }
+1098-        if (n > 0) {
+1099-            DoHoang091.G();
+1100-            DoHoang091.H();
+1101-        }
+1102-        return n;
+1103-    }
+1104-
+1105-    private static boolean b(DoHoang091.k0 k02, int n) throws Exception {
+1106-        int n2 = k16.a(k02.K);
+1107-        if (n2 < 0) {
+1108-            return false;
+1109-        }
+1110-        k02.K[n2] = k02.T[n];
+1111-        k02.L[n2] = k02.U[n];
+1112-        k02.M[n2] = false;
+1113-        k02.N[n2] = k02.V[n];
+1114-        k02.O[n2] = k02.W[n];
+1115-        k02.P[n2] = -1L;
+1116-        DoHoang091.a(k02.Z, k02.aa, k02.ab, n, k02.Q, k02.R, k02.S, n2);
+1117-        DoHoang091.a(k02.ac, k02.ad, k02.ae, n, k02.aW, k02.aX, k02.aY, n2);
+1118-        DoHoang091.c(k02, n);
+1119-        k16.J(n2);
+1120-        return true;
+1121-    }
+1122-
+1123-    private static void n(byte[] byArray) throws Exception {
+1124-        if (byArray == null || byArray.length < 6) {
+1125-            return;
+1126-        }
+1127-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+1128-        dataInputStream.readByte();
+1129-        int n = dataInputStream.readUnsignedByte();
+1130-        int n2 = dataInputStream.readInt();
+1131-        DoHoang091.k0 k02 = DoHoang091.z();
+1132-        if (n >= k02.K.length || k02.K[n] < 0 || n2 <= 0 || n2 >= (k02.L[n] & 0xFFFF) || k16.E(k02.K[n]) < 0) {
+1133-            return;
+1134-        }
+1135-        int n3 = k16.a(k02.K);
+1136-        if (n3 < 0) {
+1137:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+1138-            return;
+1139-        }
+1140-        k02.K[n3] = k02.K[n];
+1141-        k02.L[n3] = (short)n2;
+1142-        k02.M[n3] = k02.M[n];
+1143-        k02.N[n3] = k02.N[n];
+1144-        k02.O[n3] = k02.O[n];
+1145-        k02.P[n3] = k02.P[n];
+1146-        DoHoang091.a(k02.Q, k02.R, k02.S, n, k02.Q, k02.R, k02.S, n3);
+1147-        DoHoang091.a(k02.aW, k02.aX, k02.aY, n, k02.aW, k02.aX, k02.aY, n3);
+1148-        k02.L[n] = (short)((k02.L[n] & 0xFFFF) - n2);
+1149-        DoHoang091.G();
+1150-        DoHoang091.H();
+1151-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(8);
+1152-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1153-        dataOutputStream.writeByte(n3);
+1154-        dataOutputStream.writeShort(k02.K[n3]);
+1155-        dataOutputStream.writeShort(n2);
+1156-        dataOutputStream.writeByte(n);
+1157-        dataOutputStream.writeShort(k02.L[n]);
+1158-        dataOutputStream.flush();
+1159-        DoHoang091.a((byte)8, byteArrayOutputStream.toByteArray());
+1160-    }
+1161-
+1162-    private static void b(String string) throws Exception {
+1163-        String string2;
+1164-        DoHoang091.k0 k02 = DoHoang091.z();
+1165-        String string3 = string2 = string == null ? "" : string.trim();
+1166-        if (string2.length() == 0) {
+1167-            string2 = "Offline";
+1168-        }
+1169-        if (k02.cb[0] <= 0) {
+1170-            if (k02.r < 40) {
+1171-                DoHoang091.a("Y\u00eau c\u1ea7u tr\u00ecnh \u0111\u1ed9 \u0111\u1ea1t c\u1ea5p 40.");
+1172-                return;
+1173-            }
+1174-            if (k32.c() < 10000 || !k32.b(0L, 0L, 1500L)) {
+1175-                DoHoang091.a("B\u1ea1n kh\u00f4ng \u0111\u1ee7 10000 l\u01b0\u1ee3ng.");
+1176-                return;
+1177-            }
+1178-            k02.cb[0] = 1;
+1179-            k02.cb[103] = 0;
+1180-            k02.cb[104] = 0;
+1181-            k02.cb[111] = 0;
+1182-            k02.cb[112] = 0;
+1183-            k02.c = "";
+1184-            k02.d = "";
+1185-            k02.e = "";
+1186-            DoHoang091.g(k02);
+1187-            k18.a(k02, "", 0, 0);
+1188-            k2f.b();
+1189-        }
+1190-        k02.b = string2;
+1191-        DoHoang091.G();
+1192-        DoHoang091.H();
+1193-        k5.k();
+1194-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(24);
+1195-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1196-        dataOutputStream.writeByte(-96);
+1197-        dataOutputStream.writeUTF(string2);
+1198-        dataOutputStream.writeInt(k02.C);
+1199-        dataOutputStream.flush();
+1200-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1201-    }
+1202-
+1203-    private static void c(String string) throws Exception {
+1204-        DoHoang091.k0 k02 = DoHoang091.z();
+1205-        String string2 = string.replace('-', ' ').trim();
+1206-        if (!("TUAN THU".equalsIgnoreCase(string2) || "TUANTHU".equalsIgnoreCase(string2) || "OFFLINE".equalsIgnoreCase(string2))) {
+1207-            DoHoang091.a("M\u00e3 qu\u00e0 t\u1eb7ng kh\u00f4ng t\u1ed3n t\u1ea1i ho\u1eb7c \u0111\u00e3 h\u1ebft h\u1ea1n.");
+1208-            return;
+1209-        }
+1210-        if (k02.cb[28] != 0) {
+1211-            DoHoang091.a("Nh\u00e2n v\u1eadt \u0111\u00e3 nh\u1eadn m\u00e3 qu\u00e0 t\u1eb7ng n\u00e0y.");
+1212-            return;
+1213-        }
+1214-        k02.cb[28] = 1;
+1215-        DoHoang091.G();
+1216-        DoHoang091.H();
+1217-        k16.a(228, 1, true, (byte)0, (byte)0);
+1218-        k16.a(545, 10, true, (byte)0, (byte)0);
+1219-        k16.a(652, 1, true, (byte)0, (byte)0);
+1220-        k16.a(653, 1, true, (byte)0, (byte)0);
+1221-        k16.a(654, 1, true, (byte)0, (byte)0);
+1222-        k16.a(655, 1, true, (byte)0, (byte)0);
+1223-        DoHoang091.a("\u0110\u00e3 nh\u1eadn qu\u00e0 Tu\u00e2n Th\u1ee7 v\u00e0o h\u00e0nh trang.");
+1224-    }
+1225-
+1226-    private static void g() throws Exception {
+1227-        DoHoang091.k0 k02 = DoHoang091.z();
+1228-        if (k02.cb[0] <= 0) {
+1229-            DoHoang091.a("Nh\u00e2n v\u1eadt ch\u01b0a c\u00f3 gia t\u1ed9c.");
+1230-            return;
+1231-        }
+1232-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(100);
+1233-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1234-        dataOutputStream.writeByte(-113);
+1235-        dataOutputStream.writeUTF(k02.b == null || k02.b.length() == 0 ? "Offline" : k02.b);
+1236-        dataOutputStream.writeUTF(k02.a);
+1237-        dataOutputStream.writeUTF(k02.d == null ? "" : k02.d);
+1238-        dataOutputStream.writeShort(1 + k5.j());
+1239-        dataOutputStream.writeByte(k02.cb[108]);
+1240-        dataOutputStream.writeByte(k02.cb[0]);
+1241-        dataOutputStream.writeInt(k02.cb[103]);
+1242-        dataOutputStream.writeInt(k29.a(Math.max(1, k02.cb[0])));
+1243-        dataOutputStream.writeInt(k02.cb[111]);
+1244-        dataOutputStream.writeInt(k18.h(k02));
+1245-        dataOutputStream.writeInt(k18.i(k02));
+1246-        dataOutputStream.writeUTF("");
+1247-        dataOutputStream.writeUTF("Th\u00f4ng b\u00e1o: " + (k02.c == null ? "" : k02.c));
+1248-        dataOutputStream.writeInt(k02.cb[109]);
+1249-        dataOutputStream.writeByte(k02.cb[112]);
+1250-        dataOutputStream.flush();
+1251-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1252-    }
+1253-
+1254-    private static void h() throws Exception {
+1255-        DoHoang091.k0 k02 = DoHoang091.z();
+1256-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(50);
+1257-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1258-        dataOutputStream.writeByte(-112);
+1259-        dataOutputStream.writeShort(1 + k5.j());
+1260-        dataOutputStream.writeByte(k02.bx);
+1261-        dataOutputStream.writeByte(k02.r);
+1262-        dataOutputStream.writeByte(4);
+1263-        dataOutputStream.writeUTF(k02.a);
+1264-        dataOutputStream.writeInt(k02.cb[104]);
+1265-        dataOutputStream.writeBoolean(true);
+1266-        k5.a(dataOutputStream);
+1267-        dataOutputStream.writeInt(0);
+1268-        k5.b(dataOutputStream);
+1269-        dataOutputStream.flush();
+1270-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1271-    }
+1272-
+1273-    private static void i() throws Exception {
+1274-        DoHoang091.k0 k02 = DoHoang091.z();
+1275-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(50);
+1276-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1277-        dataOutputStream.writeByte(-114);
+1278-        dataOutputStream.writeUTF(k02.e == null ? "" : k02.e);
+1279-        dataOutputStream.flush();
+1280-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1281-    }
+1282-
+1283-    private static void j() throws Exception {
+1284-        DoHoang091.k0 k02 = DoHoang091.z();
+1285-        int n = k18.e(k02);
+1286-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(3 + n * 4 + 90);
+1287-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1288-        dataOutputStream.writeByte(-111);
+1289-        dataOutputStream.writeByte(n);
+1290-        int n2 = 0;
+1291-        while (n2 < k02.f.length) {
+1292-            if (k02.f[n2] >= 0 && k02.g[n2] > 0) {
+1293-                dataOutputStream.writeShort(k02.g[n2]);
+1294-                dataOutputStream.writeShort(k02.f[n2]);
+1295-            }
+1296-            ++n2;
+1297-        }
+1298-        n2 = k18.f(k02);
+1299-        boolean bl = false;
+1300-        dataOutputStream.writeByte(n2);
+1301-        int n3 = 0;
+1302-        while (n3 < k02.o.length) {
+1303-            if (k02.o[n3] != 0L) {
+1304-                if (k13.b(k02, n3, System.currentTimeMillis())) {
+1305-                    DoHoang091.G();
+1306-                    bl = true;
+1307-                }
+1308-                k13.a(dataOutputStream, k02, n3);
+1309-            }
+1310-            ++n3;
+1311-        }
+1312-        dataOutputStream.flush();
+1313-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1314-        if (bl) {
+1315-            DoHoang091.H();
+1316-        }
+1317-    }
+1318-
+1319-    static void a(k2a k2a2, int n, int n2) throws Exception {
+1320-        long l;
+1321-        int n3;
+1322-        DoHoang091.k0 k02 = DoHoang091.z();
+1323-        if (k2a2 == null || n < 0 || n >= k2a2.a.length) {
+1324-            return;
+1325-        }
+1326-        if (!k18.g(k02)) {
+1327-            DoHoang091.a("B\u1ea1n kh\u00f4ng trong gia t\u1ed9c.");
+1328-            return;
+1329-        }
+1330-        int n4 = k2a2.a[n] & 0xFFFF;
+1331-        if (k16.E(n4) == 13 && k02.cb[112] < (n3 = n4 - 422)) {
+1332-            DoHoang091.a("V\u1eadt ph\u1ea9m n\u00e0y gia t\u1ed9c b\u1ea1n ch\u01b0a m\u1edf kho\u00e1.");
+1333-            return;
+1334-        }
+1335-        if (n4 == 596 || n4 == 601) {
+1336-            k18.d(k02, n4, k2a2.e[n]);
+1337-            return;
+1338-        }
+1339-        if (n2 < 1) {
+1340-            n2 = 1;
+1341-        }
+1342-        if ((l = (long)k2a2.e[n] * (long)n2) < 0L || l > (long)k02.cb[111]) {
+1343-            DoHoang091.a("Kh\u00f4ng \u0111\u1ee7 xu gia t\u1ed9c.");
+1344-            return;
+1345-        }
+1346-        k18.a(k02, n4, n2, k2a2.d[n], (byte)0, k2a2.c[n], k2a2.h[n], k2a2.i[n], k2a2.j[n]);
+1347-        k02.cb[111] = k02.cb[111] - (int)l;
+1348-        DoHoang091.G();
+1349-        DoHoang091.H();
+1350-        k18.j();
+1351-        DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o kho.");
+1352-    }
+1353-
+1354-    private static void o(byte[] byArray) throws Exception {
+1355-        DoHoang091.k0 k02 = DoHoang091.z();
+1356-        if (!k18.g(k02)) {
+1357-            return;
+1358-        }
+1359-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1360-        int n = dataInputStream.available() > 0 ? (int)dataInputStream.readByte() : -1;
+1361-        int n2 = k18.c(k02, n);
+1362-        if (n2 < 0) {
+1363-            return;
+1364-        }
+1365-        if ((k02.f[n2] & 0xFFFF) != 281) {
+1366-            return;
+1367-        }
+1368-        int[] nArray = k02.cb;
+1369-        if (nArray[108] != 0) {
+1370-            DoHoang091.b("Gia t\u1ed9c v\u1eabn c\u00f2n l\u01b0\u1ee3t v\u00e0o l\u00e3nh \u0111\u1ecba.");
+1371-            return;
+1372-        }
+1373-        if (nArray[109] == 0) {
+1374-            DoHoang091.b("\u0110\u00e3 h\u1ebft l\u01b0\u1ee3t s\u1eed d\u1ee5ng.");
+1375-            return;
+1376-        }
+1377-        if (k2f.e()) {
+1378-            DoHoang091.b("L\u00e3nh \u0111\u1ecba hi\u1ec7n t\u1ea1i v\u1eabn ch\u01b0a k\u1ebft th\u00fac.");
+1379-            return;
+1380-        }
+1381-        nArray[108] = nArray[108] + 1;
+1382-        nArray[109] = nArray[109] - 1;
+1383-        k18.a(k02, n2, 1);
+1384-        DoHoang091.G();
+1385-        DoHoang091.H();
+1386-        DoHoang091.b("Gia t\u1ed9c nh\u1eadn \u0111\u01b0\u1ee3c th\u00eam 1 l\u1ea7n l\u00e3nh \u0111\u1ecba gia t\u1ed9c.");
+1387-        k18.j();
+1388-    }
+1389-
+1390-    private static void p(byte[] byArray) throws Exception {
+1391-        int[] nArray;
+1392-        byte[] byArray2;
+1393-        DoHoang091.k0 k02 = DoHoang091.z();
+1394-        if (!k18.g(k02)) {
+1395-            return;
+1396-        }
+1397-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1398-        int n = dataInputStream.available() > 0 ? (int)dataInputStream.readByte() : -1;
+1399-        String string = dataInputStream.available() > 0 ? dataInputStream.readUTF() : "";
+1400-        int n2 = k18.c(k02, n);
+1401-        if (n2 < 0) {
+1402-            return;
+1403-        }
+1404-        if (!k02.a.equalsIgnoreCase(string)) {
+1405-            if (k5.a(string) < 0) {
+1406-                DoHoang091.a("Ng\u01b0\u1eddi n\u00e0y kh\u00f4ng trong gia t\u1ed9c.");
+1407-            } else if (k5.b(string) < 0) {
+1408-                DoHoang091.a("Ng\u01b0\u1eddi n\u00e0y kh\u00f4ng online.");
+1409-            } else {
+1410:                DoHoang091.a("H\u00e0nh trang nh\u00e2n v\u1eadt n\u00e0y \u0111ang \u0111\u1ea7y.");
+1411-            }
+1412-            return;
+1413-        }
+1414-        if (k16.a(k02.K) < 0) {
+1415:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng \u0111\u1ee7 ch\u1ed7 tr\u1ed1ng.");
+1416-            return;
+1417-        }
+1418-        int n3 = k02.f[n2] & 0xFFFF;
+1419-        long l = k02.k[n2];
+1420-        long l2 = l > 0L ? System.currentTimeMillis() + l : -1L;
+1421-        int n4 = k16.a(n3, 1, true, k02.i[n2], k02.j[n2], l2, byArray2 = k18.b(k02, n2, n3), nArray = k18.c(k02, n2, n3));
+1422-        if (n4 < 0) {
+1423-            return;
+1424-        }
+1425-        k18.a(k02, n2, 1);
+1426-        DoHoang091.G();
+1427-        DoHoang091.H();
+1428-        k18.j();
+1429-        DoHoang091.a("Ph\u00e1t v\u1eadt ph\u1ea9m cho " + string + " th\u00e0nh c\u00f4ng.");
+1430-    }
+1431-
+1432-    private static void q(byte[] byArray) throws Exception {
+1433-        String string;
+1434-        DoHoang091.k0 k02 = DoHoang091.z();
+1435-        if (!k18.g(k02)) {
+1436-            return;
+1437-        }
+1438-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1439-        String string2 = string = dataInputStream.available() > 0 ? dataInputStream.readUTF() : "";
+1440-        if (string.equalsIgnoreCase(k02.a)) {
+1441-            return;
+1442-        }
+1443-        int n = k2f.a(string);
+1444-        if (n == -2) {
+1445-            DoHoang091.a("L\u00e3nh \u0111\u1ecba \u0111\u00e3 b\u1eaft \u0111\u1ea7u, kh\u00f4ng th\u1ec3 m\u1eddi th\u00eam.");
+1446-        } else if (n == -1) {
+1447-            DoHoang091.a("Th\u00e0nh vi\u00ean kh\u00f4ng ho\u1ea1t \u0111\u1ed9ng.");
+1448-        } else if (n == 1) {
+1449-            DoHoang091.b(String.valueOf(string) + " \u0111\u01b0\u1ee3c m\u1eddi v\u00e0o l\u00e3nh \u0111\u1ecba gia t\u1ed9c, h\u00e3y g\u1eb7p NPC Kanata \u0111\u1ec3 \u0111i\u1ec3m danh.");
+1450-        }
+1451-    }
+1452-
+1453-    private static int e(DoHoang091.k0 k02) {
+1454-        int n = 0;
+1455-        int n2 = 0;
+1456-        while (n2 < k02.f.length) {
+1457-            if (k02.f[n2] >= 0 && k02.g[n2] > 0) {
+1458-                ++n;
+1459-            }
+1460-            ++n2;
+1461-        }
+1462-        return n;
+1463-    }
+1464-
+1465-    private static int c(DoHoang091.k0 k02, int n) {
+1466-        if (n < 0) {
+1467-            return -1;
+1468-        }
+1469-        int n2 = 0;
+1470-        int n3 = 0;
+1471-        while (n3 < k02.f.length) {
+1472-            if (k02.f[n3] >= 0 && k02.g[n3] > 0) {
+1473-                if (n2 == n) {
+1474-                    return n3;
+1475-                }
+1476-                ++n2;
+1477-            }
+1478-            ++n3;
+1479-        }
+1480-        return -1;
+1481-    }
+1482-
+1483-    private static int a(DoHoang091.k0 k02, int n, int n2, boolean bl, byte by, byte by2, long l, byte[] byArray, int[] nArray) {
+1484-        int n3 = 0;
+1485-        while (n3 < k02.f.length) {
+1486-            if ((k02.f[n3] & 0xFFFF) == n && k02.g[n3] > 0) {
+1487-                int n4 = (k02.g[n3] & 0xFFFF) + n2;
+1488-                k02.g[n3] = (short)Math.min(Short.MAX_VALUE, n4);
+1489-                return n3;
+1490-            }
+1491-            ++n3;
+1492-        }
+1493-        n3 = 0;
+1494-        while (n3 < k02.f.length) {
+1495-            if (k02.f[n3] < 0) {
+1496-                k02.f[n3] = (short)n;
+1497-                k02.g[n3] = (short)Math.min(Short.MAX_VALUE, n2);
+1498-                k02.h[n3] = bl;
+1499-                k02.i[n3] = by;
+1500-                k02.j[n3] = by2;
+1501-                k02.k[n3] = l > 0L ? l : -1L;
+1502-                k18.a(k02, n3, byArray, nArray);
+1503-                return n3;
+1504-            }
+1505-            ++n3;
+1506-        }
+1507-        return -1;
+1508-    }
+1509-
+1510-    private static void a(DoHoang091.k0 k02, int n, int n2) {
+1511-        if (n < 0 || n >= k02.f.length || n2 <= 0) {
+1512-            return;
+1513-        }
+1514-        int n3 = (k02.g[n] & 0xFFFF) - n2;
+1515-        if (n3 > 0) {
+1516-            k02.g[n] = (short)n3;
+1517-        } else {
+1518-            DoHoang091.b(k02, n);
+1519-        }
+1520-    }
+1521-
+1522-    private static void a(DoHoang091.k0 k02, int n, byte[] byArray, int[] nArray) {
+1523-        DoHoang091.a(k02.l, k02.m, k02.n, n);
+1524-        if (byArray == null || nArray == null) {
+1525-            return;
+1526-        }
+1527-        int n2 = Math.min(byArray.length, nArray.length);
+1528-        if (n2 > k02.m[n].length) {
+1529-            n2 = k02.m[n].length;
+1530-        }
+1531-        k02.l[n] = (byte)n2;
+1532-        int n3 = 0;
+1533-        while (n3 < n2) {
+1534-            k02.m[n][n3] = byArray[n3];
+1535-            k02.n[n][n3] = nArray[n3];
+1536-            ++n3;
+1537-        }
+1538-    }
+1539-
+1540-    private static byte[] b(DoHoang091.k0 k02, int n, int n2) throws Exception {
+1541-        int n3 = k02.l[n] & 0xFF;
+1542-        if (n3 <= 0) {
+1543-            return null;
+1544-        }
+1545-        byte[] byArray = new byte[n3];
+1546-        int n4 = 0;
+1547-        while (n4 < n3) {
+1548-            byArray[n4] = k02.m[n][n4];
+1549-            ++n4;
+1550-        }
+1551-        return byArray;
+1552-    }
+1553-
+1554-    private static int[] c(DoHoang091.k0 k02, int n, int n2) throws Exception {
+1555-        int n3 = k02.l[n] & 0xFF;
+1556-        if (n3 <= 0) {
+1557-            return null;
+1558-        }
+1559-        int[] nArray = new int[n3];
+1560-        boolean bl = k16.E(n2) >= 0 && k16.E(n2) <= 15;
+1561-        int n4 = 0;
+1562-        while (n4 < n3) {
+1563-            int n5 = k02.n[n][n4];
+1564-            nArray[n4] = bl ? k18.a(k02.m[n][n4] & 0xFF, n5) : n5;
+1565-            ++n4;
+1566-        }
+1567-        return nArray;
+1568-    }
+1569-
+1570-    private static int a(int n, int n2) {
+1571-        int n3 = n2;
+1572-        if (n == 0 || n == 1 || n >= 21 && n <= 26) {
+1573-            n3 -= 49;
+1574-        } else if (n == 6 || n == 7 || n == 8 || n == 9 || n == 19) {
+1575-            n3 -= 9;
+1576-        } else if (n >= 2 && n <= 5 || n >= 10 && n <= 15 || n == 17 || n == 18) {
+1577-            n3 -= 4;
+1578-        } else if (n == 16) {
+1579-            n3 -= 2;
+1580-        }
+1581-        if (n3 >= n2) {
+1582-            return n2;
+1583-        }
+1584-        return n3 + DoHoang091.g(n2 - n3 + 1);
+1585-    }
+1586-
+1587-    private static void d(DoHoang091.k0 k02, int n, int n2) throws Exception {
+1588-        int n3;
+1589-        int n4 = n3 = n == 601 ? 0 : 1;
+1590-        if (k02.o[n3] != 0L) {
+1591-            DoHoang091.a("Gia t\u1ed9c b\u1ea1n \u0111\u00e3 s\u1edf h\u1eefu th\u1ea7n th\u00fa n\u00e0y r\u1ed3i.");
+1592-            return;
+1593-        }
+1594-        if (n2 < 0 || n2 > k02.cb[111]) {
+1595-            DoHoang091.a("Kh\u00f4ng \u0111\u1ee7 xu gia t\u1ed9c.");
+1596-            return;
+1597-        }
+1598-        k13.a(k02, n3, System.currentTimeMillis() + 60000L);
+1599-        k02.cb[111] = k02.cb[111] - n2;
+1600-        DoHoang091.G();
+1601-        DoHoang091.H();
+1602-        k18.j();
+1603-        DoHoang091.a("V\u1eadt ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o kho.");
+1604-    }
+1605-
+1606-    private static int f(DoHoang091.k0 k02) {
+1607-        int n = 0;
+1608-        int n2 = 0;
+1609-        while (n2 < k02.o.length) {
+1610-            if (k02.o[n2] != 0L) {
+1611-                ++n;
+1612-            }
+1613-            ++n2;
+1614-        }
+1615-        return n;
+1616-    }
+1617-
+1618-    private static void r(byte[] byArray) throws Exception {
+1619-        DoHoang091.k0 k02 = DoHoang091.z();
+1620-        if (!k18.g(k02)) {
+1621-            DoHoang091.a("C\u00f3 l\u1ed7i x\u1ea3y ra.");
+1622-            return;
+1623-        }
+1624-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1625-        k02.c = dataInputStream.available() > 0 ? dataInputStream.readUTF() : "";
+1626-        k18.a(k02, k02.a, 4, 0);
+1627-        DoHoang091.G();
+1628-        DoHoang091.H();
+1629-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(k02.c.length() + 4);
+1630-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1631-        dataOutputStream.writeByte(-95);
+1632-        dataOutputStream.writeUTF(k02.c);
+1633-        dataOutputStream.flush();
+1634-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1635-        DoHoang091.a("Thay \u0111\u1ed5i th\u00f4ng b\u00e1o th\u00e0nh c\u00f4ng.");
+1636-    }
+1637-
+1638-    private static void s(byte[] byArray) throws Exception {
+1639-        byte by;
+1640-        DoHoang091.k0 k02 = DoHoang091.z();
+1641-        if (!k18.g(k02)) {
+1642-            DoHoang091.b("B\u1ea1n kh\u00f4ng c\u00f3 gia t\u1ed9c.");
+1643-            return;
+1644-        }
+1645-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1646-        String string = dataInputStream.available() > 0 ? dataInputStream.readUTF() : "";
+1647-        byte by2 = dataInputStream.available() > 0 ? dataInputStream.readByte() : (byte)0;
+1648-        int n = k5.a(string);
+1649-        if (n < 0) {
+1650-            DoHoang091.b("Th\u00e0nh vi\u00ean kh\u00f4ng t\u1ed3n t\u1ea1i.");
+1651-            return;
+1652-        }
+1653-        byte by3 = by = by2 == 3 || by2 == 2 ? by2 : (byte)0;
+1654-        if (by == 3 && n != 3 && k5.a(3) >= 1) {
+1655-            DoHoang091.b("Ch\u1ee9c ph\u00f3 gia t\u1ed9c \u0111\u00e3 \u0111\u1ee7 ch\u1ed7.");
+1656-            return;
+1657-        }
+1658-        if (by == 2 && n != 2 && k5.a(2) >= 5) {
+1659-            DoHoang091.b("Ch\u1ee9c tr\u01b0\u1edfng l\u00e3o gia t\u1ed9c \u0111\u00e3 \u0111\u1ee7 ch\u1ed7.");
+1660-            return;
+1661-        }
+1662-        if (!k5.a(string, (int)by)) {
+1663-            DoHoang091.b("Th\u00e0nh vi\u00ean kh\u00f4ng t\u1ed3n t\u1ea1i.");
+1664-            return;
+1665-        }
+1666-        if (by == 3) {
+1667-            k02.d = string;
+1668-        } else if (n == 3) {
+1669-            k02.d = "";
+1670-        }
+1671-        k18.a(k02, string, 4, (int)by);
+1672-        DoHoang091.G();
+1673-        DoHoang091.H();
+1674-        k18.h();
+1675-        DoHoang091.b(by == 3 ? String.valueOf(string) + " \u0111\u01b0\u1ee3c b\u1ed5 nhi\u1ec7m l\u00e0m t\u1ed9c ph\u00f3" : (by == 2 ? String.valueOf(string) + " \u0111\u01b0\u1ee3c b\u1ed5 nhi\u1ec7m l\u00e0m tr\u01b0\u1edfng l\u00e3o" : String.valueOf(string) + " \u0111\u00e3 b\u1ecb b\u00e3i nhi\u1ec7m"));
+1676-    }
+1677-
+1678-    private static void t(byte[] byArray) throws Exception {
+1679-        String string;
+1680-        DoHoang091.k0 k02 = DoHoang091.z();
+1681-        if (!k18.g(k02)) {
+1682-            DoHoang091.b("B\u1ea1n kh\u00f4ng c\u00f3 gia t\u1ed9c");
+1683-            return;
+1684-        }
+1685-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1686-        String string2 = string = dataInputStream.available() > 0 ? dataInputStream.readUTF() : "";
+1687-        if (string.equals(k02.a)) {
+1688-            DoHoang091.a("B\u1ea1n kh\u00f4ng th\u1ec3 t\u1ef1 tr\u1ee5c xu\u1ea5t ch\u00ednh m\u00ecnh.");
+1689-            return;
+1690-        }
+1691-        int n = k5.a(string);
+1692-        if (n < 0) {
+1693-            DoHoang091.b("Th\u00e0nh vi\u00ean n\u00e0y kh\u00f4ng t\u1ed3n t\u1ea1i.");
+1694-            return;
+1695-        }
+1696-        int n2 = k18.i(n);
+1697-        if (k02.cb[111] < n2) {
+1698-            DoHoang091.b("Ng\u00e2n qu\u1ef9 kh\u00f4ng \u0111\u1ee7.");
+1699-            return;
+1700-        }
+1701-        if (!k5.c(string)) {
+1702-            DoHoang091.b("Th\u00e0nh vi\u00ean n\u00e0y kh\u00f4ng t\u1ed3n t\u1ea1i.");
+1703-            return;
+1704-        }
+1705-        k02.cb[111] = k02.cb[111] - n2;
+1706-        if (string.equalsIgnoreCase(k02.d)) {
+1707-            k02.d = "";
+1708-        }
+1709-        k18.a(k02, string, 1, n2);
+1710-        DoHoang091.G();
+1711-        DoHoang091.H();
+1712-        k18.h();
+1713-        k18.g();
+1714-        k18.i();
+1715-        DoHoang091.b(String.valueOf(k02.a) + " \u0111\u00e3 tr\u1ee5c xu\u1ea5t " + string + ", ng\u00e2n qu\u1ef9 tr\u1eeb " + n2 + " xu");
+1716-    }
+1717-
+1718-    private static void k() throws Exception {
+1719-        if (!k18.g(DoHoang091.z())) {
+1720-            DoHoang091.b("B\u1ea1n kh\u00f4ng trong gia t\u1ed9c.");
+1721-            return;
+1722-        }
+1723-        DoHoang091.b("B\u1ea1n l\u00e0 t\u1ed9c tr\u01b0\u1edfng n\u00ean kh\u00f4ng th\u1ec3 r\u1eddi.");
+1724-    }
+1725-
+1726-    private static void l() throws Exception {
+1727-        DoHoang091.k0 k02 = DoHoang091.z();
+1728-        if (!k18.g(k02)) {
+1729-            DoHoang091.b("B\u1ea1n kh\u00f4ng trong gia t\u1ed9c.");
+1730-            return;
+1731-        }
+1732-        int n = Math.max(1, k02.cb[0]);
+1733-        int n2 = k29.a(n);
+1734-        int n3 = k18.i(k02);
+1735-        if (k02.cb[103] < n2) {
+1736-            DoHoang091.b("Kh\u00f4ng \u0111\u1ee7 k\u00ecnh nghi\u1ec7m n\u0103ng c\u1ea5p gia t\u1ed9c");
+1737-            return;
+1738-        }
+1739-        if (k02.cb[111] < n3) {
+1740-            DoHoang091.b("Ng\u00e2n qu\u1ef9 gia t\u1ed9c kh\u00f4ng \u0111\u1ee7");
+1741-            return;
+1742-        }
+1743-        k02.cb[103] = k02.cb[103] - n2;
+1744-        k02.cb[0] = n + 1;
+1745-        k02.cb[111] = k02.cb[111] - n3;
+1746-        k18.a(k02, k02.a, 5, -n3);
+1747-        DoHoang091.G();
+1748-        DoHoang091.H();
+1749-        k18.g();
+1750-        DoHoang091.b("Gia t\u1ed9c \u0111\u01b0\u1ee3c l\u00ean c\u1ea5p " + (n + 1));
+1751-    }
+1752-
+1753-    private static void u(byte[] byArray) throws Exception {
+1754-        int n;
+1755-        DoHoang091.k0 k02 = DoHoang091.z();
+1756-        if (!k18.g(k02)) {
+1757-            return;
+1758-        }
+1759-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1760-        int n2 = n = dataInputStream.available() >= 4 ? dataInputStream.readInt() : 0;
+1761-        if (n < 1000 || n > 100000000) {
+1762-            DoHoang091.a("Vui l\u00f2ng nh\u1eadp trong kho\u1ea3ng t\u1eeb 1.000xu \u0111\u1ebfn 100.000.000xu.");
+1763-            return;
+1764-        }
+1765-        if (!k32.b(n, 0L, 0L)) {
+1766-            DoHoang091.a("B\u1ea1n kh\u00f4ng \u0111\u1ee7 xu.");
+1767-            return;
+1768-        }
+1769-        k02.cb[111] = k02.cb[111] + n;
+1770-        k18.a(k02, k02.a, 2, n);
+1771-        DoHoang091.G();
+1772-        DoHoang091.H();
+1773-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(5);
+1774-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+1775-        dataOutputStream.writeByte(-90);
+1776-        dataOutputStream.writeInt(k02.A);
+1777-        dataOutputStream.flush();
+1778-        DoHoang091.a((byte)-28, byteArrayOutputStream.toByteArray());
+1779-        k18.g();
+1780-        k18.i();
+1781-        DoHoang091.b(String.valueOf(k02.a) + " \u0111\u00f3ng g\u00f3p v\u00e0o ng\u00e2n qu\u1ef9 " + n + " xu");
+1782-    }
+1783-
+1784-    private static void v(byte[] byArray) throws Exception {
+1785-        DataInputStream dataInputStream = k18.a(byArray, 1);
+1786-        if (dataInputStream.available() >= 4) {
+1787-            dataInputStream.readInt();
+1788-        }
+1789-        if (k18.g(DoHoang091.z())) {
+1790-            DoHoang091.b("T\u00ednh n\u0103ng \u0111ang b\u1ea3o tr\u00ec.");
+1791-        }
+1792-    }
+1793-
+1794-    private static void m() throws Exception {
+1795-        DoHoang091.k0 k02 = DoHoang091.z();
+1796-        if (!k18.g(k02)) {
+1797-            return;
+1798-        }
+1799-        int n = k02.cb[112];
+1800-        if (n >= 5) {
+1801-            return;
+1802-        }
+1803-        int n2 = (n + 1) * 5;
+1804-        if (k02.cb[0] < n2) {
+1805-            DoHoang091.b("C\u1ea5p \u0111\u1ed9 gia t\u1ed9c kh\u00f4ng \u0111\u1ea1t y\u00eau c\u1ea7u.");
+1806-            return;
+1807-        }
+1808-        int[] nArray = new int[]{1000000, 5000000, 10000000, 20000000, 30000000};
+1809-        int n3 = nArray[n];
+1810-        if (k02.cb[111] < n3) {
+1811-            DoHoang091.b("Ng\u00e2n qu\u1ef9 kh\u00f4ng \u0111\u1ee7.");
+1812-            return;
+1813-        }
+1814-        k02.cb[111] = k02.cb[111] - n3;
+1815-        k02.cb[112] = n + 1;
+1816-        k18.a(k02, k02.a, 4, -n3);
+1817-        DoHoang091.G();
+1818-        DoHoang091.H();
+1819-        k18.g();
+1820-    }
+1821-
+1822-    private static boolean g(DoHoang091.k0 k02) {
+1823-        return k02 != null && k02.cb[0] > 0;
+1824-    }
+1825-
+1826-    private static int h(DoHoang091.k0 k02) {
+1827-        return (30 + (1 + k5.j()) * 5) * 1000;
+1828-    }
+1829-
+1830-    private static int i(DoHoang091.k0 k02) {
+1831-        int n = Math.max(1, k02.cb[0]);
+1832-        return ((n - 1) / 10 + 1) * 100000 + 500000;
+1833-    }
+1834-
+1835-    private static int i(int n) {
+1836-        if (n == 3) {
+1837-            return 100000;
+1838-        }
+1839-        if (n == 2) {
+1840-            return 50000;
+1841-        }
+1842-        if (n == 1) {
+1843-            return 20000;
+1844-        }
+1845-        return 10000;
+1846-    }
+1847-
+1848-    private static void a(DoHoang091.k0 k02, String string, int n, int n2) {
+1849-        String string2 = String.valueOf(string == null ? "" : string) + "," + n + "," + n2 + "," + System.currentTimeMillis() + "\n";
+1850-        String string3 = k02.e == null ? "" : k02.e;
+1851-        int n3 = 0;
+1852-        int n4 = 0;
+1853-        while (n3 < 10) {
+1854-            int n5 = string3.indexOf(10, n4);
+1855-            if (n5 < 0) break;
+1856-            ++n3;
+1857-            n4 = n5 + 1;
+1858-        }
+1859-        if (n3 == 10 && n4 < string3.length()) {
+1860-            string3 = string3.substring(0, n4);
+1861-        }
+1862-        k02.e = String.valueOf(string2) + string3;
+1863-    }
+1864-
+1865-    private static void n() throws Exception {
+1866-        kc.b();
+1867-    }
+1868-
+1869-    private static void o() throws Exception {
+1870-        k3.l();
+1871-    }
+1872-
+1873-    private static DataInputStream a(byte[] byArray, int n) throws Exception {
+1874-        if (byArray == null) {
+1875-            byArray = new byte[]{};
+1876-        }
+1877-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+1878-        int n2 = 0;
+1879-        while (n2 < n && dataInputStream.available() > 0) {
+1880-            dataInputStream.readByte();
+1881-            ++n2;
+1882-        }
+1883-        return dataInputStream;
+1884-    }
+1885-}
+1886-

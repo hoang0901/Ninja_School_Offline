@@ -1,0 +1,571 @@
+879-            }
+880-            int n4 = k19.n((int)l, (int)l2);
+881-            DoHoang091.a(s, s2, n4);
+882-        } else if (n == 226 && (n2 = k19.c("LUNAR_GOLD2")) >= 0) {
+883-            k19.g(n2);
+884-        }
+885-    }
+886-
+887-    static int f(int n) {
+888-        if (n < 0) {
+889-            return -1;
+890-        }
+891-        DoHoang091.k0 k02 = DoHoang091.z();
+892-        int n2 = 0;
+893-        int n3 = 0;
+894-        while (n3 < k02.K.length) {
+895-            if (k19.q(k02.K[n3] & 0xFFFF) && n2++ == n) {
+896-                return n3;
+897-            }
+898-            ++n3;
+899-        }
+900-        return -1;
+901-    }
+902-
+903-    static void a(int n, boolean bl) throws Exception {
+904-        int n2 = k19.f(n);
+905-        if (n2 < 0) {
+906-            return;
+907-        }
+908-        DoHoang091.k0 k02 = DoHoang091.z();
+909-        int n3 = Math.min(k02.Q[n2] & 0xFF, k02.R[n2].length);
+910-        byte[] byArray = new byte[Math.min(16, n3 + (bl ? 5 : 1))];
+911-        int[] nArray = new int[byArray.length];
+912-        int n4 = 0;
+913-        int n5 = 0;
+914-        while (n5 < n3 && n4 < byArray.length) {
+915-            byArray[n4] = k02.R[n2][n5];
+916-            nArray[n4] = k02.S[n2][n5];
+917-            ++n4;
+918-            ++n5;
+919-        }
+920-        if (k16.c(n2, 1) != 1) {
+921-            return;
+922-        }
+923-        n5 = ab[DoHoang091.g(ab.length)];
+924-        if (DoHoang091.g(200) == 0) {
+925-            n4 = k19.a(byArray, nArray, n4, 98, k19.n(1, 30));
+926-        }
+927-        if (bl) {
+928-            n4 = k19.a(byArray, nArray, n4);
+929-        }
+930-        if (n4 != byArray.length) {
+931-            byte[] byArray2 = new byte[n4];
+932-            int[] nArray2 = new int[n4];
+933-            System.arraycopy(byArray, 0, byArray2, 0, n4);
+934-            System.arraycopy(nArray, 0, nArray2, 0, n4);
+935-            byArray = byArray2;
+936-            nArray = nArray2;
+937-        }
+938-        if (k16.a(n5, 1, false, (byte)0, (byte)0, System.currentTimeMillis() + 2592000000L, byArray, nArray) >= 0) {
+939-            DoHoang091.a(true);
+940-        }
+941-    }
+942-
+943-    private static void b(int n, String string) throws Exception {
+944-        bh = n;
+945-        bi = DoHoang091.s();
+946-        DoHoang091.a(string, 9999);
+947-    }
+948-
+949-    private static void k(int n, int n2) throws Exception {
+950-        int n3;
+951-        int[] nArray;
+952-        int[] nArray2;
+953-        int n4 = 0;
+954-        int n5 = 0;
+955-        switch (n) {
+956-            case 0: {
+957-                nArray2 = new int[]{639, 638, 641, 642, 640};
+958-                nArray = new int[]{1, 1, 1, 1, 1};
+959-                n3 = 643;
+960-                n4 = n2;
+961-                n5 = n2;
+962-                break;
+963-            }
+964-            case 1: {
+965-                nArray2 = new int[]{639, 638, 641, 642};
+966-                nArray = new int[]{1, 1, 1, 1};
+967-                n3 = 644;
+968-                break;
+969-            }
+970-            case 2: {
+971-                nArray2 = new int[]{674};
+972-                nArray = new int[]{10};
+973-                n3 = 582;
+974-                n5 = n2 + 1;
+975-                break;
+976-            }
+977-            default: {
+978-                return;
+979-            }
+980-        }
+981-        if (n2 < 1) {
+982-            k1d.b(33, "S\u1ed1 l\u01b0\u1ee3ng t\u1ed1i thi\u1ec3u l\u00e0 1.");
+983-            return;
+984-        }
+985-        if (n2 > 1000) {
+986-            k1d.b(33, "S\u1ed1 l\u01b0\u1ee3ng t\u1ed1i \u0111a l\u00e0 1.000.");
+987-            return;
+988-        }
+989-        int n6 = 0;
+990-        while (n6 < nArray2.length) {
+991-            long l = (long)nArray[n6] * (long)n2;
+992-            if (l > 32767L || !k19.l(nArray2[n6], (int)l)) {
+993-                k1d.b(33, "Kh\u00f4ng \u0111\u1ee7 " + k16.A(nArray2[n6]));
+994-                return;
+995-            }
+996-            ++n6;
+997-        }
+998-        if (k2e.s() < 1) {
+999:            k1d.b(33, "H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+1000-            return;
+1001-        }
+1002-        n6 = 0;
+1003-        while (n6 < nArray2.length) {
+1004-            if (!k16.d(nArray2[n6], nArray[n6] * n2)) {
+1005-                return;
+1006-            }
+1007-            ++n6;
+1008-        }
+1009-        if (k16.a(n3, n2, false, (byte)0, (byte)0) < 0) {
+1010-            return;
+1011-        }
+1012-        k19.a(0, n4, n5, 0);
+1013-    }
+1014-
+1015-    private static void i() throws Exception {
+1016-        if (!k19.l(644, 20)) {
+1017-            k1d.b(33, "B\u1ea1n c\u1ea7n c\u00f3 \u0111\u1ee7 20 chi\u1ebfc b\u00e1nh t\u00e9t ");
+1018-            return;
+1019-        }
+1020-        if (k2e.s() < 1) {
+1021:            k1d.b(33, "H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+1022-            return;
+1023-        }
+1024-        int n = DoHoang091.z().p == 1 ? 1083 : 1084;
+1025-        byte[][] byArrayArray = new byte[1][];
+1026-        int[][] nArrayArray = new int[1][];
+1027-        k19.a(byArrayArray, nArrayArray);
+1028-        byte[] byArray = byArrayArray[0];
+1029-        int[] nArray = nArrayArray[0];
+1030-        if (!k16.d(644, 20)) {
+1031-            return;
+1032-        }
+1033-        k16.a(n, 1, false, (byte)0, (byte)0, System.currentTimeMillis() + 1296000000L, byArray, nArray);
+1034-    }
+1035-
+1036-    static void b(boolean bl) throws Exception {
+1037-        k19.a(bl, bl ? "\u0110\u1ed5i l\u1ed3ng \u0111\u00e8n 500 l\u01b0\u1ee3ng" : "\u0110\u1ed5i l\u1ed3ng \u0111\u00e8n 2tr xu", bl ? "\u0110\u1ed5i (500l)" : "\u0110\u1ed5i (2tr xu)");
+1038-    }
+1039-
+1040-    static void a(boolean bl, String string, String string2) throws Exception {
+1041-        DoHoang091.k0 k02 = DoHoang091.z();
+1042-        int n = 0;
+1043-        int n2 = 0;
+1044-        while (n2 < k02.K.length) {
+1045-            if (k19.q(k02.K[n2] & 0xFFFF)) {
+1046-                ++n;
+1047-            }
+1048-            ++n2;
+1049-        }
+1050-        short[] sArray = new short[n];
+1051-        short[] sArray2 = new short[n];
+1052-        boolean[] blArray = new boolean[n];
+1053-        byte[] byArray = new byte[n];
+1054-        byte[] byArray2 = new byte[n];
+1055-        long[] lArray = new long[n];
+1056-        int n3 = 0;
+1057-        n2 = 0;
+1058-        while (n2 < k02.K.length) {
+1059-            if (k19.q(k02.K[n2] & 0xFFFF)) {
+1060-                sArray[n3] = k02.K[n2];
+1061-                sArray2[n3] = k02.L[n2];
+1062-                blArray[n3] = k02.M[n2];
+1063-                byArray[n3] = k02.N[n2];
+1064-                byArray2[n3] = k02.O[n2];
+1065-                lArray[n3] = k02.P[n2];
+1066-                ++n3;
+1067-            }
+1068-            ++n2;
+1069-        }
+1070-        DoHoang091.a(bl ? (byte)4 : 3, string, string2, sArray, sArray2, blArray, byArray, byArray2, lArray);
+1071-    }
+1072-
+1073-    private static void j() throws Exception {
+1074-        DoHoang091.k0 k02 = DoHoang091.z();
+1075-        if (k02.r < 20) {
+1076-            DoHoang091.b("Kh\u00f4ng \u0111\u1ee7 s\u1ee9c kh\u1ecfe.");
+1077-        }
+1078-        if (k2e.s() < 1) {
+1079:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+1080-            return;
+1081-        }
+1082-        int n = k19.p(646);
+1083-        if (n < 0) {
+1084-            DoHoang091.b("Kh\u00f4ng c\u00f3 b\u00f9a may m\u1eafn.");
+1085-            return;
+1086-        }
+1087-        if (k19.a(n, 646, "LUNAR_GOLD2")) {
+1088-            k19.a(1, 0, 1, 0);
+1089-        }
+1090-    }
+1091-
+1092-    static boolean a(int n, int n2, String string) throws Exception {
+1093-        DoHoang091.k0 k02 = DoHoang091.z();
+1094-        if (n < 0 || n >= k02.K.length || (k02.K[n] & 0xFFFF) != n2) {
+1095-            return false;
+1096-        }
+1097-        if (!k19.b(string)) {
+1098-            return false;
+1099-        }
+1100-        if (k2e.s() < 1) {
+1101:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+1102-            return false;
+1103-        }
+1104-        if (k16.c(n, 1) != 1) {
+1105-            return false;
+1106-        }
+1107-        return k19.a(string);
+1108-    }
+1109-
+1110-    static boolean a(String string) throws Exception {
+1111-        if (!k19.b(string)) {
+1112-            return false;
+1113-        }
+1114-        int n = k19.n(10000000, 15000000);
+1115-        DoHoang091.c((long)n * 10L);
+1116-        int n2 = k19.c(string);
+1117-        if (n2 < 0) {
+1118-            return false;
+1119-        }
+1120-        return k19.g(n2);
+1121-    }
+1122-
+1123-    static boolean b(String string) throws Exception {
+1124-        return string != null && bd.find(string.hashCode()) != null;
+1125-    }
+1126-
+1127-    static boolean g(int n) throws Exception {
+1128-        int n2 = n == 778 ? k19.n(5, 10) : 1;
+1129-        byte[] byArray = null;
+1130-        int[] nArray = null;
+1131-        if (n == 799 || n == 800) {
+1132-            byArray = new byte[]{94, 92, 86};
+1133-            nArray = new int[]{15, 100, 200};
+1134-        } else if (n == 849) {
+1135-            byte[][] byArrayArray = new byte[1][];
+1136-            int[][] nArrayArray = new int[1][];
+1137-            k19.a(byArrayArray, nArrayArray);
+1138-            byArray = byArrayArray[0];
+1139-            nArray = nArrayArray[0];
+1140-        }
+1141-        return k16.a(n, n2, false, (byte)0, (byte)0, k19.o(n), byArray, nArray) >= 0;
+1142-    }
+1143-
+1144-    static boolean a(int n, long l) throws Exception {
+1145-        byte[] byArray = null;
+1146-        int[] nArray = null;
+1147-        if (n == 849) {
+1148-            byte[][] byArrayArray = new byte[1][];
+1149-            int[][] nArrayArray = new int[1][];
+1150-            k19.a(byArrayArray, nArrayArray);
+1151-            byArray = byArrayArray[0];
+1152-            nArray = nArrayArray[0];
+1153-        }
+1154-        return k16.a(n, 1, false, (byte)0, (byte)0, l, byArray, nArray) >= 0;
+1155-    }
+1156-
+1157-    private static long o(int n) {
+1158-        long l = System.currentTimeMillis();
+1159-        if (n == 798) {
+1160-            return l + 86400000L * (long)k19.n(3, 10);
+1161-        }
+1162-        if (n == 850 || n == 851 || n == 781 || n == 802 || n == 803 || n == 804 || n == 830 || n == 799 || n == 800 || n == 806 || n == 805 || n == 1076) {
+1163-            return l + 259200000L;
+1164-        }
+1165-        if (n == 407 || n == 408 || n >= 814 && n <= 818 || n == 797 || n == 921) {
+1166-            return l + 604800000L;
+1167-        }
+1168-        if (n == 337 || n == 338 || k19.q(n)) {
+1169-            return l + 259200000L;
+1170-        }
+1171-        return -1L;
+1172-    }
+1173-
+1174-    private static boolean l(int n, int n2) {
+1175-        DoHoang091.k0 k02 = DoHoang091.z();
+1176-        int n3 = 0;
+1177-        while (n3 < 2) {
+1178-            boolean bl = n3 == 0;
+1179-            int n4 = 0;
+1180-            while (n4 < k02.K.length) {
+1181-                if ((k02.K[n4] & 0xFFFF) == n && k02.M[n4] == bl && (k02.L[n4] & 0xFFFF) >= n2) {
+1182-                    return true;
+1183-                }
+1184-                ++n4;
+1185-            }
+1186-            ++n3;
+1187-        }
+1188-        return false;
+1189-    }
+1190-
+1191-    private static int p(int n) {
+1192-        DoHoang091.k0 k02 = DoHoang091.z();
+1193-        int n2 = 0;
+1194-        while (n2 < k02.K.length) {
+1195-            if ((k02.K[n2] & 0xFFFF) == n) {
+1196-                return n2;
+1197-            }
+1198-            ++n2;
+1199-        }
+1200-        return -1;
+1201-    }
+1202-
+1203-    private static boolean k() {
+1204-        int n = DoHoang091.r();
+1205-        int n2 = DoHoang091.u();
+1206-        int n3 = DoHoang091.v();
+1207-        int n4 = 0;
+1208-        while (n4 < be.length) {
+1209-            int n5;
+1210-            int n6;
+1211-            if (be[n4] == n && (long)(n6 = n2 - bf[n4]) * (long)n6 + (long)(n5 = n3 - bg[n4]) * (long)n5 <= 10000L) {
+1212-                return true;
+1213-            }
+1214-            ++n4;
+1215-        }
+1216-        return false;
+1217-    }
+1218-
+1219-    private static boolean q(int n) {
+1220-        int n2 = 0;
+1221-        while (n2 < aa.length) {
+1222-            if (aa[n2] == n) {
+1223-                return true;
+1224-            }
+1225-            ++n2;
+1226-        }
+1227-        return false;
+1228-    }
+1229-
+1230-    private static int a(byte[] byArray, int[] nArray, int n) {
+1231-        int[] nArray2 = new int[12];
+1232-        nArray2[1] = 1;
+1233-        nArray2[2] = 2;
+1234-        nArray2[3] = 3;
+1235-        nArray2[4] = 4;
+1236-        nArray2[5] = 5;
+1237-        nArray2[6] = 6;
+1238-        nArray2[7] = 8;
+1239-        nArray2[8] = 9;
+1240-        nArray2[9] = 57;
+1241-        nArray2[10] = 58;
+1242-        nArray2[11] = 87;
+1243-        int[] nArray3 = nArray2;
+1244-        int[] nArray4 = new int[]{200, 200, 100, 100, 100, 50, 1000, 50, 50, 80, 20, 1000};
+1245-        int[] nArray5 = new int[]{500, 500, 150, 150, 150, 100, 2000, 200, 200, 120, 30, 5000};
+1246-        int n2 = k19.n(1, 4);
+1247-        int[] nArray6 = new int[nArray3.length];
+1248-        int n3 = 0;
+1249-        while (n3 < nArray6.length) {
+1250-            nArray6[n3] = k19.n(nArray4[n3], nArray5[n3]);
+1251-            ++n3;
+1252-        }
+1253-        boolean[] blArray = new boolean[nArray3.length];
+1254-        n3 = 0;
+1255-        while (n3 < blArray.length) {
+1256-            blArray[n3] = true;
+1257-            ++n3;
+1258-        }
+1259-        int n4 = 0;
+1260-        while (n4 < n2 && n < byArray.length) {
+1261-            int n5 = 0;
+1262-            n3 = 0;
+1263-            while (n3 < blArray.length) {
+1264-                if (blArray[n3]) {
+1265-                    ++n5;
+1266-                }
+1267-                ++n3;
+1268-            }
+1269-            if (n5 == 0) break;
+1270-            int n6 = DoHoang091.g(n5);
+1271-            int n7 = -1;
+1272-            n3 = 0;
+1273-            while (n3 < blArray.length) {
+1274-                if (blArray[n3] && n6-- == 0) {
+1275-                    n7 = n3;
+1276-                    break;
+1277-                }
+1278-                ++n3;
+1279-            }
+1280-            if (n7 < 0) break;
+1281-            blArray[n7] = false;
+1282-            n = k19.a(byArray, nArray, n, nArray3[n7], nArray6[n7]);
+1283-            ++n4;
+1284-        }
+1285-        return n;
+1286-    }
+1287-
+1288-    private static int a(byte[] byArray, int[] nArray, int n, int n2, int n3) {
+1289-        if (n >= byArray.length) {
+1290-            return n;
+1291-        }
+1292-        byArray[n] = (byte)n2;
+1293-        nArray[n] = n3;
+1294-        return n + 1;
+1295-    }
+1296-
+1297-    private static void a(byte[][] byArray, int[][] nArray) {
+1298-        boolean bl = DoHoang091.g(6) == 0;
+1299-        int n = bl ? k19.n(0, 80) : 0;
+1300-        boolean bl2 = DoHoang091.g(6) == 0;
+1301-        int n2 = 3 + (bl ? 1 : 0) + (bl2 ? 3 : 0);
+1302-        byte[] byArray2 = new byte[n2];
+1303-        int[] nArray2 = new int[n2];
+1304-        byArray2[0] = 125;
+1305-        nArray2[0] = 3000;
+1306-        byArray2[1] = 117;
+1307-        nArray2[1] = 3000;
+1308-        byArray2[2] = 94;
+1309-        nArray2[2] = 10;
+1310-        int n3 = 3;
+1311-        if (bl) {
+1312-            byArray2[n3] = -120;
+1313-            nArray2[n3] = n;
+1314-            ++n3;
+1315-        }
+1316-        if (bl2) {
+1317-            byArray2[n3] = 127;
+1318-            nArray2[n3++] = 10;
+1319-            byArray2[n3] = -126;
+1320-            nArray2[n3++] = 10;
+1321-            byArray2[n3] = -125;
+1322-            nArray2[n3] = 10;
+1323-        }
+1324-        byArray[0] = byArray2;
+1325-        nArray[0] = nArray2;
+1326-    }
+1327-
+1328-    private static void a(int n, int n2, int n3, int n4) {
+1329-        boolean bl = false;
+1330-        if (n != 0) {
+1331-            k19.l()[70] = k19.m(k19.l()[70], n);
+1332-            bl = true;
+1333-        }
+1334-        if (n2 != 0) {
+1335-            k19.l()[71] = k19.m(k19.l()[71], n2);
+1336-            bl = true;
+1337-        }
+1338-        if (n3 != 0) {
+1339-            k19.l()[72] = k19.m(k19.l()[72], n3);
+1340-            bl = true;
+1341-        }
+1342-        if (n4 != 0) {
+1343-            k19.l()[73] = k19.m(k19.l()[73], n4);
+1344-            bl = true;
+1345-        }
+1346-        if (bl) {
+1347-            DoHoang091.G();
+1348-            DoHoang091.H();
+1349-        }
+1350-    }
+1351-
+1352-    private static int m(int n, int n2) {
+1353-        long l = (long)n + (long)n2;
+1354-        return l > Integer.MAX_VALUE ? Integer.MAX_VALUE : (l < Integer.MIN_VALUE ? Integer.MIN_VALUE : (int)l);
+1355-    }
+1356-
+1357-    private static int[] l() {
+1358-        return DoHoang091.z().cb;
+1359-    }
+1360-
+1361-    private static int c(String string) throws Exception {
+1362-        byte[] byArray = bd.find(string.hashCode());
+1363-        if (byArray == null) {
+1364-            return -1;
+1365-        }
+1366-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+1367-        try {
+1368-            int n = dataInputStream.readUnsignedShort();
+1369-            int[] nArray = new int[n];
+1370-            short[] sArray = new short[n];
+1371-            int n2 = 0;
+1372-            while (n2 < n) {
+1373-                nArray[n2] = dataInputStream.readInt();
+1374-                sArray[n2] = dataInputStream.readShort();
+1375-                ++n2;
+1376-            }
+1377-            n2 = dataInputStream.readInt();
+1378-            if (n2 <= 0) {
+1379-                return -1;
+1380-            }
+1381-            int n3 = DoHoang091.g(n2) + 1;
+1382-            int n4 = 0;
+1383-            int n5 = n - 1;
+1384-            while (n4 < n5) {
+1385-                int n6 = n4 + n5 >>> 1;
+1386-                if (nArray[n6] < n3) {
+1387-                    n4 = n6 + 1;
+1388-                    continue;
+1389-                }
+1390-                n5 = n6;
+1391-            }
+1392-            int n7 = sArray[n4] & 0xFFFF;
+1393-            return n7;
+1394-        }
+1395-        finally {
+1396-            dataInputStream.close();
+1397-        }
+1398-    }
+1399-
+1400-    private static int n(int n, int n2) {
+1401-        return n + DoHoang091.g(Math.max(1, n2 - n + 1));
+1402-    }
+1403-
+1404-    private static void c(int n, String string) throws Exception {
+1405-        int n2 = k19.l()[n];
+1406-        String string2 = n2 <= 0 ? "" : "1. " + DoHoang091.z().a + " ";
+1407-        DoHoang091.a(string, string2);
+1408-    }
+1409-
+1410-    private static void m() throws Exception {
+1411-        StringBuffer stringBuffer = new StringBuffer();
+1412-        stringBuffer.append("- S\u1ed1 b\u00f9a h\u00e1i l\u1ed9c : ").append(k19.r(k19.l()[70])).append("\n");
+1413-        stringBuffer.append("- S\u1ed1 b\u00e1nh ch\u01b0ng \u0111\u00e3 l\u00e0m : ").append(k19.r(k19.l()[71])).append("\n");
+1414-        stringBuffer.append("===C\u00d4NG TH\u1ee8C===\n\n");
+1415-        stringBuffer.append("B\u00e1nh t\u00e9t : 1 n\u1ebfp + 1 l\u00e1 dong + 1 \u0111\u1eadu xanh + 1 l\u1ea1t tre + 90k xu\n\n");
+1416-        stringBuffer.append("B\u00e1nh ch\u01b0ng : 1 n\u1ebfp + 1 l\u00e1 dong + 1 \u0111\u1eadu xanh + 1 l\u1ea1t tre + 1 th\u1ecbt heo\n\n");
+1417-        stringBuffer.append("T\u1ec9 l\u1ec7 m\u1edf \u0111\u1ed3 b\u00e1nh ch\u01b0ng v\u00e0 b\u00e1nh t\u00e9t l\u00e0 nh\u01b0 nhau\n\n");
+1418-        stringBuffer.append("\u0110\u1ed3 v\u0129nh vi\u1ec5n l\u00ean ktg khi m\u1edf b\u00e1nh bao g\u1ed3m : 5 lo\u1ea1i m\u1eb7t n\u1ea1 trang b\u1ecb 2, b\u1ea1ch h\u1ed3, ph\u01b0\u1ee3ng ho\u00e0ng b\u0103ng, h\u1ecfa k\u00ec l\u00e2n, l\u00e2n s\u01b0 v\u0169");
+1419-        DoHoang091.a("H\u01b0\u1edbng D\u1eabn", stringBuffer.toString());
+1420-    }
+1421-
+1422-    private static String r(int n) {
+1423-        int n2;
+1424-        String string = String.valueOf(n);
+1425-        StringBuffer stringBuffer = new StringBuffer(string.length() + string.length() / 3);
+1426-        int n3 = n2 = string.charAt(0) == '-' ? 1 : 0;
+1427-        if (n2 == 1) {
+1428-            stringBuffer.append('-');
+1429-        }
+1430-        int n4 = n2;
+1431-        while (n4 < string.length()) {
+1432-            if (n4 > n2 && (string.length() - n4) % 3 == 0) {
+1433-                stringBuffer.append(',');
+1434-            }
+1435-            stringBuffer.append(string.charAt(n4));
+1436-            ++n4;
+1437-        }
+1438-        return stringBuffer.toString();
+1439-    }
+1440-
+1441-    private static String n() {
+1442-        return "Time Ch\u1ed1t Top : 15/2 \n\nTop 1\nV\u0169 kh\u00ed 100 +16 khai h\u00f3a 9 tinh luy\u1ec7n 9 theo ph\u00e1i v\u0129nh vi\u1ec5n\n1000 \u0111\u00e1 danh v\u1ecdng 5\n1000 \u0111\u00e1 \u1ea5n t\u1ed9c 5\n\nTop 2\nV\u0169 kh\u00ed 100 +16 khai h\u00f3a 7 tinh luy\u1ec7n 7 theo ph\u00e1i v\u0129nh vi\u1ec5n\n1000 \u0111\u00e1 danh v\u1ecdng 4\n1000 \u0111\u00e1 \u1ea5n t\u1ed9c 4\n\nTop 3,4,5\nV\u0169 kh\u00ed 100 +16 khai h\u00f3a 5 tinh luy\u1ec7n 5 theo ph\u00e1i v\u0129nh vi\u1ec5n\n1000 \u0111\u00e1 danh v\u1ecdng 3\n1000 \u0111\u00e1 \u1ea5n t\u1ed9c 3\n1 vi\u00ean ng\u1ecdc 6 max option t\u1ef1 ch\u1ecdn\n\nTop 6,7,8,9,10\nV\u0169 kh\u00ed 100 +16 khai h\u00f3a 2 tinh luy\u1ec7n 2 theo ph\u00e1i 30 ng\u00e0y\n1000 \u0111\u00e1 danh v\u1ecdng 2\n1000 \u0111\u00e1 \u1ea5n t\u1ed9c 2";
+1443-    }
+1444-
+1445-    private static String o() {
+1446-        return "Time Ch\u1ed1t Top : 15/2 \n\nTop 1\nH\u1ecfa k\u1ef3 L\u00e2n v\u0129nh vi\u1ec5n ch\u1ecdn ch\u1ec9 s\u1ed1\n\u00c1o d\u00e0i v\u0129nh vi\u1ec5n\n1 vi\u00ean ng\u1ecdc 10 max option t\u1ef1 ch\u1ecdn\n\nTop 2\nH\u1ecfa k\u1ef3 L\u00e2n v\u0129nh vi\u1ec5n random ch\u1ec9 s\u1ed1\n\u00c1o d\u00e0i v\u0129nh vi\u1ec5n\n1 vi\u00ean ng\u1ecdc 8 max option t\u1ef1 ch\u1ecdn\n\nTop 3,4,5\nH\u1ecfa k\u1ef3 L\u00e2n v\u0129nh vi\u1ec5n random ch\u1ec9 s\u1ed1\n\u00c1o d\u00e0i v\u0129nh vi\u1ec5n\n1 vi\u00ean ng\u1ecdc 6 max option t\u1ef1 ch\u1ecdn\n\nTop 6,7,8,9,10\nH\u1ecfa k\u1ef3 L\u00e2n 30 ng\u00e0y\n\u00c1o d\u00e0i 30 ng\u00e0y";
+1447-    }
+1448-}
+1449-

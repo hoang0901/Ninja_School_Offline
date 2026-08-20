@@ -1,0 +1,183 @@
+1-/*
+2- * Decompiled with CFR 0.152.
+3- */
+4-final class k28 {
+5-    private static final int a = 248;
+6-    private static final int b = 539;
+7-    private static final int c = 540;
+8-    private static final int d = 820;
+9-    private static final int e = 821;
+10-    private static final int f = 822;
+11-    private static final int g = 824;
+12-    private static final int h = 826;
+13-    private static final int i = 774;
+14-    private static final int j = 775;
+15-    private static final int k = 786;
+16-    private static final int l = 787;
+17-    private static final int m = 788;
+18-    private static final int n = 789;
+19-    private static final int o = 537;
+20-    private static final int p = 538;
+21-    private static final int q = 564;
+22-    private static final int r = 1142;
+23-
+24-    private k28() {
+25-    }
+26-
+27-    static boolean a(int n, int n2) throws Exception {
+28-        if (n2 == 248 || n2 == 539 || n2 == 540) {
+29-            k28.b(n, n2);
+30-            return true;
+31-        }
+32-        if (n2 == 822 || n2 == 824 || n2 == 826) {
+33-            k28.c(n, n2);
+34-            return true;
+35-        }
+36-        if (n2 == 821) {
+37-            k28.a(n);
+38-            return true;
+39-        }
+40-        if (n2 == 775) {
+41-            k28.d(n, 774);
+42-            return true;
+43-        }
+44-        if (n2 == 789) {
+45-            k28.d(n, 787);
+46-            return true;
+47-        }
+48-        if (n2 == 788) {
+49-            k28.d(n, 786);
+50-            return true;
+51-        }
+52-        if (n2 == 564) {
+53-            k28.a(n, 34, 0x6DDD00L, 36000000L, "Ch\u1ec9 c\u00f3 th\u1ec3 s\u1eed d\u1ee5ng t\u1ed1i \u0111a 10 gi\u1edd.");
+54-            return true;
+55-        }
+56-        if (n2 == 1142) {
+57-            k28.a(n, 46, 18000000L, 360000000L, "Ch\u1ec9 c\u00f3 th\u1ec3 s\u1eed d\u1ee5ng t\u1ed1i \u0111a 10 gi\u1edd.");
+58-            return true;
+59-        }
+60-        if (n2 == 538 || n2 == 537) {
+61-            k28.e(n, n2);
+62-            return true;
+63-        }
+64-        return false;
+65-    }
+66-
+67-    private static void b(int n, int n2) throws Exception {
+68-        int n3;
+69-        long l;
+70-        int n4;
+71-        int n5 = 0;
+72-        if (n2 == 248) {
+73-            n4 = 22;
+74-            l = 18000000L;
+75-            n3 = 2;
+76-            n5 = 248;
+77-        } else if (n2 == 539) {
+78-            n4 = 32;
+79-            l = 3600000L;
+80-            n3 = 3;
+81-        } else {
+82-            n4 = 33;
+83-            l = 3600000L;
+84-            n3 = 4;
+85-        }
+86-        kd.b(n4, l, n3, n5);
+87-        DoHoang091.k0 k02 = DoHoang091.z();
+88-        k16.c(n, k02.L[n] & 0xFFFF);
+89-    }
+90-
+91-    private static void c(int n, int n2) throws Exception {
+92-        int n3;
+93-        int n4 = n2 == 822 ? 100 : (n3 = n2 == 824 ? 1000 : 2000);
+94-        int n5 = n2 == 822 ? 1000 : (n2 == 824 ? 5000 : 7000);
+95-        int n6 = n3 + DoHoang091.g(n5 - n3 + 1);
+96-        k32.c(n6);
+97-        DoHoang091.b("B\u1ea1n nh\u1eadn \u0111\u01b0\u1ee3c " + n6 + " l\u01b0\u1ee3ng");
+98-        k16.c(n, 1);
+99-    }
+100-
+101-    private static void a(int n) throws Exception {
+102-        DoHoang091.k0 k02 = DoHoang091.z();
+103-        if (k16.a(k02.K) < 0) {
+104:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+105-            return;
+106-        }
+107-        if ((k02.L[n] & 0xFFFF) < 10000) {
+108-            DoHoang091.b("B\u1ea1n kh\u00f4ng \u0111\u1ee7 10.000 L\u00f4ng kh\u1ec9.");
+109-            return;
+110-        }
+111-        if (k16.a(820, 1, false, (byte)0, (byte)0) < 0) {
+112-            return;
+113-        }
+114-        k16.c(n, 10000);
+115-    }
+116-
+117-    private static void d(int n, int n2) throws Exception {
+118-        boolean bl;
+119-        int n3;
+120-        DoHoang091.k0 k02 = DoHoang091.z();
+121-        int n4 = k28.a(k02, n2);
+122-        int n5 = n3 = n4 < 0 ? 0 : k02.ax[n4] & 0xFF;
+123-        if (n3 >= 10) {
+124-            DoHoang091.b(String.valueOf(k16.A(n2)) + " \u0111\u00e3 \u0111\u1ea1t c\u1ea5p t\u1ed1i \u0111a, kh\u00f4ng th\u1ec3 n\u00e2ng c\u1ea5p");
+125-            return;
+126-        }
+127-        int n6 = (n3 + 1) * 1000;
+128-        if ((k02.L[n] & 0xFFFF) < n6) {
+129-            DoHoang091.b("Ph\u1ea3i c\u00f3 \u0111\u1ee7 " + n6 + " m\u1ea3nh m\u1edbi c\u00f3 th\u1ec3 " + (n4 < 0 ? "ch\u1ebf t\u1ea1o" : "n\u00e2ng c\u1ea5p"));
+130-            return;
+131-        }
+132-        if (n4 < 0 && (n4 = k16.a(k02.au)) < 0) {
+133-            DoHoang091.a("Kho c\u1ea3i trang kh\u00f4ng c\u00f2n ch\u1ed7 tr\u1ed1ng.");
+134-            return;
+135-        }
+136-        k16.c(n, n6);
+137-        boolean bl2 = bl = k02.au[n4] < 0;
+138-        if (bl) {
+139-            k02.au[n4] = (short)n2;
+140-            k02.av[n4] = 1;
+141-            k02.aw[n4] = false;
+142-            k02.ay[n4] = 0;
+143-            k02.az[n4] = -1L;
+144-        }
+145-        k02.ax[n4] = (byte)(n3 + 1);
+146-        k0.a(k02);
+147-        DoHoang091.G();
+148-        DoHoang091.H();
+149-        if (k02.aA == (short)n2) {
+150-            DoHoang091.e();
+151-        }
+152-        DoHoang091.b(bl ? "Ch\u00fac m\u1eebng b\u1ea1n \u0111\u00e3 t\u1ea1o th\u00e0nh c\u00f4ng " + k16.A(n2) : "Ch\u00fac m\u1eebng b\u1ea1n \u0111\u00e3 n\u00e2ng c\u1ea5p th\u00e0nh c\u00f4ng " + k16.A(n2) + " l\u00ean c\u1ea5p " + (n3 + 1));
+153-    }
+154-
+155-    private static int a(DoHoang091.k0 k02, int n) {
+156-        int n2 = 0;
+157-        while (n2 < k02.au.length) {
+158-            if ((k02.au[n2] & 0xFFFF) == n && k02.au[n2] >= 0) {
+159-                return n2;
+160-            }
+161-            ++n2;
+162-        }
+163-        return -1;
+164-    }
+165-
+166-    private static void a(int n, int n2, long l, long l2, String string) throws Exception {
+167-        if (!kd.a(n2, l, l2, 0, 0)) {
+168-            DoHoang091.b(string);
+169-            return;
+170-        }
+171-        k16.c(n, 1);
+172-    }
+173-
+174-    private static void e(int n, int n2) throws Exception {
+175-        if (kd.a(40) || kd.a(41)) {
+176-            DoHoang091.b("Vui l\u00f2ng ch\u1edd h\u1ebft hi\u1ec7u l\u1ef1c nh\u00e3n ph\u00f9.");
+177-            return;
+178-        }
+179-        kd.a(n2 == 537 ? 41 : 40, 18000000L, 0);
+180-        k16.c(n, 1);
+181-    }
+182-}
+183-

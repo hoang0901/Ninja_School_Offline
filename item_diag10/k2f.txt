@@ -1,0 +1,621 @@
+102-        J = new byte[w.length];
+103-        K = new int[w.length];
+104-        L = new short[w.length];
+105-        M = new short[w.length];
+106-        N = new boolean[w.length];
+107-        O = new byte[w.length];
+108-        P = new int[w.length];
+109-        Q = new int[w.length][];
+110-        R = new byte[w.length][];
+111-        k2f.q();
+112-    }
+113-
+114-    static void a(DoHoang091.k0 k02) {
+115-        if (k02 == null || k02.cb == null) {
+116-            return;
+117-        }
+118-        if (k02.cb[0] > 0) {
+119-            if (k02.cb[108] <= 0) {
+120-                k02.cb[108] = 1;
+121-            }
+122-            if (k02.cb[109] <= 0) {
+123-                k02.cb[109] = 1;
+124-            }
+125-        }
+126-    }
+127-
+128-    static void b() {
+129-        int[] nArray = DoHoang091.z().cb;
+130-        nArray[108] = 1;
+131-        nArray[109] = 1;
+132-        H = 0;
+133-    }
+134-
+135-    static void c() {
+136-        int[] nArray = DoHoang091.z().cb;
+137-        nArray[108] = 0;
+138-        nArray[109] = 0;
+139-        H = 0;
+140-        if (y) {
+141-            k2f.a();
+142-        }
+143-    }
+144-
+145-    static int a(String string) {
+146-        if (!y) {
+147-            return 0;
+148-        }
+149-        if (z) {
+150-            return -2;
+151-        }
+152-        int n = k5.b(string);
+153-        if (n < 0) {
+154-            return -1;
+155-        }
+156-        H |= 1 << n;
+157-        return 1;
+158-    }
+159-
+160-    static boolean a(int n) {
+161-        return n >= 0 && n < 31 && (H & 1 << n) != 0;
+162-    }
+163-
+164-    static int d() {
+165-        int n = 0;
+166-        int n2 = H;
+167-        while (n2 != 0) {
+168-            n2 &= n2 - 1;
+169-            ++n;
+170-        }
+171-        return n;
+172-    }
+173-
+174-    static boolean e() {
+175-        return y;
+176-    }
+177-
+178-    static void f() throws Exception {
+179-        DoHoang091.k0 k02 = DoHoang091.z();
+180-        int[] nArray = k02.cb;
+181-        if (nArray[0] <= 0) {
+182-            DoHoang091.a("B\u1ea1n \u0111\u00e3 c\u00f3 gia t\u1ed9c \u0111\u00e2u.");
+183-            return;
+184-        }
+185-        if (y) {
+186-            if (k2f.c(k02.s)) {
+187-                DoHoang091.c(k2f.r());
+188-                return;
+189-            }
+190-            if (z) {
+191-                DoHoang091.a("L\u00e3nh \u0111\u1ecba gia t\u1ed9c \u0111\u00e3 b\u1eaft \u0111\u1ea7u, b\u1ea1n h\u00e3y tham gia v\u00e0o l\u1ea7n sau.");
+192-                return;
+193-            }
+194-            F = k02.s;
+195-            DoHoang091.a(80, 191, 144);
+196-            DoHoang091.c(k2f.r());
+197-            return;
+198-        }
+199-        if (nArray[108] <= 0) {
+200-            DoHoang091.a("Gia t\u1ed9c c\u1ee7a b\u1ea1n \u0111\u00e3 h\u1ebft l\u01b0\u1ee3t tham gia l\u00e3nh \u0111\u1ecba.");
+201-            return;
+202-        }
+203-        if (k16.a(k02.K) < 0) {
+204-            DoHoang091.a("H\u00e3y \u0111\u1ec3 l\u1ea1i 1 slot tr\u1ed1ng trong r\u01b0\u01a1ng \u0111\u1ec3 nh\u1eadn ch\u00eca kho\u00e1.");
+205-            return;
+206-        }
+207-        y = true;
+208-        z = false;
+209-        A = false;
+210-        B = false;
+211-        C = false;
+212-        D = 0;
+213-        E = 0;
+214-        F = k02.s;
+215-        G = System.currentTimeMillis() + 600000L;
+216-        k2f.p();
+217-        nArray[108] = nArray[108] - 1;
+218-        int n = k16.a(260, 1, true, (byte)0, (byte)0, System.currentTimeMillis() + 600000L, null, null);
+219-        if (n < 0) {
+220-            nArray[108] = nArray[108] + 1;
+221-            k2f.a();
+222:            DoHoang091.a("H\u00e0nh trang kh\u00f4ng \u0111\u1ee7 ch\u1ed7 tr\u1ed1ng.");
+223-            return;
+224-        }
+225-        DoHoang091.G();
+226-        DoHoang091.H();
+227-        DoHoang091.a(80, 191, 144);
+228-        DoHoang091.c(k2f.r());
+229-    }
+230-
+231-    static void b(int n) throws Exception {
+232-        DoHoang091.k0 k02 = DoHoang091.z();
+233-        int[] nArray = k02.cb;
+234-        if (nArray[0] <= 0) {
+235-            DoHoang091.b("C\u1ea7n c\u00f3 gia t\u1ed9c \u0111\u1ec3 s\u1eed d\u1ee5ng.");
+236-            return;
+237-        }
+238-        if (nArray[108] != 0) {
+239-            DoHoang091.b("Gia t\u1ed9c v\u1eabn c\u00f2n l\u01b0\u1ee3t v\u00e0o l\u00e3nh \u0111\u1ecba.");
+240-            return;
+241-        }
+242-        if (nArray[109] == 0) {
+243-            DoHoang091.b("\u0110\u00e3 h\u1ebft l\u01b0\u1ee3t s\u1eed d\u1ee5ng.");
+244-            return;
+245-        }
+246-        if (y) {
+247-            DoHoang091.b("L\u00e3nh \u0111\u1ecba hi\u1ec7n t\u1ea1i v\u1eabn ch\u01b0a k\u1ebft th\u00fac.");
+248-            return;
+249-        }
+250-        nArray[108] = nArray[108] + 1;
+251-        nArray[109] = nArray[109] - 1;
+252-        k16.c(n, 1);
+253-        DoHoang091.b("Gia t\u1ed9c nh\u1eadn \u0111\u01b0\u1ee3c th\u00eam 1 l\u1ea7n l\u00e3nh \u0111\u1ecba gia t\u1ed9c.");
+254-    }
+255-
+256-    static void g() throws Exception {
+257-        DoHoang091.k0 k02 = DoHoang091.z();
+258-        if (!y || !k2f.c(k02.s)) {
+259-            DoHoang091.b("L\u00e3nh \u0111\u1ecba gia t\u1ed9c \u0111\u00e3 \u0111\u01b0\u1ee3c kh\u00e9p l\u1ea1i.");
+260-            return;
+261-        }
+262-        if (!k16.d(260, 1)) {
+263-            DoHoang091.b("Kh\u00f4ng c\u00f3 ch\u00eca kh\u00f3a.");
+264-            return;
+265-        }
+266-        int n = k02.s;
+267-        if (n == 80) {
+268-            if (k2f.m(80)) {
+269-                DoHoang091.b("C\u1eeda n\u00e0y \u0111\u00e3 \u0111\u01b0\u1ee3c m\u1edf");
+270-                return;
+271-            }
+272-            k2f.n(80);
+273-            k2f.n(81);
+274-            k2f.n(82);
+275-            k2f.n(83);
+276-            z = true;
+277-            G = System.currentTimeMillis() + 3600000L;
+278-            DoHoang091.c(k2f.r());
+279-            DoHoang091.b("C\u1eeda si\u00eau t\u1ed1c, c\u1eeda ph\u1ea3n \u0111\u00f2n, c\u1eeda n\u00e9 tr\u00e1nh \u0111\u00e3 m\u1edf.");
+280-        } else if (n >= 87 && n <= 89) {
+281-            DoHoang091.b(String.valueOf(k02.a) + " \u0111\u00e3 c\u1eafm ch\u00eca kh\u00f3a c\u01a1 quan " + DoHoang091.u(n));
+282-            if (++E >= 3) {
+283-                if (!k2f.m(90)) {
+284-                    k2f.n(90);
+285-                } else {
+286-                    DoHoang091.b("C\u1eeda n\u00e0y \u0111\u00e3 \u0111\u01b0\u1ee3c m\u1edf");
+287-                }
+288-            }
+289-        } else if (n != 167) {
+290-            int n2 = n + 3;
+291-            if (!k2f.c(n2)) {
+292-                return;
+293-            }
+294-            if (!k2f.m(n2)) {
+295-                k2f.n(n2);
+296-                DoHoang091.b(String.valueOf(k02.a) + " \u0111\u00e3 c\u1eafm ch\u00eca kh\u00f3a c\u01a1 quan " + DoHoang091.u(n));
+297-            } else {
+298-                DoHoang091.b("C\u1eeda n\u00e0y \u0111\u00e3 \u0111\u01b0\u1ee3c m\u1edf");
+299-            }
+300-        }
+301-        DoHoang091.G();
+302-        DoHoang091.H();
+303-    }
+304-
+305-    static boolean a(int n, int n2) throws Exception {
+306-        boolean bl = k2f.c(n);
+307-        boolean bl2 = k2f.c(n2);
+308-        if (!bl && !bl2) {
+309-            return true;
+310-        }
+311-        if (!y) {
+312-            DoHoang091.a("L\u00e3nh \u0111\u1ecba gia t\u1ed9c \u0111\u00e3 \u0111\u01b0\u1ee3c kh\u00e9p l\u1ea1i.");
+313-            return false;
+314-        }
+315-        if (bl && bl2) {
+316-            if (n2 != 167 && k2f.m(n2)) {
+317-                return true;
+318-            }
+319-            DoHoang091.a("C\u1eeda n\u00e0y v\u1eabn ch\u01b0a \u0111\u01b0\u1ee3c m\u1edf.");
+320-            return false;
+321-        }
+322-        DoHoang091.a("C\u1eeda n\u00e0y v\u1eabn ch\u01b0a \u0111\u01b0\u1ee3c m\u1edf.");
+323-        return false;
+324-    }
+325-
+326-    static boolean h() throws Exception {
+327-        int n;
+328-        int n2;
+329-        int n3;
+330-        if (!y || !k2f.c(DoHoang091.r())) {
+331-            return false;
+332-        }
+333-        DoHoang091.k0 k02 = DoHoang091.z();
+334-        if (!k02.z) {
+335-            return false;
+336-        }
+337-        if (k02.s == 167) {
+338-            n3 = 167;
+339-            n2 = 230 + DoHoang091.g(196);
+340-            n = 120;
+341-        } else {
+342-            n3 = 80;
+343-            n2 = 191;
+344-            n = 144;
+345-        }
+346-        DoHoang091.b(k02);
+347-        DoHoang091.g();
+348-        DoHoang091.a(n3, n2, n);
+349-        DoHoang091.c(k02);
+350-        DoHoang091.c(k2f.r());
+351-        return true;
+352-    }
+353-
+354-    static void i() throws Exception {
+355-        if (!y || G <= 0L) {
+356-            return;
+357-        }
+358-        if (k2f.r() > 0) {
+359-            return;
+360-        }
+361-        if (A) {
+362-            A = false;
+363-            B = false;
+364-            C = false;
+365-            k2f.k(167);
+366-            G = System.currentTimeMillis() + 1800000L;
+367-            int n = 230 + DoHoang091.g(196);
+368-            DoHoang091.a(167, n, 120);
+369-            DoHoang091.c(k2f.r());
+370-            DoHoang091.b("\u0110\u00e2y n\u01a1i m\u00e0 c\u00e1c c\u1ed1 nh\u1eabn gi\u1ea3 \u0111\u00e3 t\u1eebng \u0111i m\u00e0 kh\u00f4ng tr\u1edf v\u1ec1, h\u00e3y c\u1ea9n th\u1eadn v\u1edbi qu\u00e1i v\u1eadt v\u00e0 kh\u00f4ng kh\u00ed \u1edf \u0111\u00e2y.");
+371-            return;
+372-        }
+373-        k2f.o();
+374-    }
+375-
+376-    static boolean c(int n) {
+377-        return k2f.l(n) >= 0;
+378-    }
+379-
+380-    static boolean d(int n) {
+381-        return y && k2f.c(n);
+382-    }
+383-
+384-    static int b(int n, int n2) {
+385-        if (!k2f.d(n)) {
+386-            return n2;
+387-        }
+388-        int n3 = k2f.l(n);
+389-        if (n3 < 0) {
+390-            return n2;
+391-        }
+392-        int n4 = k2f.n(n, n2);
+393-        if (n != 167 && J[n3] >= 1) {
+394-            ++n4;
+395-            if (J[n3] >= 2 && Q[n3] != null) {
+396-                n4 += Q[n3].length;
+397-            }
+398-        }
+399-        return n4;
+400-    }
+401-
+402-    static void c(int n, int n2) {
+403-        if (!k2f.d(n)) {
+404-            return;
+405-        }
+406-        S = n;
+407-        T = n2;
+408-        U = new byte[n2];
+409-        V = new short[n2];
+410-        W = new short[n2];
+411-        X = new boolean[n2];
+412-        k2f.o(n, k2f.n(n, n2));
+413-    }
+414-
+415-    static void a(int n, int n2, int n3, short s, short s2, boolean bl) {
+416-        if (!k2f.d(n) || n != S || n2 < 0 || n2 >= T) {
+417-            return;
+418-        }
+419-        k2f.U[n2] = (byte)n3;
+420-        k2f.V[n2] = s;
+421-        k2f.W[n2] = s2;
+422-        k2f.X[n2] = bl;
+423-    }
+424-
+425-    static boolean a(int n, int n2, int n3) {
+426-        if (!k2f.d(n)) {
+427-            return true;
+428-        }
+429-        if (n == 167 && B) {
+430-            return n2 >= 127;
+431-        }
+432-        return n3 != 81 && n3 != 209;
+433-    }
+434-
+435-    static int a(int n, int n2, int n3, boolean bl) {
+436-        int n4 = k2f.l(n);
+437-        k2f.o(n, k2f.n(n, T));
+438-        int[] nArray = I[n4];
+439-        if (n2 < 0 || n2 >= nArray.length) {
+440-            return 0;
+441-        }
+442-        if (nArray[n2] == -1) {
+443-            nArray[n2] = k2f.b(n, n3, bl);
+444-        }
+445-        return nArray[n2];
+446-    }
+447-
+448-    static int e(int n) {
+449-        if (n == 82) {
+450-            return Integer.MAX_VALUE;
+451-        }
+452-        return n == 223 ? 2000000000 : 2000000;
+453-    }
+454-
+455-    static int a(int n, boolean bl, int n2) {
+456-        int n3 = 2100;
+457-        if (bl) {
+458-            n3 *= 20;
+459-        } else if (n2 == 1) {
+460-            n3 *= 2;
+461-        } else if (n2 == 2) {
+462-            n3 *= 3;
+463-        }
+464-        if (n == 223) {
+465-            n3 = n3 / 100 * 5;
+466-        }
+467-        return n3;
+468-    }
+469-
+470-    static int d(int n, int n2) {
+471-        return n != 167 && n2 == 82 ? 2 : 0;
+472-    }
+473-
+474-    static boolean a(int n, boolean bl) {
+475-        return bl;
+476-    }
+477-
+478-    static int a(int n, int n2, boolean bl) {
+479-        return 0;
+480-    }
+481-
+482-    static int f(int n) {
+483-        int n2 = k2f.l(n);
+484-        if (!k2f.d(n) || n2 < 0 || n == 167 || J[n2] == 0) {
+485-            return 0;
+486-        }
+487-        int n3 = 1;
+488-        if (J[n2] >= 2 && Q[n2] != null) {
+489-            n3 += Q[n2].length;
+490-        }
+491-        return n3;
+492-    }
+493-
+494-    static int e(int n, int n2) {
+495-        int n3 = k2f.l(n);
+496-        if (n2 == 0) {
+497-            return K[n3];
+498-        }
+499-        return 81;
+500-    }
+501-
+502-    static int f(int n, int n2) {
+503-        int n3 = k2f.l(n);
+504-        if (n2 == 0) {
+505-            return P[n3];
+506-        }
+507-        int[] nArray = Q[n3];
+508-        int n4 = n2 - 1;
+509-        return nArray == null || n4 < 0 || n4 >= nArray.length ? 0 : nArray[n4];
+510-    }
+511-
+512-    static int g(int n, int n2) {
+513-        return n2 == 0 ? 20000000 : 2000000;
+514-    }
+515-
+516-    static int g(int n) {
+517-        return n == 0 ? 1 : 0;
+518-    }
+519-
+520-    static int h(int n, int n2) {
+521-        int n3 = k2f.l(n);
+522-        if (n2 != 0) {
+523-            return 2100;
+524-        }
+525-        if (N[n3]) {
+526-            return 42000;
+527-        }
+528-        if (K[n3] == 82) {
+529-            return 6300;
+530-        }
+531-        return 2100;
+532-    }
+533-
+534-    static boolean i(int n, int n2) {
+535-        return n2 == 0 && N[k2f.l(n)];
+536-    }
+537-
+538-    static int j(int n, int n2) {
+539-        return k2f.e(n, n2) == 81 ? 20 : 0;
+540-    }
+541-
+542-    static int k(int n, int n2) {
+543-        int n3 = k2f.l(n);
+544-        if (n2 == 0) {
+545-            return L[n3];
+546-        }
+547-        return k2f.b(n2 - 1, true);
+548-    }
+549-
+550-    static int l(int n, int n2) {
+551-        int n3 = k2f.l(n);
+552-        if (n2 == 0) {
+553-            return M[n3];
+554-        }
+555-        return k2f.b(n2 - 1, false);
+556-    }
+557-
+558-    static int m(int n, int n2) {
+559-        int n3 = k2f.l(n);
+560-        if (n2 == 0) {
+561-            return O[n3] == 0 ? 1 : O[n3];
+562-        }
+563-        byte[] byArray = R[n3];
+564-        int n4 = n2 - 1;
+565-        return byArray == null || n4 < 0 || n4 >= byArray.length || byArray[n4] == 0 ? 1 : byArray[n4];
+566-    }
+567-
+568-    static void b(int n, int n2, int n3) {
+569-        if (!k2f.d(n)) {
+570-            return;
+571-        }
+572-        int n4 = k2f.l(n);
+573-        int n5 = k2f.n(n, T);
+574-        if (n2 >= 0 && n2 < n5) {
+575-            k2f.o(n, n5);
+576-            k2f.I[n4][n2] = Math.max(0, n3);
+577-        } else if (n != 167 && J[n4] >= 1 && n2 == n5) {
+578-            k2f.P[n4] = Math.max(0, n3);
+579-        } else if (n != 167 && J[n4] >= 2) {
+580-            int n6 = n2 - n5 - 1;
+581-            if (Q[n4] != null && n6 >= 0 && n6 < Q[n4].length) {
+582-                k2f.Q[n4][n6] = Math.max(0, n3);
+583-            }
+584-        }
+585-    }
+586-
+587-    static void c(int n, int n2, int n3) {
+588-        k2f.b(n, n2, n3);
+589-        if (!k2f.d(n) || n == 167) {
+590-            return;
+591-        }
+592-        int n4 = k2f.l(n);
+593-        int n5 = k2f.n(n, T);
+594-        int n6 = n2 - n5;
+595-        if (n6 < 0 || k2f.e(n, n6) != 81) {
+596-            return;
+597-        }
+598-        if (n6 == 0) {
+599-            k2f.O[n4] = (byte)(1 + DoHoang091.g(3));
+600-        } else if (R[n4] != null && n6 - 1 < R[n4].length) {
+601-            k2f.R[n4][n6 - 1] = (byte)(1 + DoHoang091.g(3));
+602-        }
+603-    }
+604-
+605-    static void a(int n, int n2, int n3, int n4) throws Exception {
+606-        if (!k2f.d(n)) {
+607-            return;
+608-        }
+609-        if (n3 == 82) {
+610-            k2f.m();
+611-            return;
+612-        }
+613-        if (n == 167) {
+614-            if (DoHoang091.c()) {
+615-                if (B) {
+616-                    k2f.n();
+617-                } else {
+618-                    k2f.l();
+619-                }
+620-            }
+621-            return;
+622-        }
+623-        int n5 = k2f.l(n);
+624-        if (n4 == 0 && J[n5] == 0 && DoHoang091.c()) {
+625-            k2f.h(n);
+626-        } else if (n4 == 1 && J[n5] >= 1) {
+627-            k2f.i(n);
+628-        }
+629-    }
+630-
+631-    static byte[] a(byte[] byArray, int n) throws Exception {
+632-        int n2;
+633-        int n3;
+634-        if (!k2f.d(n) || byArray == null) {
+635-            return byArray;
+636-        }
+637-        int n4 = k2f.a(byArray);
+638-        if (n4 < 0) {
+639-            return byArray;
+640-        }
+641-        int n5 = byArray[n4] & 0xFF;
+642-        int n6 = n4 + 1 + n5 * 23;
+643-        if (n6 > byArray.length) {
+644-            return byArray;
+645-        }
+646-        int n7 = k2f.b(n, n5);
+647-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(byArray.length + 184);
+648-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+649-        dataOutputStream.write(byArray, 0, n4);
+650-        dataOutputStream.writeByte(n7);
+651-        int n8 = 0;
+652-        int n9 = 0;
+653-        while (n9 < n5) {
+654-            boolean bl;
+655-            n3 = n4 + 1 + n9 * 23;
+656-            n2 = byArray[n3 + 5] & 0xFF;
+657-            boolean bl2 = bl = byArray[n3 + 22] != 0;
+658-            if (k2f.a(n, n9, n2)) {
+659-                int n10 = k2f.a(n, n8, n2, bl);
+660-                int n11 = k2f.d(n, n2);
+661-                k2f.a(dataOutputStream, n2, byArray[n3 + 6] & 0xFF, n10, 100, k2f.e(n2), k2f.b(byArray, n3 + 16), k2f.b(byArray, n3 + 18), n11, k2f.a(n2, bl));
+662-                ++n8;
+663-            }
+664-            ++n9;
+665-        }
+666-        n9 = k2f.f(n);
+667-        n3 = 0;
+668-        while (n3 < n9) {
+669-            n2 = k2f.f(n, n3);
+670-            k2f.a(dataOutputStream, k2f.e(n, n3), k2f.m(n, n3), n2, 100, k2f.g(n, n3), (short)k2f.k(n, n3), (short)k2f.l(n, n3), k2f.g(n3), k2f.i(n, n3));
+671-            ++n3;
+672-        }
+673-        dataOutputStream.write(byArray, n6, byArray.length - n6);
+674-        dataOutputStream.flush();
+675-        return byteArrayOutputStream.toByteArray();
+676-    }
+677-
+678-    private static void h(int n) throws Exception {
+679-        int n2 = k2f.l(n);
+680-        if (n2 < 0 || J[n2] != 0 || S != n || T < 1) {
+681-            return;
+682-        }
+683-        int n3 = DoHoang091.g(Math.max(1, T - 1));
+684-        k2f.J[n2] = 1;
+685-        k2f.K[n2] = U[n3] & 0xFF;
+686-        k2f.L[n2] = V[n3];
+687-        k2f.M[n2] = W[n3];
+688-        k2f.N[n2] = X[n3];
+689-        k2f.O[n2] = (byte)(1 + DoHoang091.g(3));
+690-        k2f.P[n2] = 20000000;
+691-        DoHoang091.d();
+692-    }
+693-
+694-    private static void i(int n) throws Exception {
+695-        int n2 = k2f.l(n);
+696-        if (n2 < 0 || J[n2] == 0 || S != n) {
+697-            return;
+698-        }
+699-        int n3 = 0;
+700-        int n4 = 0;
+701-        while (n4 < T) {
+702-            if ((U[n4] & 0xFF) == 81) {
+703-                ++n3;
+704-            }
+705-            ++n4;
+706-        }
+707-        int n5 = Q[n2] == null ? 0 : Q[n2].length;
+708-        int[] nArray = new int[n5 + n3];
+709-        byte[] byArray = new byte[n5 + n3];
+710-        if (n5 > 0) {
+711-            System.arraycopy(Q[n2], 0, nArray, 0, n5);
+712-            System.arraycopy(R[n2], 0, byArray, 0, n5);
+713-        }
+714-        n4 = n5;
+715-        while (n4 < nArray.length) {
+716-            nArray[n4] = 2000000;
+717-            byArray[n4] = (byte)(1 + DoHoang091.g(3));
+718-            ++n4;
+719-        }
+720-        k2f.Q[n2] = nArray;
+721-        k2f.R[n2] = byArray;
+722-        k2f.J[n2] = 2;

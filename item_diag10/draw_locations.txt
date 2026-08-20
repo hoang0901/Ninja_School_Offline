@@ -1,0 +1,5 @@
+cfrout/Class_dg.java:21:        this.a.drawImage(image, n *= b, n2 *= b, n3);
+cfrout/Class_dg.java:54:        this.a.drawRegion(image, n *= b, n2 *= b, n3 *= b, n4 *= b, n5, n6 *= b, n7 *= b, n8);
+cfrout/Class_do.java:133:    protected final void paint(Graphics graphics) {
+cfrout/Class_ds.java:594:        Class_do.c.repaint();
+cfrout/Class_ei.java:281:            System.out.println("CreateCharScr.paint(): " + q[0]);

@@ -1,0 +1,67 @@
+name: Inspect hoang restore data
+on:
+  push:
+    branches: [chatgpt/restore-hoang-sword-129]
+    paths: [.github/workflows/inspect-hoang-restore.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Inspect old VIP seed, current flow and item catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          git show 0bc8735629cf34d22bf0ebec6f14dd6ac8a02ef3:Nso_Offline_By_h0901.jar > /tmp/vip.jar
+          cp Nso_Offline_By_h0901.jar /tmp/current.jar
+          curl -fsSL -o /tmp/cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          rm -rf /tmp/vipsrc /tmp/cursrc
+          mkdir -p /tmp/vipsrc /tmp/cursrc
+          java -jar /tmp/cfr.jar /tmp/vip.jar --outputdir /tmp/vipsrc >/dev/null 2>&1 || true
+          java -jar /tmp/cfr.jar /tmp/current.jar --outputdir /tmp/cursrc >/dev/null 2>&1 || true
+          python3 - <<'PY' > /tmp/items.tsv
+          import openpyxl
+          wb=openpyxl.load_workbook('Danh_sach_ID_vat_pham.xlsx',data_only=True,read_only=True)
+          for ws in wb.worksheets:
+              print('### SHEET',ws.title)
+              for row in ws.iter_rows(values_only=True):
+                  print('\t'.join('' if v is None else str(v) for v in row))
+          PY
+          {
+            echo '=== OLD VIP JAR SHA ==='; sha256sum /tmp/vip.jar
+            echo '=== CURRENT JAR SHA ==='; sha256sum /tmp/current.jar
+            echo '=== OLD VIP ADMIN SEED RESOURCE ==='
+            jar tf /tmp/vip.jar | grep -Ei 'admin_seed|seed|rms' || true
+            unzip -p /tmp/vip.jar offline/admin_seed.rms >/tmp/admin_seed_old.rms 2>/dev/null || true
+            if [ -s /tmp/admin_seed_old.rms ]; then echo "seed_size=$(stat -c%s /tmp/admin_seed_old.rms)"; xxd -g1 -l 512 /tmp/admin_seed_old.rms; fi
+            echo '=== CURRENT ADMIN SEED RESOURCE ==='
+            unzip -p /tmp/current.jar offline/admin_seed.rms >/tmp/admin_seed_current.rms 2>/dev/null || true
+            if [ -s /tmp/admin_seed_current.rms ]; then echo "seed_size=$(stat -c%s /tmp/admin_seed_current.rms)"; xxd -g1 -l 512 /tmp/admin_seed_current.rms; fi
+            echo '=== OLD VIP zHoangVipStarter / seed methods ==='
+            grep -n -B20 -A220 -E 'zHoangVipStarter|private static k0 ar\(|private static byte\[\] ao\(|private static boolean ap\(' /tmp/vipsrc/DoHoang091.java | head -n 1800 || true
+            echo '=== CURRENT zHoangVipStarter / seed methods ==='
+            grep -n -B20 -A220 -E 'zHoangVipStarter|private static k0 ar\(|private static byte\[\] ao\(|private static boolean ap\(' /tmp/cursrc/DoHoang091.java | head -n 1800 || true
+            echo '=== OLD K0 CLASS SAVE/LOAD/CTOR ==='
+            grep -n -B20 -A900 -E 'class k0|k0\(String|DataInputStream|DataOutputStream|writeShort|readShort|writeByte|readByte' /tmp/vipsrc/DoHoang091\$k0.java | head -n 2200 || true
+            echo '=== ITEM SHEET HEADER/FIRST 80 ==='
+            head -n 100 /tmp/items.tsv
+            echo '=== ITEM SHEET SWORD/EQUIP CANDIDATES ==='
+            grep -i -E 'kiếm|kiem|áo|ao |quần|quan|găng|gang|giày|giay|nón|non|nhẫn|nhan|ngọc|ngoc|dây chuyền|day chuyen|phù|phu|vũ khí|vu khi' /tmp/items.tsv | tail -n 1200 || true
+            echo '=== HIGH LEVEL / 129+ LINES ==='
+            grep -E $'\t(12[0-9]|13[0-9]|14[0-9]|15[0-9])\t|[Ll]v.? ?(12[0-9]|13[0-9])|cấp.? ?(12[0-9]|13[0-9])' /tmp/items.tsv | tail -n 1200 || true
+            echo '=== HAIR/HEAD RESOURCES ==='
+            jar tf /tmp/current.jar | grep -Ei 'hair|head|toc|tóc|charpart|part' | head -n 1500 || true
+            echo '=== HAIR/HEAD TEXT HITS ==='
+            grep -Rni -E 'tóc|toc|hair|head' /tmp/cursrc | head -n 1500 || true
+          } > hoang_restore_inspect.txt
+          git add -- hoang_restore_inspect.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: capture hoang restore inspection'
+          git push origin HEAD:chatgpt/restore-hoang-sword-129

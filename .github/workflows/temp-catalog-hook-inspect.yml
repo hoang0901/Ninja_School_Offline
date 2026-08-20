@@ -10,32 +10,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect bridge hooks
+      - name: Inspect catalog receive methods
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/chook catalog_hook && mkdir -p /tmp/chook catalog_hook
+          rm -rf /tmp/chook catalog_receive && mkdir -p /tmp/chook catalog_receive
           cd /tmp/chook
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
-          mkdir out
-          for c in OfflineBridge OfflineDeleteMenu DoHoang091 dt Class_de Class_fp; do
-            unzip -p game.jar "$c.class" > "$c.class" || true
-            java -jar cfr.jar "$c.class" --extraclasspath game.jar --outputdir out --silent true >/tmp/$c.log 2>&1 || true
-          done
-          for f in out/*.java; do
-            [ -f "$f" ] || continue
-            b=$(basename "$f" .java)
-            grep -n -B100 -A300 -E 'OfflineDeleteMenu|OfflineBridge|case 29|case 63|new Class_de|Class_fp|writeByte|writeShort|send|a\(byte' "$f" | head -20000 > "$GITHUB_WORKSPACE/catalog_hook/${b}.txt" || true
-          done
-          jar tf game.jar | grep '^javax/microedition/lcdui/Canvas.class$' > "$GITHUB_WORKSPACE/catalog_hook/has_canvas.txt" || true
+          unzip -p game.jar k1d.class > k1d.class
+          java -jar cfr.jar k1d.class --extraclasspath game.jar --outputdir out --silent true >/tmp/k1d.log 2>&1 || true
+          f=out/k1d.java
+          grep -n -B160 -A520 -E 'Catalog v|Nhận vật phẩm|30014|case 267:|case 269:|case 324:|static void x\(|static void y\(|static void z\(|void x\(|void y\(|void z\(|private static void [xyz]\(' "$f" | head -30000 > "$GITHUB_WORKSPACE/catalog_receive/k1d_catalog.txt" || true
+          grep -n -B120 -A400 -E 'DoHoang091\.a\("ID item|30014|z\(|writeShort|writeInt|writeByte' "$f" | head -22000 > "$GITHUB_WORKSPACE/catalog_receive/k1d_receive.txt" || true
+          javap -classpath game.jar -p -s k1d > "$GITHUB_WORKSPACE/catalog_receive/k1d_signatures.txt"
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add catalog_hook
+          git add catalog_receive
           git diff --cached --quiet && exit 0
-          git commit -m "chore: inspect catalog bridge hooks"
+          git commit -m "chore: inspect catalog receive flow"
           git push

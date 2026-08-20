@@ -1,0 +1,51 @@
+name: Inspect thien vuong weapon data
+on:
+  push:
+    branches: [chatgpt/hoang-thien-vuong-vo-cuc-kiem16]
+    paths: [.github/workflows/inspect-thien-vuong-weapon.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Inspect catalog and equip fields
+        shell: bash
+        run: |
+          set -euo pipefail
+          J=Nso_Offline_By_h0901.jar
+          python3 - <<'PY' > /tmp/items.tsv
+          import openpyxl
+          wb=openpyxl.load_workbook('Danh_sach_ID_vat_pham.xlsx',data_only=True,read_only=True)
+          for ws in wb.worksheets:
+              print('###',ws.title)
+              for row in ws.iter_rows(values_only=True):
+                  print('\t'.join('' if v is None else str(v) for v in row))
+          PY
+          javap -classpath "$J" -p -c 'DoHoang091$k0' > /tmp/k0.txt
+          jar tf "$J" | grep '\.class$' | sed 's#/#.#g;s/\.class$//' > /tmp/classes.txt
+          : > /tmp/uses.txt
+          while IFS= read -r c; do
+            out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B25 -A70 -E 'DoHoang091\$k0\.(H|I|J|T|U|V|W|X|Y|Z|aa|ab|ac|ad|ae|af|ag|ah|ai|aj|ak):|\+16|cuong|cường|weapon|vũ khí|vu khi' || true)
+            if [ -n "$out" ]; then { echo "===== $c ====="; echo "$out"; } >> /tmp/uses.txt; fi
+          done < /tmp/classes.txt
+          {
+            echo '=== EXACT ITEM NAME ==='
+            grep -i -E 'Thiên Vương.*Vô Cực.*Kiếm|Thien Vuong.*Vo Cuc.*Kiem|Vô Cực Kiếm|Vo Cuc Kiem' /tmp/items.tsv || true
+            echo '=== THIEN VUONG CANDIDATES ==='
+            grep -i -E 'Thiên Vương|Thien Vuong' /tmp/items.tsv | head -n 300 || true
+            echo '=== KIEM CANDIDATES ==='
+            grep -i -E 'Kiếm|Kiem' /tmp/items.tsv | tail -n 500 || true
+            echo '=== K0 SAVE LOAD EQUIP ==='
+            grep -n -B20 -A900 -E 'writeShort|readShort|writeByte|readByte|writeInt|readInt|Field (H|I|J|T|U|V|W|X|Y|Z|aa|ab|ac|ad|ae|af|ag|ah|ai|aj|ak)' /tmp/k0.txt | head -n 2600 || true
+            echo '=== FIELD USES ==='
+            head -n 5000 /tmp/uses.txt
+          } > thien_vuong_weapon_inspect.txt
+          git add -- thien_vuong_weapon_inspect.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: capture thien vuong weapon mapping'
+          git push origin HEAD:chatgpt/hoang-thien-vuong-vo-cuc-kiem16

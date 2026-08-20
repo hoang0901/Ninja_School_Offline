@@ -1,0 +1,42 @@
+name: Inspect data manager UI
+on:
+  push:
+    branches: [chatgpt/data-manager-ui]
+    paths: [.github/workflows/temp-inspect-data-manager-ui.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/data-manager-ui
+          fetch-depth: 0
+      - name: Inspect login/menu bytecode
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/uiinspect && mkdir -p /tmp/uiinspect/classes
+          cd /tmp/uiinspect
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          jar tf game.jar > entries.txt
+          {
+            echo '=== MANIFEST ==='
+            unzip -p game.jar META-INF/MANIFEST.MF || true
+            echo '=== STRING MATCHES ==='
+            for c in $(grep '\.class$' entries.txt); do
+              unzip -p game.jar "$c" | strings | grep -E 'Chơi|Sao lưu|Khôi phục|Xóa nhân vật|Quản lý|Đổi tài khoản|Máy Chủ|Cập nhật máy chủ|Tài khoản|Mật khẩu' >/tmp/hit.txt || true
+              if [ -s /tmp/hit.txt ]; then echo "--- $c"; cat /tmp/hit.txt; fi
+            done
+            echo '=== Class_ds ==='
+            javap -classpath game.jar -p -c -verbose Class_ds 2>/dev/null || true
+            echo '=== CharacterDelete ==='
+            javap -classpath game.jar -p -c CharacterDelete 2>/dev/null || true
+            echo '=== DoHoang091 public signatures ==='
+            javap -classpath game.jar -p DoHoang091 2>/dev/null || true
+          } > "$GITHUB_WORKSPACE/data_manager_ui_inspect.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- data_manager_ui_inspect.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect login menu for data manager UI'
+          git push origin HEAD:chatgpt/data-manager-ui

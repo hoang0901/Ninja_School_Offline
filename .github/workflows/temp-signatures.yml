@@ -1,0 +1,30 @@
+name: Temporary signatures
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-signatures.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump signatures only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf signatures && mkdir signatures
+          for c in Class_ct Class_fj Class_cy Class_fe Class_dw Class_dg Class_da; do
+            javap -classpath Nso_Offline_By_h0901.jar -p -s "$c" > "signatures/${c}.txt" 2>&1 || true
+          done
+      - name: Commit diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add signatures
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect UI signatures"
+          git push

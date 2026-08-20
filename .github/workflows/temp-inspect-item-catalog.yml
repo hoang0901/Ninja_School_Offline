@@ -1,0 +1,64 @@
+name: Temporary inspect item catalog
+on:
+  push:
+    branches: [chatgpt/item-catalog-grid]
+    paths: [.github/workflows/temp-inspect-item-catalog.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect current JAR UI and item menu classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect/classes
+          cd /tmp/nsoinspect
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          unzip -q game.jar -d classes
+          {
+            echo '=== MATCHED CLASS FILES ==='
+            for term in 'Nhận vật phẩm' 'Nhận xu' 'Nhận lượng' 'Nhận yên' 'Xóa toàn bộ vật phẩm trong hành trang' 'Xóa nhân vật đang chơi' 'Fake phái'; do
+              echo "--- TERM: $term ---"
+              grep -R -a -l -F "$term" classes --include='*.class' || true
+            done
+            echo
+            echo '=== HELPER CLASSES PRESENT ==='
+            for f in OfflineDeleteMenu.class InventoryClear.class CharacterDelete.class FakeClassState.class; do
+              if [ -f "classes/$f" ]; then echo "$f"; fi
+            done
+          } > "$GITHUB_WORKSPACE/item_catalog_report.txt"
+
+          matches=$(grep -R -a -l -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ vật phẩm trong hành trang|Xóa nhân vật đang chơi|Fake phái' classes --include='*.class' | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u || true)
+          {
+            echo
+            echo '=== JAVAP MATCHES ==='
+            for c in $matches; do
+              echo
+              echo "##### CLASS $c #####"
+              javap -classpath game.jar -c -p -verbose "$c" 2>&1 || true
+            done
+          } >> "$GITHUB_WORKSPACE/item_catalog_report.txt"
+
+          # Find likely inventory/catalog UI classes by constant-pool references to helper/data classes.
+          {
+            echo
+            echo '=== CLASSES REFERENCING OfflineDeleteMenu / InventoryClear ==='
+            for f in classes/*.class; do
+              if grep -a -q -E 'OfflineDeleteMenu|InventoryClear' "$f"; then
+                basename "$f" .class
+              fi
+            done
+          } >> "$GITHUB_WORKSPACE/item_catalog_report.txt"
+      - name: Commit diagnostic report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- item_catalog_report.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect item catalog UI"
+          git push

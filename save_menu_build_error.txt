@@ -1,0 +1,953 @@
+=== source lines ===
+24 src/Build.java
+import java.io.*;
+import java.util.*;
+import java.util.jar.*;
+import org.objectweb.asm.*;
+import org.objectweb.asm.tree.*;
+  }
+  static byte[] patch(byte[] in,String cls){ClassNode c=new ClassNode();new ClassReader(in).accept(c,0);for(Object o:c.methods){MethodNode m=(MethodNode)o;if(cls.equals("Class_da")&&m.name.equals("startApp")&&m.desc.equals("()V")){m.instructions.clear();m.tryCatchBlocks.clear();if(m.localVariables!=null)m.localVariables.clear();m.instructions.add(new MethodInsnNode(INVOKESTATIC,"OfflineStartMenu","ensureGameThread","()V",false));m.instructions.add(new VarInsnNode(ALOAD,0));m.instructions.add(new MethodInsnNode(INVOKESTATIC,"OfflineStartMenu","show","(LClass_da;)V",false));m.instructions.add(new InsnNode(RETURN));m.maxLocals=1;m.maxStack=1;}if(cls.equals("CharacterDelete")&&m.name.equals("deleteCurrent")&&m.desc.equals("()Z")){m.instructions.clear();m.tryCatchBlocks.clear();if(m.localVariables!=null)m.localVariables.clear();m.instructions.add(new MethodInsnNode(INVOKESTATIC,"OfflineStartMenu","deleteCurrent","()Z",false));m.instructions.add(new InsnNode(IRETURN));m.maxLocals=0;m.maxStack=1;}}ClassWriter w=new ClassWriter(ClassWriter.COMPUTE_MAXS);c.accept(w);return w.toByteArray();}
+  static byte[] read(JarFile j,String n)throws Exception{InputStream i=j.getInputStream(j.getJarEntry(n));ByteArrayOutputStream b=new ByteArrayOutputStream();byte[] x=new byte[8192];int r;while((r=i.read(x))!=-1)b.write(x,0,r);i.close();return b.toByteArray();}
+  public static void main(String[] a)throws Exception{JarFile j=new JarFile("game.jar");byte[] da=patch(read(j,"Class_da.class"),"Class_da"),del=patch(read(j,"CharacterDelete.class"),"CharacterDelete");j.close();FileOutputStream f=new FileOutputStream("classes/OfflineStartMenu.class");f.write(menu());f.close();f=new FileOutputStream("classes/Class_da.class");f.write(da);f.close();f=new FileOutputStream("classes/CharacterDelete.class");f.write(del);f.close();}
+}
+=== downloads ===
+curl_asm=0
+curl_tree=0
+javac=0
+generator=0
+jar_update=0
+Archive:  game.jar
+    testing: Class_gs.class           OK
+    testing: Class_gm.class           OK
+    testing: k23.class                OK
+    testing: Class_af.class           OK
+    testing: Class_fm.class           OK
+    testing: Class_ef.class           OK
+    testing: Class_bd.class           OK
+    testing: Class_dz.class           OK
+    testing: Class_fg.class           OK
+    testing: Class_cz.class           OK
+    testing: Class_cm.class           OK
+    testing: Class_gk.class           OK
+    testing: Class_ee.class           OK
+    testing: Class_ex.class           OK
+    testing: Class_aa.class           OK
+    testing: Class_ci.class           OK
+    testing: Class_dm.class           OK
+    testing: Class_bn.class           OK
+    testing: Class_cr.class           OK
+    testing: k7$k0.class              OK
+    testing: Class_ae.class           OK
+    testing: Class_en.class           OK
+    testing: Class_ga.class           OK
+    testing: k1b.class                OK
+    testing: ee.class                 OK
+    testing: CharacterDelete.class    OK
+    testing: k1c.class                OK
+    testing: Class_fo.class           OK
+    testing: k2c.class                OK
+    testing: Class_bf.class           OK
+    testing: Class_ak.class           OK
+    testing: Class_gz.class           OK
+    testing: Class_cd.class           OK
+    testing: Class_aq.class           OK
+    testing: provider.txt             OK
+    testing: k31.class                OK
+    testing: k7.class                 OK
+    testing: k8.class                 OK
+    testing: Class_ap.class           OK
+    testing: Class_dp.class           OK
+    testing: Class_an.class           OK
+    testing: Class_al.class           OK
+    testing: META-INF/                OK
+    testing: META-INF/MANIFEST.MF     OK
+    testing: Class_cj.class           OK
+    testing: OfflineBridge.class      OK
+    testing: Class_by.class           OK
+    testing: k14$k0.class             OK
+    testing: k24.class                OK
+    testing: Class_dg.class           OK
+    testing: Class_eb.class           OK
+    testing: Class_gh.class           OK
+    testing: InventoryClear.class     OK
+    testing: Class_aj.class           OK
+    testing: k16$k0.class             OK
+    testing: k30.class                OK
+    testing: k0.class                 OK
+    testing: Class_du.class           OK
+    testing: kd.class                 OK
+    testing: Class_da.class           OK
+    testing: k25.class                OK
+    testing: font/                    OK
+    testing: font/number              OK
+    testing: font/tahoma_7b           OK
+    testing: font/tahoma_7            OK
+    testing: font/tahoma_8b           OK
+    testing: Class_gr.class           OK
+    testing: k2b.class                OK
+    testing: k13.class                OK
+    testing: DoHoang091.class         OK
+    testing: Class_gf.class           OK
+    testing: NativeCatalog.class      OK
+    testing: Class_fl.class           OK
+    testing: Class_cp.class           OK
+    testing: k20.class                OK
+    testing: Class_fv.class           OK
+    testing: Class_fi.class           OK
+    testing: Class_db.class           OK
+    testing: Class_av.class           OK
+    testing: Class_ep.class           OK
+    testing: k1.class                 OK
+    testing: k1a.class                OK
+    testing: Class_ba.class           OK
+    testing: Class_ek.class           OK
+    testing: Class_hb.class           OK
+    testing: k19.class                OK
+    testing: Class_et.class           OK
+    testing: Class_gg.class           OK
+    testing: Class_bx.class           OK
+    testing: Class_cq.class           OK
+    testing: Class_au.class           OK
+    testing: k2e.class                OK
+    testing: Class_ck.class           OK
+    testing: Class_dv.class           OK
+    testing: Class_cl.class           OK
+    testing: k2d.class                OK
+    testing: Class_ej.class           OK
+    testing: k26.class                OK
+    testing: k12.class                OK
+    testing: DoHoang091SaveState.class   OK
+    testing: Class_ha.class           OK
+    testing: Class_de.class           OK
+    testing: x1/                      OK
+    testing: x1/Big4.png              OK
+    testing: x1/plus12.png            OK
+    testing: x1/font/                 OK
+    testing: x1/font/tahoma_7b_yellow.png   OK
+    testing: x1/font/tahoma_7b_blue.png   OK
+    testing: x1/font/number_red.png   OK
+    testing: x1/font/tahoma_7_red.png   OK
+    testing: x1/font/tahoma_7_grey.png   OK
+    testing: x1/font/tahoma_7.png     OK
+    testing: x1/font/tahoma_7b_purple.png   OK
+    testing: x1/font/tahoma_7_blue.png   OK
+    testing: x1/font/number_white.png   OK
+    testing: x1/font/tahoma_7b_red.png   OK
+    testing: x1/font/tahoma_7b_white.png   OK
+    testing: x1/font/tahoma_7_green.png   OK
+    testing: x1/font/tahoma_8b.png    OK
+    testing: x1/font/tahoma_7_blue1.png   OK
+    testing: x1/font/tahoma_7_white.png   OK
+    testing: x1/font/number_orange.png   OK
+    testing: x1/font/number_green.png   OK
+    testing: x1/font/tahoma_7_yellow.png   OK
+    testing: x1/font/number_yellow.png   OK
+    testing: x1/font/tahoma_7b_green.png   OK
+    testing: x1/e/                    OK
+    testing: x1/e/w0.png              OK
+    testing: x1/e/d11.png             OK
+    testing: x1/e/d00.png             OK
+    testing: x1/e/d12.png             OK
+    testing: x1/e/w2.png              OK
+    testing: x1/e/d13.png             OK
+    testing: x1/e/d01.png             OK
+    testing: x1/e/sp2.png             OK
+    testing: x1/e/d14.png             OK
+    testing: x1/e/sp1.png             OK
+    testing: x1/e/d04.png             OK
+    testing: x1/e/sp0.png             OK
+    testing: x1/e/d10.png             OK
+    testing: x1/e/d03.png             OK
+    testing: x1/e/w1.png              OK
+    testing: x1/e/d02.png             OK
+    testing: x1/wm.png                OK
+    testing: x1/img/                  OK
+    testing: x1/img/Big4.png          OK
+    testing: x1/img/Big0.png          OK
+    testing: x1/img/Big2.png          OK
+    testing: x1/img/Big1.png          OK
+    testing: x1/img/Big3.png          OK
+    testing: x1/eff/                  OK
+    testing: x1/eff/g6.png            OK
+    testing: x1/eff/g132.png          OK
+    testing: x1/eff/g99.png           OK
+    testing: x1/eff/g15.png           OK
+    testing: x1/eff/g10.png           OK
+    testing: x1/eff/g97.png           OK
+    testing: x1/eff/g9.png            OK
+    testing: x1/export/               OK
+    testing: x1/export/_big2.png      OK
+    testing: x1/export/_big0.png      OK
+    testing: x1/export/_big1.png      OK
+    testing: x1/export/1              OK
+    testing: x1/export/0              OK
+    testing: x1/export/2              OK
+    testing: x1/t/                    OK
+    testing: x1/t/twtf.png            OK
+    testing: x1/t/uwt.png             OK
+    testing: x1/t/mini_1.png          OK
+    testing: x1/t/wts.png             OK
+    testing: x1/t/3.png               OK
+    testing: x1/t/wts1.png            OK
+    testing: x1/t/2.png               OK
+    testing: x1/t/mini_3.png          OK
+    testing: x1/t/wtf.png             OK
+    testing: x1/t/mini_2.png          OK
+    testing: x1/t/mini_4.png          OK
+    testing: x1/t/4.png               OK
+    testing: x1/t/1.png               OK
+    testing: x1/tt.png                OK
+    testing: x1/hd/                   OK
+    testing: x1/hd/hpp.png            OK
+    testing: x1/hd/mat.png            OK
+    testing: x1/hd/focus.png          OK
+    testing: x1/hd/bd2.png            OK
+    testing: x1/hd/right2.png         OK
+    testing: x1/hd/bd0.png            OK
+    testing: x1/hd/arrow.png          OK
+    testing: x1/hd/skill.png          OK
+    testing: x1/hd/btnlBig1.png       OK
+    testing: x1/hd/arrow2.png         OK
+    testing: x1/hd/topbar.png         OK
+    testing: x1/hd/button.png         OK
+    testing: x1/hd/btnlf.png          OK
+    testing: x1/hd/mpp.png            OK
+    testing: x1/hd/btnlBig0.png       OK
+    testing: x1/hd/button2.png        OK
+    testing: x1/hd/btnl.png           OK
+    testing: x1/hd/menu.png           OK
+    testing: x1/hd/analog2.png        OK
+    testing: x1/hd/chat.png           OK
+    testing: x1/hd/lua.png            OK
+    testing: x1/hd/transparent.png    OK
+    testing: x1/hd/tf.png             OK
+    testing: x1/hd/mapborder.png      OK
+    testing: x1/hd/bd1.png            OK
+    testing: x1/hd/analog1.png        OK
+    testing: x1/hd/right.png          OK
+    testing: x1/u/                    OK
+    testing: x1/u/fc.png              OK
+    testing: x1/u/c1.png              OK
+    testing: x1/u/cobay.png           OK
+    testing: x1/u/x.png               OK
+    testing: x1/u/tuyet.png           OK
+    testing: x1/u/f.png               OK
+    testing: x1/u/wpt1.png            OK
+    testing: x1/u/select.png          OK
+    testing: x1/u/c0.png              OK
+    testing: x1/m1.png                OK
+    testing: x1/trung1.png            OK
+    testing: x1/del/                  OK
+    testing: x1/del/10.png            OK
+    testing: x1/del/5.png             OK
+    testing: x1/del/10_dataEff        OK
+    testing: x1/del/9_dataEff         OK
+    testing: x1/del/9.png             OK
+    testing: x1/del/5_dataEff         OK
+    testing: x1/bg/                   OK
+    testing: x1/bg/bg37.png           OK
+    testing: x1/bg/bg28.png           OK
+    testing: x1/bg/bg016.png          OK
+    testing: x1/bg/bg16.png           OK
+    testing: x1/bg/bg15.png           OK
+    testing: x1/bg/bg114.png          OK
+    testing: x1/bg/sun1.png           OK
+    testing: x1/bg/bg015.png          OK
+    testing: x1/bg/cl2.png            OK
+    testing: x1/bg/bg17.png           OK
+    testing: x1/bg/bg02.png           OK
+    testing: x1/bg/bg39.png           OK
+    testing: x1/bg/bg11.png           OK
+    testing: x1/bg/cl3.png            OK
+    testing: x1/bg/bg32.png           OK
+    testing: x1/bg/cl0.png            OK
+    testing: x1/bg/bg26.png           OK
+    testing: x1/bg/bg35.png           OK
+    testing: x1/bg/bg08.png           OK
+    testing: x1/bg/bg30.png           OK
+    testing: x1/bg/bg115.png          OK
+    testing: x1/bg/bg011.png          OK
+    testing: x1/bg/bg03.png           OK
+    testing: x1/bg/bg04.png           OK
+    testing: x1/bg/bg216.png          OK
+    testing: x1/bg/bg12.png           OK
+    testing: x1/bg/sun0.png           OK
+    testing: x1/bg/bg314.png          OK
+    testing: x1/bg/bg33.png           OK
+    testing: x1/bg/bg31.png           OK
+    testing: x1/bg/bg014.png          OK
+    testing: x1/bg/bg00.png           OK
+    testing: x1/bg/bg21.png           OK
+    testing: x1/bg/bg05.png           OK
+    testing: x1/bg/bg113.png          OK
+    testing: x1/bg/bg010.png          OK
+    testing: x1/bg/bg214.png          OK
+    testing: x1/bg/bg22.png           OK
+    testing: x1/bg/bg34.png           OK
+    testing: x1/bg/bg18.png           OK
+    testing: x1/bg/bg10.png           OK
+    testing: x1/bg/bg38.png           OK
+    testing: x1/bg/cl1.png            OK
+    testing: x1/bg/bg25.png           OK
+    testing: x1/bg/bg07.png           OK
+    testing: x1/bg/bg20.png           OK
+    testing: x1/bg/bg116.png          OK
+    testing: x1/bg/bg09.png           OK
+    testing: x1/bg/bg06.png           OK
+    testing: x1/bg/bg013.png          OK
+    testing: x1/bg/bg13.png           OK
+    testing: x1/bg/bg23.png           OK
+    testing: x1/bg/bg01.png           OK
+    testing: x1/m2.png                OK
+    testing: k16$k1.class             OK
+    testing: Class_ai.class           OK
+    testing: Class_gt.class           OK
+    testing: dt.class                 OK
+    testing: Class_bv.class           OK
+    testing: Class_eh.class           OK
+    testing: k20$k1.class             OK
+    testing: k9.class                 OK
+    testing: Class_bp.class           OK
+    testing: Class_dw.class           OK
+    testing: Class_ff.class           OK
+    testing: Class_eo.class           OK
+    testing: k0$k0.class              OK
+    testing: Class_dj.class           OK
+    testing: Class_fa.class           OK
+    testing: Class_bl.class           OK
+    testing: Class_bs.class           OK
+    testing: Class_gv.class           OK
+    testing: Class_ec.class           OK
+    testing: Class_be.class           OK
+    testing: text.txt                 OK
+    testing: Class_er.class           OK
+    testing: k4.class                 OK
+    testing: Class_do.class           OK
+    testing: Class_aw.class           OK
+    testing: Class_bj.class           OK
+    testing: Class_gx.class           OK
+    testing: Class_cx.class           OK
+    testing: Class_he.class           OK
+    testing: Class_gc.class           OK
+    testing: Class_bt.class           OK
+    testing: Class_dd.class           OK
+    testing: Class_cf.class           OK
+    testing: k2f.class                OK
+    testing: Class_df.class           OK
+    testing: Class_bu.class           OK
+    testing: Class_ce.class           OK
+    testing: Class_el.class           OK
+    testing: Class_ac.class           OK
+    testing: Class_ea.class           OK
+    testing: k1f.class                OK
+    testing: Class_ay.class           OK
+    testing: Class_dr.class           OK
+    testing: Class_bm.class           OK
+    testing: k3.class                 OK
+    testing: Class_cw.class           OK
+    testing: Class_hd.class           OK
+    testing: Class_dl.class           OK
+    testing: Class_gi.class           OK
+    testing: agent.txt                OK
+    testing: Class_ev.class           OK
+    testing: Class_bk.class           OK
+    testing: k1e$k0.class             OK
+    testing: Class_ch.class           OK
+    testing: cq.class                 OK
+    testing: Class_fs.class           OK
+    testing: Class_em.class           OK
+    testing: OfflineDeleteMenu.class   OK
+    testing: Class_gl.class           OK
+    testing: k25$k0.class             OK
+    testing: Class_gu.class           OK
+    testing: Class_fd.class           OK
+    testing: Class_ca.class           OK
+    testing: offline/                 OK
+    testing: offline/boot/            OK
+    testing: offline/boot/index.bin   OK
+    testing: offline/packs/           OK
+    testing: offline/packs/s09.pak    OK
+    testing: offline/packs/s13.pak    OK
+    testing: offline/packs/s24.pak    OK
+    testing: offline/packs/s17.pak    OK
+    testing: offline/packs/s19.pak    OK
+    testing: offline/packs/s01.pak    OK
+    testing: offline/packs/s11.pak    OK
+    testing: offline/packs/s23.pak    OK
+    testing: offline/packs/s02.pak    OK
+    testing: offline/packs/s14.pak    OK
+    testing: offline/packs/d07.pak    OK
+    testing: offline/packs/d00.pak    OK
+    testing: offline/packs/s00.pak    OK
+    testing: offline/packs/s05.pak    OK
+    testing: offline/packs/d01.pak    OK
+    testing: offline/packs/s15.pak    OK
+    testing: offline/packs/s04.pak    OK
+    testing: offline/packs/d04.pak    OK
+    testing: offline/packs/s22.pak    OK
+    testing: offline/packs/s07.pak    OK
+    testing: offline/packs/s12.pak    OK
+    testing: offline/packs/d06.pak    OK
+    testing: offline/packs/d03.pak    OK
+    testing: offline/packs/index.bin   OK
+    testing: offline/packs/s18.pak    OK
+    testing: offline/packs/s16.pak    OK
+    testing: offline/packs/s03.pak    OK
+    testing: offline/packs/d05.pak    OK
+    testing: offline/packs/s20.pak    OK
+    testing: offline/packs/s10.pak    OK
+    testing: offline/packs/s06.pak    OK
+    testing: offline/packs/s21.pak    OK
+    testing: offline/packs/s08.pak    OK
+    testing: offline/packs/manifest.json   OK
+    testing: offline/packs/d02.pak    OK
+    testing: offline/full/            OK
+    testing: offline/full/manifest.json   OK
+    testing: offline/p006.bin         OK
+    testing: offline/p003.bin         OK
+    testing: offline/p005.bin         OK
+    testing: offline/version.bin      OK
+    testing: offline/admin_seed.rms   OK
+    testing: offline/p004.bin         OK
+    testing: Class_gb.class           OK
+    testing: Class_cu.class           OK
+    testing: Class_fb.class           OK
+    testing: Class_bg.class           OK
+    testing: Class_cg.class           OK
+    testing: k27.class                OK
+    testing: Class_bi.class           OK
+    testing: Class_ao.class           OK
+    testing: Class_gp.class           OK
+    testing: k18.class                OK
+    testing: Class_cc.class           OK
+    testing: Class_ar.class           OK
+    testing: Class_hc.class           OK
+    testing: Class_ge.class           OK
+    testing: Class_fq.class           OK
+    testing: Class_az.class           OK
+    testing: Class_fr.class           OK
+    testing: Class_dx.class           OK
+    testing: Class_bw.class           OK
+    testing: Class_fw.class           OK
+    testing: Class_dk.class           OK
+    testing: Class_ew.class           OK
+    testing: k14.class                OK
+    testing: Class_gq.class           OK
+    testing: k1d$k0.class             OK
+    testing: Class_dh.class           OK
+    testing: Class_gd.class           OK
+    testing: Class_am.class           OK
+    testing: ke.class                 OK
+    testing: Class_eu.class           OK
+    testing: Class_ft.class           OK
+    testing: k32.class                OK
+    testing: Class_ei.class           OK
+    testing: k17.class                OK
+    testing: k10.class                OK
+    testing: Class_fn.class           OK
+    testing: k6.class                 OK
+    testing: k25$k1.class             OK
+    testing: Class_cy.class           OK
+    testing: Class_fk.class           OK
+    testing: Class_fj.class           OK
+    testing: Class_dq.class           OK
+    testing: Class_dt.class           OK
+    testing: kc.class                 OK
+    testing: Class_bo.class           OK
+    testing: icon.png                 OK
+    testing: Class_di.class           OK
+    testing: Class_ds.class           OK
+    testing: Class_fc.class           OK
+    testing: Class_cs.class           OK
+    testing: Class_bq.class           OK
+    testing: Class_dn.class           OK
+    testing: Class_fz.class           OK
+    testing: k5$k0.class              OK
+    testing: kb.class                 OK
+    testing: Class_bb.class           OK
+    testing: Class_ah.class           OK
+    testing: k15.class                OK
+    testing: Class_br.class           OK
+    testing: Class_fp.class           OK
+    testing: k29.class                OK
+    testing: k2a.class                OK
+    testing: Class_cn.class           OK
+    testing: Class_ag.class           OK
+    testing: Class_es.class           OK
+    testing: Class_gy.class           OK
+    testing: Class_at.class           OK
+    testing: kf.class                 OK
+    testing: Class_bh.class           OK
+    testing: Class_go.class           OK
+    testing: Class_fu.class           OK
+    testing: Class_dy.class           OK
+    testing: k28.class                OK
+    testing: k11.class                OK
+    testing: k21.class                OK
+    testing: k33.class                OK
+    testing: Class_eq.class           OK
+    testing: k2.class                 OK
+    testing: Class_ez.class           OK
+    testing: Class_as.class           OK
+    testing: k16.class                OK
+    testing: k22.class                OK
+    testing: Class_ey.class           OK
+    testing: Class_cb.class           OK
+    testing: Class_ab.class           OK
+    testing: Class_ad.class           OK
+    testing: Class_gj.class           OK
+    testing: Class_cv.class           OK
+    testing: DoHoang091$k0.class      OK
+    testing: Class_ax.class           OK
+    testing: Class_fe.class           OK
+    testing: k20$k0.class             OK
+    testing: Class_fy.class           OK
+    testing: Class_bc.class           OK
+    testing: Class_co.class           OK
+    testing: Class_eg.class           OK
+    testing: Class_bz.class           OK
+    testing: Class_gn.class           OK
+    testing: map/                     OK
+    testing: map/134                  OK
+    testing: map/121                  OK
+    testing: map/53                   OK
+    testing: map/61                   OK
+    testing: map/72                   OK
+    testing: map/87                   OK
+    testing: map/4                    OK
+    testing: map/140                  OK
+    testing: map/101                  OK
+    testing: map/23                   OK
+    testing: map/54                   OK
+    testing: map/113                  OK
+    testing: map/56                   OK
+    testing: map/96                   OK
+    testing: map/97                   OK
+    testing: map/30                   OK
+    testing: map/123                  OK
+    testing: map/124                  OK
+    testing: map/65                   OK
+    testing: map/130                  OK
+    testing: map/84                   OK
+    testing: map/90                   OK
+    testing: map/77                   OK
+    testing: map/79                   OK
+    testing: map/82                   OK
+    testing: map/24                   OK
+    testing: map/114                  OK
+    testing: map/109                  OK
+    testing: map/148                  OK
+    testing: map/55                   OK
+    testing: map/62                   OK
+    testing: map/36                   OK
+    testing: map/38                   OK
+    testing: map/40                   OK
+    testing: map/102                  OK
+    testing: map/47                   OK
+    testing: map/37                   OK
+    testing: map/18                   OK
+    testing: map/21                   OK
+    testing: map/103                  OK
+    testing: map/67                   OK
+    testing: map/132                  OK
+    testing: map/64                   OK
+    testing: map/143                  OK
+    testing: map/32                   OK
+    testing: map/139                  OK
+    testing: map/86                   OK
+    testing: map/142                  OK
+    testing: map/157                  OK
+    testing: map/39                   OK
+    testing: map/156                  OK
+    testing: map/145                  OK
+    testing: map/28                   OK
+    testing: map/104                  OK
+    testing: map/66                   OK
+    testing: map/98                   OK
+    testing: map/69                   OK
+    testing: map/57                   OK
+    testing: map/115                  OK
+    testing: map/83                   OK
+    testing: map/22                   OK
+    testing: map/95                   OK
+    testing: map/119                  OK
+    testing: map/11                   OK
+    testing: map/12                   OK
+    testing: map/159                  OK
+    testing: map/110                  OK
+    testing: map/125                  OK
+    testing: map/13                   OK
+    testing: map/89                   OK
+    testing: map/137                  OK
+    testing: map/158                  OK
+    testing: map/43                   OK
+    testing: map/58                   OK
+    testing: map/35                   OK
+    testing: map/129                  OK
+    testing: map/127                  OK
+    testing: map/146                  OK
+    testing: map/144                  OK
+    testing: map/71                   OK
+    testing: map/100                  OK
+    testing: map/50                   OK
+    testing: map/44                   OK
+    testing: map/60                   OK
+    testing: map/1                    OK
+    testing: map/147                  OK
+    testing: map/34                   OK
+    testing: map/116                  OK
+    testing: map/33                   OK
+    testing: map/117                  OK
+    testing: map/63                   OK
+    testing: map/0                    OK
+    testing: map/78                   OK
+    testing: map/122                  OK
+    testing: map/9                    OK
+    testing: map/118                  OK
+    testing: map/68                   OK
+    testing: map/150                  OK
+    testing: map/49                   OK
+    testing: map/81                   OK
+    testing: map/152                  OK
+    testing: map/6                    OK
+    testing: map/105                  OK
+    testing: map/133                  OK
+    testing: map/10                   OK
+    testing: map/120                  OK
+    testing: map/26                   OK
+    testing: map/46                   OK
+    testing: map/51                   OK
+    testing: map/138                  OK
+    testing: map/41                   OK
+    testing: map/106                  OK
+    testing: map/141                  OK
+    testing: map/70                   OK
+    testing: map/14                   OK
+    testing: map/7                    OK
+    testing: map/73                   OK
+    testing: map/153                  OK
+    testing: map/45                   OK
+    testing: map/108                  OK
+    testing: map/149                  OK
+    testing: map/131                  OK
+    testing: map/8                    OK
+    testing: map/136                  OK
+    testing: map/75                   OK
+    testing: map/107                  OK
+    testing: map/48                   OK
+    testing: map/85                   OK
+    testing: map/74                   OK
+    testing: map/88                   OK
+    testing: map/5                    OK
+    testing: map/135                  OK
+    testing: map/3                    OK
+    testing: map/112                  OK
+    testing: map/76                   OK
+    testing: map/111                  OK
+    testing: map/59                   OK
+    testing: map/20                   OK
+    testing: map/2                    OK
+    testing: map/27                   OK
+    testing: map/94                   OK
+    testing: map/42                   OK
+    testing: map/52                   OK
+    testing: map/19                   OK
+    testing: map/91                   OK
+    testing: map/92                   OK
+    testing: map/15                   OK
+    testing: map/155                  OK
+    testing: map/17                   OK
+    testing: map/16                   OK
+    testing: map/31                   OK
+    testing: map/29                   OK
+    testing: map/126                  OK
+    testing: map/newmap               OK
+    testing: map/80                   OK
+    testing: map/93                   OK
+    testing: map/151                  OK
+    testing: map/154                  OK
+    testing: map/99                   OK
+    testing: map/25                   OK
+    testing: map/128                  OK
+    testing: k5.class                 OK
+    testing: Class_gw.class           OK
+    testing: k1e.class                OK
+    testing: Class_fx.class           OK
+    testing: Class_fh.class           OK
+    testing: Class_ed.class           OK
+    testing: Class_dc.class           OK
+    testing: ka.class                 OK
+    testing: k1d.class                OK
+    testing: Class_ct.class           OK
+    testing: OfflineStartMenu.class   OK
+No errors detected in compressed data of game.jar.
+unzip_test=0
+public final class OfflineStartMenu extends javax.microedition.lcdui.List implements javax.microedition.lcdui.CommandListener {
+  private static Class_da midlet;
+  private OfflineStartMenu();
+  public static void show(Class_da);
+  public static void ensureGameThread();
+  public static void clearPrimary();
+  private static void enter(boolean);
+  public void commandAction(javax.microedition.lcdui.Command, javax.microedition.lcdui.Displayable);
+  public static boolean deleteCurrent() throws java.lang.Exception;
+}
+javap_menu=0
+public class Class_da extends javax.microedition.midlet.MIDlet {
+  public static java.lang.String a;
+
+  public static Class_da b;
+
+  public static int c;
+
+  public static byte d;
+
+  public static byte e;
+
+  public static java.lang.String f;
+
+  public static byte g;
+
+  private static int[] i;
+
+  public static byte h;
+
+  protected void pauseApp();
+    Code:
+       0: return
+
+  private java.lang.String b(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokevirtual #29                 // Method java/lang/Object.getClass:()Ljava/lang/Class;
+       4: new           #31                 // class java/lang/StringBuffer
+       7: dup
+       8: ldc           #33                 // String /
+      10: invokespecial #37                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+      13: aload_1
+      14: invokevirtual #41                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      17: invokevirtual #45                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+      20: invokevirtual #51                 // Method java/lang/Class.getResourceAsStream:(Ljava/lang/String;)Ljava/io/InputStream;
+      23: astore_1
+      24: aload_1
+      25: invokevirtual #57                 // Method java/io/InputStream.available:()I
+      28: newarray       byte
+      30: astore_2
+      31: aload_1
+      32: aload_2
+      33: invokevirtual #61                 // Method java/io/InputStream.read:([B)I
+      36: ldc           #63                 // String
+      38: invokevirtual #68                 // Method java/lang/String.length:()I
+      41: pop2
+      42: new           #65                 // class java/lang/String
+      45: dup
+      46: aload_2
+      47: ldc           #70                 // String UTF-8
+      49: invokespecial #73                 // Method java/lang/String."<init>":([BLjava/lang/String;)V
+      52: astore_1
+      53: ldc           #63                 // String
+      55: invokevirtual #68                 // Method java/lang/String.length:()I
+      58: pop
+      59: ldc           #75                 // String
+      61: invokevirtual #68                 // Method java/lang/String.length:()I
+      64: bipush        49
+      66: bipush        13
+      68: iadd
+      69: bipush        -5
+      71: isub
+      72: bipush        72
+      74: iadd
+      75: bipush        23
+      77: bipush        101
+      79: iadd
+      80: iconst_m1
+      81: isub
+      82: iconst_5
+      83: iadd
+      84: ixor
+      85: sipush        141
+      88: sipush        183
+      91: ixor
+      92: sipush        163
+      95: sipush        144
+      98: ixor
+      99: ixor
+     100: ldc           #77                 // String
+     102: invokevirtual #68                 // Method java/lang/String.length:()I
+     105: ineg
+     106: ixor
+     107: iand
+     108: if_icmpne     122
+     111: aconst_null
+     112: areturn
+     113: ldc           #63                 // String
+     115: invokevirtual #68                 // Method java/lang/String.length:()I
+     118: pop2
+     119: ldc           #63                 // String
+     121: astore_1
+     122: aload_1
+     123: areturn
+    Exception table:
+       from    to  target type
+          24    53   113   Class java/lang/Exception
+
+  public Class_da();
+    Code:
+       0: aload_0
+       1: invokespecial #79                 // Method javax/microedition/midlet/MIDlet."<init>":()V
+       4: invokestatic  #84                 // Method Class_fp.c:()LClass_fp;
+       7: invokestatic  #89                 // Method Class_by.b:()LClass_by;
+      10: invokevirtual #92                 // Method Class_fp.a:(LClass_by;)V
+      13: aload_0
+      14: putstatic     #94                 // Field b:LClass_da;
+      17: aload_0
+      18: ldc           #96                 // String agent.txt
+      20: invokespecial #98                 // Method b:(Ljava/lang/String;)Ljava/lang/String;
+      23: putstatic     #100                // Field a:Ljava/lang/String;
+      26: aload_0
+      27: ldc           #102                // String provider.txt
+      29: invokespecial #98                 // Method b:(Ljava/lang/String;)Ljava/lang/String;
+      32: invokestatic  #108                // Method java/lang/Byte.parseByte:(Ljava/lang/String;)B
+      35: putstatic     #110                // Field d:B
+      38: getstatic     #116                // Field java/lang/System.out:Ljava/io/PrintStream;
+      41: new           #31                 // class java/lang/StringBuffer
+      44: dup
+      45: ldc           #118                // String AGENT:
+      47: invokespecial #37                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+      50: getstatic     #100                // Field a:Ljava/lang/String;
+      53: invokevirtual #41                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      56: ldc           #120                // String , PROVIDER:
+      58: invokevirtual #41                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+      61: getstatic     #110                // Field d:B
+      64: invokevirtual #123                // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+      67: invokevirtual #45                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+      70: invokevirtual #128                // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+      73: getstatic     #130                // Field i:[I
+      76: iconst_0
+      77: iaload
+      78: putstatic     #134                // Field Class_cl.h:I
+      81: new           #132                // class Class_cl
+      84: dup
+      85: invokespecial #135                // Method Class_cl."<init>":()V
+      88: putstatic     #141                // Field Class_ds.j:LClass_aw;
+      91: invokestatic  #146                // Method Class_do.b:()LClass_do;
+      94: invokestatic  #149                // Method Class_ds.d:()LClass_ds;
+      97: putfield      #152                // Field Class_do.b:LClass_ha;
+     100: return
+
+  private static void a();
+    Code:
+       0: iconst_3
+       1: newarray       int
+       3: putstatic     #130                // Field i:[I
+       6: getstatic     #130                // Field i:[I
+       9: iconst_0
+      10: bipush        58
+      12: bipush        91
+      14: ixor
+      15: bipush        70
+      17: bipush        39
+      19: ixor
+      20: iconst_m1
+      21: ixor
+      22: iand
+      23: iastore
+      24: getstatic     #130                // Field i:[I
+      27: iconst_1
+      28: ldc           #77                 // String
+      30: invokevirtual #68                 // Method java/lang/String.length:()I
+      33: iastore
+      34: getstatic     #130                // Field i:[I
+      37: iconst_2
+      38: sipush        -17026
+      41: sipush        31469
+      44: iand
+      45: iastore
+      46: return
+
+  protected void destroyApp(boolean);
+    Code:
+       0: return
+
+  public static void a(java.lang.String);
+    Code:
+       0: aload_0
+       1: ldc           #63                 // String
+       3: invokevirtual #160                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       6: invokestatic  #163                // Method a:(I)Z
+       9: ifeq          37
+      12: getstatic     #94                 // Field b:LClass_da;
+      15: aload_0
+      16: invokevirtual #167                // Method javax/microedition/midlet/MIDlet.platformRequest:(Ljava/lang/String;)Z
+      19: ldc           #63                 // String
+      21: invokevirtual #68                 // Method java/lang/String.length:()I
+      24: pop2
+      25: getstatic     #94                 // Field b:LClass_da;
+      28: invokevirtual #170                // Method javax/microedition/midlet/MIDlet.notifyDestroyed:()V
+      31: return
+      32: dup
+      33: astore_0
+      34: invokevirtual #175                // Method java/lang/Throwable.printStackTrace:()V
+      37: return
+    Exception table:
+       from    to  target type
+          12    31    32   Class javax/microedition/io/ConnectionNotFoundException
+
+  protected void startApp();
+    Code:
+       0: invokestatic  #181                // Method OfflineStartMenu.ensureGameThread:()V
+       3: aload_0
+       4: invokestatic  #185                // Method OfflineStartMenu.show:(LClass_da;)V
+       7: return
+
+  static {};
+    Code:
+       0: invokestatic  #188                // Method a:()V
+       3: getstatic     #130                // Field i:[I
+       6: iconst_1
+       7: iaload
+       8: putstatic     #190                // Field g:B
+      11: getstatic     #130                // Field i:[I
+      14: iconst_0
+      15: iaload
+      16: putstatic     #192                // Field h:B
+      19: getstatic     #130                // Field i:[I
+      22: iconst_2
+      23: iaload
+      24: putstatic     #194                // Field c:I
+      27: ldc           #63                 // String
+      29: putstatic     #196                // Field f:Ljava/lang/String;
+      32: getstatic     #130                // Field i:[I
+      35: iconst_0
+      36: iaload
+      37: putstatic     #110                // Field d:B
+      40: getstatic     #130                // Field i:[I
+      43: iconst_0
+      44: iaload
+      45: putstatic     #198                // Field e:B
+      48: return
+
+  private static boolean a(int);
+    Code:
+       0: iload_0
+       1: ifne          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+}
+javap_da=0
+Compiled from "CharacterDelete.java"
+public final class CharacterDelete {
+  private CharacterDelete();
+    Code:
+       0: aload_0
+       1: invokespecial #14                 // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static boolean deleteCurrent() throws java.lang.Exception;
+    Code:
+       0: invokestatic  #22                 // Method OfflineStartMenu.deleteCurrent:()Z
+       3: ireturn
+}
+javap_delete=0

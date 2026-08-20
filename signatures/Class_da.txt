@@ -1,0 +1,46 @@
+public class Class_da extends javax.microedition.midlet.MIDlet {
+  public static java.lang.String a;
+    descriptor: Ljava/lang/String;
+  public static Class_da b;
+    descriptor: LClass_da;
+  public static int c;
+    descriptor: I
+  public static byte d;
+    descriptor: B
+  public static byte e;
+    descriptor: B
+  public static java.lang.String f;
+    descriptor: Ljava/lang/String;
+  public static byte g;
+    descriptor: B
+  private static int[] i;
+    descriptor: [I
+  public static byte h;
+    descriptor: B
+  protected void pauseApp();
+    descriptor: ()V
+
+  private java.lang.String b(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  public Class_da();
+    descriptor: ()V
+
+  private static void a();
+    descriptor: ()V
+
+  protected void destroyApp(boolean);
+    descriptor: (Z)V
+
+  public static void a(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  protected void startApp();
+    descriptor: ()V
+
+  static {};
+    descriptor: ()V
+
+  private static boolean a(int);
+    descriptor: (I)Z
+}

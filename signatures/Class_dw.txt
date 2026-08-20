@@ -1,0 +1,73 @@
+public final class Class_dw {
+  public int a;
+    descriptor: I
+  private static int[] l;
+    descriptor: [I
+  public java.lang.String b;
+    descriptor: Ljava/lang/String;
+  public int c;
+    descriptor: I
+  public java.lang.String[] d;
+    descriptor: [Ljava/lang/String;
+  public int e;
+    descriptor: I
+  public boolean f;
+    descriptor: Z
+  public int g;
+    descriptor: I
+  public java.lang.Object h;
+    descriptor: Ljava/lang/Object;
+  public int i;
+    descriptor: I
+  public javax.microedition.lcdui.Image j;
+    descriptor: Ljavax/microedition/lcdui/Image;
+  public Class_bx k;
+    descriptor: LClass_bx;
+  static {};
+    descriptor: ()V
+
+  public final void a();
+    descriptor: ()V
+
+  private static void d();
+    descriptor: ()V
+
+  private static boolean a(java.lang.Object, java.lang.Object);
+    descriptor: (Ljava/lang/Object;Ljava/lang/Object;)Z
+
+  public final void a(Class_dg);
+    descriptor: (LClass_dg;)V
+
+  private static boolean a(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public final boolean b();
+    descriptor: ()Z
+
+  public Class_dw(java.lang.String, int, int);
+    descriptor: (Ljava/lang/String;II)V
+
+  public final void c();
+    descriptor: ()V
+
+  private static boolean a(int);
+    descriptor: (I)Z
+
+  public Class_dw(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)V
+
+  public Class_dw(java.lang.String, int, java.lang.Object);
+    descriptor: (Ljava/lang/String;ILjava/lang/Object;)V
+
+  public Class_dw(java.lang.String, Class_bx, int, java.lang.Object, int, int);
+    descriptor: (Ljava/lang/String;LClass_bx;ILjava/lang/Object;II)V
+
+  private static boolean b(int);
+    descriptor: (I)Z
+
+  private static boolean c(int);
+    descriptor: (I)Z
+
+  public Class_dw(java.lang.String, Class_bx, int, java.lang.Object);
+    descriptor: (Ljava/lang/String;LClass_bx;ILjava/lang/Object;)V
+}

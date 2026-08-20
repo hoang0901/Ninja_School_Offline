@@ -1,0 +1,30 @@
+name: Capture small startup refs
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-small-start-refs.yml]
+permissions:
+  contents: write
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capture focused startup references
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/smallrefs && mkdir -p /tmp/smallrefs
+          cd /tmp/smallrefs
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          : > refs.txt
+          for cls in Class_ds Class_ha Class_ew Class_do Class_da DoHoang091 DoHoang091SaveState CharacterDelete k20; do
+            javap -classpath game.jar -p -c "$cls" > "$cls.txt" 2>&1 || true
+            echo "===== $cls =====" >> refs.txt
+            grep -n -E -B12 -A24 'DoHoang091\.(connect|backupSave|restoreSave)|DoHoang091SaveState\.hasSaveData|Class_ds\.d|Class_do\.b|Display\.setCurrent|startApp|deleteCurrent|public static .* d\(' "$cls.txt" >> refs.txt || true
+          done
+          cp refs.txt "$GITHUB_WORKSPACE/startup_refs_small.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- startup_refs_small.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: capture small startup refs'
+          git push origin main

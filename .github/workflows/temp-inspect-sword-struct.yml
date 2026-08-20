@@ -1,0 +1,42 @@
+name: Inspect sword structures
+on:
+  push:
+    branches: [chatgpt/sword-strongest-character]
+    paths: [.github/workflows/temp-inspect-sword-struct.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/sword-strongest-character
+          fetch-depth: 0
+      - name: Inspect focused structures
+        shell: bash
+        run: |
+          set -euo pipefail
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/focus && mkdir -p /tmp/focus
+          cd /tmp/focus
+          jar tf "$J" | grep '^DoHoang091.*\.class$' > nested.txt
+          {
+            echo '=== NESTED ==='; cat nested.txt
+            echo '=== K0 SIGNATURES ==='
+            for c in $(cat nested.txt | sed 's/\.class$//'); do
+              sig=$(javap -classpath "$J" -p "$c" 2>/dev/null || true)
+              if echo "$sig" | grep -qE 'short\[\]|byte\[\]|int\[\]|Class_fj|Class_fe|String'; then
+                echo "##### $c #####"; echo "$sig"
+              fi
+            done
+            echo '=== DoHoang091 methods touching aj/load/save ==='
+            javap -classpath "$J" -p -c DoHoang091 2>/dev/null | grep -n -B12 -A35 -E 'Field aj:|Field ak:|DoHoang091\$k0|RecordStore|DataInputStream|DataOutputStream' || true
+            echo '=== Class_fj ==='; javap -classpath "$J" -p -c Class_fj 2>/dev/null || true
+            echo '=== Class_fe ==='; javap -classpath "$J" -p -c Class_fe 2>/dev/null || true
+            echo '=== Class_dn template lookup ==='; javap -classpath "$J" -p -c Class_dn 2>/dev/null | grep -n -B8 -A25 -E 'Class_fe|\(S\)LClass_fe;|short' || true
+          } > "$GITHUB_WORKSPACE/sword_struct.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- sword_struct.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect sword structures'
+          git push origin HEAD:chatgpt/sword-strongest-character

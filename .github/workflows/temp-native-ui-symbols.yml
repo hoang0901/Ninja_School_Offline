@@ -1,0 +1,58 @@
+name: Temporary native UI symbols
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-native-ui-symbols.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Find exact native trade/inventory symbols
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nsym && mkdir -p /tmp/nsym/report
+          cd /tmp/nsym
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          for c in Class_ct Class_ds Class_cy Class_by Class_ew; do
+            javap -classpath game.jar -p -v "$c" > "$c.v.txt"
+            javap -classpath game.jar -p -c "$c" > "$c.c.txt"
+          done
+          {
+            for f in *.v.txt; do
+              echo "===== $f ====="
+              grep -ni -B12 -A20 -E 'Xu|gui|gửi|dang|đang|Nhan|Nhận|Xem|Dong|Đóng|Giao|trade|send' "$f" || true
+            done
+          } > report/string_refs.txt
+          {
+            for f in *.c.txt; do
+              echo "===== $f ====="
+              grep -ni -B80 -A180 -E 'Class_cy\.dc|Field .*bz:I|Field .*dc:|Class_fj|Class_dn|Class_dw' "$f" || true
+            done
+          } > report/bytecode_refs.txt
+          git -C "$GITHUB_WORKSPACE" checkout chatgpt/native-catalog-inventory-ui
+          rm -rf "$GITHUB_WORKSPACE/native_symbols"
+          cp -r report "$GITHUB_WORKSPACE/native_symbols"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- native_symbols
+          git diff --cached --quiet || git commit -m "chore: map native inventory UI symbols"
+          git push origin HEAD:chatgpt/native-catalog-inventory-ui
+      - name: Cleanup temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main
+          git rm -- .github/workflows/temp-native-ui-symbols.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: remove temporary native UI symbol workflow"
+          git push origin main

@@ -1,0 +1,56 @@
+name: Empty admin seed
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-empty-admin-seed.yml]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace bundled starter profile with empty profile
+        shell: python
+        run: |
+          import io, os, struct, zipfile
+          jar='Nso_Offline_By_h0901.jar'
+          out=jar+'.new'
+          buf=io.BytesIO()
+          buf.write(bytes([39,0,0]))
+          name=b'offline'
+          buf.write(struct.pack('>H',len(name)))
+          buf.write(name)
+          empty=buf.getvalue()
+          target='offline/admin_seed.rms'
+          with zipfile.ZipFile(jar,'r') as zin, zipfile.ZipFile(out,'w') as zout:
+              found=False
+              for info in zin.infolist():
+                  data=zin.read(info.filename)
+                  if info.filename==target:
+                      data=empty; found=True
+                  zout.writestr(info,data)
+              if not found: raise SystemExit('starter profile resource missing')
+          with zipfile.ZipFile(out,'r') as z:
+              assert z.read(target)==empty
+              assert z.testzip() is None
+          os.replace(out,jar)
+          print('starter profile replaced with empty profile')
+      - name: Commit JAR
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- Nso_Offline_By_h0901.jar
+          git commit -m 'fix: keep character removal empty instead of restoring starter'
+          git push origin HEAD:main
+      - name: Cleanup
+        if: always()
+        shell: bash
+        run: |
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-empty-admin-seed.yml || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m 'chore: remove empty admin seed patcher' || true
+          git push origin HEAD:main || true

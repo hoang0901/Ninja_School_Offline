@@ -1,0 +1,12 @@
+START
+curl1=0
+curl2=0
+javac=0
+generator=0
+jarupdate=0
+unzip=0
+javap=0
+67:      84: ldc           #36                 // String ninja_school_offline_v3
+97:     140: invokestatic  #51                 // Method DoHoang091.as:()V
+98:     143: invokestatic  #54                 // Method DoHoang091.U:()V
+grep=0

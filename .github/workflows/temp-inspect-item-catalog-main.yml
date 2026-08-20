@@ -10,29 +10,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect native shop protocol
+      - name: Locate native shop action target
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag8"
-          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag8"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag9"
+          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag9"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          f=cfrout/k5.java
-          [ -f "$f" ]
-          grep -n -E '^    (public |private |protected |static |final )' "$f" | head -400 > "$GITHUB_WORKSPACE/item_diag8/k5_methods.txt" || true
-          grep -n -B80 -A220 -E 'DoHoang091\.a\(\(byte\)|writeShort|writeInt|writeByte|writeUTF|new k0|k16\.' "$f" | head -24000 > "$GITHUB_WORKSPACE/item_diag8/k5_packets.txt" || true
-          grep -R -n -B30 -A100 -E 'k5\.[A-Za-z_$][A-Za-z0-9_$]*\([^;]*(1014|970)' cfrout --include='*.java' | head -5000 > "$GITHUB_WORKSPACE/item_diag8/k5_shop_calls.txt" || true
+          grep -R -n -E 'case (970|971|988|990):' cfrout --include='*.java' | head -300 > "$GITHUB_WORKSPACE/item_diag9/shop_cases.txt" || true
+          grep -R -n -E '(==|!=) (970|971|988|990)' cfrout --include='*.java' | head -300 > "$GITHUB_WORKSPACE/item_diag9/shop_cmp.txt" || true
+          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag9/shop_cases.txt" | sort -u | head -20 > /tmp/files.txt || true
+          while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            b=$(basename "$f" .java)
+            grep -n -B120 -A500 -E 'case (970|971|988|990):|writeShort|writeByte|writeInt|DoHoang091\.a\(' "$f" | head -20000 > "$GITHUB_WORKSPACE/item_diag9/${b}.txt" || true
+          done < /tmp/files.txt
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag8
+          git add -- item_diag9
           git diff --cached --quiet && exit 0
-          git commit -m "chore: inspect native shop protocol"
+          git commit -m "chore: locate native shop target"
           git push

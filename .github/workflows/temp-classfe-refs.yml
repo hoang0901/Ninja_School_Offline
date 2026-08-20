@@ -1,0 +1,35 @@
+name: Temporary Class_fe refs
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-classfe-refs.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find Class_fe bytecode references
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/cferefs classfe_refs
+          mkdir -p /tmp/cferefs/classes classfe_refs
+          unzip -q Nso_Offline_By_h0901.jar -d /tmp/cferefs/classes
+          grep -R -a -l 'Class_fe' /tmp/cferefs/classes --include='*.class' | sed 's#/tmp/cferefs/classes/##;s#\.class$##;s#/#.#g' | sort -u > classfe_refs/classes.txt || true
+          while IFS= read -r c; do
+            [ -n "$c" ] || continue
+            safe=$(echo "$c" | tr '/.$' '___')
+            javap -classpath Nso_Offline_By_h0901.jar -p -c "$c" > "classfe_refs/${safe}.txt" 2>&1 || true
+          done < classfe_refs/classes.txt
+      - name: Commit diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add classfe_refs
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect Class_fe refs"
+          git push

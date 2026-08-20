@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Locate native shop action target
+      - name: Locate native inventory grid renderer
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag9"
-          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag9"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag10"
+          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag10"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          grep -R -n -E 'case (970|971|988|990):' cfrout --include='*.java' | head -300 > "$GITHUB_WORKSPACE/item_diag9/shop_cases.txt" || true
-          grep -R -n -E '(==|!=) (970|971|988|990)' cfrout --include='*.java' | head -300 > "$GITHUB_WORKSPACE/item_diag9/shop_cmp.txt" || true
-          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag9/shop_cases.txt" | sort -u | head -20 > /tmp/files.txt || true
+          grep -R -n -E 'H\\u00e0nh trang|Hành trang|hành trang|R\\u01b0\\u01a1ng|Trang b\\u1ecb|Trang bị' cfrout --include='*.java' | head -1500 > "$GITHUB_WORKSPACE/item_diag10/inventory_locations.txt" || true
+          grep -R -n -E 'drawImage|drawRegion|paint\(' cfrout/Class_*.java | head -4000 > "$GITHUB_WORKSPACE/item_diag10/draw_locations.txt" || true
+          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag10/inventory_locations.txt" | sort -u | head -25 > /tmp/files.txt || true
           while IFS= read -r f; do
             [ -f "$f" ] || continue
             b=$(basename "$f" .java)
-            grep -n -B120 -A500 -E 'case (970|971|988|990):|writeShort|writeByte|writeInt|DoHoang091\.a\(' "$f" | head -20000 > "$GITHUB_WORKSPACE/item_diag9/${b}.txt" || true
+            grep -n -B120 -A500 -E 'H\\u00e0nh trang|Hành trang|hành trang|Trang b\\u1ecb|Trang bị|drawImage|drawRegion|paint\(|item|Item' "$f" | head -20000 > "$GITHUB_WORKSPACE/item_diag10/${b}.txt" || true
           done < /tmp/files.txt
       - name: Commit diagnostics
         shell: bash
@@ -35,7 +35,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag9
+          git add -- item_diag10
           git diff --cached --quiet && exit 0
-          git commit -m "chore: locate native shop target"
+          git commit -m "chore: locate inventory grid renderer"
           git push

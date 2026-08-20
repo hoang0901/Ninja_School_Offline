@@ -1,0 +1,67 @@
+name: Publish save menu JAR directly
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-publish-save-menu-direct.yml]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build validated JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/smdirect && mkdir -p /tmp/smdirect/src /tmp/smdirect/classes
+          cd /tmp/smdirect
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          git -C "$GITHUB_WORKSPACE" show f0acf971ddb30385d58aa5e324dd26da722029c8:.github/workflows/temp-build-save-menu-asm.yml > workflow.yml
+          awk '/cat > src\/Build.java <<'\''JAVA'\''/{f=1;next} f && /^          JAVA$/{exit} f{sub(/^          /,"");print}' workflow.yml > src/Build.java
+          curl -fsSL -o asm.jar https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar
+          curl -fsSL -o asm-tree.jar https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar
+          javac -cp asm.jar:asm-tree.jar -d classes src/Build.java
+          java -cp asm.jar:asm-tree.jar:classes Build
+          jar uf game.jar -C classes OfflineStartMenu.class -C classes Class_da.class -C classes CharacterDelete.class
+          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
+          unzip -t game.jar >/dev/null
+          javap -classpath game.jar -p OfflineStartMenu > menu.txt
+          javap -classpath game.jar -p -c Class_da > da.txt
+          javap -classpath game.jar -p -c CharacterDelete > del.txt
+          grep -q 'OfflineStartMenu.show' da.txt
+          grep -q 'OfflineStartMenu.deleteCurrent' del.txt
+          grep -q 'clearPrimary' menu.txt
+          jar tf game.jar > entries.txt
+          grep -q '^NativeCatalog.class$' entries.txt
+          ! grep -q '^ItemCatalogGrid.class$' entries.txt
+          ! grep -q '^FakeClassState.class$' entries.txt
+          cp game.jar /tmp/new-save-menu.jar
+      - name: Commit JAR to test branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          git fetch origin chatgpt/save-menu-redesign:refs/remotes/origin/chatgpt/save-menu-redesign
+          git checkout -B chatgpt/save-menu-redesign origin/chatgpt/save-menu-redesign
+          cp /tmp/new-save-menu.jar Nso_Offline_By_h0901.jar
+          rm -rf .github save_menu_inspect start_flow_inspect
+          rm -f startup_debug.txt startup_refs.txt startup_refs_small.txt core_start_debug.txt ds_login_focus.txt Class_ds.java.txt ds_bytecode_focus.txt save_menu_build_error.txt
+          git add -A
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: redesign startup save menu with permanent delete'
+          git push origin HEAD:chatgpt/save-menu-redesign
+      - name: Clean main
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main || true
+          rm -rf .github
+          rm -f save_menu_build_error.txt startup_debug.txt startup_refs.txt startup_refs_small.txt core_start_debug.txt ds_login_focus.txt Class_ds.java.txt ds_bytecode_focus.txt
+          git add -A
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: clean save menu publisher' || true
+          git push origin main || true

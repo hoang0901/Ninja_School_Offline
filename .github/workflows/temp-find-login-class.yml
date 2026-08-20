@@ -1,0 +1,44 @@
+name: Find login class fast
+on:
+  push:
+    branches: [chatgpt/data-manager-ui]
+    paths: [.github/workflows/temp-find-login-class.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/data-manager-ui
+          fetch-depth: 0
+      - name: Find candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/loginfind && mkdir -p /tmp/loginfind
+          cd /tmp/loginfind
+          jar tf "$J" | grep '^Class_.*\.class$' | sed 's/\.class$//' > classes.txt
+          : > candidates.txt
+          while read c; do
+            sig=$(javap -classpath "$J" -p "$c" 2>/dev/null | head -n 2 | tail -n 1 || true)
+            case "$sig" in
+              *"extends Class_ha implements Class_bx"*) echo "$c :: $sig" >> candidates.txt;;
+            esac
+          done < classes.txt
+          {
+            echo '=== candidates ==='
+            cat candidates.txt
+            echo '=== details ==='
+            while IFS=' ' read -r c rest; do
+              [ -n "$c" ] || continue
+              echo "##### $c #####"
+              javap -classpath "$J" -p -c -verbose "$c" 2>/dev/null | grep -E -n -B4 -A12 'String +#|Class_dw|Class_ew|8885|8886|1000|1001|1005|1006|indServer|lowGraphic' || true
+            done < candidates.txt
+          } > "$GITHUB_WORKSPACE/login_class_fast.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- login_class_fast.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: identify login class fast'
+          git push origin HEAD:chatgpt/data-manager-ui

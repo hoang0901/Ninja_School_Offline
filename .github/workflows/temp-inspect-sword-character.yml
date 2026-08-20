@@ -17,6 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo rerun
           J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
           rm -rf /tmp/swordinspect && mkdir -p /tmp/swordinspect
           cd /tmp/swordinspect
@@ -34,38 +35,8 @@ jobs:
             for c in Class_fe Class_fj Class_dn Class_ct; do
               echo "##### $c #####"; javap -classpath "$J" -p "$c" 2>/dev/null || true
             done
-            echo '=== classes referencing DoHoang091.aj or equipment ==='
-            for c in $(grep '\.class$' entries.txt | sed 's/\.class$//' | head -n 1200); do
-              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B4 -A12 -E 'DoHoang091\.(aj|ak|an)|Class_fj|Class_fe' || true)
-              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
-            done
           } > "$GITHUB_WORKSPACE/sword_character_inspect.txt"
           cd "$GITHUB_WORKSPACE"
-          python3 - <<'PY' >> sword_character_inspect.txt
-          import zipfile, xml.etree.ElementTree as ET
-          p='Danh_sach_ID_vat_pham.xlsx'
-          try:
-              z=zipfile.ZipFile(p)
-              ss=[]
-              if 'xl/sharedStrings.xml' in z.namelist():
-                  root=ET.fromstring(z.read('xl/sharedStrings.xml'))
-                  ns={'a':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-                  ss=[''.join(t.text or '' for t in si.findall('.//a:t',ns)) for si in root.findall('a:si',ns)]
-              sh=ET.fromstring(z.read('xl/worksheets/sheet1.xml'))
-              ns={'a':'http://schemas.openxmlformats.org/spreadsheetml/2006/main'}
-              print('=== XLSX FIRST 30 ROWS ===')
-              for row in sh.findall('.//a:row',ns)[:30]:
-                  vals=[]
-                  for c in row.findall('a:c',ns):
-                      v=c.find('a:v',ns)
-                      val='' if v is None else v.text
-                      if c.attrib.get('t')=='s' and val:
-                          val=ss[int(val)]
-                      vals.append(f"{c.attrib.get('r')}={val}")
-                  print(' | '.join(vals))
-          except Exception as e:
-              print('XLSX_ERROR',repr(e))
-          PY
           git add -- sword_character_inspect.txt
           git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect character and item data'
           git push origin HEAD:chatgpt/sword-strongest-character

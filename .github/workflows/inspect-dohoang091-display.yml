@@ -1,0 +1,74 @@
+name: Inspect DoHoang091 display strings
+on:
+  push:
+    branches: [chatgpt/rename-display-dohoang091-h0901]
+    paths: [.github/workflows/inspect-dohoang091-display.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect JAR constants and resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import io, struct, zipfile
+          jar='Nso_Offline_By_h0901.jar'
+          needle='DoHoang091'
+          out=[]
+
+          def u1(b,o): return b[o],o+1
+          def u2(b,o): return struct.unpack_from('>H',b,o)[0],o+2
+          def u4(b,o): return struct.unpack_from('>I',b,o)[0],o+4
+
+          with zipfile.ZipFile(jar) as z:
+              for name in z.namelist():
+                  data=z.read(name)
+                  if name.endswith('.class') and data[:4]==b'\xca\xfe\xba\xbe':
+                      try:
+                          o=8
+                          cp_count,o=u2(data,o)
+                          utf={}
+                          class_refs=set(); string_refs=set()
+                          i=1
+                          while i<cp_count:
+                              tag,o=u1(data,o)
+                              if tag==1:
+                                  n,o=u2(data,o); s=data[o:o+n].decode('utf-8','replace'); utf[i]=s; o+=n
+                              elif tag in (3,4): o+=4
+                              elif tag in (5,6): o+=8; i+=1
+                              elif tag==7:
+                                  idx,o=u2(data,o); class_refs.add(idx)
+                              elif tag==8:
+                                  idx,o=u2(data,o); string_refs.add(idx)
+                              elif tag in (9,10,11,12,17,18): o+=4
+                              elif tag==15: o+=3
+                              elif tag in (16,19,20): o+=2
+                              else: raise ValueError(f'unknown cp tag {tag}')
+                              i+=1
+                          hits=[]
+                          for idx,s in utf.items():
+                              if needle in s:
+                                  kinds=[]
+                                  if idx in string_refs: kinds.append('STRING')
+                                  if idx in class_refs: kinds.append('CLASS')
+                                  if not kinds: kinds.append('OTHER')
+                                  hits.append((idx,'+'.join(kinds),s))
+                          if hits:
+                              out.append(f'=== {name} ===')
+                              for idx,k,s in hits: out.append(f'cp#{idx}\t{k}\t{s}')
+                      except Exception as e:
+                          out.append(f'ERROR {name}: {e}')
+                  else:
+                      if needle.encode() in data:
+                          out.append(f'=== RESOURCE {name} ===')
+                          out.append(f'raw occurrences: {data.count(needle.encode())}')
+          with open('dohoang091_display_inspect.txt','w',encoding='utf-8') as f:
+              f.write('\n'.join(out) if out else 'NO OCCURRENCES FOUND')
+          PY
+          git add -- dohoang091_display_inspect.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: inspect DoHoang091 display strings'
+          git push origin HEAD:chatgpt/rename-display-dohoang091-h0901

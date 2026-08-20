@@ -1,0 +1,44 @@
+name: Find native catalog UI
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-find-native-catalog-ui.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Locate native item grid and trade UI
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nativeui native_ui_report && mkdir -p /tmp/nativeui/out native_ui_report
+          cd /tmp/nativeui
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          # Decompile the main client receiver/UI/service classes plus all likely trade/shop classes.
+          for c in Class_ct Class_by Class_ew Class_cy Class_ds Class_dn Class_fj Class_fe Class_dg Class_fp OfflineBridge OfflineDeleteMenu k1d; do
+            java -jar cfr.jar game.jar --extraclasspath game.jar --outputdir out --silent true --caseinsensitivefs true >/dev/null 2>&1 && break || true
+          done
+          # Exact/native text references if CFR recovers them.
+          grep -Rni -B20 -A60 -E 'Xu đang gửi|dang gui|đang gửi|Nhận|Xem|Đóng|Mua|Bán' out > "$GITHUB_WORKSPACE/native_ui_report/strings.txt" || true
+          # Find every item-array allocation/assignment and nearby methods/case labels.
+          grep -Rni -B35 -A100 -E 'new Class_fj\[|Class_fj\[\]|\.y = Class_dn\.b|Class_dn\.b\(' out/Class_by.java out/Class_ct.java > "$GITHUB_WORKSPACE/native_ui_report/item_arrays.txt" || true
+          # Find packet cases and methods tied to item list/grid setup.
+          grep -n -B50 -A160 -E 'case -111|case -112|case -113|case 111|case 112|case 113|Class_cy\.dc\.b|\.as\(\)|Xu|gui' out/Class_by.java > "$GITHUB_WORKSPACE/native_ui_report/receiver.txt" || true
+          # UI methods referencing Class_cy.dc.b and likely send-money/trade fields.
+          grep -n -B100 -A240 -E 'Class_cy\.dc\.b|Class_cy\.dc|Class_fj.*\[|drawRect|drawString|Xu|a\(Class_dg' out/Class_ct.java > "$GITHUB_WORKSPACE/native_ui_report/ui_focus.txt" || true
+          # Service methods sending item-slot selections.
+          grep -n -B50 -A100 -E 'writeByte\(.*\.i\)|writeShort\(.*\.y\.e|Class_fj object|Class_fj\[\]' out/Class_ew.java > "$GITHUB_WORKSPACE/native_ui_report/service.txt" || true
+          head -80 out/Class_cy.java > "$GITHUB_WORKSPACE/native_ui_report/classcy_head.txt" || true
+      - name: Commit report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add native_ui_report
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: locate native catalog item grid"
+          git push

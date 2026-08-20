@@ -1,0 +1,911 @@
+67-    private static final int bt = 43;
+68-    private static final int bu = 44;
+69-    private static final int bv = 45;
+70-    private static final int bw = 46;
+71-    private static final int bx = 47;
+72-    private static final int by = 50;
+73-    private static final int bz = 51;
+74-    private static final int bA = 52;
+75-    private static final int bB = 53;
+76-    private static final int bC = 54;
+77-    private static final int bD = 48;
+78-    private static final int bE = 49;
+79-    private static final int bF = 170;
+80-    private static final int bG = 171;
+81-    private static final int bH = 172;
+82-    private static final int bI = 173;
+83-    private static final int bJ = 174;
+84-    private static final int bK = 175;
+85-    private static final int bL = 176;
+86-    private static final int bM = 177;
+87-    private static final int bN = 178;
+88-    private static final int bO = 181;
+89-    private static final int bP = 182;
+90-    private static final int bQ = 183;
+91-    private static final int bR = 184;
+92-    private static final int bS = 100;
+93-    private static final int bT = 101;
+94-    private static final int bU = 102;
+95-    private static final int bV = 103;
+96-    private static final int bW = 104;
+97-    private static final int bX = 105;
+98-    private static final int bY = 106;
+99-    private static final int bZ = 107;
+100-    private static final int ca = 110;
+101-    private static final int cb = 111;
+102-    private static final int cc = 112;
+103-    private static final int cd = 113;
+104-    private static final int ce = 114;
+105-    private static final int cf = 115;
+106-    private static final int cg = 120;
+107-    private static final int ch = 121;
+108-    private static final int ci = 122;
+109-    private static final int cj = 123;
+110-    private static final int ck = 124;
+111-    private static final int cl = 125;
+112-    private static final int cm = 126;
+113-    private static final int cn = 130;
+114-    private static final int co = 131;
+115-    private static final int cp = 140;
+116-    private static final int cq = 141;
+117-    private static final int cr = 142;
+118-    private static final int cs = 150;
+119-    private static final int ct = 151;
+120-    private static final int cu = 152;
+121-    private static final int cv = 330;
+122-    private static final int cw = 160;
+123-    private static final int cx = 161;
+124-    private static final int cy = 162;
+125-    private static final int cz = 163;
+126-    private static final int cA = 164;
+127-    private static final int cB = 165;
+128-    private static final int cC = 166;
+129-    private static final int cD = 350;
+130-    private static final int cE = 350;
+131-    private static final int cF = 351;
+132-    private static final int cG = 352;
+133-    private static final int cH = 353;
+134-    private static final int cI = 190;
+135-    private static final int cJ = 191;
+136-    private static final int cK = 192;
+137-    private static final int cL = 193;
+138-    private static final int cM = 194;
+139-    private static final int cN = 195;
+140-    private static final int cO = 196;
+141-    private static final int cP = 197;
+142-    private static final int cQ = 198;
+143-    private static final int cR = 199;
+144-    private static final int cS = 200;
+145-    private static final int cT = 201;
+146-    private static final int cU = 202;
+147:    private static final int cV = 267;
+148-    private static final int cW = 268;
+149-    private static final int cX = 321;
+150-    private static final int cY = 322;
+151-    private static final int cZ = 323;
+152-    private static final int da = 269;
+153-    private static final int db = 324;
+154-    private static final int dc = 325;
+155-    private static final int dd = 326;
+156-    private static final int de = 327;
+157-    private static final int df = 380;
+158-    private static final int dg = 8;
+159-    private static final int dh = 0;
+160-    private static final int di = 1;
+161-    private static final int dj = 203;
+162-    private static final int dk = 204;
+163-    private static final int dl = 205;
+164-    private static final int dm = 206;
+165-    private static final int dn = 207;
+166-    private static final int do = 208;
+167-    private static final int dp = 209;
+168-    private static final int dq = 210;
+169-    private static final int dr = 211;
+170-    private static final int ds = 212;
+171-    private static final int dt = 213;
+172-    private static final int du = 214;
+173-    private static final int dv = 215;
+174-    private static final int dw = 216;
+175-    private static final int dx = 217;
+176-    private static final int dy = 218;
+177-    private static final int dz = 219;
+178-    private static final int dA = 220;
+179-    private static final int dB = 221;
+180-    private static final int dC = 222;
+181-    private static final int dD = 223;
+182-    private static final int dE = 224;
+183-    private static final int dF = 225;
+184-    private static final int dG = 226;
+185-    private static final int dH = 227;
+186-    private static final int dI = 228;
+187-    private static final int dJ = 229;
+188-    private static final int dK = 230;
+189-    private static final int dL = 231;
+190-    private static final int dM = 232;
+191-    private static final int dN = 233;
+192-    private static final int dO = 234;
+193-    private static final int dP = 235;
+194-    private static final int dQ = 236;
+195-    private static final int dR = 237;
+196-    private static final int dS = 238;
+197-    private static final int dT = 239;
+198-    private static final int dU = 240;
+199-    private static final int dV = 241;
+200-    private static final int dW = 242;
+201-    private static final int dX = 243;
+202-    private static final int dY = 244;
+203-    private static final int dZ = 245;
+204-    private static final int ea = 246;
+205-    private static final int eb = 247;
+206-    private static final int ec = 248;
+207-    private static final int ed = 249;
+208-    private static final int ee = 250;
+209-    private static final int ef = 251;
+210-    private static final int eg = 252;
+211-    private static final int eh = 253;
+212-    private static final int ei = 254;
+213-    private static final int ej = 255;
+214-    private static final int ek = 256;
+215-    private static final int el = 257;
+216-    private static final int em = 258;
+217-    private static final int en = 259;
+218-    private static final int eo = 260;
+219-    private static final int ep = 261;
+220-    private static final int eq = 262;
+221-    private static final int er = 263;
+222-    private static final int es = 264;
+223-    private static final int et = 265;
+224-    private static final int eu = 266;
+225-    private static final int ev = 270;
+226-    private static final int ew = 271;
+227-    private static final int ex = 272;
+228-    private static final int ey = 273;
+229-    private static final int ez = 274;
+230-    private static final int eA = 275;
+231-    private static final int eB = 276;
+232-    private static final int eC = 277;
+233-    private static final int eD = 278;
+234-    private static final int eE = 279;
+235-    private static final int eF = 280;
+236-    private static final int eG = 281;
+237-    private static final int eH = 282;
+238-    private static final int eI = 283;
+239-    private static final int eJ = 284;
+240-    private static final int eK = 285;
+241-    private static final int eL = 286;
+242-    private static final int eM = 287;
+243-    private static final int eN = 288;
+244-    private static final int eO = 289;
+245-    private static final int eP = 290;
+246-    private static final int eQ = 291;
+247-    private static final int eR = 292;
+248-    private static final int eS = 293;
+249-    private static final int eT = 294;
+250-    private static final int eU = 295;
+251-    private static final int eV = 296;
+252-    private static final int eW = 297;
+253-    private static final int eX = -2;
+254-    private static final int eY = 300;
+255-    private static final int eZ = 308;
+256-    private static final int fa = 309;
+257-    private static final int fb = 310;
+258-    private static final int fc = 311;
+259-    private static final int fd = 312;
+260-    private static final int fe = 313;
+261-    private static final int ff = 314;
+262-    private static final int fg = 315;
+263-    private static final int fh = 316;
+264-    private static final int fi = 320;
+265-    private static final int fj = 5;
+266-    private static final int fk = 100;
+267-    private static final int fl = 101;
+268-    private static final int fm = 102;
+269-    private static final int fn = 2402;
+270-    private static final int fo = 2003;
+271-    private static final int fp = 30001;
+272-    private static final int fq = 30002;
+273-    private static final int fr = 30003;
+274-    private static final int fs = 30004;
+275-    private static final int ft = 30005;
+276-    private static final int fu = 30006;
+277-    private static final int fv = 30007;
+278-    private static final int fw = 30008;
+279-    private static final int fx = 30009;
+280-    private static final int fy = 30010;
+281-    private static final int fz = 30011;
+282-    private static final int fA = 30012;
+283-    private static final int fB = 30013;
+284-    private static final int fC = 30014;
+285-    private static final int fD = 30015;
+286-    private static final int fE = 30016;
+287-    private static final int fF = 9999;
+288-    private static final int fG = 1;
+289-    private static final int fH = 2;
+290-    private static final int fI = 0;
+291-    private static final int fJ = 1;
+292-    private static final int fK = 2;
+293-    private static final int fL = 340;
+294-    private static final int fM = 12;
+295-    private static final int fN = 38;
+296-    private static final int fO = -72;
+297-    private static final int fP = 1314079537;
+298-    private static final int fQ = 9;
+299-    private static final long fR = 86400000L;
+300-    static final int a = 0;
+301-    static final int b = 1;
+302-    static final int c = 2;
+303-    static final int d = 3;
+304-    static final int e = 4;
+305-    static final int f = 5;
+306-    static final int g = 6;
+307-    static final int h = 7;
+308-    static final int i = 8;
+309-    static final int j = 9;
+310-    static final int k = 10;
+311-    static final int l = 11;
+312-    static final int m = 12;
+313-    static final int n = 13;
+314-    static final int o = 14;
+315-    static final int p = 15;
+316-    static final int q = 16;
+317-    static final int r = 32;
+318-    static final int s = 33;
+319-    static final int t = 34;
+320-    static final int u = 35;
+321-    static final int v = 36;
+322-    static final int w = 37;
+323-    static final int x = 38;
+324-    static final int y = 39;
+325-    static final int z = 40;
+326-    static final int A = 41;
+327-    static final int B = 42;
+328-    static final int C = 43;
+329-    static final int D = 44;
+330-    static final int E = 45;
+331-    static final int F = 46;
+332-    static final int G = 47;
+333-    static final int H = 48;
+334-    static final int I = 49;
+335-    static final int J = 50;
+336-    static final int K = 74;
+337-    static final int L = 75;
+338-    static final int M = 76;
+339-    static final int N = 77;
+340-    static final int O = 78;
+341-    static final int P = 79;
+342-    static final int Q = 80;
+343-    static final int R = 81;
+344-    static final int S = 82;
+345-    static final int T = 83;
+346-    static final int U = 84;
+347-    static final int V = 85;
+348-    static final int W = 86;
+349-    static final int X = 87;
+350-    static final int Y = 88;
+351-    static final int Z = 89;
+352-    static final int aa = 90;
+353-    static final int ab = 91;
+354-    static final int ac = 92;
+355-    static final int ad = 93;
+356-    static final int ae = 94;
+357-    static final int af = 95;
+358-    static final int ag = 96;
+359-    static final int ah = 97;
+360-    static final int ai = 98;
+361-    static final int aj = 99;
+362-    static final int ak = 100;
+363-    static final int al = 101;
+364-    static final int am = 102;
+365-    static final int an = 103;
+366-    static final int ao = 104;
+367-    static final int ap = 111;
+--
+1516-        int n4 = k5.a(n, nArray[96], l);
+1517-        if (n4 < 0) {
+1518-            return;
+1519-        }
+1520-        int n5 = nArray[94] - n4;
+1521-        if (n5 < 0) {
+1522-            n5 = 0;
+1523-        }
+1524-        nArray[94] = n5;
+1525-        nArray[96] = nArray[96] + 1;
+1526-        if (n5 <= 0) {
+1527-            k1d.d(false);
+1528-        } else {
+1529-            DoHoang091.G();
+1530-        }
+1531-    }
+1532-
+1533-    private static void c(String string) throws Exception {
+1534-        int n;
+1535-        if (k1d.al()[0] <= 0) {
+1536-            DoHoang091.a("B\u1ea1n \u0111\u00e3 c\u00f3 gia t\u1ed9c \u0111\u00e2u.");
+1537-            return;
+1538-        }
+1539-        if (!k1d.l(string)) {
+1540-            DoHoang091.a("S\u1ed1 l\u01b0\u1ee3ng nh\u1eadp v\u00e0o kh\u00f4ng h\u1ee3p l\u1ec7");
+1541-            return;
+1542-        }
+1543-        try {
+1544-            n = Integer.parseInt(string);
+1545-        }
+1546-        catch (Exception exception) {
+1547-            DoHoang091.a("S\u1ed1 l\u01b0\u1ee3ng nh\u1eadp v\u00e0o kh\u00f4ng h\u1ee3p l\u1ec7");
+1548-            return;
+1549-        }
+1550-        if (n > 50) {
+1551-            DoHoang091.a("B\u1ea1n c\u00f3 th\u1ec3 \u0111\u1ed5i t\u1ed1i \u0111a 50 l\u1ea7n");
+1552-            return;
+1553-        }
+1554-        if (n < 1) {
+1555-            DoHoang091.a("B\u1ea1n ph\u1ea3i \u0111\u1ed5i \u00edt nh\u1ea5t 1 l\u1ea7n");
+1556-            return;
+1557-        }
+1558-        if (k1d.B() < 6) {
+1559-            DoHoang091.a("H\u00e3y ch\u1eeba ra 6 ch\u1ed7 tr\u1ed1ng trong h\u00e0nh trang");
+1560-            return;
+1561-        }
+1562-        if (k16.a(894, n, true, (byte)0, (byte)0) >= 0) {
+1563-            DoHoang091.a("B\u1ea1n \u0111\u00e3 mua th\u00e0nh c\u00f4ng " + n + " gi\u1ea5y ph\u00e9p");
+1564-        }
+1565-    }
+1566-
+1567-    private static int B() throws Exception {
+1568-        short[] sArray = DoHoang091.z().K;
+1569-        int n = 0;
+1570-        int n2 = 0;
+1571-        while (n2 < sArray.length) {
+1572-            if (sArray[n2] < 0) {
+1573-                ++n;
+1574-            }
+1575-            ++n2;
+1576-        }
+1577-        return n;
+1578-    }
+1579-
+1580-    private static void C() throws Exception {
+1581-        DoHoang091.a("H\u01b0\u1edbng d\u1eabn \u1ea5n t\u1ed9c", "H\u00e3y tham gia v\u00e0o 1 gia t\u1ed9c b\u1ea5t k\u00ec \u0111\u1ec3 nh\u1eadn \u0111\u01b0\u1ee3c \u1ea5n t\u1ed9c \n\n\u0110\u1ec3 th\u0103ng \u1ea5n t\u1ed9c b\u1ea1n c\u1ea7n : gi\u1ea5y ph\u00e9p n\u00e2ng c\u1ea5p + \u0111\u00e1 linh h\u1ed3n\n\n\u0110\u00e1 linh h\u1ed3n t\u00ecm \u1edf s\u1ef1 ki\u1ec7n \n\nC\u00f3 th\u1ec3 ph\u00f9 ph\u00e9p t\u1ea1o \u0111\u00e1 linh h\u1ed3n t\u1eeb : b\u1ee5i linh h\u1ed3n + tr\u01b0\u1ee3ng linh h\u1ed3n\n\nXem chi ti\u1ebft t\u1ea1i : nsokiss.me/Tinhnang");
+1582-    }
+1583-
+1584-    private static void a(int n, String string, int n2, String string2, int n3) throws Exception {
+1585-        k1d.a(n, new String[]{"B\u1ea3ng x\u1ebfp h\u1ea1ng", "Nh\u1eadp h\u1ecdc", "T\u1ea9y \u0111i\u1ec3m", "N\u00f3i chuy\u1ec7n", "Giao chi\u1ebfn"}, new int[]{2, 11, 12, 1, 13});
+1586-    }
+1587-
+1588-    private static void p(int n) throws Exception {
+1589-        String string;
+1590-        boolean bl = k1d.al()[7] != (int)(System.currentTimeMillis() / 86400000L);
+1591-        boolean bl2 = (k1d.al()[8] & 1) == 0;
+1592-        boolean bl3 = k1d.c();
+1593-        String string2 = bl3 ? "[T\u1eaft]\\nKh\u00f4ng nh\u1eadn kinh nghi\u1ec7m" : "[B\u1eadt]\\nKh\u00f4ng nh\u1eadn kinh nghi\u1ec7m";
+1594-        String string3 = string = k5.d() ? "T\u1eaft Bot" : "B\u1eadt Bot";
+1595-        if (bl && bl2) {
+1596:            k1d.a(n, new String[]{"\u0110i\u1ec3m danh", "Qu\u00e0 t\u00e2n th\u1ee7", "Nh\u1eadp giftcode", string2, "B\u1ecf h\u1ebft nhi\u1ec7m v\u1ee5", "Thu\u00ea Server Game", "\u0110\u1ed5i t\u00ean \u0111\u0103ng nh\u1eadp", "\u0110\u1ed5i t\u00ean nh\u00e2n v\u1eadt", "\u0110\u1ed5i t\u00ean clan", "H\u1ee7y clan", "T\u00ecnh tr\u1ea1ng boss", "T\u00ecnh tr\u1ea1ng s\u1ef1 ki\u1ec7n", string, "Nh\u1eadn v\u1eadt ph\u1ea9m", "Nh\u1eadn xu", "Nh\u1eadn l\u01b0\u1ee3ng", "Nh\u1eadn y\u00ean"}, new int[]{33, 34, 35, 197, 15, 202, 198, 199, 200, 201, 265, 266, 268, 267, 321, 322, 323});
+1597-        } else if (bl) {
+1598:            k1d.a(n, new String[]{"\u0110i\u1ec3m danh", "Nh\u1eadp giftcode", string2, "B\u1ecf h\u1ebft nhi\u1ec7m v\u1ee5", "Thu\u00ea Server Game", "\u0110\u1ed5i t\u00ean \u0111\u0103ng nh\u1eadp", "\u0110\u1ed5i t\u00ean nh\u00e2n v\u1eadt", "\u0110\u1ed5i t\u00ean clan", "H\u1ee7y clan", "T\u00ecnh tr\u1ea1ng boss", "T\u00ecnh tr\u1ea1ng s\u1ef1 ki\u1ec7n", string, "Nh\u1eadn v\u1eadt ph\u1ea9m", "Nh\u1eadn xu", "Nh\u1eadn l\u01b0\u1ee3ng", "Nh\u1eadn y\u00ean"}, new int[]{33, 35, 197, 15, 202, 198, 199, 200, 201, 265, 266, 268, 267, 321, 322, 323});
+1599-        } else if (bl2) {
+1600:            k1d.a(n, new String[]{"Qu\u00e0 t\u00e2n th\u1ee7", "Nh\u1eadp giftcode", string2, "B\u1ecf h\u1ebft nhi\u1ec7m v\u1ee5", "Thu\u00ea Server Game", "\u0110\u1ed5i t\u00ean \u0111\u0103ng nh\u1eadp", "\u0110\u1ed5i t\u00ean nh\u00e2n v\u1eadt", "\u0110\u1ed5i t\u00ean clan", "H\u1ee7y clan", "T\u00ecnh tr\u1ea1ng boss", "T\u00ecnh tr\u1ea1ng s\u1ef1 ki\u1ec7n", string, "Nh\u1eadn v\u1eadt ph\u1ea9m", "Nh\u1eadn xu", "Nh\u1eadn l\u01b0\u1ee3ng", "Nh\u1eadn y\u00ean"}, new int[]{34, 35, 197, 15, 202, 198, 199, 200, 201, 265, 266, 268, 267, 321, 322, 323});
+1601-        } else {
+1602:            k1d.a(n, new String[]{"Nh\u1eadp giftcode", string2, "B\u1ecf h\u1ebft nhi\u1ec7m v\u1ee5", "Thu\u00ea Server Game", "\u0110\u1ed5i t\u00ean \u0111\u0103ng nh\u1eadp", "\u0110\u1ed5i t\u00ean nh\u00e2n v\u1eadt", "\u0110\u1ed5i t\u00ean clan", "H\u1ee7y clan", "T\u00ecnh tr\u1ea1ng boss", "T\u00ecnh tr\u1ea1ng s\u1ef1 ki\u1ec7n", string, "Nh\u1eadn v\u1eadt ph\u1ea9m", "Nh\u1eadn xu", "Nh\u1eadn l\u01b0\u1ee3ng", "Nh\u1eadn y\u00ean"}, new int[]{35, 197, 15, 202, 198, 199, 200, 201, 265, 266, 268, 267, 321, 322, 323});
+1603-        }
+1604-    }
+1605-
+1606-    private static void j(int n, int n2) throws Exception {
+1607-        String string;
+1608-        int n3;
+1609-        if (n2 == 0) {
+1610-            n3 = k32.a(500000000L);
+1611-            string = "xu";
+1612-        } else if (n2 == 1) {
+1613-            n3 = k32.c(500000000L);
+1614-            string = "l\u01b0\u1ee3ng";
+1615-        } else {
+1616-            n3 = k32.b(500000000L);
+1617-            string = "y\u00ean";
+1618-        }
+1619-        if (n3 <= 0) {
+1620-            DoHoang091.b("B\u1ea1n \u0111\u00e3 \u0111\u1ea1t gi\u1edbi h\u1ea1n 2.000.000.000 " + string + ".");
+1621-            return;
+1622-        }
+1623-        k32.e();
+1624-        DoHoang091.H();
+1625-        DoHoang091.b("B\u1ea1n nh\u1eadn \u0111\u01b0\u1ee3c " + n3 + " " + string + ".");
+1626-    }
+1627-
+1628-    private static void q(int n) throws Exception {
+1629-        k1d.a(n, new String[]{"Th\u00f4ng tin", "T\u00ecnh tr\u1ea1ng boss", "T\u00ecnh tr\u1ea1ng s\u1ef1 ki\u1ec7n", "\u0110i t\u1edbi", "L\u01b0u d\u1eef li\u1ec7u", "B\u1ea3o tr\u00ec", "T\u00ecm ng\u01b0\u1eddi ch\u01a1i", "Nh\u1eadp l\u1ec7nh"}, new int[]{191, 265, 266, 192, 193, 194, 195, 196});
+1630-    }
+1631-
+1632-    static void b(int n, int n2) throws Exception {
+1633-        DoHoang091.k0 k02 = DoHoang091.v(n2);
+1634-        if (k02 == null) {
+1635-            DoHoang091.a("Kh\u00f4ng t\u00ecm th\u1ea5y ng\u01b0\u1eddi ch\u01a1i n\u00e0y!");
+1636-            return;
+1637-        }
+1638-        gk = n2;
+1639-        k1d.a(n, new String[]{"Th\u00f4ng tin", "Kh\u00f3a t\u00e0i kho\u1ea3n", "\u0110i t\u1edbi"}, new int[]{281, 282, 283});
+1640-    }
+1641-
+1642-    static void c(int n) throws Exception {
+1643-        if (!k16.e(n)) {
+1644-            return;
+1645-        }
+1646-        int n2 = k16.f(n);
+1647-        if (n2 >= 9) {
+1648-            DoHoang091.b("\u0110\u00e3 \u0111\u1ea1t ng\u01b0\u1ee1ng t\u1ed1i \u0111a");
+1649-            return;
+1650-        }
+1651-        int n3 = n2 + 1;
+1652-        gk = n;
+1653-        int n4 = n2 < 0 ? 295 : 296;
+1654-        int n5 = n2 < 0 ? 10 : 11;
+1655-        k1d.a(n5, n4, 5, "Th\u0103ng ng\u01b0\u1ee1ng khai h\u00f3a l\u00ean c\u1ea5p " + n3 + " \n T\u1ef7 l\u1ec7 th\u00e0nh c\u00f4ng: " + k16.j(n3) + "% \n C\u1ea7n " + k1d.a((long)k16.k(n3)) + " xu v\u00e0 " + k1d.a((long)k16.l(n3)) + " l\u01b0\u1ee3ng");
+1656-    }
+1657-
+1658-    static void d(int n) throws Exception {
+1659-        int n2 = k16.h(n);
+1660-        if (n2 < 0) {
+1661-            return;
+1662-        }
+1663-        if (k16.i(n2) >= 0) {
+1664-            DoHoang091.b("B\u1ea1n c\u1ea7n n\u00e2ng ng\u01b0\u1ee1ng khai h\u00f3a \u0111\u1ec3 ti\u1ebfp t\u1ee5c n\u00e2ng c\u1ea5p.");
+1665-            return;
+1666-        }
+1667-        int n3 = k16.f(n2);
+1668-        int n4 = k16.g(n2);
+1669-        if (n4 == 0) {
+1670-            gm = n2;
+1671-            k1d.a(5, new String[]{"S\u1ee9c m\u1ea1nh", "Ph\u00f2ng th\u1ee7", "H\u1ed3i ph\u1ee5c"}, new int[]{292, 293, 294});
+1672-            return;
+1673-        }
+1674-        if (n3 <= n4) {
+1675-            DoHoang091.b(n3 < 9 ? "B\u1ea1n c\u1ea7n n\u00e2ng ng\u01b0\u1ee1ng khai h\u00f3a \u0111\u1ec3 ti\u1ebfp t\u1ee5c n\u00e2ng c\u1ea5p." : "B\u1ea1n \u0111\u00e3 \u0111\u1ea1t c\u1ea5p t\u1ed1i \u0111a n\u00e2ng c\u1ea5p.");
+1676-            return;
+1677-        }
+1678-        int n5 = n4 + 1;
+1679-        gk = n2;
+1680-        k1d.a(12, 297, 5, "Th\u0103ng c\u1ea5p khai h\u00f3a l\u00ean c\u1ea5p " + n5 + " \n T\u1ef7 l\u1ec7 th\u00e0nh c\u00f4ng: " + k16.m(n5) + "% \n C\u1ea7n " + k1d.a((long)k16.n(n5)) + " xu v\u00e0 " + k1d.a((long)k16.o(n5)) + " l\u01b0\u1ee3ng");
+1681-    }
+1682-
+1683-    private static void a(int n, int n2, int n3, String string) throws Exception {
+1684-        ge = -1;
+1685-        gf = new int[0];
+1686-        gg = false;
+1687-        gh = n;
+1688-        gi = n2;
+1689-        gj = n3;
+1690-        gl = null;
+1691-        DoHoang091.b(n, string);
+1692-    }
+1693-
+1694-    private static void a(int n, int n2, int n3, String string, String string2) throws Exception {
+1695-        k1d.a(n, n2, n3, string);
+1696-        gl = string2;
+1697-    }
+1698-
+1699-    static void d(byte[] byArray) throws Exception {
+1700-        if (byArray == null || byArray.length == 0) {
+1701-            return;
+1702-        }
+1703-        int n = byArray[0] & 0xFF;
+1704-        if (n == 0) {
+1705-            gh = -1;
+1706-            gi = -1;
+1707-            gj = -1;
+1708-            gk = -1;
+1709-            gl = null;
+1710-            gm = -1;
+1711-            DoHoang091.a(true);
+1712-            return;
+1713-        }
+1714-        if (gh < 0) {
+1715-            return;
+1716-        }
+1717-        if (n != gh && (n != 1 || gh <= 0)) {
+1718-            return;
+1719-        }
+1720-        int n2 = gi;
+1721-        int n3 = gj;
+1722-        int n4 = gk;
+1723-        String string = gl;
+1724-        gh = -1;
+1725-        gi = -1;
+1726-        gj = -1;
+1727-        gk = -1;
+1728-        gl = null;
+1729-        switch (n2) {
+1730-            case 270: {
+1731-                DoHoang091.d(string);
+1732-                break;
+1733-            }
+1734-            case 271: {
+1735-                DoHoang091.e(string);
+1736-                break;
+1737-            }
+1738-            case 272: {
+1739-                DoHoang091.f(string);
+1740-                break;
+1741-            }
+1742-            case 273: {
+1743-                DoHoang091.D();
+1744-                break;
+1745-            }
+1746-            case 274: {
+1747-                k1d.r(n3);
+1748-                break;
+1749-            }
+1750-            case 275: {
+1751-                k16.l();
+1752-                break;
+1753-            }
+1754-            case 276: {
+1755-                k16.m();
+1756-                break;
+1757-            }
+1758-            case 277: {
+1759-                k1d.S(n3);
+1760-                break;
+1761-            }
+1762-            case 278: {
+1763-                k1d.b(n3, false);
+1764-                break;
+1765-            }
+1766-            case 279: {
+1767-                k1d.b(n3, true);
+1768-                break;
+1769-            }
+1770-            case 280: {
+1771-                k1d.V(n3);
+1772-                break;
+1773-            }
+1774-            case 295: 
+1775-            case 296: {
+1776-                k16.p(n4);
+1777-                break;
+1778-            }
+1779-            case 297: {
+1780-                k16.q(n4);
+1781-                break;
+1782-            }
+1783-            case 320: {
+1784-                k16.u(n4);
+1785-                break;
+1786-            }
+1787-            case 281: {
+1788-                DoHoang091.w(n4);
+1789-                break;
+1790-            }
+1791-            case 283: {
+1792-                DoHoang091.x(n4);
+1793-                break;
+1794-            }
+1795-        }
+1796-    }
+1797-
+1798-    private static void r(int n) throws Exception {
+1799-        k2e.z();
+1800-    }
+1801-
+1802-    private static boolean d(String string) {
+1803-        if (string == null) {
+1804-            return false;
+1805-        }
+1806-        String string2 = string.trim();
+1807-        if (string2.length() < 1 || string2.length() > 15) {
+1808-            return false;
+1809-        }
+1810-        int n = 0;
+1811-        while (n < string2.length()) {
+1812-            char c = string2.charAt(n);
+1813-            if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9')) {
+1814-                return false;
+1815-            }
+1816-            ++n;
+1817-        }
+1818-        return true;
+1819-    }
+1820-
+1821-    private static String e(String string) {
+1822-        return string == null ? null : string.trim().toLowerCase();
+--
+3525-                k1d.q(n);
+3526-                break;
+3527-            }
+3528-            case 281: {
+3529-                DoHoang091.w(gk);
+3530-                break;
+3531-            }
+3532-            case 282: {
+3533-                DoHoang091.a("Th\u1eddi h\u1ea1n (gi\u1edd), b\u1ecf tr\u1ed1ng n\u1ebfu v\u0129nh vi\u1ec5n", 30013);
+3534-                break;
+3535-            }
+3536-            case 283: {
+3537-                DoHoang091.x(gk);
+3538-                break;
+3539-            }
+3540-            case 191: {
+3541-                DoHoang091.E();
+3542-                break;
+3543-            }
+3544-            case 265: {
+3545-                k10.e();
+3546-                break;
+3547-            }
+3548-            case 266: {
+3549-                ke.E();
+3550-                break;
+3551-            }
+3552-            case 192: {
+3553-                DoHoang091.a("Nh\u1eadp ID MAP", 30001);
+3554-                break;
+3555-            }
+3556-            case 193: {
+3557-                DoHoang091.H();
+3558-                DoHoang091.a("\u0110\u00e3 l\u01b0u d\u1eef li\u1ec7u!");
+3559-                break;
+3560-            }
+3561-            case 194: {
+3562-                DoHoang091.F();
+3563-                break;
+3564-            }
+3565-            case 195: {
+3566-                DoHoang091.a("T\u00ecm ng\u01b0\u1eddi ch\u01a1i", 30002);
+3567-                break;
+3568-            }
+3569-            case 196: {
+3570-                DoHoang091.a("Nh\u1eadp l\u1ec7nh", 30003);
+3571-                break;
+3572-            }
+3573-            case 197: {
+3574-                k1d.s(n);
+3575-                break;
+3576-            }
+3577-            case 268: {
+3578-                k1d.t(n);
+3579-                break;
+3580-            }
+3581-            case 198: {
+3582-                DoHoang091.a("T\u00ean \u0111\u0103ng nh\u1eadp m\u1edbi", 30004);
+3583-                break;
+3584-            }
+3585-            case 199: {
+3586-                DoHoang091.a("T\u00ean nh\u00e2n v\u1eadt m\u1edbi", 30005);
+3587-                break;
+3588-            }
+3589-            case 200: {
+3590-                DoHoang091.a("T\u00ean clan m\u1edbi", 30006);
+3591-                break;
+3592-            }
+3593-            case 201: {
+3594-                if (k1d.al()[0] <= 0) {
+3595-                    DoHoang091.D();
+3596-                    break;
+3597-                }
+3598-                k1d.a(1, 273, n, "B\u1ea1n c\u00f3 ch\u1eafc ch\u1eafn mu\u1ed1n gi\u1ea3i t\u00e1n gia t\u1ed9c?");
+3599-                break;
+3600-            }
+3601-            case 202: {
+3602-                DoHoang091.a("M\u00e1y ch\u1ee7 \u0111ang ho\u1ea1t \u0111\u1ed9ng \u1ed5n \u0111\u1ecbnh.");
+3603-                break;
+3604-            }
+3605:            case 267: {
+3606-                k1d.u(n);
+3607-                break;
+3608-            }
+3609-            case 269: {
+3610-                DoHoang091.a("ID item [SL] [n\u00e2ng c\u1ea5p] [h\u1ec7] [kh\u00f3a] [h\u1ea1n ng\u00e0y]", 30014);
+3611-                break;
+3612-            }
+3613-            case 324: {
+3614-                gv = 0;
+3615-                gw = -1;
+3616-                k1d.x(n);
+3617-                break;
+3618-            }
+3619-            case 325: 
+3620-            case 326: 
+3621-            case 327: {
+3622-                k1d.l(n, n2);
+3623-                break;
+3624-            }
+3625-            case 321: {
+3626-                k1d.j(n, 0);
+3627-                break;
+3628-            }
+3629-            case 322: {
+3630-                k1d.j(n, 1);
+3631-                break;
+3632-            }
+3633-            case 323: {
+3634-                k1d.j(n, 2);
+3635-                break;
+3636-            }
+3637-            case 142: {
+3638-                DoHoang091.send((byte)-28, new byte[]{-82});
+3639-                break;
+3640-            }
+3641-            case 48: {
+3642-                k1d.b(n, 194, "ki\u1ebfm g\u1ed7");
+3643-                break;
+3644-            }
+3645-            case 49: {
+3646-                k1d.O(DoHoang091.z().H);
+3647-                break;
+3648-            }
+3649-            case 130: 
+3650-            case 131: {
+3651-                k1d.aI(n);
+3652-                break;
+3653-            }
+3654-            case 170: {
+3655-                k1d.a(n, "B\u1ea1n c\u00f3 mu\u1ed1n nh\u1eadn nhi\u1ec7m v\u1ee5 n\u00e0y.", new String[]{"Nh\u1eadn", "H\u1ee7y"}, new int[]{171, 174});
+3656-                break;
+3657-            }
+3658-            case 171: {
+3659-                k2e.a(1, n);
+3660-                break;
+3661-            }
+3662-            case 172: {
+3663-                k2e.a(2, n);
+3664-                break;
+3665-            }
+3666-            case 175: {
+3667-                k2e.a(4, n);
+3668-                break;
+3669-            }
+3670-            case 176: {
+3671-                k2e.a(5, n);
+3672-                break;
+3673-            }
+3674-            case 177: {
+3675-                k2e.a(6, n);
+3676-                break;
+3677-            }
+3678-            case 178: {
+3679-                k2e.a(7, n);
+3680-                break;
+3681-            }
+3682-            case 173: {
+3683-                k2e.a(3, n);
+3684-                break;
+3685-            }
+3686-            case 174: {
+3687-                gg = true;
+3688-                k1d.i(n);
+3689-                break;
+3690-            }
+3691-            case 181: 
+3692-            case 182: 
+3693-            case 183: 
+3694-            case 184: {
+3695-                k2e.g(n2 - 181 + 1);
+3696-                if (!k2e.f()) break;
+3697-                k1d.f(n);
+3698-                break;
+3699-            }
+3700-        }
+3701-    }
+3702-
+3703-    static void a(int n, String[] object, int[] nArray) throws Exception {
+3704-        Object object2;
+3705-        if (((String[])object).length != nArray.length) {
+3706-            throw new Exception("NPC menu/action mismatch " + n);
+3707-        }
+3708-        if (gg) {
+3709-            gg = false;
+3710-            int n2 = k2e.d(n);
+3711-            if (n2 != 0) {
+3712-                object2 = new String[((String[])object).length + 1];
+3713-                int[] nArray2 = new int[nArray.length + 1];
+3714-                object2[0] = k2e.f(n2);
+3715-                nArray2[0] = n2 == 1 ? 170 : (n2 == 3 ? 173 : (n2 == 4 ? 175 : (n2 == 5 ? 176 : (n2 == 6 ? 177 : (n2 == 7 ? 178 : 172)))));
+3716-                System.arraycopy(object, 0, object2, 1, ((String[])object).length);
+3717-                System.arraycopy(nArray, 0, nArray2, 1, nArray.length);
+3718-                object = object2;
+3719-                nArray = nArray2;
+3720-            }
+3721-        }
+3722-        ge = n;
+3723-        gf = nArray;
+3724-        if (((String[])object).length == 0) {
+3725-            ge = -1;
+3726-            gf = new int[0];
+3727-            DoHoang091.a(true);
+3728-            return;
+3729-        }
+3730-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(128);
+3731-        object2 = new DataOutputStream(byteArrayOutputStream);
+3732-        int n3 = 0;
+3733-        while (n3 < ((String[])object).length) {
+3734-            ((DataOutputStream)object2).writeUTF(object[n3]);
+3735-            ++n3;
+3736-        }
+3737-        ((DataOutputStream)object2).flush();
+3738-        DoHoang091.a((byte)63, byteArrayOutputStream.toByteArray());
+3739-    }
+3740-
+3741-    private static void a(int n, String string, String[] stringArray, int[] nArray) throws Exception {
+3742-        if (stringArray.length != nArray.length) {
+3743-            throw new Exception("NPC confirm/action mismatch " + n);
+3744-        }
+3745-        ge = n;
+3746-        gf = nArray;
+3747-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(192);
+3748-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+3749-        dataOutputStream.writeShort(n);
+3750-        dataOutputStream.writeUTF(string);
+3751-        dataOutputStream.writeByte(stringArray.length);
+3752-        int n2 = 0;
+3753-        while (n2 < stringArray.length) {
+3754-            dataOutputStream.writeUTF(stringArray[n2]);
+3755-            ++n2;
+3756-        }
+3757-        dataOutputStream.flush();
+3758-        DoHoang091.a((byte)39, byteArrayOutputStream.toByteArray());
+3759-    }
+3760-
+3761-    static void f(int n) throws Exception {
+3762-        byte[] byArray = k2e.j();
+3763-        if (byArray == null) {
+3764-            return;
+3765-        }
+3766-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+3767-        String string = dataInputStream.readUTF();
+3768-        dataInputStream.readUnsignedByte();
+3769-        int n2 = dataInputStream.readUnsignedByte();
+3770-        String[] stringArray = new String[n2];
+3771-        int[] nArray = new int[n2];
+3772-        int n3 = 0;
+3773-        while (n3 < n2) {
+3774-            int n4 = dataInputStream.readUnsignedByte();
+3775-            stringArray[n3] = dataInputStream.readUTF();
+3776-            nArray[n3] = 181 + n4 - 1;
+3777-            ++n3;
+3778-        }
+3779-        dataInputStream.close();
+3780-        k1d.a(n, string, stringArray, nArray);
+3781-    }
+3782-
+3783-    private static void B(int n) throws Exception {
+3784-        String[] stringArray = new String[]{"\u0110\u00e1", "N\u00f3n", "V\u0169 kh\u00ed", "\u00c1o", "D\u00e2y chuy\u1ec1n", "G\u0103ng tay", "Nh\u1eabn", "Qu\u1ea7n", "Ng\u1ecdc B\u1ed9i", "Gi\u00e0y", "B\u00f9a", "Linh tinh"};
+3785-        int[] nArray = new int[stringArray.length];
+3786-        int n2 = 0;
+3787-        while (n2 < nArray.length) {
+3788-            nArray[n2] = 330 + n2;
+3789-            ++n2;
+3790-        }
+3791-        k1d.a(n, stringArray, nArray);
+3792-    }
+3793-
+3794-    private static void C(int n) throws Exception {
+3795-        if (n == 9) {
+3796-            k1d.a(n, new String[]{"Ninja Ki\u1ebfm", "Ninja Phi Ti\u00eau"}, new int[]{4001, 4002});
+3797-        } else if (n == 10) {
+3798-            k1d.a(n, new String[]{"Ninja Kunai", "Ninja Cung"}, new int[]{4003, 4004});
+3799-        } else {
+3800-            k1d.a(n, new String[]{"Ninja \u0110ao", "Ninja Qu\u1ea1t"}, new int[]{4005, 4006});
+3801-        }
+3802-    }
+3803-
+3804-    private static void D(int n) throws Exception {
+3805-        k1d.a(n, new String[]{"Top \u0111\u1ea1i gia", "Top cao th\u1ee7", "Top gia t\u1ed9c", "Top hang \u0111\u1ed9ng"}, new int[]{130, 130, 130, 130});
+3806-    }
+3807-
+3808-    private static void E(int n) throws Exception {
+3809-        k1d.a(n, new String[]{"\u0110\u0103ng k\u00fd", "Chinh ph\u1ee5c", "Thi\u00ean b\u1ea3ng", "\u0110\u1ecba b\u1ea3ng"}, new int[]{163, 164, 165, 166});
+3810-    }
+3811-
+3812-    private static void F(int n) throws Exception {
+3813-        k30.b(n);
+3814-    }
+3815-
+3816-    private static void G(int n) throws Exception {
+3817-        k30.c(n);
+3818-    }
+3819-
+3820-    private static void H(int n) throws Exception {
+3821-        k30.d(n);
+3822-    }
+3823-
+3824-    private static int a(DoHoang091.k0 k02) {
+3825-        return k30.c(k02);

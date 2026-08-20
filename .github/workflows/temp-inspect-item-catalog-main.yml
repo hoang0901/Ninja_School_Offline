@@ -10,38 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find client menu packet handler and item-grid renderer
+      - name: Inspect shop action implementation
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag5"
-          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag5"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag6"
+          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag6"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          # Locate likely packet-63 handlers and packet-29 menu-selection senders across all classes.
-          grep -R -n -E 'case 63:|== 63|!= 63' cfrout --include='*.java' | head -200 > "$GITHUB_WORKSPACE/item_diag5/case63_locations.txt" || true
-          grep -R -n -E 'case 29:|== 29|!= 29' cfrout --include='*.java' | head -200 > "$GITHUB_WORKSPACE/item_diag5/case29_locations.txt" || true
-          # Build focused snippets for every source containing case 63/29.
-          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag5/case63_locations.txt" | sort -u | head -20 > /tmp/files63.txt || true
-          while IFS= read -r f; do
-            [ -f "$f" ] || continue
-            b=$(basename "$f" .java)
-            grep -n -B80 -A240 -E 'case 63:|== 63|!= 63|readUTF|Vector|menu|Menu' "$f" | head -12000 > "$GITHUB_WORKSPACE/item_diag5/${b}_63.txt" || true
-          done < /tmp/files63.txt
-          # Find likely grid/icon/inventory drawing sources.
-          grep -R -n -E 'hành trang|Hành trang|inventory|Inventory|drawImage|drawRegion|icon|Icon' cfrout --include='*.java' | head -3000 > "$GITHUB_WORKSPACE/item_diag5/grid_locations.txt" || true
-          # Existing shop-like packet/open methods in offline server.
-          grep -n -B80 -A240 -E 'C\\u1eeda h\\u00e0ng|Qu\\u1ea7y s\\u00e1ch' cfrout/k1d.java > "$GITHUB_WORKSPACE/item_diag5/k1d_shop.txt" || true
+          f=cfrout/k1d.java
+          grep -n -B100 -A500 -E 'case 1014:|case 1015:|case 1032:|case 1034:' "$f" > "$GITHUB_WORKSPACE/item_diag6/k1d_shop_actions.txt" || true
+          # Any helper methods called by those actions will usually sit nearby and mention template/item writes.
+          grep -n -B60 -A220 -E 'writeShort|writeByte|writeInt|k16\.A\(|k16\.B\(|k16\.G\(' "$f" | head -20000 > "$GITHUB_WORKSPACE/item_diag6/k1d_item_packet_candidates.txt" || true
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag5
+          git add -- item_diag6
           git diff --cached --quiet && exit 0
-          git commit -m "chore: locate client catalog grid hook"
+          git commit -m "chore: inspect shop action implementation"
           git push

@@ -1,0 +1,190 @@
+name: Build catalog grouped by type
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-build-catalog-types.yml]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch catalog grouping
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/catalog-build && mkdir -p /tmp/catalog-build/src /tmp/catalog-build/classes
+          cd /tmp/catalog-build
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o javassist.jar https://repo1.maven.org/maven2/org/javassist/javassist/3.30.2-GA/javassist-3.30.2-GA.jar
+          cat > src/Patch.java <<'JAVA'
+          import javassist.*;
+          import java.io.*;
+          import java.util.jar.*;
+          import java.util.*;
+
+          public class Patch {
+            public static void main(String[] args) throws Exception {
+              String jar = args[0];
+              ClassPool cp = new ClassPool(true);
+              cp.insertClassPath(jar);
+              CtClass k = cp.get("k1d");
+              CtField gy = k.getDeclaredField("gy");
+              gy.setModifiers(Modifier.setPublic(gy.getModifiers()));
+
+              CtMethod x = k.getDeclaredMethod("x", new CtClass[]{CtClass.intType});
+              x.setBody("{"+
+                "D(); gu=0; int st=gv*8; int total=gx==null?0:gx.length;"+
+                "if(st>=total){gv=0;st=0;} int cnt=total-st; if(cnt>8)cnt=8;"+
+                "boolean prev=gv>0; boolean next=st+cnt<total;"+
+                "int extra=1+(prev?1:0)+(next?1:0);"+
+                "String[] ss=new String[cnt+extra]; int[] aa=new int[ss.length];"+
+                "for(int i=0;i<cnt;i++){int type=gx[st+i]; ss[i]=v(type)+\" (\"+gy[st+i].length+\")\"; aa[i]=380+i;}"+
+                "int p=cnt; if(prev){ss[p]=\"Trang trước\";aa[p]=325;p++;}"+
+                "if(next){ss[p]=\"Trang sau\";aa[p]=326;p++;}"+
+                "ss[p]=\"Quay lại\";aa[p]=327; a($1,ss,aa);"+
+              "}");
+
+              CtMethod km = k.getDeclaredMethod("k", new CtClass[]{CtClass.intType,CtClass.intType});
+              km.setBody("{"+
+                "if($2<0||$2>=8)return; int st=gv*8;"+
+                "if(gu==1){"+
+                  "if(gw<0||gw>=gy.length){x($1);return;} int[] arr=gy[gw]; int pos=st+$2;"+
+                  "if(pos<0||pos>=arr.length)return; z(arr[pos]); return;"+
+                "}"+
+                "int pos=st+$2; if(pos<0||gx==null||pos>=gx.length)return;"+
+                "NativeCatalog.openType(gx[pos]);"+
+              "}");
+
+              byte[] kb = k.toBytecode();
+              k.detach();
+              replace(jar, "k1d.class", kb);
+            }
+            static void replace(String jarPath, String name, byte[] data) throws Exception {
+              File src=new File(jarPath), tmp=new File(jarPath+".tmp");
+              JarFile jf=new JarFile(src); JarOutputStream jo=new JarOutputStream(new FileOutputStream(tmp));
+              byte[] buf=new byte[8192]; Enumeration<JarEntry> en=jf.entries();
+              while(en.hasMoreElements()){
+                JarEntry e=en.nextElement(); String n=e.getName();
+                if(n.equals(name) || (n.startsWith("META-INF/") && (n.endsWith(".SF")||n.endsWith(".RSA")||n.endsWith(".DSA")))) continue;
+                JarEntry ne=new JarEntry(n); if(e.getTime()!=-1)ne.setTime(e.getTime()); jo.putNextEntry(ne);
+                InputStream in=jf.getInputStream(e); int r; while((r=in.read(buf))!=-1)jo.write(buf,0,r); in.close(); jo.closeEntry();
+              }
+              JarEntry ne=new JarEntry(name); jo.putNextEntry(ne); jo.write(data); jo.closeEntry(); jo.close(); jf.close();
+              if(!src.delete()||!tmp.renameTo(src)) throw new IOException("replace failed");
+            }
+          }
+          JAVA
+          javac -cp javassist.jar src/Patch.java -d classes
+          java -cp javassist.jar:classes Patch game.jar
+
+          cat > src/NativeCatalog.java <<'JAVA'
+          public final class NativeCatalog {
+              private static final int RECEIVE = 1100999;
+              private static boolean on;
+              private static Class_fj[] list = new Class_fj[0];
+              private static int[] ids = new int[0];
+              private static Class_dw oldHo;
+
+              public static boolean active() { return on; }
+              public static Class_fj[] items() { return list; }
+
+              public static void open() {
+                  try {
+                      k1d.D();
+                      if (k1d.gx != null && k1d.gx.length > 0) openType(k1d.gx[0]);
+                  } catch (Exception e) { e.printStackTrace(); }
+              }
+
+              public static void openType(int type) {
+                  try {
+                      k1d.D();
+                      int idx = -1;
+                      for (int i = 0; i < k1d.gx.length; i++) if (k1d.gx[i] == type) { idx = i; break; }
+                      if (idx < 0 || idx >= k1d.gy.length) return;
+                      int[] src = k1d.gy[idx];
+                      ids = new int[src.length];
+                      for (int i = 0; i < src.length; i++) ids[i] = src[i];
+                      for (int i = 1; i < ids.length; i++) {
+                          int v = ids[i], j = i - 1;
+                          while (j >= 0 && ids[j] > v) { ids[j + 1] = ids[j]; j--; }
+                          ids[j + 1] = v;
+                      }
+                      list = new Class_fj[ids.length];
+                      for (int i = 0; i < ids.length; i++) {
+                          Class_fe t = Class_dn.b((short)ids[i]);
+                          if (t == null) continue;
+                          Class_fj it = new Class_fj();
+                          it.y = t;
+                          it.v = 1;
+                          it.i = i;
+                          list[i] = it;
+                      }
+                      Class_ct ct = Class_ct.fj;
+                      oldHo = ct.ho;
+                      on = true;
+                      ct.k();
+                      ct.ho = new Class_dw("Nhận", RECEIVE);
+                      Class_ct.fm = 1;
+                      Class_ct.bz = 0;
+                      ct.aa();
+                  } catch (Exception e) { e.printStackTrace(); }
+              }
+
+              private static void receive() {
+                  try {
+                      int p = Class_ct.bz;
+                      if (p >= 0 && p < ids.length) k1d.z(ids[p]);
+                  } catch (Exception e) { e.printStackTrace(); }
+              }
+
+              private static void closeState() {
+                  try {
+                      Class_ct ct = Class_ct.fj;
+                      if (oldHo != null) ct.ho = oldHo;
+                      on = false;
+                      list = new Class_fj[0];
+                      ids = new int[0];
+                      oldHo = null;
+                  } catch (Exception e) { e.printStackTrace(); }
+              }
+
+              public static boolean handleAction(int action) {
+                  if (!on) return false;
+                  if (action == RECEIVE) { receive(); return true; }
+                  if (action == 3) { closeState(); return false; }
+                  return false;
+              }
+          }
+          JAVA
+          javac -cp game.jar src/NativeCatalog.java -d classes
+          jar uf game.jar -C classes NativeCatalog.class
+          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
+          unzip -t game.jar >/dev/null
+          javap -classpath game.jar -p k1d > k1d.txt
+          javap -classpath game.jar -p NativeCatalog > native.txt
+          grep -q 'public static void openType(int)' native.txt
+          grep -q 'public static int\[\]\[\] gy' k1d.txt
+          unzip -p game.jar NativeCatalog.class >/dev/null
+          cp game.jar "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+
+          cd "$GITHUB_WORKSPACE"
+          git checkout chatgpt/catalog-by-type-v2
+          cp /tmp/catalog-build/game.jar Nso_Offline_By_h0901.jar
+          rm -rf .github catalog_inspect
+          git add -- Nso_Offline_By_h0901.jar
+          git add -u -- .github catalog_inspect || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: group native item catalog by type'
+          git push origin HEAD:chatgpt/catalog-by-type-v2
+      - name: Remove workflow from main
+        if: always()
+        shell: bash
+        run: |
+          git checkout main
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-build-catalog-types.yml || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: remove catalog type builder' || true
+          git push origin main || true

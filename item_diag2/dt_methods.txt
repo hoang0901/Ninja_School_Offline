@@ -1,0 +1,2 @@
+  public dt();
+  public static void offlineReceive(byte, byte[]);

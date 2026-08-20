@@ -1,0 +1,371 @@
+677-   #666 = String             #2460        // Nhiệm vụ
+678-   #667 = String             #2461        // Nhiệm vụ danh vọng
+679-   #668 = String             #2462        // Nhiệm vụ hàng ngày
+680-   #669 = String             #2463        // Nhiệm vụ lần trước ta giao, con vẫn chưa hoàn thành.
+681-   #670 = String             #2464        // Nhiệm vụ truy bắt tà thú
+682-   #671 = String             #2465        // Nhiệm vụ truy bắt tà thú của ngày hôm nay đã hết con hãy quay lại vào ngày mai.
+683-   #672 = String             #2466        // Nhân vật
+684-   #673 = String             #2467        // Nhẫn
+685-   #674 = String             #2468        // Nhận
+686-   #675 = String             #2469        // Nhận Geningan
+687-   #676 = String             #2470        // Nhận Ruby
+688-   #677 = String             #2471        // Nhận bí kíp
+689-   #678 = String             #2472        // Nhận chìa khóa
+690-   #679 = String             #2473        // Nhận cần câu
+691-   #680 = String             #2474        // Nhận kiếm gỗ
+692:   #681 = String             #2475        // Nhận lượng
+693-   #682 = String             #2476        // Nhận lại vật phâm
+694-   #683 = String             #2477        // Nhận thưởng
+695-   #684 = String             #2478        // Nhận thưởng thăng cấp
+696:   #685 = String             #2479        // Nhận vật phẩm
+697:   #686 = String             #2480        // Nhận xu
+698:   #687 = String             #2481        // Nhận yên
+699-   #688 = String             #2482        // Nhận ấn tộc
+700-   #689 = String             #2483        // Nhập ID MAP
+701-   #690 = String             #2484        // Nhập giftcode
+702-   #691 = String             #2485        // Nhập học
+703-   #692 = String             #2486        // Nhập lệnh
+704-   #693 = String             #2487        // Nhập số lần cần quy đổi
+705-   #694 = String             #2488        // Nhập số lần cần quy đổi
+706-   #695 = String             #2489        // Nhập số lần đổi
+707-   #696 = String             #2490        // Nhập tên gia tộc đối thủ
+708-   #697 = String             #2491        // Nhập tên nhân vật
+709-   #698 = String             #2492        // Nhặt theo danh sách
+710-   #699 = String             #2493        // Nhặt tất cả
+711-   #700 = String             #2494        // Nhặt v.phẩm hữu ích
+712-   #701 = String             #2495        // Ninja Cung
+713-   #702 = String             #2496        // Ninja Kiếm
+714-   #703 = String             #2497        // Ninja Kunai
+715-   #704 = String             #2498        // Ninja Phi Tiêu
+716-   #705 = String             #2499        // Ninja Quạt
+717-   #706 = String             #2500        // Ninja Tài Năng
+718-   #707 = String             #2501        // Ninja tài năng
+719-   #708 = String             #2502        // Ninja tài năng chưa mở cửa hoặc đã kết thúc.
+720-   #709 = String             #2503        // Ninja tài năng đã mở cửa.
+721-   #710 = String             #2504        // Ninja tài năng đã đóng cửa.
+722-   #711 = String             #2505        // Ninja Đao
+723-   #712 = String             #2506        // Ninja đệ nhất
+724-   #713 = String             #2507        // Ninja đệ nhất hiện chưa mở đăng ký.
+725-   #714 = String             #2508        // Nâng cấp
+726-   #715 = String             #2509        // Nâng cấp Ruby
+727-   #716 = String             #2510        // Nâng cấp VIP
+728-   #717 = String             #2511        // Nâng cấp bí kíp
+729-   #718 = String             #2512        // Nâng cấp thành công!
+730-   #719 = String             #2513        // Nâng cấp thất bại!
+731-   #720 = String             #2514        // Nâng cấp thất bại.
+732-   #721 = String             #2515        // Nâng cấp trang bị nhằm mục đích gia tăng các chỉ số cơ bản của trang bị. Có các cấp trang bị sau +1, +2, +3, .. tối đa +16. Để thực hiện, bạn cần gặp NPC Kenshinto. Sau đó, tiến hành chọn vật phẩm và số lượng đá đủ để nâng cấp. Lưu ý, trang bị cấp độ 5 trở lên nâng cấp thất bại sẽ bị giảm cấp độ.\n\nBạn có thể tách một vật phẩm đã nâng cấp và thu lại 50% số đá đã dùng để nâng cấp trang bị đó.\n\n
+733-   #722 = String             #2516        // Nâng cấp vật phẩm
+--
+2461-  #2460 = Utf8               Nhiệm vụ
+2462-  #2461 = Utf8               Nhiệm vụ danh vọng
+2463-  #2462 = Utf8               Nhiệm vụ hàng ngày
+2464-  #2463 = Utf8               Nhiệm vụ lần trước ta giao, con vẫn chưa hoàn thành.
+2465-  #2464 = Utf8               Nhiệm vụ truy bắt tà thú
+2466-  #2465 = Utf8               Nhiệm vụ truy bắt tà thú của ngày hôm nay đã hết con hãy quay lại vào ngày mai.
+2467-  #2466 = Utf8               Nhân vật
+2468-  #2467 = Utf8               Nhẫn
+2469-  #2468 = Utf8               Nhận
+2470-  #2469 = Utf8               Nhận Geningan
+2471-  #2470 = Utf8               Nhận Ruby
+2472-  #2471 = Utf8               Nhận bí kíp
+2473-  #2472 = Utf8               Nhận chìa khóa
+2474-  #2473 = Utf8               Nhận cần câu
+2475-  #2474 = Utf8               Nhận kiếm gỗ
+2476:  #2475 = Utf8               Nhận lượng
+2477-  #2476 = Utf8               Nhận lại vật phâm
+2478-  #2477 = Utf8               Nhận thưởng
+2479-  #2478 = Utf8               Nhận thưởng thăng cấp
+2480:  #2479 = Utf8               Nhận vật phẩm
+2481:  #2480 = Utf8               Nhận xu
+2482:  #2481 = Utf8               Nhận yên
+2483-  #2482 = Utf8               Nhận ấn tộc
+2484-  #2483 = Utf8               Nhập ID MAP
+2485-  #2484 = Utf8               Nhập giftcode
+2486-  #2485 = Utf8               Nhập học
+2487-  #2486 = Utf8               Nhập lệnh
+2488-  #2487 = Utf8               Nhập số lần cần quy đổi
+2489-  #2488 = Utf8               Nhập số lần cần quy đổi
+2490-  #2489 = Utf8               Nhập số lần đổi
+2491-  #2490 = Utf8               Nhập tên gia tộc đối thủ
+2492-  #2491 = Utf8               Nhập tên nhân vật
+2493-  #2492 = Utf8               Nhặt theo danh sách
+2494-  #2493 = Utf8               Nhặt tất cả
+2495-  #2494 = Utf8               Nhặt v.phẩm hữu ích
+2496-  #2495 = Utf8               Ninja Cung
+2497-  #2496 = Utf8               Ninja Kiếm
+2498-  #2497 = Utf8               Ninja Kunai
+2499-  #2498 = Utf8               Ninja Phi Tiêu
+2500-  #2499 = Utf8               Ninja Quạt
+2501-  #2500 = Utf8               Ninja Tài Năng
+2502-  #2501 = Utf8               Ninja tài năng
+2503-  #2502 = Utf8               Ninja tài năng chưa mở cửa hoặc đã kết thúc.
+2504-  #2503 = Utf8               Ninja tài năng đã mở cửa.
+2505-  #2504 = Utf8               Ninja tài năng đã đóng cửa.
+2506-  #2505 = Utf8               Ninja Đao
+2507-  #2506 = Utf8               Ninja đệ nhất
+2508-  #2507 = Utf8               Ninja đệ nhất hiện chưa mở đăng ký.
+2509-  #2508 = Utf8               Nâng cấp
+2510-  #2509 = Utf8               Nâng cấp Ruby
+2511-  #2510 = Utf8               Nâng cấp VIP
+2512-  #2511 = Utf8               Nâng cấp bí kíp
+2513-  #2512 = Utf8               Nâng cấp thành công!
+2514-  #2513 = Utf8               Nâng cấp thất bại!
+2515-  #2514 = Utf8               Nâng cấp thất bại.
+2516-  #2515 = Utf8               Nâng cấp trang bị nhằm mục đích gia tăng các chỉ số cơ bản của trang bị. Có các cấp trang bị sau +1, +2, +3, .. tối đa +16. Để thực hiện, bạn cần gặp NPC Kenshinto. Sau đó, tiến hành chọn vật phẩm và số lượng đá đủ để nâng cấp. Lưu ý, trang bị cấp độ 5 trở lên nâng cấp thất bại sẽ bị giảm cấp độ.\n\nBạn có thể tách một vật phẩm đã nâng cấp và thu lại 50% số đá đã dùng để nâng cấp trang bị đó.\n\n
+2517-  #2516 = Utf8               Nâng cấp vật phẩm
+--
+10949-       152: aastore
+10950-       153: dup
+10951-       154: bipush        10
+10952-       156: ldc_w         #840                // String Tình trạng boss
+10953-       159: aastore
+10954-       160: dup
+10955-       161: bipush        11
+10956-       163: ldc_w         #841                // String Tình trạng sự kiện
+10957-       166: aastore
+10958-       167: dup
+10959-       168: bipush        12
+10960-       170: aload         5
+10961-       172: aastore
+10962-       173: dup
+10963-       174: bipush        13
+10964:       176: ldc_w         #685                // String Nhận vật phẩm
+10965-       179: aastore
+10966-       180: dup
+10967-       181: bipush        14
+10968:       183: ldc_w         #686                // String Nhận xu
+10969-       186: aastore
+10970-       187: dup
+10971-       188: bipush        15
+10972:       190: ldc_w         #681                // String Nhận lượng
+10973-       193: aastore
+10974-       194: dup
+10975-       195: bipush        16
+10976:       197: ldc_w         #687                // String Nhận yên
+10977-       200: aastore
+10978-       201: bipush        17
+10979-       203: newarray       int
+10980-       205: dup
+10981-       206: iconst_0
+10982-       207: bipush        33
+10983-       209: iastore
+10984-       210: dup
+10985-       211: iconst_1
+10986-       212: bipush        34
+10987-       214: iastore
+10988-       215: dup
+10989-       216: iconst_2
+10990-       217: bipush        35
+10991-       219: iastore
+10992-       220: dup
+10993-       221: iconst_3
+10994-       222: sipush        197
+10995-       225: iastore
+10996-       226: dup
+10997-       227: iconst_4
+10998-       228: bipush        15
+10999-       230: iastore
+11000-       231: dup
+11001-       232: iconst_5
+11002-       233: sipush        202
+11003-       236: iastore
+11004-       237: dup
+11005-       238: bipush        6
+11006-       240: sipush        198
+11007-       243: iastore
+11008-       244: dup
+11009-       245: bipush        7
+11010-       247: sipush        199
+11011-       250: iastore
+--
+11090-       385: aastore
+11091-       386: dup
+11092-       387: bipush        9
+11093-       389: ldc_w         #840                // String Tình trạng boss
+11094-       392: aastore
+11095-       393: dup
+11096-       394: bipush        10
+11097-       396: ldc_w         #841                // String Tình trạng sự kiện
+11098-       399: aastore
+11099-       400: dup
+11100-       401: bipush        11
+11101-       403: aload         5
+11102-       405: aastore
+11103-       406: dup
+11104-       407: bipush        12
+11105:       409: ldc_w         #685                // String Nhận vật phẩm
+11106-       412: aastore
+11107-       413: dup
+11108-       414: bipush        13
+11109:       416: ldc_w         #686                // String Nhận xu
+11110-       419: aastore
+11111-       420: dup
+11112-       421: bipush        14
+11113:       423: ldc_w         #681                // String Nhận lượng
+11114-       426: aastore
+11115-       427: dup
+11116-       428: bipush        15
+11117:       430: ldc_w         #687                // String Nhận yên
+11118-       433: aastore
+11119-       434: bipush        16
+11120-       436: newarray       int
+11121-       438: dup
+11122-       439: iconst_0
+11123-       440: bipush        33
+11124-       442: iastore
+11125-       443: dup
+11126-       444: iconst_1
+11127-       445: bipush        35
+11128-       447: iastore
+11129-       448: dup
+11130-       449: iconst_2
+11131-       450: sipush        197
+11132-       453: iastore
+11133-       454: dup
+11134-       455: iconst_3
+11135-       456: bipush        15
+11136-       458: iastore
+11137-       459: dup
+11138-       460: iconst_4
+11139-       461: sipush        202
+11140-       464: iastore
+11141-       465: dup
+11142-       466: iconst_5
+11143-       467: sipush        198
+11144-       470: iastore
+11145-       471: dup
+11146-       472: bipush        6
+11147-       474: sipush        199
+11148-       477: iastore
+11149-       478: dup
+11150-       479: bipush        7
+11151-       481: sipush        200
+11152-       484: iastore
+--
+11227-       612: aastore
+11228-       613: dup
+11229-       614: bipush        9
+11230-       616: ldc_w         #840                // String Tình trạng boss
+11231-       619: aastore
+11232-       620: dup
+11233-       621: bipush        10
+11234-       623: ldc_w         #841                // String Tình trạng sự kiện
+11235-       626: aastore
+11236-       627: dup
+11237-       628: bipush        11
+11238-       630: aload         5
+11239-       632: aastore
+11240-       633: dup
+11241-       634: bipush        12
+11242:       636: ldc_w         #685                // String Nhận vật phẩm
+11243-       639: aastore
+11244-       640: dup
+11245-       641: bipush        13
+11246:       643: ldc_w         #686                // String Nhận xu
+11247-       646: aastore
+11248-       647: dup
+11249-       648: bipush        14
+11250:       650: ldc_w         #681                // String Nhận lượng
+11251-       653: aastore
+11252-       654: dup
+11253-       655: bipush        15
+11254:       657: ldc_w         #687                // String Nhận yên
+11255-       660: aastore
+11256-       661: bipush        16
+11257-       663: newarray       int
+11258-       665: dup
+11259-       666: iconst_0
+11260-       667: bipush        34
+11261-       669: iastore
+11262-       670: dup
+11263-       671: iconst_1
+11264-       672: bipush        35
+11265-       674: iastore
+11266-       675: dup
+11267-       676: iconst_2
+11268-       677: sipush        197
+11269-       680: iastore
+11270-       681: dup
+11271-       682: iconst_3
+11272-       683: bipush        15
+11273-       685: iastore
+11274-       686: dup
+11275-       687: iconst_4
+11276-       688: sipush        202
+11277-       691: iastore
+11278-       692: dup
+11279-       693: iconst_5
+11280-       694: sipush        198
+11281-       697: iastore
+11282-       698: dup
+11283-       699: bipush        6
+11284-       701: sipush        199
+11285-       704: iastore
+11286-       705: dup
+11287-       706: bipush        7
+11288-       708: sipush        200
+11289-       711: iastore
+--
+11358-       828: aastore
+11359-       829: dup
+11360-       830: bipush        8
+11361-       832: ldc_w         #840                // String Tình trạng boss
+11362-       835: aastore
+11363-       836: dup
+11364-       837: bipush        9
+11365-       839: ldc_w         #841                // String Tình trạng sự kiện
+11366-       842: aastore
+11367-       843: dup
+11368-       844: bipush        10
+11369-       846: aload         5
+11370-       848: aastore
+11371-       849: dup
+11372-       850: bipush        11
+11373:       852: ldc_w         #685                // String Nhận vật phẩm
+11374-       855: aastore
+11375-       856: dup
+11376-       857: bipush        12
+11377:       859: ldc_w         #686                // String Nhận xu
+11378-       862: aastore
+11379-       863: dup
+11380-       864: bipush        13
+11381:       866: ldc_w         #681                // String Nhận lượng
+11382-       869: aastore
+11383-       870: dup
+11384-       871: bipush        14
+11385:       873: ldc_w         #687                // String Nhận yên
+11386-       876: aastore
+11387-       877: bipush        15
+11388-       879: newarray       int
+11389-       881: dup
+11390-       882: iconst_0
+11391-       883: bipush        35
+11392-       885: iastore
+11393-       886: dup
+11394-       887: iconst_1
+11395-       888: sipush        197
+11396-       891: iastore
+11397-       892: dup
+11398-       893: iconst_2
+11399-       894: bipush        15
+11400-       896: iastore
+11401-       897: dup
+11402-       898: iconst_3
+11403-       899: sipush        202
+11404-       902: iastore
+11405-       903: dup
+11406-       904: iconst_4
+11407-       905: sipush        198
+11408-       908: iastore
+11409-       909: dup
+11410-       910: iconst_5
+11411-       911: sipush        199
+11412-       914: iastore
+11413-       915: dup
+11414-       916: bipush        6
+11415-       918: sipush        200
+11416-       921: iastore
+11417-       922: dup
+11418-       923: bipush        7
+11419-       925: sipush        201
+11420-       928: iastore

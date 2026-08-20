@@ -1,0 +1,557 @@
+5438-     118: aastore
+5439-     119: dup
+5440-     120: iconst_5
+5441-     121: ldc_w         #766                // String Thuê Server Game
+5442-     124: aastore
+5443-     125: dup
+5444-     126: bipush        6
+5445-     128: ldc_w         #934                // String Đổi tên đăng nhập
+5446-     131: aastore
+5447-     132: dup
+5448-     133: bipush        7
+5449-     135: ldc_w         #933                // String Đổi tên nhân vật
+5450-     138: aastore
+5451-     139: dup
+5452-     140: bipush        8
+5453-     142: ldc_w         #932                // String Đổi tên clan
+5454-     145: aastore
+5455-     146: dup
+5456-     147: bipush        9
+5457-     149: ldc_w         #579                // String Hủy clan
+5458-     152: aastore
+5459-     153: dup
+5460-     154: bipush        10
+5461-     156: ldc_w         #840                // String Tình trạng boss
+5462-     159: aastore
+5463-     160: dup
+5464-     161: bipush        11
+5465-     163: ldc_w         #841                // String Tình trạng sự kiện
+5466-     166: aastore
+5467-     167: dup
+5468-     168: bipush        12
+5469-     170: aload         5
+5470-     172: aastore
+5471-     173: dup
+5472-     174: bipush        13
+5473:     176: ldc_w         #685                // String Nhận vật phẩm
+5474-     179: aastore
+5475-     180: dup
+5476-     181: bipush        14
+5477:     183: ldc_w         #686                // String Nhận xu
+5478-     186: aastore
+5479-     187: dup
+5480-     188: bipush        15
+5481:     190: ldc_w         #681                // String Nhận lượng
+5482-     193: aastore
+5483-     194: dup
+5484-     195: bipush        16
+5485:     197: ldc_w         #687                // String Nhận yên
+5486-     200: aastore
+5487-     201: bipush        17
+5488-     203: newarray       int
+5489-     205: dup
+5490-     206: iconst_0
+5491-     207: bipush        33
+5492-     209: iastore
+5493-     210: dup
+5494-     211: iconst_1
+5495-     212: bipush        34
+5496-     214: iastore
+5497-     215: dup
+5498-     216: iconst_2
+5499-     217: bipush        35
+5500-     219: iastore
+5501-     220: dup
+5502-     221: iconst_3
+5503-     222: sipush        197
+5504-     225: iastore
+5505-     226: dup
+5506-     227: iconst_4
+5507-     228: bipush        15
+5508-     230: iastore
+5509-     231: dup
+5510-     232: iconst_5
+5511-     233: sipush        202
+5512-     236: iastore
+5513-     237: dup
+5514-     238: bipush        6
+5515-     240: sipush        198
+5516-     243: iastore
+5517-     244: dup
+5518-     245: bipush        7
+5519-     247: sipush        199
+5520-     250: iastore
+5521-     251: dup
+5522-     252: bipush        8
+5523-     254: sipush        200
+5524-     257: iastore
+5525-     258: dup
+5526-     259: bipush        9
+5527-     261: sipush        201
+5528-     264: iastore
+5529-     265: dup
+5530-     266: bipush        10
+5531-     268: sipush        265
+5532-     271: iastore
+5533-     272: dup
+5534-     273: bipush        11
+5535-     275: sipush        266
+5536-     278: iastore
+5537-     279: dup
+5538-     280: bipush        12
+5539-     282: sipush        268
+5540-     285: iastore
+5541-     286: dup
+5542-     287: bipush        13
+5543-     289: sipush        267
+5544-     292: iastore
+5545-     293: dup
+5546-     294: bipush        14
+5547-     296: sipush        321
+5548-     299: iastore
+5549-     300: dup
+5550-     301: bipush        15
+5551-     303: sipush        322
+5552-     306: iastore
+5553-     307: dup
+5554-     308: bipush        16
+5555-     310: sipush        323
+5556-     313: iastore
+5557-     314: invokestatic  #1304               // Method a:(I[Ljava/lang/String;[I)V
+5558-     317: goto          981
+5559-     320: iload_1
+5560-     321: ifeq          547
+5561-     324: iload_0
+5562-     325: bipush        16
+5563-     327: anewarray     #955                // class java/lang/String
+5564-     330: dup
+5565-     331: iconst_0
+5566-     332: ldc_w         #907                // String Điểm danh
+5567-     335: aastore
+5568-     336: dup
+5569-     337: iconst_1
+5570-     338: ldc_w         #690                // String Nhập giftcode
+5571-     341: aastore
+5572-     342: dup
+5573-     343: iconst_2
+5574-     344: aload         4
+5575-     346: aastore
+5576-     347: dup
+5577-     348: iconst_3
+5578-     349: ldc_w         #472                // String Bỏ hết nhiệm vụ
+5579-     352: aastore
+5580-     353: dup
+5581-     354: iconst_4
+5582-     355: ldc_w         #766                // String Thuê Server Game
+5583-     358: aastore
+5584-     359: dup
+5585-     360: iconst_5
+5586-     361: ldc_w         #934                // String Đổi tên đăng nhập
+5587-     364: aastore
+5588-     365: dup
+5589-     366: bipush        6
+5590-     368: ldc_w         #933                // String Đổi tên nhân vật
+5591-     371: aastore
+5592-     372: dup
+5593-     373: bipush        7
+5594-     375: ldc_w         #932                // String Đổi tên clan
+5595-     378: aastore
+5596-     379: dup
+5597-     380: bipush        8
+5598-     382: ldc_w         #579                // String Hủy clan
+5599-     385: aastore
+5600-     386: dup
+5601-     387: bipush        9
+5602-     389: ldc_w         #840                // String Tình trạng boss
+5603-     392: aastore
+5604-     393: dup
+5605-     394: bipush        10
+5606-     396: ldc_w         #841                // String Tình trạng sự kiện
+5607-     399: aastore
+5608-     400: dup
+5609-     401: bipush        11
+5610-     403: aload         5
+5611-     405: aastore
+5612-     406: dup
+5613-     407: bipush        12
+5614:     409: ldc_w         #685                // String Nhận vật phẩm
+5615-     412: aastore
+5616-     413: dup
+5617-     414: bipush        13
+5618:     416: ldc_w         #686                // String Nhận xu
+5619-     419: aastore
+5620-     420: dup
+5621-     421: bipush        14
+5622:     423: ldc_w         #681                // String Nhận lượng
+5623-     426: aastore
+5624-     427: dup
+5625-     428: bipush        15
+5626:     430: ldc_w         #687                // String Nhận yên
+5627-     433: aastore
+5628-     434: bipush        16
+5629-     436: newarray       int
+5630-     438: dup
+5631-     439: iconst_0
+5632-     440: bipush        33
+5633-     442: iastore
+5634-     443: dup
+5635-     444: iconst_1
+5636-     445: bipush        35
+5637-     447: iastore
+5638-     448: dup
+5639-     449: iconst_2
+5640-     450: sipush        197
+5641-     453: iastore
+5642-     454: dup
+5643-     455: iconst_3
+5644-     456: bipush        15
+5645-     458: iastore
+5646-     459: dup
+5647-     460: iconst_4
+5648-     461: sipush        202
+5649-     464: iastore
+5650-     465: dup
+5651-     466: iconst_5
+5652-     467: sipush        198
+5653-     470: iastore
+5654-     471: dup
+5655-     472: bipush        6
+5656-     474: sipush        199
+5657-     477: iastore
+5658-     478: dup
+5659-     479: bipush        7
+5660-     481: sipush        200
+5661-     484: iastore
+5662-     485: dup
+5663-     486: bipush        8
+5664-     488: sipush        201
+5665-     491: iastore
+5666-     492: dup
+5667-     493: bipush        9
+5668-     495: sipush        265
+5669-     498: iastore
+5670-     499: dup
+5671-     500: bipush        10
+5672-     502: sipush        266
+5673-     505: iastore
+5674-     506: dup
+5675-     507: bipush        11
+5676-     509: sipush        268
+5677-     512: iastore
+5678-     513: dup
+5679-     514: bipush        12
+5680-     516: sipush        267
+5681-     519: iastore
+5682-     520: dup
+5683-     521: bipush        13
+5684-     523: sipush        321
+5685-     526: iastore
+5686-     527: dup
+5687-     528: bipush        14
+5688-     530: sipush        322
+5689-     533: iastore
+5690-     534: dup
+5691-     535: bipush        15
+5692-     537: sipush        323
+5693-     540: iastore
+5694-     541: invokestatic  #1304               // Method a:(I[Ljava/lang/String;[I)V
+5695-     544: goto          981
+5696-     547: iload_2
+5697-     548: ifeq          774
+5698-     551: iload_0
+5699-     552: bipush        16
+5700-     554: anewarray     #955                // class java/lang/String
+5701-     557: dup
+5702-     558: iconst_0
+5703-     559: ldc_w         #741                // String Quà tân thủ
+5704-     562: aastore
+5705-     563: dup
+5706-     564: iconst_1
+5707-     565: ldc_w         #690                // String Nhập giftcode
+5708-     568: aastore
+5709-     569: dup
+5710-     570: iconst_2
+5711-     571: aload         4
+5712-     573: aastore
+5713-     574: dup
+5714-     575: iconst_3
+5715-     576: ldc_w         #472                // String Bỏ hết nhiệm vụ
+5716-     579: aastore
+5717-     580: dup
+5718-     581: iconst_4
+5719-     582: ldc_w         #766                // String Thuê Server Game
+5720-     585: aastore
+5721-     586: dup
+5722-     587: iconst_5
+5723-     588: ldc_w         #934                // String Đổi tên đăng nhập
+5724-     591: aastore
+5725-     592: dup
+5726-     593: bipush        6
+5727-     595: ldc_w         #933                // String Đổi tên nhân vật
+5728-     598: aastore
+5729-     599: dup
+5730-     600: bipush        7
+5731-     602: ldc_w         #932                // String Đổi tên clan
+5732-     605: aastore
+5733-     606: dup
+5734-     607: bipush        8
+5735-     609: ldc_w         #579                // String Hủy clan
+5736-     612: aastore
+5737-     613: dup
+5738-     614: bipush        9
+5739-     616: ldc_w         #840                // String Tình trạng boss
+5740-     619: aastore
+5741-     620: dup
+5742-     621: bipush        10
+5743-     623: ldc_w         #841                // String Tình trạng sự kiện
+5744-     626: aastore
+5745-     627: dup
+5746-     628: bipush        11
+5747-     630: aload         5
+5748-     632: aastore
+5749-     633: dup
+5750-     634: bipush        12
+5751:     636: ldc_w         #685                // String Nhận vật phẩm
+5752-     639: aastore
+5753-     640: dup
+5754-     641: bipush        13
+5755:     643: ldc_w         #686                // String Nhận xu
+5756-     646: aastore
+5757-     647: dup
+5758-     648: bipush        14
+5759:     650: ldc_w         #681                // String Nhận lượng
+5760-     653: aastore
+5761-     654: dup
+5762-     655: bipush        15
+5763:     657: ldc_w         #687                // String Nhận yên
+5764-     660: aastore
+5765-     661: bipush        16
+5766-     663: newarray       int
+5767-     665: dup
+5768-     666: iconst_0
+5769-     667: bipush        34
+5770-     669: iastore
+5771-     670: dup
+5772-     671: iconst_1
+5773-     672: bipush        35
+5774-     674: iastore
+5775-     675: dup
+5776-     676: iconst_2
+5777-     677: sipush        197
+5778-     680: iastore
+5779-     681: dup
+5780-     682: iconst_3
+5781-     683: bipush        15
+5782-     685: iastore
+5783-     686: dup
+5784-     687: iconst_4
+5785-     688: sipush        202
+5786-     691: iastore
+5787-     692: dup
+5788-     693: iconst_5
+5789-     694: sipush        198
+5790-     697: iastore
+5791-     698: dup
+5792-     699: bipush        6
+5793-     701: sipush        199
+5794-     704: iastore
+5795-     705: dup
+5796-     706: bipush        7
+5797-     708: sipush        200
+5798-     711: iastore
+5799-     712: dup
+5800-     713: bipush        8
+5801-     715: sipush        201
+5802-     718: iastore
+5803-     719: dup
+5804-     720: bipush        9
+5805-     722: sipush        265
+5806-     725: iastore
+5807-     726: dup
+5808-     727: bipush        10
+5809-     729: sipush        266
+5810-     732: iastore
+5811-     733: dup
+5812-     734: bipush        11
+5813-     736: sipush        268
+5814-     739: iastore
+5815-     740: dup
+5816-     741: bipush        12
+5817-     743: sipush        267
+5818-     746: iastore
+5819-     747: dup
+5820-     748: bipush        13
+5821-     750: sipush        321
+5822-     753: iastore
+5823-     754: dup
+5824-     755: bipush        14
+5825-     757: sipush        322
+5826-     760: iastore
+5827-     761: dup
+5828-     762: bipush        15
+5829-     764: sipush        323
+5830-     767: iastore
+5831-     768: invokestatic  #1304               // Method a:(I[Ljava/lang/String;[I)V
+5832-     771: goto          981
+5833-     774: iload_0
+5834-     775: bipush        15
+5835-     777: anewarray     #955                // class java/lang/String
+5836-     780: dup
+5837-     781: iconst_0
+5838-     782: ldc_w         #690                // String Nhập giftcode
+5839-     785: aastore
+5840-     786: dup
+5841-     787: iconst_1
+5842-     788: aload         4
+5843-     790: aastore
+5844-     791: dup
+5845-     792: iconst_2
+5846-     793: ldc_w         #472                // String Bỏ hết nhiệm vụ
+5847-     796: aastore
+5848-     797: dup
+5849-     798: iconst_3
+5850-     799: ldc_w         #766                // String Thuê Server Game
+5851-     802: aastore
+5852-     803: dup
+5853-     804: iconst_4
+5854-     805: ldc_w         #934                // String Đổi tên đăng nhập
+5855-     808: aastore
+5856-     809: dup
+5857-     810: iconst_5
+5858-     811: ldc_w         #933                // String Đổi tên nhân vật
+5859-     814: aastore
+5860-     815: dup
+5861-     816: bipush        6
+5862-     818: ldc_w         #932                // String Đổi tên clan
+5863-     821: aastore
+5864-     822: dup
+5865-     823: bipush        7
+5866-     825: ldc_w         #579                // String Hủy clan
+5867-     828: aastore
+5868-     829: dup
+5869-     830: bipush        8
+5870-     832: ldc_w         #840                // String Tình trạng boss
+5871-     835: aastore
+5872-     836: dup
+5873-     837: bipush        9
+5874-     839: ldc_w         #841                // String Tình trạng sự kiện
+5875-     842: aastore
+5876-     843: dup
+5877-     844: bipush        10
+5878-     846: aload         5
+5879-     848: aastore
+5880-     849: dup
+5881-     850: bipush        11
+5882:     852: ldc_w         #685                // String Nhận vật phẩm
+5883-     855: aastore
+5884-     856: dup
+5885-     857: bipush        12
+5886:     859: ldc_w         #686                // String Nhận xu
+5887-     862: aastore
+5888-     863: dup
+5889-     864: bipush        13
+5890:     866: ldc_w         #681                // String Nhận lượng
+5891-     869: aastore
+5892-     870: dup
+5893-     871: bipush        14
+5894:     873: ldc_w         #687                // String Nhận yên
+5895-     876: aastore
+5896-     877: bipush        15
+5897-     879: newarray       int
+5898-     881: dup
+5899-     882: iconst_0
+5900-     883: bipush        35
+5901-     885: iastore
+5902-     886: dup
+5903-     887: iconst_1
+5904-     888: sipush        197
+5905-     891: iastore
+5906-     892: dup
+5907-     893: iconst_2
+5908-     894: bipush        15
+5909-     896: iastore
+5910-     897: dup
+5911-     898: iconst_3
+5912-     899: sipush        202
+5913-     902: iastore
+5914-     903: dup
+5915-     904: iconst_4
+5916-     905: sipush        198
+5917-     908: iastore
+5918-     909: dup
+5919-     910: iconst_5
+5920-     911: sipush        199
+5921-     914: iastore
+5922-     915: dup
+5923-     916: bipush        6
+5924-     918: sipush        200
+5925-     921: iastore
+5926-     922: dup
+5927-     923: bipush        7
+5928-     925: sipush        201
+5929-     928: iastore
+5930-     929: dup
+5931-     930: bipush        8
+5932-     932: sipush        265
+5933-     935: iastore
+5934-     936: dup
+5935-     937: bipush        9
+5936-     939: sipush        266
+5937-     942: iastore
+5938-     943: dup
+5939-     944: bipush        10
+5940-     946: sipush        268
+5941-     949: iastore
+5942-     950: dup
+5943-     951: bipush        11
+5944-     953: sipush        267
+5945-     956: iastore
+5946-     957: dup
+5947-     958: bipush        12
+5948-     960: sipush        321
+5949-     963: iastore
+5950-     964: dup
+5951-     965: bipush        13
+5952-     967: sipush        322
+5953-     970: iastore
+5954-     971: dup
+5955-     972: bipush        14
+5956-     974: sipush        323
+5957-     977: iastore
+5958-     978: invokestatic  #1304               // Method a:(I[Ljava/lang/String;[I)V
+5959-     981: return
+5960-
+5961-  private static void j(int, int) throws java.lang.Exception;
+5962-    Code:
+5963-       0: iload_1
+5964-       1: ifne          18
+5965-       4: ldc2_w        #1004               // long 500000000l
+5966-       7: invokestatic  #1509               // Method k32.a:(J)I
+5967-      10: istore_2
+5968-      11: ldc_w         #900                // String xu
+5969-      14: astore_3
+5970-      15: goto          48
+5971-      18: iload_1
+5972-      19: iconst_1
+5973-      20: if_icmpne     37
+5974-      23: ldc2_w        #1004               // long 500000000l
+5975-      26: invokestatic  #1513               // Method k32.c:(J)I
+5976-      29: istore_2
+5977-      30: ldc_w         #894                // String lượng
+5978-      33: astore_3
+5979-      34: goto          48
+5980-      37: ldc2_w        #1004               // long 500000000l
+5981-      40: invokestatic  #1511               // Method k32.b:(J)I
+5982-      43: istore_2
+5983-      44: ldc_w         #901                // String yên
+5984-      47: astore_3
+5985-      48: iload_2
+5986-      49: ifgt          79
+5987-      52: new           #956                // class java/lang/StringBuffer
+5988-      55: dup
+5989-      56: ldc_w         #460                // String Bạn đã đạt giới hạn 2.000.000.000
+5990-      59: invokespecial #1177               // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+5991-      62: aload_3
+5992-      63: invokevirtual #1180               // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+5993-      66: ldc_w         #399                // String .
+5994-      69: invokevirtual #1180               // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;

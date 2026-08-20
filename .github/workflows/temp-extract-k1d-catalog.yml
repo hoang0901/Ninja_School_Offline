@@ -1,0 +1,60 @@
+name: Extract catalog methods
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-extract-k1d-catalog.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - name: Extract methods
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/kcat && mkdir -p /tmp/kcat/out
+          cd /tmp/kcat
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          unzip -p game.jar k1d.class > k1d.class
+          java -jar cfr.jar k1d.class --extraclasspath game.jar --outputdir out --silent true >/dev/null 2>&1 || true
+          python3 - <<'PY'
+          import re
+          s=open('out/k1d.java',encoding='utf-8').read()
+          pats=[r'private static void D\(\)',r'static void D\(\)',r'private static void z\(int',r'static void z\(int',r'private static void x\(int',r'static void x\(int',r'private static void j\(String',r'static void j\(String']
+          out=[]
+          for p in pats:
+              m=re.search(p,s)
+              if not m: continue
+              start=s.rfind('\n',0,m.start())+1
+              brace=s.find('{',m.start())
+              if brace<0: continue
+              depth=0; end=brace
+              for i in range(brace,len(s)):
+                  if s[i]=='{': depth+=1
+                  elif s[i]=='}':
+                      depth-=1
+                      if depth==0:
+                          end=i+1; break
+              out.append(s[start:end])
+          open('/tmp/kcat/catalog_methods.txt','w',encoding='utf-8').write('\n\n---\n\n'.join(out))
+          PY
+          cd "$GITHUB_WORKSPACE"
+          git fetch origin chatgpt/catalog-by-type-v2
+          git checkout chatgpt/catalog-by-type-v2
+          cp /tmp/kcat/catalog_methods.txt catalog_inspect/catalog_methods.txt
+          git add -- catalog_inspect/catalog_methods.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: extract catalog methods' || true
+          git push origin HEAD:chatgpt/catalog-by-type-v2
+      - name: Cleanup
+        if: always()
+        shell: bash
+        run: |
+          git checkout main
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-extract-k1d-catalog.yml || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: remove catalog method extractor' || true
+          git push origin main || true

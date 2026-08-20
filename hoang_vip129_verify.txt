@@ -1,0 +1,225 @@
+=== JAR SHA256 ===
+c14fcd3a11f3ff49e957f7587347613bb0857e64e89d5dc61519b4aba52daf53  game.jar
+=== ADMIN SEED SIZE ===
+8286
+=== PATCHED METHOD ===
+16507-       7: iload_2
+16508-       8: iload         4
+16509-      10: iadd
+16510-      11: aload_0
+16511-      12: iload_1
+16512-      13: iload         4
+16513-      15: iadd
+16514-      16: iaload
+16515-      17: iastore
+16516-      18: iinc          4, 1
+16517-      21: iload         4
+16518-      23: iload_3
+16519-      24: if_icmplt     6
+16520-      27: return
+16521-
+16522-  private static void a(int[], int, int);
+16523-    Code:
+16524-       0: iload_1
+16525-       1: istore_3
+16526-       2: goto          12
+16527-       5: aload_0
+16528-       6: iload_3
+16529-       7: iconst_0
+16530-       8: iastore
+16531-       9: iinc          3, 1
+16532-      12: iload_3
+16533-      13: iload_2
+16534-      14: if_icmple     5
+16535-      17: return
+16536-
+16537-  private static byte[] ao();
+16538-    Code:
+16539-       0: ldc_w         #2386               // String /offline/admin_seed.rms
+16540-       3: invokestatic  #797                // Method l:(Ljava/lang/String;)[B
+16541-       6: astore_0
+16542-       7: new           #924                // class java/io/DataInputStream
+16543-      10: dup
+16544-      11: new           #926                // class java/io/ByteArrayInputStream
+16545-      14: dup
+16546-      15: aload_0
+16547-      16: invokespecial #928                // Method java/io/ByteArrayInputStream."<init>":([B)V
+16548-      19: invokespecial #931                // Method java/io/DataInputStream."<init>":(Ljava/io/InputStream;)V
+16549-      22: astore_1
+16550-      23: aload_1
+16551-      24: invokevirtual #944                // Method java/io/DataInputStream.readUnsignedByte:()I
+16552-      27: istore_2
+16553-      28: iload_2
+16554-      29: iconst_2
+16555-      30: if_icmplt     83
+16556-      33: iload_2
+16557-      34: bipush        39
+16558-      36: if_icmpgt     83
+16559-      39: aload_1
+16560-      40: invokevirtual #944                // Method java/io/DataInputStream.readUnsignedByte:()I
+16561-      43: ifne          83
+16562-      46: aload_1
+16563-      47: invokevirtual #944                // Method java/io/DataInputStream.readUnsignedByte:()I
+16564-      50: iconst_1
+16565-      51: if_icmpne     83
+16566-      54: ldc           #11                 // String offline
+16567-      56: aload_1
+16568-      57: invokevirtual #938                // Method java/io/DataInputStream.readUTF:()Ljava/lang/String;
+16569-      60: invokevirtual #152                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+16570-      63: ifeq          83
+16571-      66: ldc_w         #2372               // String hoang
+16572-      69: aload_1
+16573-      70: invokevirtual #938                // Method java/io/DataInputStream.readUTF:()Ljava/lang/String;
+16574-      73: invokevirtual #152                // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+16575-      76: ifeq          83
+16576-      79: iconst_1
+--
+19719-    Code:
+19720-       0: aload_0
+19721-       1: invokestatic  #2333               // Method p:(LDoHoang091$k0;)V
+19722-       4: return
+19723-
+19724:  private static void zHoangVipStarter();
+19725-    Code:
+19726-       0: getstatic     #232                // Field as:[B
+19727-       3: aconst_null
+19728-       4: if_acmpne     14
+19729-       7: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19730-      10: aconst_null
+19731-      11: if_acmpne     17
+19732-      14: goto          277
+19733-      17: iconst_m1
+19734-      18: istore_0
+19735-      19: iconst_0
+19736-      20: istore_1
+19737-      21: iload_1
+19738-      22: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19739-      25: arraylength
+19740-      26: if_icmpge     84
+19741-      29: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19742-      32: iload_1
+19743-      33: aaload
+19744-      34: aconst_null
+19745-      35: if_acmpeq     50
+19746-      38: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19747-      41: iload_1
+19748-      42: aaload
+19749-      43: getfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19750-      46: aconst_null
+19751-      47: if_acmpne     53
+19752-      50: goto          70
+19753-      53: ldc_w         #2372               // String hoang
+19754-      56: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19755-      59: iload_1
+19756-      60: aaload
+19757-      61: getfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19758-      64: invokevirtual #2086               // Method java/lang/String.equalsIgnoreCase:(Ljava/lang/String;)Z
+19759-      67: ifne          73
+19760-      70: goto          78
+19761-      73: iload_1
+19762-      74: istore_0
+19763-      75: goto          84
+19764-      78: iinc          1, 1
+19765-      81: goto          21
+19766-      84: iload_0
+19767-      85: iconst_0
+19768-      86: if_icmpge     137
+19769-      89: invokestatic  #2394               // Method ar:()LDoHoang091$k0;
+19770-      92: astore_2
+19771-      93: aload_2
+19772-      94: aconst_null
+19773-      95: if_acmpeq     137
+19774-      98: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19775-     101: arraylength
+19776-     102: iconst_1
+19777-     103: iadd
+19778-     104: anewarray     #805                // class DoHoang091$k0
+19779-     107: astore_3
+19780-     108: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19781-     111: iconst_0
+19782-     112: aload_3
+19783-     113: iconst_0
+19784-     114: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19785-     117: arraylength
+19786-     118: invokestatic  #953                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+19787-     121: aload_3
+19788-     122: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19789-     125: arraylength
+19790-     126: aload_2
+19791-     127: aastore
+19792-     128: aload_3
+19793-     129: putstatic     #212                // Field aj:[LDoHoang091$k0;
+19794-     132: aload_3
+19795-     133: arraylength
+19796-     134: iconst_1
+19797-     135: isub
+19798-     136: istore_0
+19799-     137: iload_0
+19800-     138: iconst_0
+19801-     139: if_icmplt     277
+19802-     142: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19803-     145: iload_0
+19804-     146: aaload
+19805-     147: astore        4
+19806-     149: aload         4
+19807-     151: getfield      #898                // Field DoHoang091$k0.r:I
+19808-     154: sipush        129
+19809-     157: if_icmpne     170
+19810-     160: aload         4
+19811-     162: getfield      #884                // Field DoHoang091$k0.p:B
+19812-     165: iconst_1
+19813-     166: i2b
+19814-     167: if_icmpeq     173
+19815-     170: goto          183
+19816-     173: aload         4
+19817-     175: getfield      #2406               // Field DoHoang091$k0.q:S
+19818-     178: iconst_2
+19819-     179: i2s
+19820-     180: if_icmpeq     186
+19821-     183: goto          196
+19822-     186: aload         4
+19823-     188: getfield      #892                // Field DoHoang091$k0.bx:B
+19824-     191: iconst_1
+19825-     192: i2b
+19826-     193: if_icmpeq     277
+19827-     196: aload         4
+19828-     198: getfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19829-     201: astore        5
+19830-     203: invokestatic  #2394               // Method ar:()LDoHoang091$k0;
+19831-     206: astore        6
+19832-     208: aload         6
+19833-     210: aconst_null
+19834-     211: if_acmpeq     225
+19835-     214: aload         6
+19836-     216: astore        4
+19837-     218: aload         4
+19838-     220: aload         5
+19839-     222: putfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19840-     225: aload         4
+19841-     227: iconst_1
+19842-     228: i2b
+19843-     229: putfield      #884                // Field DoHoang091$k0.p:B
+19844-     232: aload         4
+19845-     234: iconst_2
+19846-     235: i2s
+19847-     236: putfield      #2406               // Field DoHoang091$k0.q:S
+19848-     239: aload         4
+19849-     241: iconst_1
+19850-     242: i2b
+19851-     243: putfield      #892                // Field DoHoang091$k0.bx:B
+19852-     246: aload         4
+19853-     248: sipush        129
+19854-     251: putfield      #898                // Field DoHoang091$k0.r:I
+19855-     254: aload         4
+19856-     256: invokestatic  #2370               // Method l:(LDoHoang091$k0;)V
+19857-     259: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19858-     262: iload_0
+19859-     263: aload         4
+19860-     265: aastore
+19861-     266: iload_0
+19862-     267: putstatic     #215                // Field ak:I
+19863-     270: iconst_1
+19864-     271: putstatic     #223                // Field an:Z
+19865-     274: invokestatic  #764                // Method as:()V
+19866-     277: return
+19867-}

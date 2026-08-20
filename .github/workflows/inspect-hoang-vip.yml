@@ -1,0 +1,56 @@
+name: Inspect hoang vip starter
+on:
+  push:
+    branches: [chatgpt/hoang-vip-starter]
+    paths: [.github/workflows/inspect-hoang-vip.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/hoang-vip-starter
+          fetch-depth: 0
+      - name: Inspect JAR mappings
+        shell: bash
+        run: |
+          set -euo pipefail
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect && cd /tmp/nsoinspect
+          jar tf "$J" | grep '\.class$' | sed 's/\.class$//' > classes.txt
+          javap -classpath "$J" -p -c DoHoang091 > do.txt
+          javap -classpath "$J" -p -c 'DoHoang091$k0' > k0.txt
+          {
+            echo '=== HOANG CREATION ==='
+            grep -n -B30 -A80 'String hoang' do.txt || true
+            echo '=== CLASS MAPPING ==='
+            grep -n -A80 -B3 'static java.lang.String a(byte)' do.txt || true
+            echo '=== K0 CTOR TAIL ==='
+            grep -n -A220 'DoHoang091\$k0(java.lang.String, byte, short, int)' k0.txt || true
+            echo '=== FIELD q USES ALL CLASSES ==='
+            while read c; do
+              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B18 -A28 'DoHoang091\$k0.q:S' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done < classes.txt
+            echo '=== APPEARANCE/LEVEL FIELD USES ==='
+            while read c; do
+              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B12 -A24 -E 'DoHoang091\$k0\.(p|q|r|s|t|u|H|I|J|bK|bL|bM|bS|bT|bU|cc|cd|ce|cu):' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done < classes.txt
+            echo '=== EQUIPMENT ARRAYS USES ==='
+            while read c; do
+              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B10 -A24 -E 'DoHoang091\$k0\.(T|U|V|W|X|Y|Z|aa|ab):' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done < classes.txt
+            echo '=== LEVEL CONSTANTS / STRINGS ==='
+            for c in $(cat classes.txt); do
+              out=$(javap -classpath "$J" -p -verbose "$c" 2>/dev/null | grep -i -E 'level|max level|cấp độ|tóc|búi|nữ|kiếm|trang bị' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done
+          } > "$GITHUB_WORKSPACE/hoang_vip_inspect.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- hoang_vip_inspect.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect hoang vip starter mappings'
+          git push origin HEAD:chatgpt/hoang-vip-starter

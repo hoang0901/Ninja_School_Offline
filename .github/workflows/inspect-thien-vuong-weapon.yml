@@ -18,6 +18,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo trigger-2
           J=Nso_Offline_By_h0901.jar
           python3 - <<'PY' > /tmp/items.tsv
           import openpyxl

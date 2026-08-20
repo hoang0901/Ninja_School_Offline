@@ -1,0 +1,41 @@
+name: Temp inspect hoang female sword hair
+on:
+  push:
+    branches: [fix/hoang-female-sword-hair]
+    paths: [.github/workflows/temp-inspect-hoang-female.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Inspect hoang character fields
+        shell: bash
+        run: |
+          set -euo pipefail
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/inspect && mkdir -p /tmp/inspect && cd /tmp/inspect
+          jar tf "$J" | grep '\.class$' | sed 's/\.class$//' > classes.txt
+          javap -classpath "$J" -p -c DoHoang091 > do.txt
+          javap -classpath "$J" -p -c 'DoHoang091$k0' > k0.txt
+          {
+            echo '=== DOHOANG HOANG REFERENCES ==='
+            grep -n -B80 -A180 -E 'hoang|String hoang|ldc.*hoang' do.txt || true
+            echo '=== K0 FIELDS + CTORS ==='
+            head -n 220 k0.txt
+            grep -n -A900 -E 'DoHoang091\$k0\(' k0.txt || true
+            echo '=== K0 FIELD WRITES ==='
+            grep -n -B16 -A24 -E 'putfield.*DoHoang091\$k0\.' k0.txt || true
+            echo '=== GLOBAL K0 FIELD USES ==='
+            while read c; do
+              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B12 -A25 -E 'DoHoang091\$k0\.' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done < classes.txt
+          } > "$GITHUB_WORKSPACE/hoang_female_inspect.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- hoang_female_inspect.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect hoang gender and hair fields'
+          git push origin HEAD:fix/hoang-female-sword-hair

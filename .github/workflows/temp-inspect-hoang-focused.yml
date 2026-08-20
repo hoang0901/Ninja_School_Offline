@@ -1,0 +1,52 @@
+name: Inspect focused hoang state
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-inspect-hoang-focused.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Inspect focused state
+        shell: bash
+        run: |
+          set -euo pipefail
+          J=Nso_Offline_By_h0901.jar
+          rm -rf /tmp/focus && mkdir -p /tmp/focus/out
+          cd /tmp/focus
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          java -jar cfr.jar "$GITHUB_WORKSPACE/$J" --outputdir out >/dev/null 2>&1 || true
+          {
+            echo '=== DoHoang091 hoang hits ==='
+            F=$(find out -name 'DoHoang091.java' | head -n1); echo "FILE=$F"; [ -z "$F" ] || grep -n -B25 -A120 -E '"hoang"|new k0|new DoHoang091\.k0|k0\(' "$F" | head -n 1000 || true
+            echo '=== k0 source ==='
+            K=$(find out -name '*k0*.java' | grep -E 'DoHoang091|k0' | head -n1); echo "FILE=$K"; [ -z "$K" ] || sed -n '1,500p' "$K" || true
+            echo '=== SaveState source ==='
+            S=$(find out -name 'DoHoang091SaveState.java' | head -n1); echo "FILE=$S"; [ -z "$S" ] || sed -n '1,900p' "$S" || true
+            echo '=== OfflineBridge refs ==='
+            B=$(find out -name 'OfflineBridge.java' | head -n1); echo "FILE=$B"; [ -z "$B" ] || grep -n -B40 -A120 -E 'SaveState|restore|load|hoang|k0' "$B" | head -n 1200 || true
+          } > "$GITHUB_WORKSPACE/hoang_focused.txt"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name ChatGPT
+          git config user.email actions@github.com
+          git add -- hoang_focused.txt
+          git commit -m 'chore: capture focused hoang state' || true
+          git push origin HEAD:main
+      - name: Cleanup
+        if: always()
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-inspect-hoang-focused.yml || true
+          git config user.name ChatGPT
+          git config user.email actions@github.com
+          git commit -m 'chore: remove focused hoang inspector' || true
+          git push origin HEAD:main || true

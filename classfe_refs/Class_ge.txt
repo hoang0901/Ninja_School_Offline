@@ -1,0 +1,26 @@
+public final class Class_ge {
+  public final java.lang.String a;
+
+  public final int b;
+
+  public final Class_fe c;
+
+  public Class_ge(Class_fe, int, java.lang.String);
+    Code:
+       0: aload_0
+       1: invokespecial #6                  // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #5                  // Field c:LClass_fe;
+       9: aload_0
+      10: iload_2
+      11: putfield      #4                  // Field b:I
+      14: aload_0
+      15: aload_3
+      16: putfield      #3                  // Field a:Ljava/lang/String;
+      19: return
+
+  static {};
+    Code:
+       0: return
+}

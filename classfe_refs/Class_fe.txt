@@ -1,0 +1,189 @@
+public final class Class_fe {
+  public short a;
+
+  public boolean b;
+
+  public java.lang.String c;
+
+  public short d;
+
+  public short e;
+
+  private static int[] j;
+
+  public byte f;
+
+  public java.lang.String g;
+
+  public byte h;
+
+  public byte i;
+
+  private static boolean a(int, int);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: if_icmplt     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+
+  private static boolean a(int);
+    Code:
+       0: iload_0
+       1: iflt          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  private static boolean b(int, int);
+    Code:
+       0: iload_0
+       1: iload_1
+       2: if_icmpgt     9
+       5: iconst_1
+       6: goto          10
+       9: iconst_0
+      10: ireturn
+
+  public final boolean a();
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field f:B
+       4: invokestatic  #15                 // Method a:(I)Z
+       7: ifeq          31
+      10: aload_0
+      11: getfield      #10                 // Field f:B
+      14: getstatic     #14                 // Field j:[I
+      17: iconst_0
+      18: iaload
+      19: invokestatic  #17                 // Method b:(II)Z
+      22: ifeq          31
+      25: getstatic     #14                 // Field j:[I
+      28: iconst_1
+      29: iaload
+      30: ireturn
+      31: getstatic     #14                 // Field j:[I
+      34: iconst_2
+      35: iaload
+      36: ireturn
+
+  public Class_fe(short, byte, byte, java.lang.String, java.lang.String, byte, short, short, boolean);
+    Code:
+       0: aload_0
+       1: invokespecial #19                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: iload_1
+       6: putfield      #9                  // Field e:S
+       9: aload_0
+      10: iload_2
+      11: putfield      #10                 // Field f:B
+      14: aload_0
+      15: iload_3
+      16: putfield      #12                 // Field h:B
+      19: aload_0
+      20: aload         4
+      22: putfield      #11                 // Field g:Ljava/lang/String;
+      25: aload_0
+      26: aload         5
+      28: putfield      #7                  // Field c:Ljava/lang/String;
+      31: aload_0
+      32: iload         6
+      34: putfield      #13                 // Field i:B
+      37: aload_0
+      38: iload         7
+      40: putfield      #5                  // Field a:S
+      43: aload_0
+      44: iload         8
+      46: putfield      #8                  // Field d:S
+      49: aload_0
+      50: iload         9
+      52: putfield      #6                  // Field b:Z
+      55: return
+
+  private static void c();
+    Code:
+       0: iconst_5
+       1: newarray       int
+       3: putstatic     #14                 // Field j:[I
+       6: getstatic     #14                 // Field j:[I
+       9: iconst_0
+      10: bipush        95
+      12: bipush        45
+      14: ixor
+      15: bipush        107
+      17: bipush        22
+      19: ixor
+      20: ixor
+      21: iastore
+      22: getstatic     #14                 // Field j:[I
+      25: iconst_1
+      26: ldc           #1                  // String
+      28: invokevirtual #20                 // Method java/lang/String.length:()I
+      31: iastore
+      32: getstatic     #14                 // Field j:[I
+      35: iconst_2
+      36: bipush        86
+      38: bipush        109
+      40: ixor
+      41: bipush        100
+      43: bipush        95
+      45: ixor
+      46: iconst_m1
+      47: ixor
+      48: iand
+      49: iastore
+      50: getstatic     #14                 // Field j:[I
+      53: iconst_3
+      54: bipush        77
+      56: bipush        54
+      58: ixor
+      59: bipush        83
+      61: bipush        63
+      63: ixor
+      64: ixor
+      65: iastore
+      66: getstatic     #14                 // Field j:[I
+      69: iconst_4
+      70: bipush        19
+      72: bipush        32
+      74: ixor
+      75: bipush        127
+      77: bipush        85
+      79: ixor
+      80: ixor
+      81: iastore
+      82: return
+
+  public final boolean b();
+    Code:
+       0: aload_0
+       1: getfield      #10                 // Field f:B
+       4: getstatic     #14                 // Field j:[I
+       7: iconst_3
+       8: iaload
+       9: invokestatic  #16                 // Method a:(II)Z
+      12: ifeq          36
+      15: aload_0
+      16: getfield      #10                 // Field f:B
+      19: getstatic     #14                 // Field j:[I
+      22: iconst_4
+      23: iaload
+      24: invokestatic  #17                 // Method b:(II)Z
+      27: ifeq          36
+      30: getstatic     #14                 // Field j:[I
+      33: iconst_1
+      34: iaload
+      35: ireturn
+      36: getstatic     #14                 // Field j:[I
+      39: iconst_2
+      40: iaload
+      41: ireturn
+
+  static {};
+    Code:
+       0: invokestatic  #18                 // Method c:()V
+       3: return
+}

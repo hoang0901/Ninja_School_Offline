@@ -1,0 +1,399 @@
+final class Class_gj implements java.lang.Runnable {
+  private static int[] b;
+
+  private final java.lang.String c;
+
+  public static boolean a;
+
+  private static java.util.Hashtable d;
+
+  static {};
+    Code:
+       0: invokestatic  #63                 // Method b:()V
+       3: getstatic     #51                 // Field b:[I
+       6: iconst_1
+       7: iaload
+       8: putstatic     #50                 // Field a:Z
+      11: new           #35                 // class java/util/Hashtable
+      14: dup
+      15: invokespecial #81                 // Method java/util/Hashtable."<init>":()V
+      18: putstatic     #53                 // Field d:Ljava/util/Hashtable;
+      21: return
+
+  private static boolean a(java.lang.Object);
+    Code:
+       0: aload_0
+       1: ifnonnull     8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  public final void run();
+    Code:
+       0: ldc2_w        #36                 // long 50l
+       3: invokestatic  #79                 // Method java/lang/Thread.sleep:(J)V
+       6: ldc           #1                  // String
+       8: invokevirtual #70                 // Method java/lang/String.length:()I
+      11: pop
+      12: ldc           #2                  // String
+      14: invokevirtual #70                 // Method java/lang/String.length:()I
+      17: ldc           #4                  // String
+      19: invokevirtual #70                 // Method java/lang/String.length:()I
+      22: if_icmpne     32
+      25: return
+      26: ldc           #1                  // String
+      28: invokevirtual #70                 // Method java/lang/String.length:()I
+      31: pop2
+      32: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      35: invokevirtual #84                 // Method java/util/Hashtable.isEmpty:()Z
+      38: invokestatic  #64                 // Method b:(I)Z
+      41: ifeq          159
+      44: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      47: invokevirtual #85                 // Method java/util/Hashtable.keys:()Ljava/util/Enumeration;
+      50: astore_1
+      51: aload_1
+      52: invokeinterface #88,  1           // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+      57: invokestatic  #67                 // Method c:(I)Z
+      60: ifeq          159
+      63: aload_1
+      64: invokeinterface #89,  1           // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+      69: checkcast     #30                 // class java/lang/String
+      72: astore_2
+      73: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      76: aload_2
+      77: invokevirtual #83                 // Method java/util/Hashtable.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      80: checkcast     #30                 // class java/lang/String
+      83: invokestatic  #68                 // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+      86: lstore_3
+      87: invokestatic  #77                 // Method java/lang/System.currentTimeMillis:()J
+      90: lload_3
+      91: lsub
+      92: ldc2_w        #38                 // long 5000l
+      95: invokestatic  #65                 // Method b:(JJ)I
+      98: invokestatic  #60                 // Method a:(I)Z
+     101: ifeq          117
+     104: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+     107: aload_2
+     108: invokevirtual #87                 // Method java/util/Hashtable.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     111: ldc           #1                  // String
+     113: invokevirtual #70                 // Method java/lang/String.length:()I
+     116: pop2
+     117: ldc           #1                  // String
+     119: invokevirtual #70                 // Method java/lang/String.length:()I
+     122: pop
+     123: ldc           #3                  // String
+     125: invokevirtual #70                 // Method java/lang/String.length:()I
+     128: ldc           #3                  // String
+     130: invokevirtual #70                 // Method java/lang/String.length:()I
+     133: if_icmpeq     51
+     136: return
+     137: ldc           #1                  // String
+     139: invokevirtual #70                 // Method java/lang/String.length:()I
+     142: pop2
+     143: ldc           #1                  // String
+     145: invokevirtual #70                 // Method java/lang/String.length:()I
+     148: pop
+     149: ldc           #3                  // String
+     151: invokevirtual #70                 // Method java/lang/String.length:()I
+     154: ineg
+     155: ifle          51
+     158: return
+     159: getstatic     #42                 // Field Class_at.j:Ljava/util/Hashtable;
+     162: invokevirtual #84                 // Method java/util/Hashtable.isEmpty:()Z
+     165: invokestatic  #64                 // Method b:(I)Z
+     168: ifeq          493
+     171: aload_0
+     172: getfield      #52                 // Field c:Ljava/lang/String;
+     175: new           #31                 // class java/lang/StringBuffer
+     178: dup
+     179: ldc           #12                 // String bán hàng auto.
+     181: invokespecial #73                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+     184: getstatic     #40                 // Field Class_ad.aa:Ljava/lang/String;
+     187: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     190: ldc           #7                  // String  khu
+     192: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     195: getstatic     #41                 // Field Class_ad.v:B
+     198: invokevirtual #74                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+     201: ldc           #8                  // String  tọa độ:
+     203: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     206: invokestatic  #56                 // Method Class_cy.aa:()LClass_cy;
+     209: getfield      #43                 // Field Class_cy.ah:I
+     212: invokevirtual #74                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+     215: ldc           #11                 // String -
+     217: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     220: invokestatic  #56                 // Method Class_cy.aa:()LClass_cy;
+     223: getfield      #44                 // Field Class_cy.an:I
+     226: invokevirtual #74                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+     229: invokevirtual #76                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+     232: invokestatic  #57                 // Method Class_dt.e:(Ljava/lang/String;Ljava/lang/String;)V
+     235: aconst_null
+     236: astore_1
+     237: getstatic     #42                 // Field Class_at.j:Ljava/util/Hashtable;
+     240: invokevirtual #85                 // Method java/util/Hashtable.keys:()Ljava/util/Enumeration;
+     243: astore_2
+     244: aload_2
+     245: invokeinterface #88,  1           // InterfaceMethod java/util/Enumeration.hasMoreElements:()Z
+     250: invokestatic  #67                 // Method c:(I)Z
+     253: ifeq          430
+     256: aload_2
+     257: invokeinterface #89,  1           // InterfaceMethod java/util/Enumeration.nextElement:()Ljava/lang/Object;
+     262: checkcast     #30                 // class java/lang/String
+     265: astore_3
+     266: getstatic     #42                 // Field Class_at.j:Ljava/util/Hashtable;
+     269: aload_3
+     270: invokevirtual #83                 // Method java/util/Hashtable.get:(Ljava/lang/Object;)Ljava/lang/Object;
+     273: checkcast     #23                 // class Class_ge
+     276: dup
+     277: astore        4
+     279: invokestatic  #66                 // Method b:(Ljava/lang/Object;)Z
+     282: ifeq          397
+     285: aload_1
+     286: invokestatic  #62                 // Method a:(Ljava/lang/Object;)Z
+     289: ifeq          294
+     292: aload_3
+     293: astore_1
+     294: invokestatic  #55                 // Method Class_at.d:()LClass_at;
+     297: ldc           #1                  // String
+     299: invokevirtual #70                 // Method java/lang/String.length:()I
+     302: pop2
+     303: aload         4
+     305: getfield      #49                 // Field Class_ge.c:LClass_fe;
+     308: getfield      #45                 // Field Class_fe.e:S
+     311: invokestatic  #54                 // Method Class_at.a:(S)I
+     314: istore_3
+     315: ldc2_w        #36                 // long 50l
+     318: invokestatic  #59                 // Method Class_eo.a:(J)V
+     321: aload_0
+     322: getfield      #52                 // Field c:Ljava/lang/String;
+     325: new           #31                 // class java/lang/StringBuffer
+     328: dup
+     329: ldc           #14                 // String mãvp:
+     331: invokespecial #73                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+     334: aload         4
+     336: getfield      #47                 // Field Class_ge.a:Ljava/lang/String;
+     339: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     342: ldc           #5                  // String  (
+     344: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     347: aload         4
+     349: getfield      #49                 // Field Class_ge.c:LClass_fe;
+     352: getfield      #46                 // Field Class_fe.g:Ljava/lang/String;
+     355: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     358: ldc           #10                 // String ) bán:
+     360: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     363: aload         4
+     365: getfield      #48                 // Field Class_ge.b:I
+     368: invokestatic  #71                 // Method java/lang/String.valueOf:(I)Ljava/lang/String;
+     371: invokestatic  #58                 // Method Class_ej.a:(Ljava/lang/String;)Ljava/lang/String;
+     374: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     377: ldc           #15                 // String xu/1cái. còn
+     379: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     382: iload_3
+     383: invokevirtual #74                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+     386: ldc           #6                  // String  cái
+     388: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     391: invokevirtual #76                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+     394: invokestatic  #57                 // Method Class_dt.e:(Ljava/lang/String;Ljava/lang/String;)V
+     397: ldc           #1                  // String
+     399: invokevirtual #70                 // Method java/lang/String.length:()I
+     402: pop
+     403: iconst_4
+     404: bipush        9
+     406: iadd
+     407: bipush        -120
+     409: isub
+     410: bipush        53
+     412: iadd
+     413: sipush        131
+     416: bipush        84
+     418: iadd
+     419: bipush        89
+     421: isub
+     422: bipush        65
+     424: iadd
+     425: ixor
+     426: ifgt          244
+     429: return
+     430: aload_1
+     431: invokestatic  #66                 // Method b:(Ljava/lang/Object;)Z
+     434: ifeq          471
+     437: ldc2_w        #36                 // long 50l
+     440: invokestatic  #59                 // Method Class_eo.a:(J)V
+     443: aload_0
+     444: getfield      #52                 // Field c:Ljava/lang/String;
+     447: new           #31                 // class java/lang/StringBuffer
+     450: dup
+     451: ldc           #13                 // String chat \'\'mua solg mãvp\'\' để mua. vd: \'\'mua 12
+     453: invokespecial #73                 // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+     456: aload_1
+     457: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     460: ldc           #9                  // String \'\'
+     462: invokevirtual #75                 // Method java/lang/StringBuffer.append:(Ljava/lang/String;)Ljava/lang/StringBuffer;
+     465: invokevirtual #76                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+     468: invokestatic  #57                 // Method Class_dt.e:(Ljava/lang/String;Ljava/lang/String;)V
+     471: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+     474: aload_0
+     475: getfield      #52                 // Field c:Ljava/lang/String;
+     478: invokestatic  #77                 // Method java/lang/System.currentTimeMillis:()J
+     481: invokestatic  #72                 // Method java/lang/String.valueOf:(J)Ljava/lang/String;
+     484: invokevirtual #86                 // Method java/util/Hashtable.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+     487: ldc           #1                  // String
+     489: invokevirtual #70                 // Method java/lang/String.length:()I
+     492: pop2
+     493: getstatic     #51                 // Field b:[I
+     496: iconst_1
+     497: iaload
+     498: putstatic     #50                 // Field a:Z
+     501: return
+    Exception table:
+       from    to  target type
+           0     6    26   Class java/lang/InterruptedException
+          73   117   137   Class java/lang/Exception
+
+  private static boolean a(int);
+    Code:
+       0: iload_0
+       1: ifle          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  public Class_gj(java.lang.String);
+    Code:
+       0: aload_0
+       1: invokespecial #69                 // Method java/lang/Object."<init>":()V
+       4: aload_0
+       5: aload_1
+       6: putfield      #52                 // Field c:Ljava/lang/String;
+       9: return
+
+  private static int a(long, long);
+    Code:
+       0: lload_0
+       1: lload_2
+       2: lcmp
+       3: ireturn
+
+  public final synchronized void a();
+    Code:
+       0: getstatic     #50                 // Field a:Z
+       3: invokestatic  #64                 // Method b:(I)Z
+       6: ifeq          133
+       9: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      12: invokevirtual #84                 // Method java/util/Hashtable.isEmpty:()Z
+      15: invokestatic  #64                 // Method b:(I)Z
+      18: ifeq          114
+      21: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      24: aload_0
+      25: getfield      #52                 // Field c:Ljava/lang/String;
+      28: invokevirtual #82                 // Method java/util/Hashtable.containsKey:(Ljava/lang/Object;)Z
+      31: invokestatic  #67                 // Method c:(I)Z
+      34: ifeq          114
+      37: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+      40: aload_0
+      41: getfield      #52                 // Field c:Ljava/lang/String;
+      44: invokevirtual #83                 // Method java/util/Hashtable.get:(Ljava/lang/Object;)Ljava/lang/Object;
+      47: checkcast     #30                 // class java/lang/String
+      50: invokestatic  #68                 // Method java/lang/Long.parseLong:(Ljava/lang/String;)J
+      53: lstore_1
+      54: invokestatic  #77                 // Method java/lang/System.currentTimeMillis:()J
+      57: lload_1
+      58: lsub
+      59: ldc2_w        #38                 // long 5000l
+      62: invokestatic  #61                 // Method a:(JJ)I
+      65: invokestatic  #60                 // Method a:(I)Z
+      68: ifeq          90
+      71: getstatic     #51                 // Field b:[I
+      74: iconst_0
+      75: iaload
+      76: putstatic     #50                 // Field a:Z
+      79: new           #33                 // class java/lang/Thread
+      82: dup
+      83: aload_0
+      84: invokespecial #78                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+      87: invokevirtual #80                 // Method java/lang/Thread.start:()V
+      90: return
+      91: ldc           #1                  // String
+      93: invokevirtual #70                 // Method java/lang/String.length:()I
+      96: pop2
+      97: getstatic     #53                 // Field d:Ljava/util/Hashtable;
+     100: aload_0
+     101: getfield      #52                 // Field c:Ljava/lang/String;
+     104: invokevirtual #87                 // Method java/util/Hashtable.remove:(Ljava/lang/Object;)Ljava/lang/Object;
+     107: ldc           #1                  // String
+     109: invokevirtual #70                 // Method java/lang/String.length:()I
+     112: pop2
+     113: return
+     114: getstatic     #51                 // Field b:[I
+     117: iconst_0
+     118: iaload
+     119: putstatic     #50                 // Field a:Z
+     122: new           #33                 // class java/lang/Thread
+     125: dup
+     126: aload_0
+     127: invokespecial #78                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+     130: invokevirtual #80                 // Method java/lang/Thread.start:()V
+     133: return
+    Exception table:
+       from    to  target type
+          37    90    91   Class java/lang/Exception
+
+  private static boolean b(java.lang.Object);
+    Code:
+       0: aload_0
+       1: ifnull        8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  private static boolean b(int);
+    Code:
+       0: iload_0
+       1: ifne          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+
+  private static void b();
+    Code:
+       0: iconst_2
+       1: newarray       int
+       3: putstatic     #51                 // Field b:[I
+       6: getstatic     #51                 // Field b:[I
+       9: iconst_0
+      10: ldc           #2                  // String
+      12: invokevirtual #70                 // Method java/lang/String.length:()I
+      15: iastore
+      16: getstatic     #51                 // Field b:[I
+      19: iconst_1
+      20: sipush        131
+      23: sipush        164
+      26: ixor
+      27: bipush        112
+      29: bipush        87
+      31: ixor
+      32: iconst_m1
+      33: ixor
+      34: iand
+      35: iastore
+      36: return
+
+  private static int b(long, long);
+    Code:
+       0: lload_0
+       1: lload_2
+       2: lcmp
+       3: ireturn
+
+  private static boolean c(int);
+    Code:
+       0: iload_0
+       1: ifeq          8
+       4: iconst_1
+       5: goto          9
+       8: iconst_0
+       9: ireturn
+}

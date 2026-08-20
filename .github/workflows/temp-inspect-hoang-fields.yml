@@ -1,0 +1,41 @@
+name: Inspect hoang fields
+on:
+  push:
+    branches: [chatgpt/sword-strongest-character]
+    paths: [.github/workflows/temp-inspect-hoang-fields.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/sword-strongest-character
+          fetch-depth: 0
+      - name: Inspect gender hair clan equipment stats
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo rerun
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          {
+            echo '=== K0 ctor tail / field init ==='
+            javap -classpath "$J" -p -c 'DoHoang091$k0' | sed -n '520,1220p'
+            echo '=== K0 methods ==='
+            javap -classpath "$J" -p -c 'DoHoang091$k0' | sed -n '1220,1700p'
+            echo '=== item template ==='
+            javap -classpath "$J" -p -c Class_fe
+            echo '=== item instance ==='
+            javap -classpath "$J" -p -c Class_fj
+            echo '=== item lookup/use ==='
+            javap -classpath "$J" -p -c Class_dn | grep -n -B12 -A40 -E 'Class_fe|new +#.*Class_fe|\(S\)LClass_fe;' || true
+            echo '=== all constants with clan/gender/hair context ==='
+            for c in DoHoang091 k0 k1d Class_ct Class_cy Class_fe Class_fj; do
+              echo "##### $c #####"
+              javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B10 -A22 -E 'phái|Phái|kiếm|Kiếm|quạt|Quạt|nam|nữ|Nữ|tóc|hair|gender|Field p:B|Field q:S|Field bx:B|Field bJ:B|Field cc:B|Field ce:B' || true
+            done
+          } > "$GITHUB_WORKSPACE/hoang_fields.txt"
+          git add -- hoang_fields.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: inspect hoang appearance and item stats'
+          git push origin HEAD:chatgpt/sword-strongest-character

@@ -10,34 +10,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Locate inventory classes fast
+      - name: Locate inventory UI references
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsofast "$GITHUB_WORKSPACE/item_diag11"
-          mkdir -p /tmp/nsofast/classes "$GITHUB_WORKSPACE/item_diag11"
-          cd /tmp/nsofast
+          rm -rf /tmp/nsorefs "$GITHUB_WORKSPACE/item_diag12"
+          mkdir -p /tmp/nsorefs "$GITHUB_WORKSPACE/item_diag12"
+          cd /tmp/nsorefs
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
-          unzip -q game.jar -d classes
-          out="$GITHUB_WORKSPACE/item_diag11/classes.txt"
-          : > "$out"
-          for term in 'Hành trang' 'hành trang' 'Trang bị' 'Vật phẩm' 'Sử dụng' 'Bỏ ra' 'Mua' 'Cửa hàng'; do
-            echo "=== $term ===" >> "$out"
-            grep -R -a -l -F "$term" classes --include='*.class' | sed 's#^classes/##' | head -80 >> "$out" || true
-          done
-          grep -R -a -l -E 'Hành trang|hành trang|Trang bị|Cửa hàng' classes --include='*.class' | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u | head -25 > /tmp/matches.txt || true
-          while IFS= read -r c; do
-            [ -n "$c" ] || continue
-            safe=$(echo "$c" | tr '/.$' '___')
-            javap -classpath game.jar -p -c "$c" > "$GITHUB_WORKSPACE/item_diag11/${safe}.txt" 2>&1 || true
-          done < /tmp/matches.txt
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          mkdir cfrout
+          java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
+          grep -R -n -E 'Class_gd\.(ll|k|oa)|Class_gd\.[A-Za-z_$][A-Za-z0-9_$]*\[[^]]*\].*H' cfrout/Class_*.java | head -1200 > "$GITHUB_WORKSPACE/item_diag12/refs.txt" || true
+          grep -R -n -E 'Class_gd\.ll|Class_gd\.k|Class_gd\.oa' cfrout --include='*.java' | cut -d: -f1 | sort -u | head -20 > /tmp/files.txt || true
+          while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            b=$(basename "$f" .java)
+            grep -n -B140 -A500 -E 'Class_gd\.ll|Class_gd\.k|Class_gd\.oa|drawImage|drawRegion|paint\(' "$f" | head -22000 > "$GITHUB_WORKSPACE/item_diag12/${b}.txt" || true
+          done < /tmp/files.txt
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag11
+          git add -- item_diag12
           git diff --cached --quiet && exit 0
-          git commit -m "chore: locate inventory classes fast"
+          git commit -m "chore: locate inventory UI refs"
           git push

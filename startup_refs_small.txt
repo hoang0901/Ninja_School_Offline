@@ -1,0 +1,243 @@
+===== Class_ds =====
+1590-      19: aconst_null
+1591-      20: aconst_null
+1592-      21: invokevirtual #276                // Method Class_bc.a:(Ljava/lang/String;LClass_dw;LClass_dw;LClass_dw;)V
+1593-      24: getstatic     #159                // Field ap:LClass_bc;
+1594-      27: putstatic     #157                // Field an:LClass_ak;
+1595-      30: getstatic     #159                // Field ap:LClass_bc;
+1596-      33: getstatic     #189                // Field bs:[I
+1597-      36: iconst_0
+1598-      37: iaload
+1599-      38: putfield      #111                // Field Class_bc.e:Z
+1600-      41: return
+1601-
+1602:  public static Class_ds d();
+1603-    Code:
+1604-       0: getstatic     #219                // Field o:LClass_ds;
+1605-       3: invokestatic  #318                // Method a:(Ljava/lang/Object;)Z
+1606-       6: ifeq          19
+1607-       9: new           #56                 // class Class_ds
+1608-      12: dup
+1609-      13: invokespecial #315                // Method "<init>":()V
+1610-      16: putstatic     #219                // Field o:LClass_ds;
+1611-      19: getstatic     #219                // Field o:LClass_ds;
+1612-      22: areturn
+1613-
+1614-  public static boolean b(int, int, int, int);
+1615-    Code:
+1616-       0: getstatic     #162                // Field as:Z
+1617-       3: invokestatic  #334                // Method h:(I)Z
+1618-       6: ifeq          24
+1619-       9: getstatic     #144                // Field a:Z
+1620-      12: invokestatic  #334                // Method h:(I)Z
+1621-      15: ifeq          24
+1622-      18: getstatic     #189                // Field bs:[I
+1623-      21: iconst_2
+1624-      22: iaload
+1625-      23: ireturn
+1626-      24: getstatic     #149                // Field ae:I
+===== Class_ha =====
+===== Class_ew =====
+8037-      14: getstatic     #45                 // Field Class_da.g:B
+8038-      17: invokevirtual #97                 // Method java/io/DataOutputStream.writeByte:(I)V
+8039-      20: aload_1
+8040-      21: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8041-      24: getstatic     #46                 // Field Class_dg.b:I
+8042-      27: invokevirtual #97                 // Method java/io/DataOutputStream.writeByte:(I)V
+8043-      30: aload_1
+8044-      31: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8045-      34: getstatic     #49                 // Field Class_ds.bb:Z
+8046-      37: invokevirtual #96                 // Method java/io/DataOutputStream.writeBoolean:(Z)V
+8047-      40: aload_1
+8048-      41: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8049:      44: getstatic     #50                 // Field Class_ds.d:I
+8050-      47: invokevirtual #98                 // Method java/io/DataOutputStream.writeInt:(I)V
+8051-      50: aload_1
+8052-      51: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8053-      54: getstatic     #51                 // Field Class_ds.k:I
+8054-      57: invokevirtual #98                 // Method java/io/DataOutputStream.writeInt:(I)V
+8055-      60: aload_1
+8056-      61: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8057-      64: getstatic     #47                 // Field Class_dk.j:Z
+8058-      67: invokevirtual #96                 // Method java/io/DataOutputStream.writeBoolean:(Z)V
+8059-      70: aload_1
+8060-      71: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8061-      74: getstatic     #52                 // Field Class_ds.t:Z
+8062-      77: invokevirtual #96                 // Method java/io/DataOutputStream.writeBoolean:(Z)V
+8063-      80: aload_1
+8064-      81: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8065-      84: ldc           #8                  // String microedition.platform
+8066-      86: invokestatic  #109                // Method java/lang/System.getProperty:(Ljava/lang/String;)Ljava/lang/String;
+8067-      89: invokevirtual #100                // Method java/io/DataOutputStream.writeUTF:(Ljava/lang/String;)V
+8068-      92: aload_1
+8069-      93: invokevirtual #72                 // Method Class_de.b:()Ljava/io/DataOutputStream;
+8070-      96: getstatic     #55                 // Field c:[I
+8071-      99: iconst_1
+8072-     100: iaload
+8073-     101: invokevirtual #97                 // Method java/io/DataOutputStream.writeByte:(I)V
+===== Class_do =====
+===== Class_da =====
+126-      61: getstatic     #34                 // Field d:B
+127-      64: invokevirtual #63                 // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+128-      67: invokevirtual #65                 // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+129-      70: invokevirtual #55                 // Method java/io/PrintStream.println:(Ljava/lang/String;)V
+130-      73: getstatic     #39                 // Field i:[I
+131-      76: iconst_0
+132-      77: iaload
+133-      78: putstatic     #30                 // Field Class_cl.h:I
+134-      81: new           #11                 // class Class_cl
+135-      84: dup
+136-      85: invokespecial #45                 // Method Class_cl."<init>":()V
+137-      88: putstatic     #42                 // Field Class_ds.j:LClass_aw;
+138:      91: invokestatic  #49                 // Method Class_do.b:()LClass_do;
+139:      94: invokestatic  #50                 // Method Class_ds.d:()LClass_ds;
+140:      97: putfield      #41                 // Field Class_do.b:LClass_ha;
+141-     100: return
+142-
+143-  private static void a();
+144-    Code:
+145-       0: iconst_3
+146-       1: newarray       int
+147-       3: putstatic     #39                 // Field i:[I
+148-       6: getstatic     #39                 // Field i:[I
+149-       9: iconst_0
+150-      10: bipush        58
+151-      12: bipush        91
+152-      14: ixor
+153-      15: bipush        70
+154-      17: bipush        39
+155-      19: ixor
+156-      20: iconst_m1
+157-      21: ixor
+158-      22: iand
+159-      23: iastore
+160-      24: getstatic     #39                 // Field i:[I
+161-      27: iconst_1
+162-      28: ldc           #2                  // String
+163-      30: invokevirtual #61                 // Method java/lang/String.length:()I
+164-      33: iastore
+--
+189-      24: pop2
+190-      25: getstatic     #32                 // Field b:LClass_da;
+191-      28: invokevirtual #72                 // Method javax/microedition/midlet/MIDlet.notifyDestroyed:()V
+192-      31: return
+193-      32: dup
+194-      33: astore_0
+195-      34: invokevirtual #68                 // Method java/lang/Throwable.printStackTrace:()V
+196-      37: return
+197-    Exception table:
+198-       from    to  target type
+199-          12    31    32   Class javax/microedition/io/ConnectionNotFoundException
+200-
+201:  protected void startApp();
+202-    Code:
+203-       0: getstatic     #40                 // Field Class_do.a:Z
+204-       3: invokestatic  #47                 // Method a:(I)Z
+205-       6: ifeq          22
+206-       9: new           #25                 // class java/lang/Thread
+207-      12: dup
+208:      13: invokestatic  #49                 // Method Class_do.b:()LClass_do;
+209-      16: invokespecial #66                 // Method java/lang/Thread."<init>":(Ljava/lang/Runnable;)V
+210-      19: invokevirtual #67                 // Method java/lang/Thread.start:()V
+211-      22: aload_0
+212-      23: invokestatic  #69                 // Method javax/microedition/lcdui/Display.getDisplay:(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display;
+213:      26: invokestatic  #49                 // Method Class_do.b:()LClass_do;
+214:      29: invokevirtual #70                 // Method javax/microedition/lcdui/Display.setCurrent:(Ljavax/microedition/lcdui/Displayable;)V
+215-      32: return
+216-
+217-  static {};
+218-    Code:
+219-       0: invokestatic  #46                 // Method a:()V
+220-       3: getstatic     #39                 // Field i:[I
+221-       6: iconst_1
+222-       7: iaload
+223-       8: putstatic     #37                 // Field g:B
+224-      11: getstatic     #39                 // Field i:[I
+225-      14: iconst_0
+226-      15: iaload
+227-      16: putstatic     #38                 // Field h:B
+228-      19: getstatic     #39                 // Field i:[I
+229-      22: iconst_2
+230-      23: iaload
+231-      24: putstatic     #33                 // Field c:I
+232-      27: ldc           #1                  // String
+233-      29: putstatic     #36                 // Field f:Ljava/lang/String;
+234-      32: getstatic     #39                 // Field i:[I
+235-      35: iconst_0
+236-      36: iaload
+237-      37: putstatic     #34                 // Field d:B
+238-      40: getstatic     #39                 // Field i:[I
+===== DoHoang091 =====
+===== DoHoang091SaveState =====
+===== CharacterDelete =====
+1-Compiled from "CharacterDelete.java"
+2-public final class CharacterDelete {
+3-  private CharacterDelete();
+4-    Code:
+5-       0: aload_0
+6-       1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+7-       4: return
+8-
+9:  public static boolean deleteCurrent() throws java.lang.Exception;
+10-    Code:
+11-       0: getstatic     #7                  // Field DoHoang091.aj:[LDoHoang091$k0;
+12-       3: astore_0
+13-       4: getstatic     #13                 // Field DoHoang091.ak:I
+14-       7: istore_1
+15-       8: aload_0
+16-       9: ifnull        27
+17-      12: aload_0
+18-      13: arraylength
+19-      14: ifeq          27
+20-      17: iload_1
+21-      18: iflt          27
+22-      21: iload_1
+23-      22: aload_0
+24-      23: arraylength
+25-      24: if_icmplt     29
+26-      27: iconst_0
+27-      28: ireturn
+28-      29: aload_0
+29-      30: arraylength
+30-      31: iconst_1
+31-      32: isub
+32-      33: anewarray     #17                 // class DoHoang091$k0
+33-      36: astore_2
+===== k20 =====
+70-      70: aastore
+71-      71: putstatic     #63                 // Field i:[Ljava/lang/String;
+72-      74: return
+73-
+74-  private k20();
+75-    Code:
+76-       0: aload_0
+77-       1: invokespecial #92                 // Method java/lang/Object."<init>":()V
+78-       4: return
+79-
+80-  static boolean a();
+81-    Code:
+82:       0: invokestatic  #69                 // Method DoHoang091SaveState.hasSaveData:()Z
+83-       3: ireturn
+84-
+85-  static int b() throws java.lang.Exception;
+86-    Code:
+87-       0: invokestatic  #110                // Method a:()Z
+88-       3: ifne          16
+89-       6: new           #50                 // class java/lang/Exception
+90-       9: dup
+91-      10: ldc           #21                 // String NO_SAVE
+92-      12: invokespecial #91                 // Method java/lang/Exception."<init>":(Ljava/lang/String;)V
+93-      15: athrow
+94-      16: invokestatic  #123                // Method d:()Lk20$k0;
+95-      19: astore_0
+96-      20: aload_0
+97-      21: invokestatic  #114                // Method a:(Lk20$k0;)[B
+98-      24: astore_1
+99-      25: ldc           #29                 // String nso_offline_backup_v1
+100-      27: aload_1
+101-      28: invokestatic  #112                // Method a:(Ljava/lang/String;[B)V
+102-      31: ldc           #29                 // String nso_offline_backup_v1
+103-      33: invokestatic  #119                // Method b:(Ljava/lang/String;)[B
+104-      36: astore_2
+105-      37: aload_2
+106-      38: invokestatic  #116                // Method a:([B)Lk20$k0;

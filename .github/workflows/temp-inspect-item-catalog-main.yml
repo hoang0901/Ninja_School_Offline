@@ -14,29 +14,37 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag2"
-          mkdir -p /tmp/nsoinspect/classes "$GITHUB_WORKSPACE/item_diag2"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag3"
+          mkdir -p /tmp/nsoinspect/classes "$GITHUB_WORKSPACE/item_diag3"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           unzip -q game.jar -d classes
           for c in k1d OfflineDeleteMenu dt k25 DoHoang091; do
             if [ -f "classes/$c.class" ]; then
               javap -classpath game.jar -p -c "$c" > "/tmp/$c.javap" 2>&1 || true
-              { grep -n -B35 -A100 -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ|Xóa nhân vật|Fake phái|OfflineDeleteMenu|FakeClassState|InventoryClear|CharacterDelete' "/tmp/$c.javap" || true; } > "$GITHUB_WORKSPACE/item_diag2/${c}_focus.txt"
-              # Method signatures only, useful for finding renderer/input methods.
-              grep -E '^  (public|private|protected|static|final|synchronized|native|abstract|strictfp|[A-Za-z0-9_$<>\[\].]+)[^:]*(\);|\) throws|\) ?$)' "/tmp/$c.javap" | head -300 > "$GITHUB_WORKSPACE/item_diag2/${c}_methods.txt" || true
+              grep -n -B45 -A130 -E 'sipush[[:space:]]+267|Nhận vật phẩm|Xóa toàn bộ|Fake phái|OfflineDeleteMenu|FakeClassState' "/tmp/$c.javap" > "$GITHUB_WORKSPACE/item_diag3/${c}_focus.txt" || true
             fi
           done
-          # Class constant-pool neighbors for likely inventory UI/item icon rendering references.
-          javap -classpath game.jar -p -verbose k1d > /tmp/k1d.verbose 2>&1 || true
-          grep -n -B15 -A35 -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên' /tmp/k1d.verbose > "$GITHUB_WORKSPACE/item_diag2/k1d_constants.txt" || true
+          # Decompile only k1d and OfflineDeleteMenu, then extract snippets around receive-item action/menu.
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          mkdir -p cfrout
+          java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
+          for f in cfrout/k1d.java cfrout/OfflineDeleteMenu.java; do
+            [ -f "$f" ] || continue
+            base=$(basename "$f" .java)
+            grep -n -B80 -A220 -E '267|Nhận vật phẩm|Xóa toàn bộ|Fake phái' "$f" > "$GITHUB_WORKSPACE/item_diag3/${base}_cfr_focus.txt" || true
+          done
+          # Inventory/item UI candidate references from decompiled source.
+          if [ -f cfrout/k1d.java ]; then
+            grep -n -B35 -A90 -E 'item|Item|trang bị|Trang bị|hành trang|Hành trang|shop|Shop|icon|Icon' cfrout/k1d.java | head -5000 > "$GITHUB_WORKSPACE/item_diag3/k1d_item_refs.txt" || true
+          fi
       - name: Commit targeted diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag2
+          git add -- item_diag3
           git diff --cached --quiet && exit 0
-          git commit -m "chore: add targeted catalog bytecode diagnostics"
+          git commit -m "chore: inspect receive-item action 267"
           git push

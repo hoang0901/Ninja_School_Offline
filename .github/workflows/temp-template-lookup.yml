@@ -1,0 +1,33 @@
+name: Temporary template lookup
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-template-lookup.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Locate Class_fe lookup APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf template_lookup && mkdir template_lookup
+          jar tf Nso_Offline_By_h0901.jar | grep '\.class$' | sed 's#/#.#g;s#\.class$##' > /tmp/classes.txt
+          : > /tmp/all_sigs.txt
+          while IFS= read -r c; do
+            javap -classpath Nso_Offline_By_h0901.jar -p -s "$c" 2>/dev/null >> /tmp/all_sigs.txt || true
+          done < /tmp/classes.txt
+          grep -n -B2 -A2 -E '\(I\)LClass_fe;|\(S\)LClass_fe;|\[LClass_fe;' /tmp/all_sigs.txt > template_lookup/lookups.txt || true
+      - name: Commit diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add template_lookup
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect Class_fe lookup APIs"
+          git push

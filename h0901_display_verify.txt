@@ -1,0 +1,9 @@
+=== DISPLAY METADATA ===
+MIDlet-Vendor: H0901
+MIDlet-Name: NinjaSchoolOffline
+Implementation-Author: H0901
+=== CLASS FILES PRESERVED ===
+DoHoang091.class
+DoHoang091$k0.class
+=== SHA256 ===
+aa6515c4fc2135266c36c2d0cce4502264a5f50cf4f240212685ff7199408cfe  Nso_Offline_By_h0901.jar

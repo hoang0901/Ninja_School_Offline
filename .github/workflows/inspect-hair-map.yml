@@ -1,0 +1,31 @@
+name: Inspect female hair mapping
+on:
+  push:
+    branches: [chatgpt/restore-hoang-sword-129]
+    paths: [.github/workflows/inspect-hair-map.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Find uses of character hair/head field q
+        shell: bash
+        run: |
+          set -euo pipefail
+          J=Nso_Offline_By_h0901.jar
+          jar tf "$J" | grep '\.class$' | sed 's#/#.#g;s/\.class$//' > /tmp/classes.txt
+          : > hair_map_inspect.txt
+          while IFS= read -r c; do
+            out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B35 -A70 -E 'DoHoang091\$k0\.q:S|Field .*\.q:S|head|hair|toc|tóc' || true)
+            if [ -n "$out" ]; then { echo "===== $c ====="; echo "$out"; } >> hair_map_inspect.txt; fi
+          done < /tmp/classes.txt
+          jar tf "$J" | grep -Ei '(^|/)(head|hair|char|part|mob|effect|res|img|image)' >> hair_map_inspect.txt || true
+          git add -- hair_map_inspect.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: capture female hair id mapping'
+          git push origin HEAD:chatgpt/restore-hoang-sword-129

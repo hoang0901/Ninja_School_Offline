@@ -1,0 +1,168 @@
+name: Build offline startup save menu redesign
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-build-save-menu-redesign.yml]
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build redesigned save menu
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/savemenu && mkdir -p /tmp/savemenu/src /tmp/savemenu/classes /tmp/feature
+          cd /tmp/savemenu
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o asm.jar https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar
+          curl -fsSL -o javassist.jar https://repo1.maven.org/maven2/org/javassist/javassist/3.30.2-GA/javassist-3.30.2-GA.jar
+
+          cat > src/GenerateMenu.java <<'JAVA'
+          import java.io.*;
+          import org.objectweb.asm.*;
+          import static org.objectweb.asm.Opcodes.*;
+
+          public final class GenerateMenu {
+            static void addAppend(MethodVisitor m,String s){
+              m.visitVarInsn(ALOAD,0); m.visitLdcInsn(s); m.visitInsn(ACONST_NULL);
+              m.visitMethodInsn(INVOKEVIRTUAL,"OfflineStartMenu","append","(Ljava/lang/String;Ljavax/microedition/lcdui/Image;)I",false); m.visitInsn(POP);
+            }
+            public static void main(String[] x)throws Exception{
+              ClassWriter cw=new ClassWriter(ClassWriter.COMPUTE_MAXS);
+              cw.visit(V1_4,ACC_PUBLIC|ACC_FINAL,"OfflineStartMenu",null,"javax/microedition/lcdui/List",new String[]{"javax/microedition/lcdui/CommandListener"});
+              cw.visitField(ACC_PRIVATE|ACC_STATIC,"midlet","LClass_da;",null,null).visitEnd();
+
+              MethodVisitor m=cw.visitMethod(ACC_PRIVATE,"<init>","()V",null,null);
+              m.visitCode();
+              m.visitVarInsn(ALOAD,0); m.visitLdcInsn("Ninja School Offline"); m.visitInsn(ICONST_3);
+              m.visitMethodInsn(INVOKESPECIAL,"javax/microedition/lcdui/List","<init>","(Ljava/lang/String;I)V",false);
+              addAppend(m,"Chơi mới");
+              Label noSave=new Label();
+              m.visitMethodInsn(INVOKESTATIC,"DoHoang091SaveState","hasSaveData","()Z",false); m.visitJumpInsn(IFEQ,noSave);
+              addAppend(m,"Tiếp tục");
+              m.visitLabel(noSave);
+              addAppend(m,"Sao lưu"); addAppend(m,"Khôi phục");
+              m.visitVarInsn(ALOAD,0); m.visitVarInsn(ALOAD,0);
+              m.visitMethodInsn(INVOKEVIRTUAL,"OfflineStartMenu","setCommandListener","(Ljavax/microedition/lcdui/CommandListener;)V",false);
+              m.visitInsn(RETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              m=cw.visitMethod(ACC_PUBLIC|ACC_STATIC,"show","(LClass_da;)V",null,null); m.visitCode();
+              m.visitVarInsn(ALOAD,0); m.visitFieldInsn(PUTSTATIC,"OfflineStartMenu","midlet","LClass_da;");
+              m.visitVarInsn(ALOAD,0); m.visitMethodInsn(INVOKESTATIC,"javax/microedition/lcdui/Display","getDisplay","(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display;",false);
+              m.visitTypeInsn(NEW,"OfflineStartMenu"); m.visitInsn(DUP); m.visitMethodInsn(INVOKESPECIAL,"OfflineStartMenu","<init>","()V",false);
+              m.visitMethodInsn(INVOKEVIRTUAL,"javax/microedition/lcdui/Display","setCurrent","(Ljavax/microedition/lcdui/Displayable;)V",false); m.visitInsn(RETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              m=cw.visitMethod(ACC_PUBLIC|ACC_STATIC,"clearPrimary","()V",null,null); m.visitCode();
+              Label t1s=new Label(),t1e=new Label(),t1h=new Label(),t2s=new Label(),t2e=new Label(),t2h=new Label(),after=new Label();
+              m.visitTryCatchBlock(t1s,t1e,t1h,"java/lang/Throwable"); m.visitLabel(t1s); m.visitLdcInsn("ninja_school_offline_v3");
+              m.visitMethodInsn(INVOKESTATIC,"javax/microedition/rms/RecordStore","deleteRecordStore","(Ljava/lang/String;)V",false); m.visitLabel(t1e); m.visitJumpInsn(GOTO,t2s);
+              m.visitLabel(t1h); m.visitInsn(POP); m.visitLabel(t2s); m.visitTryCatchBlock(t2s,t2e,t2h,"java/lang/Throwable");
+              m.visitLdcInsn("nso_offline_e72_v2"); m.visitMethodInsn(INVOKESTATIC,"javax/microedition/rms/RecordStore","deleteRecordStore","(Ljava/lang/String;)V",false); m.visitLabel(t2e); m.visitJumpInsn(GOTO,after);
+              m.visitLabel(t2h); m.visitInsn(POP); m.visitLabel(after);
+              m.visitInsn(ICONST_0); m.visitTypeInsn(ANEWARRAY,"DoHoang091$k0"); m.visitFieldInsn(PUTSTATIC,"DoHoang091","aj","[LDoHoang091$k0;");
+              m.visitInsn(ICONST_0); m.visitFieldInsn(PUTSTATIC,"DoHoang091","ak","I"); m.visitInsn(ICONST_1); m.visitFieldInsn(PUTSTATIC,"DoHoang091","an","Z");
+              m.visitInsn(RETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              m=cw.visitMethod(ACC_PRIVATE|ACC_STATIC,"enterGame","(Z)V",null,null); m.visitCode(); Label skip=new Label();
+              m.visitVarInsn(ILOAD,0); m.visitJumpInsn(IFEQ,skip); m.visitMethodInsn(INVOKESTATIC,"OfflineStartMenu","clearPrimary","()V",false); m.visitLabel(skip);
+              m.visitMethodInsn(INVOKESTATIC,"DoHoang091","connect","()V",false);
+              m.visitFieldInsn(GETSTATIC,"OfflineStartMenu","midlet","LClass_da;"); m.visitMethodInsn(INVOKESTATIC,"javax/microedition/lcdui/Display","getDisplay","(Ljavax/microedition/midlet/MIDlet;)Ljavax/microedition/lcdui/Display;",false);
+              m.visitMethodInsn(INVOKESTATIC,"Class_do","b","()LClass_do;",false); m.visitMethodInsn(INVOKEVIRTUAL,"javax/microedition/lcdui/Display","setCurrent","(Ljavax/microedition/lcdui/Displayable;)V",false);
+              m.visitInsn(RETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              m=cw.visitMethod(ACC_PUBLIC,"commandAction","(Ljavax/microedition/lcdui/Command;Ljavax/microedition/lcdui/Displayable;)V",null,null); m.visitCode();
+              m.visitVarInsn(ALOAD,0); m.visitMethodInsn(INVOKEVIRTUAL,"OfflineStartMenu","getSelectedIndex","()I",false); m.visitVarInsn(ISTORE,3);
+              m.visitMethodInsn(INVOKESTATIC,"DoHoang091SaveState","hasSaveData","()Z",false); m.visitVarInsn(ISTORE,4);
+              Label not0=new Label(); m.visitVarInsn(ILOAD,3); m.visitJumpInsn(IFNE,not0); m.visitInsn(ICONST_1); m.visitMethodInsn(INVOKESTATIC,"OfflineStartMenu","enterGame","(Z)V",false); m.visitInsn(RETURN); m.visitLabel(not0);
+              Label noContinue=new Label(); m.visitVarInsn(ILOAD,4); m.visitJumpInsn(IFEQ,noContinue);
+              Label not1=new Label(); m.visitVarInsn(ILOAD,3); m.visitInsn(ICONST_1); m.visitJumpInsn(IF_ICMPNE,not1); m.visitInsn(ICONST_0); m.visitMethodInsn(INVOKESTATIC,"OfflineStartMenu","enterGame","(Z)V",false); m.visitInsn(RETURN); m.visitLabel(not1);
+              m.visitIincInsn(3,-1); m.visitLabel(noContinue);
+              Label notBackup=new Label(); m.visitVarInsn(ILOAD,3); m.visitInsn(ICONST_1); m.visitJumpInsn(IF_ICMPNE,notBackup);
+              m.visitMethodInsn(INVOKESTATIC,"DoHoang091","backupSave","()Ljava/lang/String;",false); m.visitInsn(POP); m.visitInsn(RETURN); m.visitLabel(notBackup);
+              Label done=new Label(); m.visitVarInsn(ILOAD,3); m.visitInsn(ICONST_2); m.visitJumpInsn(IF_ICMPNE,done);
+              m.visitMethodInsn(INVOKESTATIC,"DoHoang091","restoreSave","()Ljava/lang/String;",false); m.visitInsn(POP);
+              m.visitFieldInsn(GETSTATIC,"OfflineStartMenu","midlet","LClass_da;"); m.visitMethodInsn(INVOKESTATIC,"OfflineStartMenu","show","(LClass_da;)V",false);
+              m.visitLabel(done); m.visitInsn(RETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              m=cw.visitMethod(ACC_PUBLIC|ACC_STATIC,"deleteCurrent","()Z",null,new String[]{"java/lang/Exception"}); m.visitCode();
+              m.visitFieldInsn(GETSTATIC,"DoHoang091","aj","[LDoHoang091$k0;"); m.visitVarInsn(ASTORE,0); m.visitFieldInsn(GETSTATIC,"DoHoang091","ak","I"); m.visitVarInsn(ISTORE,1);
+              Label valid=new Label(); m.visitVarInsn(ALOAD,0); m.visitJumpInsn(IFNULL,valid); m.visitVarInsn(ALOAD,0); m.visitInsn(ARRAYLENGTH); Label nonzero=new Label(); m.visitJumpInsn(IFNE,nonzero); m.visitLabel(valid); m.visitInsn(ICONST_0); m.visitInsn(IRETURN); m.visitLabel(nonzero);
+              Label idxok=new Label(); m.visitVarInsn(ILOAD,1); m.visitJumpInsn(IFLT,valid); m.visitVarInsn(ILOAD,1); m.visitVarInsn(ALOAD,0); m.visitInsn(ARRAYLENGTH); m.visitJumpInsn(IF_ICMPLT,idxok); m.visitJumpInsn(GOTO,valid); m.visitLabel(idxok);
+              m.visitVarInsn(ALOAD,0); m.visitInsn(ARRAYLENGTH); m.visitInsn(ICONST_1); m.visitInsn(ISUB); m.visitTypeInsn(ANEWARRAY,"DoHoang091$k0"); m.visitVarInsn(ASTORE,2);
+              Label copyAfter=new Label(); m.visitVarInsn(ILOAD,1); Label copyTail=new Label(); m.visitJumpInsn(IFLE,copyTail); m.visitVarInsn(ALOAD,0); m.visitInsn(ICONST_0); m.visitVarInsn(ALOAD,2); m.visitInsn(ICONST_0); m.visitVarInsn(ILOAD,1); m.visitMethodInsn(INVOKESTATIC,"java/lang/System","arraycopy","(Ljava/lang/Object;ILjava/lang/Object;II)V",false); m.visitLabel(copyTail);
+              m.visitVarInsn(ILOAD,1); m.visitVarInsn(ALOAD,0); m.visitInsn(ARRAYLENGTH); m.visitInsn(ICONST_1); m.visitInsn(ISUB); m.visitJumpInsn(IF_ICMPGE,copyAfter);
+              m.visitVarInsn(ALOAD,0); m.visitVarInsn(ILOAD,1); m.visitInsn(ICONST_1); m.visitInsn(IADD); m.visitVarInsn(ALOAD,2); m.visitVarInsn(ILOAD,1); m.visitVarInsn(ALOAD,0); m.visitInsn(ARRAYLENGTH); m.visitVarInsn(ILOAD,1); m.visitInsn(ISUB); m.visitInsn(ICONST_1); m.visitInsn(ISUB); m.visitMethodInsn(INVOKESTATIC,"java/lang/System","arraycopy","(Ljava/lang/Object;ILjava/lang/Object;II)V",false); m.visitLabel(copyAfter);
+              m.visitVarInsn(ALOAD,2); m.visitFieldInsn(PUTSTATIC,"DoHoang091","aj","[LDoHoang091$k0;");
+              Label remain=new Label(); m.visitVarInsn(ALOAD,2); m.visitInsn(ARRAYLENGTH); m.visitJumpInsn(IFNE,remain); m.visitInsn(ICONST_0); m.visitFieldInsn(PUTSTATIC,"DoHoang091","ak","I"); m.visitMethodInsn(INVOKESTATIC,"OfflineStartMenu","clearPrimary","()V",false); m.visitInsn(ICONST_1); m.visitInsn(IRETURN); m.visitLabel(remain);
+              m.visitVarInsn(ILOAD,1); m.visitVarInsn(ALOAD,2); m.visitInsn(ARRAYLENGTH); Label oldidx=new Label(); m.visitJumpInsn(IF_ICMPLT,oldidx); m.visitVarInsn(ALOAD,2); m.visitInsn(ARRAYLENGTH); m.visitInsn(ICONST_1); m.visitInsn(ISUB); Label setidx=new Label(); m.visitJumpInsn(GOTO,setidx); m.visitLabel(oldidx); m.visitVarInsn(ILOAD,1); m.visitLabel(setidx); m.visitFieldInsn(PUTSTATIC,"DoHoang091","ak","I");
+              m.visitInsn(ICONST_1); m.visitFieldInsn(PUTSTATIC,"DoHoang091","an","Z"); m.visitMethodInsn(INVOKESTATIC,"DoHoang091","as","()V",false); m.visitMethodInsn(INVOKESTATIC,"DoHoang091","U","()V",false); m.visitInsn(ICONST_1); m.visitInsn(IRETURN); m.visitMaxs(0,0); m.visitEnd();
+
+              cw.visitEnd();
+              FileOutputStream o=new FileOutputStream("classes/OfflineStartMenu.class"); o.write(cw.toByteArray()); o.close();
+            }
+          }
+          JAVA
+          javac -cp asm.jar -d classes src/GenerateMenu.java
+          java -cp asm.jar:classes GenerateMenu
+          jar uf game.jar -C classes OfflineStartMenu.class
+
+          cat > src/Patch.java <<'JAVA'
+          import javassist.*;
+          import java.io.*; import java.util.*; import java.util.jar.*;
+          public final class Patch {
+            static void replace(String jar,String name,byte[] data)throws Exception{
+              File s=new File(jar),t=new File(jar+".tmp"); JarFile jf=new JarFile(s); JarOutputStream jo=new JarOutputStream(new FileOutputStream(t)); byte[] b=new byte[8192]; Enumeration<JarEntry> en=jf.entries();
+              while(en.hasMoreElements()){JarEntry e=en.nextElement();String n=e.getName();if(n.equals(name)||(n.startsWith("META-INF/")&&(n.endsWith(".SF")||n.endsWith(".RSA")||n.endsWith(".DSA"))))continue;JarEntry ne=new JarEntry(n);if(e.getTime()!=-1)ne.setTime(e.getTime());jo.putNextEntry(ne);InputStream in=jf.getInputStream(e);int r;while((r=in.read(b))!=-1)jo.write(b,0,r);in.close();jo.closeEntry();}
+              JarEntry ne=new JarEntry(name);jo.putNextEntry(ne);jo.write(data);jo.closeEntry();jo.close();jf.close();if(!s.delete()||!t.renameTo(s))throw new IOException("replace failed");
+            }
+            public static void main(String[] a)throws Exception{
+              ClassPool cp=new ClassPool(true);cp.insertClassPath("game.jar");
+              CtClass da=cp.get("Class_da"); CtMethod start=da.getDeclaredMethod("startApp");
+              start.setBody("{ if(!Class_do.a){ new Thread(Class_do.b()).start(); } OfflineStartMenu.show(this); }");
+              replace("game.jar","Class_da.class",da.toBytecode()); da.detach();
+              cp=new ClassPool(true);cp.insertClassPath("game.jar"); CtClass cd=cp.get("CharacterDelete"); CtMethod del=cd.getDeclaredMethod("deleteCurrent");
+              del.setBody("{ return OfflineStartMenu.deleteCurrent(); }"); replace("game.jar","CharacterDelete.class",cd.toBytecode()); cd.detach();
+            }
+          }
+          JAVA
+          javac -cp javassist.jar -d classes src/Patch.java
+          java -cp javassist.jar:classes Patch
+          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
+          unzip -t game.jar >/dev/null
+          javap -classpath game.jar -p OfflineStartMenu > menu-api.txt
+          javap -classpath game.jar -p -c Class_da > da-code.txt
+          javap -classpath game.jar -p -c CharacterDelete > delete-code.txt
+          grep -q 'OfflineStartMenu.show' da-code.txt
+          grep -q 'OfflineStartMenu.deleteCurrent' delete-code.txt
+          grep -q 'public static void clearPrimary' menu-api.txt
+          jar tf game.jar | grep -q '^NativeCatalog.class$'
+          ! jar tf game.jar | grep -q '^ItemCatalogGrid.class$'
+          ! jar tf game.jar | grep -q '^FakeClassState.class$'
+
+          git worktree add /tmp/feature origin/chatgpt/save-menu-redesign
+          cp game.jar /tmp/feature/Nso_Offline_By_h0901.jar
+          cd /tmp/feature
+          rm -rf .github save_menu_inspect start_flow_inspect
+          rm -f startup_debug.txt startup_refs.txt startup_refs_small.txt core_start_debug.txt ds_login_focus.txt Class_ds.java.txt ds_bytecode_focus.txt
+          git add -- Nso_Offline_By_h0901.jar
+          git add -u || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: redesign offline startup save menu'
+          git push --force-with-lease origin HEAD:chatgpt/save-menu-redesign
+      - name: Clean temporary main files
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main
+          rm -rf .github
+          rm -f startup_debug.txt startup_refs.txt startup_refs_small.txt core_start_debug.txt ds_login_focus.txt Class_ds.java.txt ds_bytecode_focus.txt
+          git add -A
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: clean startup build files' || true
+          git push origin main || true

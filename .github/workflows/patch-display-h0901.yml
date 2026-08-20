@@ -1,0 +1,47 @@
+name: Patch display author to H0901
+on:
+  push:
+    branches: [chatgpt/rename-display-dohoang091-h0901]
+    paths: [.github/workflows/patch-display-h0901.yml]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch manifest display metadata only
+        shell: bash
+        run: |
+          set -euo pipefail
+          J='Nso_Offline_By_h0901.jar'
+          rm -rf /tmp/jarwork && mkdir -p /tmp/jarwork
+          cd /tmp/jarwork
+          jar xf "$GITHUB_WORKSPACE/$J"
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('META-INF/MANIFEST.MF')
+          s=p.read_text(encoding='utf-8',errors='strict')
+          before=s
+          s=s.replace('MIDlet-Vendor: DoHoang091','MIDlet-Vendor: H0901')
+          s=s.replace('Implementation-Author: DoHoang091','Implementation-Author: H0901')
+          if s==before:
+              raise SystemExit('Expected display metadata not found')
+          p.write_text(s,encoding='utf-8',newline='')
+          PY
+          zip -qr "$GITHUB_WORKSPACE/$J" .
+          cd "$GITHUB_WORKSPACE"
+          {
+            echo '=== DISPLAY METADATA ==='
+            unzip -p "$J" META-INF/MANIFEST.MF | grep -E 'MIDlet-Vendor|Implementation-Author|MIDlet-Name' || true
+            echo '=== CLASS FILES PRESERVED ==='
+            jar tf "$J" | grep -E '^DoHoang091(\$k0)?\.class$' || true
+            echo '=== SHA256 ==='
+            sha256sum "$J"
+          } > h0901_display_verify.txt
+          grep -q '^MIDlet-Vendor: H0901' h0901_display_verify.txt
+          grep -q '^Implementation-Author: H0901' h0901_display_verify.txt
+          grep -q '^DoHoang091.class$' h0901_display_verify.txt
+          git add -- "$J" h0901_display_verify.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: rename displayed author to H0901'
+          git push origin HEAD:chatgpt/rename-display-dohoang091-h0901

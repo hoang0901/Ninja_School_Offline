@@ -1,0 +1,48 @@
+name: Temporary inspect item catalog main
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-inspect-item-catalog-main.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect JAR item menu and inventory UI
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect/classes
+          cd /tmp/nsoinspect
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          unzip -q game.jar -d classes
+          report="$GITHUB_WORKSPACE/item_catalog_report.txt"
+          : > "$report"
+          for term in 'Nhận vật phẩm' 'Nhận xu' 'Nhận lượng' 'Nhận yên' 'Xóa toàn bộ vật phẩm trong hành trang' 'Xóa nhân vật đang chơi' 'Fake phái'; do
+            echo "=== TERM: $term ===" >> "$report"
+            grep -R -a -l -F "$term" classes --include='*.class' >> "$report" || true
+          done
+          echo '=== HELPER CLASSES ===' >> "$report"
+          find classes -maxdepth 1 -type f \( -name 'OfflineDeleteMenu.class' -o -name 'InventoryClear.class' -o -name 'CharacterDelete.class' -o -name 'FakeClassState.class' \) -printf '%f\n' >> "$report" || true
+          matches=$(grep -R -a -l -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ vật phẩm trong hành trang|Xóa nhân vật đang chơi|Fake phái' classes --include='*.class' | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u || true)
+          for c in $matches OfflineDeleteMenu InventoryClear CharacterDelete; do
+            [ -f "classes/${c//.//}.class" ] || continue
+            echo "##### CLASS $c #####" >> "$report"
+            javap -classpath game.jar -c -p -verbose "$c" >> "$report" 2>&1 || true
+          done
+          echo '=== TOP-LEVEL CLASSES REFERENCING CUSTOM HELPERS ===' >> "$report"
+          for f in classes/*.class; do
+            if grep -a -q -E 'OfflineDeleteMenu|InventoryClear|CharacterDelete' "$f"; then basename "$f" .class >> "$report"; fi
+          done
+      - name: Commit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- item_catalog_report.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect item catalog UI on current JAR"
+          git push

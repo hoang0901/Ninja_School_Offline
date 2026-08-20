@@ -1,0 +1,42 @@
+name: Focus inspect data manager UI
+on:
+  push:
+    branches: [chatgpt/data-manager-ui]
+    paths: [.github/workflows/temp-focus-data-manager-ui.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/data-manager-ui
+          fetch-depth: 0
+      - name: Focus inspect
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/uifocus && mkdir -p /tmp/uifocus
+          cd /tmp/uifocus
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          javap -classpath game.jar -p -c Class_ds > ds.txt
+          javap -classpath game.jar -p -c CharacterDelete > del.txt || true
+          jar tf game.jar | grep '\.class$' > classes.txt
+          : > callers.txt
+          while read c; do
+            n=${c%.class}; n=${n//\//.}
+            javap -classpath game.jar -p -c "$n" 2>/dev/null | grep -n -B8 -A14 -E 'CharacterDelete|backupSave|restoreSave|Class_dw\."<init>"|new +#.*Class_dw' >> callers.txt || true
+          done < classes.txt
+          {
+            echo '=== Class_ds command/menu focus ==='
+            grep -n -B12 -A24 -E 'Class_dw|Class_ew\.ai|Class_ew\.a\(|Class_do\.b|Class_ds\.<init>|invoke.*Class_ds' ds.txt || true
+            echo '=== CharacterDelete ==='
+            cat del.txt
+            echo '=== Callers/save/menu ==='
+            cat callers.txt
+          } > "$GITHUB_WORKSPACE/data_manager_ui_focus.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- data_manager_ui_focus.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: focus inspect data manager UI'
+          git push origin HEAD:chatgpt/data-manager-ui

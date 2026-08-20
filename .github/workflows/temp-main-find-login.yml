@@ -1,4 +1,4 @@
-name: Build data manager UI
+name: Debug Class_et native menu
 on:
   push:
     branches: [main]
@@ -6,101 +6,28 @@ on:
 permissions:
   contents: write
 jobs:
-  build:
+  debug:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Patch native login menu
+      - name: Dump Class_et focus
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/datamenu && mkdir -p /tmp/datamenu/src /tmp/datamenu/classes
-          cd /tmp/datamenu
-          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
-          curl -fsSL -o asm.jar https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar
-          curl -fsSL -o asm-tree.jar https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar
-          cat > src/Patch.java <<'JAVA'
-          import java.io.*;
-          import java.util.*;
-          import java.util.jar.*;
-          import org.objectweb.asm.*;
-          import org.objectweb.asm.tree.*;
-          import static org.objectweb.asm.Opcodes.*;
-
-          public final class Patch {
-            static byte[] read(JarFile j, JarEntry e) throws Exception { InputStream in=j.getInputStream(e); ByteArrayOutputStream b=new ByteArrayOutputStream(); byte[] x=new byte[8192]; int n; while((n=in.read(x))!=-1)b.write(x,0,n); in.close(); return b.toByteArray(); }
-            static boolean hasClass(JarFile j,String n){ return j.getJarEntry(n+".class")!=null; }
-            static boolean intConst(AbstractInsnNode n,int v){
-              if(n instanceof InsnNode){int o=n.getOpcode(); if(v==-1&&o==ICONST_M1)return true; if(v>=0&&v<=5&&o==ICONST_0+v)return true;}
-              if(n instanceof IntInsnNode)return ((IntInsnNode)n).operand==v;
-              if(n instanceof LdcInsnNode)return ((LdcInsnNode)n).cst instanceof Integer && ((Integer)((LdcInsnNode)n).cst).intValue()==v;
-              return false;
-            }
-            static void pushInt(InsnList il,int v){ if(v>=-1&&v<=5)il.add(new InsnNode(v==-1?ICONST_M1:ICONST_0+v)); else if(v>=-128&&v<=127)il.add(new IntInsnNode(BIPUSH,v)); else il.add(new IntInsnNode(SIPUSH,v)); }
-            static void makeCmd(InsnList il,String cmd,String ctor,int code){ il.add(new TypeInsnNode(NEW,cmd)); il.add(new InsnNode(DUP)); il.add(new LdcInsnNode("")); il.add(new VarInsnNode(ALOAD,0)); pushInt(il,code); il.add(new InsnNode(ACONST_NULL)); il.add(new MethodInsnNode(INVOKESPECIAL,cmd,"<init>",ctor,false)); }
-            static void setLabels(InsnList il,String owner,String field,String[] labels){ pushInt(il,labels.length); il.add(new TypeInsnNode(ANEWARRAY,"java/lang/String")); for(int i=0;i<labels.length;i++){il.add(new InsnNode(DUP));pushInt(il,i);il.add(new LdcInsnNode(labels[i]));il.add(new InsnNode(AASTORE));} il.add(new FieldInsnNode(PUTSTATIC,owner,field,"[Ljava/lang/String;")); }
-            static void setCmds(InsnList il,String owner,String field,String cmd,String ctor,int[] codes){ pushInt(il,2); il.add(new TypeInsnNode(ANEWARRAY,"[L"+cmd+";")); for(int r=0;r<2;r++){il.add(new InsnNode(DUP));pushInt(il,r);pushInt(il,codes.length);il.add(new TypeInsnNode(ANEWARRAY,cmd));for(int i=0;i<codes.length;i++){il.add(new InsnNode(DUP));pushInt(il,i);makeCmd(il,cmd,ctor,codes[i]);il.add(new InsnNode(AASTORE));}il.add(new InsnNode(AASTORE));} il.add(new FieldInsnNode(PUTSTATIC,owner,field,"[[L"+cmd+";")); }
-            static MethodNode method(int access,String name,String desc){ return new MethodNode(ASM9,access,name,desc,null,null); }
-            public static void main(String[] args)throws Exception{
-              JarFile j=new JarFile("game.jar"); ClassNode target=null; MethodNode setup=null;
-              Enumeration<JarEntry> en=j.entries();
-              while(en.hasMoreElements() && target==null){JarEntry e=en.nextElement(); if(!e.getName().endsWith(".class"))continue; byte[] b=read(j,e); ClassNode c=new ClassNode(); try{new ClassReader(b).accept(c,0);}catch(Throwable t){continue;} for(Object om:c.methods){MethodNode m=(MethodNode)om; for(AbstractInsnNode n=m.instructions.getFirst();n!=null;n=n.getNext()){if(n instanceof LdcInsnNode && "indServer".equals(((LdcInsnNode)n).cst)){target=c;setup=m;break;}} if(target!=null)break;}}
-              if(target==null)throw new RuntimeException("login class with indServer not found");
-              String owner=target.name, labels=null, cmds=null, cmdClass=null, ctor=null, sel=null;
-              for(AbstractInsnNode n=setup.instructions.getFirst();n!=null;n=n.getNext()){
-                if(n instanceof FieldInsnNode){FieldInsnNode f=(FieldInsnNode)n; if(f.getOpcode()==PUTSTATIC&&f.owner.equals(owner)&&f.desc.equals("[Ljava/lang/String;"))labels=f.name; if(f.getOpcode()==PUTSTATIC&&f.owner.equals(owner)&&f.desc.startsWith("[[L")){cmds=f.name;cmdClass=f.desc.substring(3,f.desc.length()-1);} if(f.getOpcode()==PUTFIELD&&f.owner.equals(owner)&&f.desc.equals("I")&&intConst(n.getPrevious(),-1))sel=f.name;}
-                if(n instanceof MethodInsnNode){MethodInsnNode mi=(MethodInsnNode)n; if(mi.getOpcode()==INVOKESPECIAL&&mi.name.equals("<init>")&&mi.desc.startsWith("(Ljava/lang/String;L")&&mi.desc.endsWith("ILjava/lang/Object;)V")){ if(cmdClass==null||mi.owner.equals(cmdClass)){cmdClass=mi.owner;ctor=mi.desc;} }}
-              }
-              if(labels==null||cmds==null||cmdClass==null||ctor==null)throw new RuntimeException("menu fields/command ctor not found: "+owner+" labels="+labels+" cmds="+cmds+" cmd="+cmdClass+" ctor="+ctor);
-              if(sel==null){ for(Object of:target.fields){FieldNode f=(FieldNode)of;if((f.access&ACC_STATIC)==0&&f.desc.equals("I")){sel=f.name;break;}} }
-              final String MAIN="zDataMain", DATA="zDataMenu";
-              MethodNode mm=method(ACC_PRIVATE,MAIN,"()V"); InsnList a=mm.instructions; LabelNode no=new LabelNode(),done=new LabelNode();
-              if(hasClass(j,"DoHoang091SaveState")){a.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091SaveState","hasSaveData","()Z",false));a.add(new JumpInsnNode(IFEQ,no));}
-              else {a.add(new FieldInsnNode(GETSTATIC,"DoHoang091","aj","[LDoHoang091$k0;"));a.add(new JumpInsnNode(IFNULL,no));a.add(new FieldInsnNode(GETSTATIC,"DoHoang091","aj","[LDoHoang091$k0;"));a.add(new InsnNode(ARRAYLENGTH));a.add(new JumpInsnNode(IFEQ,no));}
-              setLabels(a,owner,labels,new String[]{"Chơi tiếp","Chơi mới","Quản lý dữ liệu"}); setCmds(a,owner,cmds,cmdClass,ctor,new int[]{1003,1000,1010}); a.add(new JumpInsnNode(GOTO,done)); a.add(no); setLabels(a,owner,labels,new String[]{"Chơi mới","Quản lý dữ liệu"}); setCmds(a,owner,cmds,cmdClass,ctor,new int[]{1000,1010}); a.add(done); if(sel!=null){a.add(new VarInsnNode(ALOAD,0));a.add(new InsnNode(ICONST_0));a.add(new FieldInsnNode(PUTFIELD,owner,sel,"I"));} a.add(new InsnNode(RETURN)); target.methods.add(mm);
-              MethodNode dm=method(ACC_PRIVATE,DATA,"()V"); a=dm.instructions; setLabels(a,owner,labels,new String[]{"Sao lưu","Khôi phục","Xóa nhân vật đang chơi","Trở lại"}); setCmds(a,owner,cmds,cmdClass,ctor,new int[]{1011,1012,1013,1014}); if(sel!=null){a.add(new VarInsnNode(ALOAD,0));a.add(new InsnNode(ICONST_0));a.add(new FieldInsnNode(PUTFIELD,owner,sel,"I"));} a.add(new InsnNode(RETURN)); target.methods.add(dm);
-              for(AbstractInsnNode n=setup.instructions.getFirst();n!=null;){AbstractInsnNode next=n.getNext();if(n.getOpcode()==RETURN){InsnList x=new InsnList();x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,owner,MAIN,"()V",false));setup.instructions.insertBefore(n,x);}n=next;}
-              MethodNode action=null; for(Object om:target.methods){MethodNode m=(MethodNode)om;if(m.desc.equals("(ILjava/lang/Object;)V")){action=m;break;}}
-              if(action==null)throw new RuntimeException("action method not found in "+owner);
-              InsnList p=new InsnList(); LabelNode l1011=new LabelNode(),l1012=new LabelNode(),l1013=new LabelNode(),l1014=new LabelNode(),orig=new LabelNode();
-              p.add(new VarInsnNode(ILOAD,1));pushInt(p,1010);p.add(new JumpInsnNode(IF_ICMPNE,l1011));p.add(new VarInsnNode(ALOAD,0));p.add(new MethodInsnNode(INVOKESPECIAL,owner,DATA,"()V",false));p.add(new InsnNode(RETURN));
-              p.add(l1011);p.add(new VarInsnNode(ILOAD,1));pushInt(p,1011);p.add(new JumpInsnNode(IF_ICMPNE,l1012));p.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091","backupSave","()Ljava/lang/String;",false));p.add(new InsnNode(POP));p.add(new InsnNode(RETURN));
-              p.add(l1012);p.add(new VarInsnNode(ILOAD,1));pushInt(p,1012);p.add(new JumpInsnNode(IF_ICMPNE,l1013));p.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091","restoreSave","()Ljava/lang/String;",false));p.add(new InsnNode(POP));p.add(new VarInsnNode(ALOAD,0));p.add(new MethodInsnNode(INVOKESPECIAL,owner,MAIN,"()V",false));p.add(new InsnNode(RETURN));
-              p.add(l1013);p.add(new VarInsnNode(ILOAD,1));pushInt(p,1013);p.add(new JumpInsnNode(IF_ICMPNE,l1014));p.add(new MethodInsnNode(INVOKESTATIC,"CharacterDelete","deleteCurrent","()Z",false));p.add(new InsnNode(POP));p.add(new VarInsnNode(ALOAD,0));p.add(new MethodInsnNode(INVOKESPECIAL,owner,MAIN,"()V",false));p.add(new InsnNode(RETURN));
-              p.add(l1014);p.add(new VarInsnNode(ILOAD,1));pushInt(p,1014);p.add(new JumpInsnNode(IF_ICMPNE,orig));p.add(new VarInsnNode(ALOAD,0));p.add(new MethodInsnNode(INVOKESPECIAL,owner,MAIN,"()V",false));p.add(new InsnNode(RETURN));p.add(orig);
-              action.instructions.insert(p);
-              ClassWriter w=new ClassWriter(ClassWriter.COMPUTE_MAXS); target.accept(w); byte[] out=w.toByteArray(); j.close();
-              File dir=new File("classes/"+(owner.contains("/")?owner.substring(0,owner.lastIndexOf('/')):""));dir.mkdirs(); File f=new File("classes/"+owner+".class");f.getParentFile().mkdirs();FileOutputStream fo=new FileOutputStream(f);fo.write(out);fo.close();FileWriter tw=new FileWriter("target.txt");tw.write(owner);tw.close();
-              System.out.println("TARGET="+owner+" labels="+labels+" cmds="+cmds+" command="+cmdClass+" selection="+sel);
-            }
-          }
-          JAVA
-          javac -cp asm.jar:asm-tree.jar -d classes src/Patch.java
-          java -cp asm.jar:asm-tree.jar:classes Patch | tee patch_info.txt
-          TARGET=$(cat target.txt)
-          jar uf game.jar -C classes "$TARGET.class"
-          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
-          unzip -t game.jar >/dev/null
-          javap -classpath game.jar -p -c "$TARGET" > login_after.txt
-          grep -q 'zDataMain' login_after.txt
-          grep -q 'zDataMenu' login_after.txt
-          grep -q 'DoHoang091.backupSave' login_after.txt
-          grep -q 'DoHoang091.restoreSave' login_after.txt
-          grep -q 'CharacterDelete.deleteCurrent' login_after.txt
-          javap -classpath game.jar -p -c Class_da > da_after.txt
-          ! grep -q 'OfflineStartMenu' da_after.txt
-          jar tf game.jar > entries.txt
-          grep -q '^NativeCatalog.class$' entries.txt
-          ! grep -q '^OfflineStartMenu.class$' entries.txt
-          cp game.jar "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/etdebug && mkdir -p /tmp/etdebug
+          cd /tmp/etdebug
+          javap -classpath "$J" -p Class_et > sig.txt
+          javap -classpath "$J" -p -c Class_et > code.txt
+          {
+            echo '=== SIGNATURE ==='
+            cat sig.txt
+            echo '=== METHODS / MENU FOCUS ==='
+            grep -n -B18 -A80 -E '^  (public|private|protected).*\(|putstatic +#.*Class_et\.r|putstatic +#.*Class_et\.v|getstatic +#.*Class_et\.r|getstatic +#.*Class_et\.v|sipush +100[0-9]|sipush +101[0-9]|Class_dw\."<init>"|Class_dw\.<init>|DoHoang091|CharacterDelete' code.txt || true
+          } > "$GITHUB_WORKSPACE/class_et_debug.txt"
           cd "$GITHUB_WORKSPACE"
-          rm -rf .github
-          rm -f main_login_candidates.txt data_manager_ui_inspect.txt data_manager_ui_focus.txt login_class_fast.txt
-          git add -- Nso_Offline_By_h0901.jar
-          git rm -r --cached .github >/dev/null 2>&1 || true
-          rm -rf .github
-          git add -u -- .github main_login_candidates.txt 2>/dev/null || true
-          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: add native data manager login menu'
+          git add -- class_et_debug.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: dump Class_et native menu bytecode'
           git push origin main

@@ -1,0 +1,76 @@
+name: Extract exact native trade method
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-extract-native-trade-method.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract exact methods
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/extrade && mkdir -p /tmp/extrade/out /tmp/extrade/report
+          cd /tmp/extrade
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          unzip -p game.jar Class_ct.class > Class_ct.class
+          unzip -p game.jar Class_gd.class > Class_gd.class
+          java -jar cfr.jar Class_ct.class --extraclasspath game.jar --outputdir out --silent true >/dev/null 2>&1 || true
+          java -jar cfr.jar Class_gd.class --extraclasspath game.jar --outputdir out --silent true >/dev/null 2>&1 || true
+          python - <<'PY'
+          import re, pathlib
+          src = pathlib.Path('out/Class_ct.java').read_text(errors='replace').splitlines()
+          pats = ['Class_gd.fv','Class_gd.pw','Class_gd.doa','Class_gd.el','Class_cy.dc.b','Class_ct.bz']
+          def method_bounds(i):
+              start=i
+              sig=re.compile(r'^\s*(public|private|protected)\s+.*\([^;]*\)\s*(throws\s+[^\{]+)?\{\s*$')
+              while start>=0 and not sig.match(src[start]): start-=1
+              if start<0: start=max(0,i-80)
+              bal=0; seen=False; end=min(len(src)-1,i+250)
+              for j in range(start,len(src)):
+                  line=src[j]
+                  bal += line.count('{')-line.count('}')
+                  if '{' in line: seen=True
+                  if seen and bal==0:
+                      end=j; break
+              return start,end
+          out=[]; seen=set()
+          for pat in pats:
+              for i,line in enumerate(src):
+                  if pat in line:
+                      a,b=method_bounds(i)
+                      key=(a,b)
+                      if key in seen: continue
+                      seen.add(key)
+                      out.append('\n===== pattern %s line %d =====\n'%(pat,i+1))
+                      out.extend('%d:%s\n'%(j+1,src[j]) for j in range(a,b+1))
+          pathlib.Path('report/methods.txt').write_text(''.join(out))
+          PY
+          git -C "$GITHUB_WORKSPACE" checkout chatgpt/native-catalog-inventory-ui
+          rm -rf "$GITHUB_WORKSPACE/native_exact"
+          cp -r report "$GITHUB_WORKSPACE/native_exact"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- native_exact
+          git diff --cached --quiet || git commit -m "chore: extract exact native trade methods"
+          git push origin HEAD:chatgpt/native-catalog-inventory-ui
+      - name: Cleanup workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main
+          git rm -- .github/workflows/temp-extract-native-trade-method.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: remove native trade extractor"
+          git push origin main

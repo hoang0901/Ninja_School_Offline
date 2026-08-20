@@ -1,4 +1,4 @@
-name: Focus Class_et menu init
+name: Build native data manager UI
 on:
   push:
     branches: [main]
@@ -6,27 +6,119 @@ on:
 permissions:
   contents: write
 jobs:
-  debug:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Dump menu init
+      - name: Patch Class_et only
         shell: bash
         run: |
           set -euo pipefail
-          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          rm -rf /tmp/etfocus && mkdir -p /tmp/etfocus
-          cd /tmp/etfocus
-          javap -classpath "$J" -p -c Class_et > code.txt
-          {
-            echo '=== r/v writes ==='
-            grep -n -B45 -A110 -E 'putstatic +#97 +// Field r:|putstatic +#101 +// Field v:' code.txt || true
-            echo '=== command codes around menu init ==='
-            grep -n -B20 -A30 -E 'sipush +1000|sipush +1001|sipush +1002|sipush +1003|sipush +1004' code.txt || true
-          } > "$GITHUB_WORKSPACE/class_et_menu_init.txt"
+          rm -rf /tmp/datamenu && mkdir -p /tmp/datamenu/src /tmp/datamenu/classes
+          cd /tmp/datamenu
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o asm.jar https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar
+          curl -fsSL -o asm-tree.jar https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar
+          cat > src/Patch.java <<'JAVA'
+          import java.io.*;
+          import java.util.jar.*;
+          import org.objectweb.asm.*;
+          import org.objectweb.asm.tree.*;
+          import static org.objectweb.asm.Opcodes.*;
+
+          public final class Patch {
+            static void push(InsnList x,int v){
+              if(v>=-1&&v<=5)x.add(new InsnNode(v==-1?ICONST_M1:ICONST_0+v));
+              else if(v>=-128&&v<=127)x.add(new IntInsnNode(BIPUSH,v));
+              else x.add(new IntInsnNode(SIPUSH,v));
+            }
+            static void labels(InsnList x,String[] a){
+              push(x,a.length);x.add(new TypeInsnNode(ANEWARRAY,"java/lang/String"));
+              for(int i=0;i<a.length;i++){x.add(new InsnNode(DUP));push(x,i);x.add(new LdcInsnNode(a[i]));x.add(new InsnNode(AASTORE));}
+              x.add(new FieldInsnNode(PUTSTATIC,"Class_et","r","[Ljava/lang/String;"));
+            }
+            static void cmd(InsnList x,int code){
+              x.add(new TypeInsnNode(NEW,"Class_dw"));x.add(new InsnNode(DUP));x.add(new LdcInsnNode(""));x.add(new VarInsnNode(ALOAD,0));push(x,code);x.add(new InsnNode(ACONST_NULL));
+              x.add(new MethodInsnNode(INVOKESPECIAL,"Class_dw","<init>","(Ljava/lang/String;LClass_bx;ILjava/lang/Object;)V",false));
+            }
+            static void cmds(InsnList x,int[] codes){
+              push(x,2);x.add(new TypeInsnNode(ANEWARRAY,"[LClass_dw;"));
+              for(int row=0;row<2;row++){
+                x.add(new InsnNode(DUP));push(x,row);push(x,codes.length);x.add(new TypeInsnNode(ANEWARRAY,"Class_dw"));
+                for(int i=0;i<codes.length;i++){x.add(new InsnNode(DUP));push(x,i);cmd(x,codes[i]);x.add(new InsnNode(AASTORE));}
+                x.add(new InsnNode(AASTORE));
+              }
+              x.add(new FieldInsnNode(PUTSTATIC,"Class_et","v","[[LClass_dw;"));
+            }
+            static MethodNode mainMenu(boolean hasSaveStateClass){
+              MethodNode m=new MethodNode(ASM9,ACC_PRIVATE,"zDataMain","()V",null,null);InsnList x=m.instructions;LabelNode no=new LabelNode(),done=new LabelNode();
+              if(hasSaveStateClass){x.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091SaveState","hasSaveData","()Z",false));x.add(new JumpInsnNode(IFEQ,no));}
+              else {x.add(new FieldInsnNode(GETSTATIC,"DoHoang091","aj","[LDoHoang091$k0;"));x.add(new JumpInsnNode(IFNULL,no));x.add(new FieldInsnNode(GETSTATIC,"DoHoang091","aj","[LDoHoang091$k0;"));x.add(new InsnNode(ARRAYLENGTH));x.add(new JumpInsnNode(IFEQ,no));}
+              labels(x,new String[]{"Chơi tiếp","Chơi mới","Quản lý dữ liệu"});cmds(x,new int[]{1003,1000,1010});x.add(new JumpInsnNode(GOTO,done));
+              x.add(no);labels(x,new String[]{"Chơi mới","Quản lý dữ liệu"});cmds(x,new int[]{1000,1010});x.add(done);
+              x.add(new VarInsnNode(ALOAD,0));x.add(new InsnNode(ICONST_0));x.add(new FieldInsnNode(PUTFIELD,"Class_et","o","I"));x.add(new InsnNode(RETURN));return m;
+            }
+            static MethodNode dataMenu(){
+              MethodNode m=new MethodNode(ASM9,ACC_PRIVATE,"zDataMenu","()V",null,null);InsnList x=m.instructions;
+              labels(x,new String[]{"Sao lưu","Khôi phục","Xóa nhân vật đang chơi","Trở lại"});cmds(x,new int[]{1011,1012,1013,1014});
+              x.add(new VarInsnNode(ALOAD,0));x.add(new InsnNode(ICONST_0));x.add(new FieldInsnNode(PUTFIELD,"Class_et","o","I"));x.add(new InsnNode(RETURN));return m;
+            }
+            static void injectAction(MethodNode m){
+              InsnList x=new InsnList();LabelNode a=new LabelNode(),b=new LabelNode(),c=new LabelNode(),d=new LabelNode(),end=new LabelNode();
+              x.add(new VarInsnNode(ILOAD,1));push(x,1010);x.add(new JumpInsnNode(IF_ICMPNE,a));x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMenu","()V",false));x.add(new InsnNode(RETURN));
+              x.add(a);x.add(new VarInsnNode(ILOAD,1));push(x,1011);x.add(new JumpInsnNode(IF_ICMPNE,b));x.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091","backupSave","()Ljava/lang/String;",false));x.add(new InsnNode(POP));x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMenu","()V",false));x.add(new InsnNode(RETURN));
+              x.add(b);x.add(new VarInsnNode(ILOAD,1));push(x,1012);x.add(new JumpInsnNode(IF_ICMPNE,c));x.add(new MethodInsnNode(INVOKESTATIC,"DoHoang091","restoreSave","()Ljava/lang/String;",false));x.add(new InsnNode(POP));x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMain","()V",false));x.add(new InsnNode(RETURN));
+              x.add(c);x.add(new VarInsnNode(ILOAD,1));push(x,1013);x.add(new JumpInsnNode(IF_ICMPNE,d));x.add(new MethodInsnNode(INVOKESTATIC,"CharacterDelete","deleteCurrent","()Z",false));x.add(new InsnNode(POP));x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMain","()V",false));x.add(new InsnNode(RETURN));
+              x.add(d);x.add(new VarInsnNode(ILOAD,1));push(x,1014);x.add(new JumpInsnNode(IF_ICMPNE,end));x.add(new VarInsnNode(ALOAD,0));x.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMain","()V",false));x.add(new InsnNode(RETURN));x.add(end);
+              m.instructions.insert(x);
+            }
+            public static void main(String[] a)throws Exception{
+              JarFile j=new JarFile("game.jar");JarEntry e=j.getJarEntry("Class_et.class");InputStream in=j.getInputStream(e);ByteArrayOutputStream b=new ByteArrayOutputStream();byte[] z=new byte[8192];int n;while((n=in.read(z))!=-1)b.write(z,0,n);in.close();
+              boolean saveState=j.getJarEntry("DoHoang091SaveState.class")!=null;j.close();
+              ClassNode c=new ClassNode();new ClassReader(b.toByteArray()).accept(c,0);
+              for(Object om:c.methods){MethodNode m=(MethodNode)om;if(m.name.equals("zDataMain")||m.name.equals("zDataMenu"))throw new RuntimeException("already patched");}
+              MethodNode action=null,menuInit=null;
+              for(Object om:c.methods){MethodNode m=(MethodNode)om;if(m.name.equals("a")&&m.desc.equals("(ILjava/lang/Object;)V"))action=m;if(m.name.equals("b")&&m.desc.equals("()V"))menuInit=m;}
+              if(action==null||menuInit==null)throw new RuntimeException("expected Class_et methods not found");
+              int hooks=0;
+              for(AbstractInsnNode p=menuInit.instructions.getFirst();p!=null;p=p.getNext()){
+                if(p instanceof FieldInsnNode){FieldInsnNode f=(FieldInsnNode)p;if(f.getOpcode()==PUTSTATIC&&f.owner.equals("Class_et")&&f.name.equals("r")&&f.desc.equals("[Ljava/lang/String;")){
+                  InsnList h=new InsnList();h.add(new VarInsnNode(ALOAD,0));h.add(new MethodInsnNode(INVOKESPECIAL,"Class_et","zDataMain","()V",false));menuInit.instructions.insert(p,h);hooks++;
+                }}
+              }
+              if(hooks<1)throw new RuntimeException("menu label write hook not found");
+              c.methods.add(mainMenu(saveState));c.methods.add(dataMenu());injectAction(action);
+              ClassWriter w=new ClassWriter(ClassWriter.COMPUTE_MAXS);c.accept(w);FileOutputStream out=new FileOutputStream("classes/Class_et.class");out.write(w.toByteArray());out.close();
+              System.out.println("patched Class_et hooks="+hooks+" saveStateClass="+saveState);
+            }
+          }
+          JAVA
+          javac -cp asm.jar:asm-tree.jar -d classes src/Patch.java
+          java -cp asm.jar:asm-tree.jar:classes Patch | tee patch_info.txt
+          jar uf game.jar -C classes Class_et.class
+          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
+          unzip -t game.jar >/dev/null
+          javap -classpath game.jar -p -c Class_et > et_after.txt
+          grep -q 'zDataMain' et_after.txt
+          grep -q 'zDataMenu' et_after.txt
+          grep -q 'DoHoang091.backupSave' et_after.txt
+          grep -q 'DoHoang091.restoreSave' et_after.txt
+          grep -q 'CharacterDelete.deleteCurrent' et_after.txt
+          javap -classpath game.jar -p -c Class_da > da_after.txt
+          ! grep -q 'OfflineStartMenu' da_after.txt
+          javap -classpath game.jar -p -c CharacterDelete > del_after.txt
+          grep -q 'deleteRecordStore' del_after.txt
+          grep -q 'DoHoang091.as' del_after.txt
+          grep -q 'DoHoang091.U' del_after.txt
+          jar tf game.jar > entries.txt
+          grep -q '^NativeCatalog.class$' entries.txt
+          ! grep -q '^OfflineStartMenu.class$' entries.txt
+          cp game.jar "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
           cd "$GITHUB_WORKSPACE"
-          git add -- class_et_menu_init.txt
-          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: dump Class_et menu initializer'
+          git add -- Nso_Offline_By_h0901.jar
+          git rm -r --ignore-unmatch .github
+          git rm -f --ignore-unmatch main_login_candidates.txt class_et_debug.txt class_et_menu_init.txt data_manager_ui_inspect.txt data_manager_ui_focus.txt login_class_fast.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'feat: add native data manager login menu'
           git push origin main

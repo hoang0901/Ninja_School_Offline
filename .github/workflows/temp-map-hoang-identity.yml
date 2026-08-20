@@ -1,0 +1,49 @@
+name: Map hoang identity
+on:
+  push:
+    branches: [chatgpt/sword-strongest-character]
+    paths: [.github/workflows/temp-map-hoang-identity.yml]
+permissions:
+  contents: write
+jobs:
+  map:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/sword-strongest-character
+          fetch-depth: 0
+      - name: Map clan gender hair
+        shell: bash
+        run: |
+          set -euo pipefail
+          J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          rm -rf /tmp/idh && mkdir -p /tmp/idh && cd /tmp/idh
+          jar tf "$J" | grep '\.class$' | sed 's/\.class$//' > classes.txt
+          javap -classpath "$J" -p -c DoHoang091 > do.txt
+          {
+            echo '=== DEFAULT HOANG CREATION ==='
+            grep -n -B15 -A45 'String hoang' do.txt | head -n 120 || true
+            echo '=== a(byte) METHOD / CLAN NAME MAPPING CANDIDATE ==='
+            grep -n -A100 -B5 'static java.lang.String a(byte)' do.txt || true
+            echo '=== p q FIELD USES IN DoHoang091 ==='
+            grep -n -B18 -A30 -E 'DoHoang091\$k0\.(p|q):' do.txt || true
+            echo '=== APPEARANCE SCALAR FIELD USES IN DoHoang091 ==='
+            grep -n -B18 -A30 -E 'DoHoang091\$k0\.(bx|by|bz|bA|bB|bH|bJ|cc|cd|ce|cu):' do.txt || true
+            echo '=== OTHER CLASSES USING K0 p/q/appearance ==='
+            while read c; do
+              out=$(javap -classpath "$J" -p -c "$c" 2>/dev/null | grep -n -B10 -A22 -E 'DoHoang091\$k0\.(p|q|bx|by|bz|bA|bB|bH|bJ|cc|cd|ce|cu):' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done < classes.txt
+            echo '=== PLAYER DISPLAY MODEL k0$k0 ==='
+            javap -classpath "$J" -p -c 'k0$k0' 2>/dev/null || true
+            echo '=== RELEVANT VIETNAMESE STRINGS ==='
+            for c in $(cat classes.txt); do
+              out=$(javap -classpath "$J" -p -verbose "$c" 2>/dev/null | grep -i -E 'kiếm|quạt|tiêu|cung|đao|nữ|nam|tóc|búi|phái' || true)
+              [ -z "$out" ] || { echo "##### $c #####"; echo "$out"; }
+            done
+          } > "$GITHUB_WORKSPACE/hoang_identity_map.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add -- hoang_identity_map.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: map hoang identity fields'
+          git push origin HEAD:chatgpt/sword-strongest-character

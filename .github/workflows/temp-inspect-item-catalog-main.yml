@@ -10,40 +10,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Locate shop and menu handlers
+      - name: Inspect native shop protocol
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag7"
-          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag7"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag8"
+          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag8"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          grep -R -n -E '1014|1015|1032|1034' cfrout --include='*.java' | head -1000 > "$GITHUB_WORKSPACE/item_diag7/shop_locations.txt" || true
-          grep -R -n -E 'case 63:|== 63|!= 63' cfrout --include='*.java' | head -1000 > "$GITHUB_WORKSPACE/item_diag7/menu63_locations.txt" || true
-          grep -R -n -E 'case 29:|== 29|!= 29' cfrout --include='*.java' | head -1000 > "$GITHUB_WORKSPACE/item_diag7/menu29_locations.txt" || true
-          # For every file referencing shop action IDs, save a small focused snippet.
-          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag7/shop_locations.txt" | sort -u | head -20 > /tmp/shopfiles.txt || true
-          while IFS= read -r f; do
-            [ -f "$f" ] || continue
-            b=$(basename "$f" .java)
-            grep -n -B100 -A400 -E '1014|1015|1032|1034|writeShort|writeByte|writeInt|item|Item' "$f" | head -12000 > "$GITHUB_WORKSPACE/item_diag7/${b}_shop.txt" || true
-          done < /tmp/shopfiles.txt
-          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag7/menu63_locations.txt" | sort -u | head -20 > /tmp/m63files.txt || true
-          while IFS= read -r f; do
-            [ -f "$f" ] || continue
-            b=$(basename "$f" .java)
-            grep -n -B100 -A400 -E 'case 63:|== 63|!= 63|readUTF|menu|Menu' "$f" | head -12000 > "$GITHUB_WORKSPACE/item_diag7/${b}_menu63.txt" || true
-          done < /tmp/m63files.txt
+          f=cfrout/k5.java
+          [ -f "$f" ]
+          grep -n -E '^    (public |private |protected |static |final )' "$f" | head -400 > "$GITHUB_WORKSPACE/item_diag8/k5_methods.txt" || true
+          grep -n -B80 -A220 -E 'DoHoang091\.a\(\(byte\)|writeShort|writeInt|writeByte|writeUTF|new k0|k16\.' "$f" | head -24000 > "$GITHUB_WORKSPACE/item_diag8/k5_packets.txt" || true
+          grep -R -n -B30 -A100 -E 'k5\.[A-Za-z_$][A-Za-z0-9_$]*\([^;]*(1014|970)' cfrout --include='*.java' | head -5000 > "$GITHUB_WORKSPACE/item_diag8/k5_shop_calls.txt" || true
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag7
+          git add -- item_diag8
           git diff --cached --quiet && exit 0
-          git commit -m "chore: locate shop/menu protocol handlers"
+          git commit -m "chore: inspect native shop protocol"
           git push

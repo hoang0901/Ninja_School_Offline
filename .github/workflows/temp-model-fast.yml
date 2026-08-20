@@ -1,0 +1,32 @@
+name: Temporary model fast
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-model-fast.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fast javap inventory classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/modelfast model_fast
+          mkdir -p /tmp/modelfast model_fast
+          cp Nso_Offline_By_h0901.jar /tmp/modelfast/game.jar
+          for c in Class_fj Class_dt Class_ct Class_ew Class_cy; do
+            javap -classpath /tmp/modelfast/game.jar -p -c "$c" > "model_fast/${c}.txt" 2>&1 || true
+          done
+      - name: Commit diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add model_fast
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect inventory model fast"
+          git push

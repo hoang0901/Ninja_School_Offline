@@ -1,4 +1,4 @@
-name: Debug Class_et native menu
+name: Focus Class_et menu init
 on:
   push:
     branches: [main]
@@ -12,22 +12,21 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Dump Class_et focus
+      - name: Dump menu init
         shell: bash
         run: |
           set -euo pipefail
           J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
-          rm -rf /tmp/etdebug && mkdir -p /tmp/etdebug
-          cd /tmp/etdebug
-          javap -classpath "$J" -p Class_et > sig.txt
+          rm -rf /tmp/etfocus && mkdir -p /tmp/etfocus
+          cd /tmp/etfocus
           javap -classpath "$J" -p -c Class_et > code.txt
           {
-            echo '=== SIGNATURE ==='
-            cat sig.txt
-            echo '=== METHODS / MENU FOCUS ==='
-            grep -n -B18 -A80 -E '^  (public|private|protected).*\(|putstatic +#.*Class_et\.r|putstatic +#.*Class_et\.v|getstatic +#.*Class_et\.r|getstatic +#.*Class_et\.v|sipush +100[0-9]|sipush +101[0-9]|Class_dw\."<init>"|Class_dw\.<init>|DoHoang091|CharacterDelete' code.txt || true
-          } > "$GITHUB_WORKSPACE/class_et_debug.txt"
+            echo '=== r/v writes ==='
+            grep -n -B45 -A110 -E 'putstatic +#97 +// Field r:|putstatic +#101 +// Field v:' code.txt || true
+            echo '=== command codes around menu init ==='
+            grep -n -B20 -A30 -E 'sipush +1000|sipush +1001|sipush +1002|sipush +1003|sipush +1004' code.txt || true
+          } > "$GITHUB_WORKSPACE/class_et_menu_init.txt"
           cd "$GITHUB_WORKSPACE"
-          git add -- class_et_debug.txt
-          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: dump Class_et native menu bytecode'
+          git add -- class_et_menu_init.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: dump Class_et menu initializer'
           git push origin main

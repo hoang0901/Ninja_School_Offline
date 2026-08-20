@@ -1,0 +1,50 @@
+name: Inspect save login flow
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-inspect-save-menu-main.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decompile and inspect
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/saveinspect && mkdir -p /tmp/saveinspect/out /tmp/feature
+          cd /tmp/saveinspect
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          java -jar cfr.jar game.jar --outputdir out >/dev/null 2>&1 || true
+          {
+            echo '=== STRING HITS ==='
+            grep -RniE 'Đăng nhập|Dang nhap|đăng nhập|Chơi mới|Choi moi|Tiếp tục|Tiep tuc|Sao lưu|Sao luu|Khôi phục|Khoi phuc|Xóa nhân vật|Xoa nhan vat|CharacterDelete|deleteCurrent|RecordStore|RMS|save|backup|restore|username|password|nhân vật|nhan vat' out | head -n 1600 || true
+            echo
+            echo '=== FILES ==='
+            grep -RliE 'Đăng nhập|Dang nhap|Chơi mới|Choi moi|Tiếp tục|Tiep tuc|Sao lưu|Sao luu|Khôi phục|Khoi phuc|Xóa nhân vật|Xoa nhan vat|CharacterDelete|deleteCurrent|RecordStore' out | head -n 120 || true
+          } > report.txt
+          git worktree add /tmp/feature origin/chatgpt/save-menu-redesign
+          mkdir -p /tmp/feature/save_menu_inspect
+          cp report.txt /tmp/feature/save_menu_inspect/report.txt
+          grep -RliE 'Đăng nhập|Dang nhap|Chơi mới|Choi moi|Tiếp tục|Tiep tuc|Sao lưu|Sao luu|Khôi phục|Khoi phuc|Xóa nhân vật|Xoa nhan vat|CharacterDelete|deleteCurrent|RecordStore' out | head -n 100 | while read f; do cp "$f" "/tmp/feature/save_menu_inspect/$(basename "$f")"; done
+          cd /tmp/feature
+          rm -rf .github
+          git add -- save_menu_inspect
+          git add -u -- .github || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: capture save/login inspection' || true
+          git push origin HEAD:chatgpt/save-menu-redesign
+      - name: Cleanup main workflow
+        if: always()
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-inspect-save-menu-main.yml || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: remove save/login inspector' || true
+          git push origin main || true

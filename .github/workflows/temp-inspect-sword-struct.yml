@@ -17,6 +17,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo rerun
           J="$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
           rm -rf /tmp/focus && mkdir -p /tmp/focus
           cd /tmp/focus

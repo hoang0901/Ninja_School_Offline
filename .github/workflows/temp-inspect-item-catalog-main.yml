@@ -10,31 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Locate inventory UI references
+      - name: Inspect inventory model and open flow
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsorefs "$GITHUB_WORKSPACE/item_diag12"
-          mkdir -p /tmp/nsorefs "$GITHUB_WORKSPACE/item_diag12"
-          cd /tmp/nsorefs
+          rm -rf /tmp/nsomodel "$GITHUB_WORKSPACE/item_diag13"
+          mkdir -p /tmp/nsomodel "$GITHUB_WORKSPACE/item_diag13"
+          cd /tmp/nsomodel
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          grep -R -n -E 'Class_gd\.(ll|k|oa)|Class_gd\.[A-Za-z_$][A-Za-z0-9_$]*\[[^]]*\].*H' cfrout/Class_*.java | head -1200 > "$GITHUB_WORKSPACE/item_diag12/refs.txt" || true
-          grep -R -n -E 'Class_gd\.ll|Class_gd\.k|Class_gd\.oa' cfrout --include='*.java' | cut -d: -f1 | sort -u | head -20 > /tmp/files.txt || true
-          while IFS= read -r f; do
-            [ -f "$f" ] || continue
-            b=$(basename "$f" .java)
-            grep -n -B140 -A500 -E 'Class_gd\.ll|Class_gd\.k|Class_gd\.oa|drawImage|drawRegion|paint\(' "$f" | head -22000 > "$GITHUB_WORKSPACE/item_diag12/${b}.txt" || true
-          done < /tmp/files.txt
+          grep -n -B120 -A450 -E 'Class_fj\[\] ar| ar =|ar\[|new Class_fj' cfrout/Class_dt.java | head -18000 > "$GITHUB_WORKSPACE/item_diag13/Class_dt_ar.txt" || true
+          grep -n -B120 -A450 -E 'Class_fj\(|class Class_fj|public Class_fj|short |int |byte |String ' cfrout/Class_fj.java | head -18000 > "$GITHUB_WORKSPACE/item_diag13/Class_fj_model.txt" || true
+          grep -n -B120 -A500 -E 'no = true|no = false|no = nl\[|no\)|az\(|Class_dt\.ar|Class_gd\.ll' cfrout/Class_ct.java | head -24000 > "$GITHUB_WORKSPACE/item_diag13/Class_ct_inventory_flow.txt" || true
+          grep -R -n -B80 -A220 -E 'Class_dt\.ar' cfrout --include='*.java' | head -16000 > "$GITHUB_WORKSPACE/item_diag13/ar_refs.txt" || true
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag12
+          git add -- item_diag13
           git diff --cached --quiet && exit 0
-          git commit -m "chore: locate inventory UI refs"
+          git commit -m "chore: inspect inventory model flow"
           git push

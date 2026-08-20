@@ -1,0 +1,41 @@
+1-/*
+2- * Decompiled with CFR 0.152.
+3- */
+4:public final class OfflineBridge {
+5:    private OfflineBridge() {
+6-    }
+7-
+8:    public static void connect(Class_fp class_fp, String string, int n) {
+9:        Class_fp.n = string;
+10:        Class_fp.h = n;
+11-        class_fp.j = true;
+12-        class_fp.p = false;
+13-        DoHoang091.connect();
+14-        DoHoang091.startAsync();
+15-        class_fp.c = true;
+16-        class_fp.j = false;
+17-        class_fp.q = System.currentTimeMillis();
+18-    }
+19-
+20:    public static void send(Class_fp class_fp, Class_de class_de) {
+21-        class_fp.q = System.currentTimeMillis();
+22-        byte[] byArray = class_de.c();
+23:        if (OfflineDeleteMenu.consume(class_de.a, byArray)) {
+24-            return;
+25-        }
+26-        DoHoang091.post(class_de.a, byArray);
+27-    }
+28-
+29:    public static void close(Class_fp class_fp) {
+30-        DoHoang091.closeAsync();
+31-        DoHoang091.flush();
+32-        class_fp.c = false;
+33-        class_fp.j = false;
+34-        class_fp.p = false;
+35-    }
+36-
+37-    public static boolean tick(int n) {
+38-        DoHoang091.pump();
+39-        return n > 0;
+40-    }
+41-}

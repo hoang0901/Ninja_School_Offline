@@ -1,0 +1,200 @@
+1-/*
+2- * Decompiled with CFR 0.152.
+3- */
+4-import java.io.ByteArrayInputStream;
+5-import java.io.ByteArrayOutputStream;
+6-import java.io.DataInputStream;
+7-import java.io.DataOutputStream;
+8-import java.io.OutputStream;
+9-import java.util.Vector;
+10-
+11:public final class OfflineDeleteMenu {
+12-    private static boolean active;
+13-    private static int deleteIndex;
+14-    private static int clearBagIndex;
+15-    private static final int[] fakeIndex;
+16-    private static int realIndex;
+17-
+18:    private OfflineDeleteMenu() {
+19-    }
+20-
+21-    private static void resetIndexes() {
+22-        active = false;
+23-        deleteIndex = -1;
+24-        clearBagIndex = -1;
+25-        realIndex = -1;
+26-        for (int i = 0; i < fakeIndex.length; ++i) {
+27:            OfflineDeleteMenu.fakeIndex[i] = -1;
+28-        }
+29-    }
+30-
+31-    public static byte[] extend(byte by, byte[] byArray) {
+32-        if (by != 63 || byArray == null) {
+33-            return byArray;
+34-        }
+35:        OfflineDeleteMenu.resetIndexes();
+36-        try {
+37-            int n;
+38-            Object object;
+39-            DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(byArray));
+40-            Vector<String> vector = new Vector<String>();
+41-            boolean bl = false;
+42-            boolean bl2 = false;
+43-            boolean bl3 = false;
+44-            boolean bl4 = false;
+45-            while (dataInputStream.available() > 0) {
+46-                object = dataInputStream.readUTF();
+47-                vector.addElement((String)object);
+48-                if ("Nh\u1eadn v\u1eadt ph\u1ea9m".equals(object)) {
+49-                    bl = true;
+50-                }
+51-                if ("Nh\u1eadn xu".equals(object)) {
+52-                    bl2 = true;
+53-                }
+54-                if ("Nh\u1eadn l\u01b0\u1ee3ng".equals(object)) {
+55-                    bl3 = true;
+56-                }
+57-                if (!"Nh\u1eadn y\u00ean".equals(object)) continue;
+58-                bl4 = true;
+59-            }
+60-            if (!(bl && bl2 && bl3 && bl4)) {
+61-                return byArray;
+62-            }
+63-            object = new ByteArrayOutputStream(byArray.length + 320);
+64-            ((OutputStream)object).write(byArray);
+65-            DataOutputStream dataOutputStream = new DataOutputStream((OutputStream)object);
+66-            deleteIndex = n = vector.size();
+67-            dataOutputStream.writeUTF("X\u00f3a nh\u00e2n v\u1eadt \u0111ang ch\u01a1i");
+68-            clearBagIndex = n + 1;
+69-            dataOutputStream.writeUTF("X\u00f3a to\u00e0n b\u1ed9 v\u1eadt ph\u1ea9m trong h\u00e0nh trang");
+70-            String[] stringArray = new String[]{"Ki\u1ebfm", "Phi ti\u00eau", "Kunai", "Cung", "\u0110ao", "Qu\u1ea1t"};
+71-            for (int i = 0; i < 6; ++i) {
+72:                OfflineDeleteMenu.fakeIndex[i] = n + 2 + i;
+73-                dataOutputStream.writeUTF("Fake ph\u00e1i - " + stringArray[i]);
+74-            }
+75-            realIndex = n + 8;
+76-            dataOutputStream.writeUTF("Fake ph\u00e1i - Ph\u00e1i g\u1ed1c");
+77-            dataOutputStream.flush();
+78-            active = true;
+79-            return ((ByteArrayOutputStream)object).toByteArray();
+80-        }
+81-        catch (Throwable throwable) {
+82:            OfflineDeleteMenu.resetIndexes();
+83-            return byArray;
+84-        }
+85-    }
+86-
+87-    private static int[] decode(byte[] byArray) {
+88-        int n;
+89-        int n2;
+90-        if (byArray == null || byArray.length < 2) {
+91-            return null;
+92-        }
+93-        if (byArray.length >= 4) {
+94-            n2 = byArray[1] & 0xFF;
+95-            n = byArray[2] & 0xFF;
+96-        } else if (byArray.length == 2) {
+97-            n2 = byArray[0] & 0xFF;
+98-            n = byArray[1] & 0xFF;
+99-        } else {
+100-            int n3 = byArray[0] & 0xFF;
+101-            int n4 = byArray[1] & 0xFF;
+102-            if (n3 == 37) {
+103-                n2 = n3;
+104-                n = n4;
+105-            } else if (n4 == 37) {
+106-                n2 = n4;
+107-                n = byArray[2] & 0xFF;
+108-            } else {
+109-                n2 = n3;
+110-                n = n4;
+111-            }
+112-        }
+113-        return new int[]{n2, n};
+114-    }
+115-
+116-    private static void refreshFakeClass(int n) {
+117-        try {
+118-            if (n >= 1 && n <= 6) {
+119-                FakeClassState.set(n);
+120-            } else {
+121-                FakeClassState.clear();
+122-            }
+123-            try {
+124-                DoHoang091.G();
+125-            }
+126-            catch (Throwable throwable) {
+127-                // empty catch block
+128-            }
+129-            try {
+130-                DoHoang091.H();
+131-            }
+132-            catch (Throwable throwable) {
+133-                // empty catch block
+134-            }
+135-            String string = n >= 1 && n <= 6 ? DoHoang091.a((byte)n) : "Ph\u00e1i g\u1ed1c";
+136-            try {
+137-                DoHoang091.a("Fake ph\u00e1i: " + string);
+138-            }
+139-            catch (Throwable throwable) {}
+140-        }
+141-        catch (Throwable throwable) {
+142-            // empty catch block
+143-        }
+144-    }
+145-
+146-    public static boolean consume(byte by, byte[] byArray) {
+147-        if (by != 29 || !active || byArray == null || byArray.length < 2) {
+148-            return false;
+149-        }
+150:        int[] nArray = OfflineDeleteMenu.decode(byArray);
+151-        if (nArray == null) {
+152-            return false;
+153-        }
+154-        int n = nArray[0];
+155-        int n2 = nArray[1];
+156-        active = false;
+157-        if (n == 37 && n2 == deleteIndex) {
+158:            OfflineDeleteMenu.resetIndexes();
+159-            try {
+160-                CharacterDelete.deleteCurrent();
+161-            }
+162-            catch (Throwable throwable) {
+163-                // empty catch block
+164-            }
+165-            return true;
+166-        }
+167-        if (n == 37 && n2 == clearBagIndex) {
+168:            OfflineDeleteMenu.resetIndexes();
+169-            try {
+170-                InventoryClear.clearCurrentBag();
+171-            }
+172-            catch (Throwable throwable) {
+173-                // empty catch block
+174-            }
+175-            return true;
+176-        }
+177-        if (n == 37) {
+178-            for (int i = 0; i < 6; ++i) {
+179-                if (n2 != fakeIndex[i]) continue;
+180:                OfflineDeleteMenu.resetIndexes();
+181:                OfflineDeleteMenu.refreshFakeClass(i + 1);
+182-                return true;
+183-            }
+184-            if (n2 == realIndex) {
+185:                OfflineDeleteMenu.resetIndexes();
+186:                OfflineDeleteMenu.refreshFakeClass(0);
+187-                return true;
+188-            }
+189-        }
+190:        OfflineDeleteMenu.resetIndexes();
+191-        return false;
+192-    }
+193-
+194-    static {
+195-        deleteIndex = -1;
+196-        clearBagIndex = -1;
+197-        fakeIndex = new int[]{-1, -1, -1, -1, -1, -1};
+198-        realIndex = -1;
+199-    }
+200-}

@@ -10,40 +10,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect JAR item menu and inventory UI
+      - name: Produce small focused diagnostics
         shell: bash
         run: |
           set -euo pipefail
-          echo "diagnostic rerun v2"
-          rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect/classes
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag"
+          mkdir -p /tmp/nsoinspect/classes "$GITHUB_WORKSPACE/item_diag"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           unzip -q game.jar -d classes
-          report="$GITHUB_WORKSPACE/item_catalog_report.txt"
-          : > "$report"
+          out="$GITHUB_WORKSPACE/item_diag/classes.txt"
+          : > "$out"
           for term in 'Nhận vật phẩm' 'Nhận xu' 'Nhận lượng' 'Nhận yên' 'Xóa toàn bộ vật phẩm trong hành trang' 'Xóa nhân vật đang chơi' 'Fake phái'; do
-            echo "=== TERM: $term ===" >> "$report"
-            grep -R -a -l -F "$term" classes --include='*.class' >> "$report" || true
+            echo "TERM=$term" >> "$out"
+            grep -R -a -l -F "$term" classes --include='*.class' | sed 's#^classes/##' | head -30 >> "$out" || true
           done
-          echo '=== HELPER CLASSES ===' >> "$report"
-          find classes -maxdepth 1 -type f \( -name 'OfflineDeleteMenu.class' -o -name 'InventoryClear.class' -o -name 'CharacterDelete.class' -o -name 'FakeClassState.class' \) -printf '%f\n' >> "$report" || true
-          matches=$(grep -R -a -l -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ vật phẩm trong hành trang|Xóa nhân vật đang chơi|Fake phái' classes --include='*.class' | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u || true)
-          for c in $matches OfflineDeleteMenu InventoryClear CharacterDelete; do
-            [ -f "classes/${c//.//}.class" ] || continue
-            echo "##### CLASS $c #####" >> "$report"
-            javap -classpath game.jar -c -p -verbose "$c" >> "$report" 2>&1 || true
-          done
-          echo '=== TOP-LEVEL CLASSES REFERENCING CUSTOM HELPERS ===' >> "$report"
-          for f in classes/*.class; do
-            if grep -a -q -E 'OfflineDeleteMenu|InventoryClear|CharacterDelete' "$f"; then basename "$f" .class >> "$report"; fi
-          done
-      - name: Commit report
+          echo 'HELPERS=' >> "$out"
+          find classes -type f \( -name 'OfflineDeleteMenu.class' -o -name 'InventoryClear.class' -o -name 'CharacterDelete.class' -o -name 'FakeClassState.class' \) -printf '%P\n' | sort >> "$out" || true
+          echo 'REF_HELPERS=' >> "$out"
+          grep -R -a -l -E 'OfflineDeleteMenu|InventoryClear|CharacterDelete|FakeClassState' classes --include='*.class' | sed 's#^classes/##' | head -80 >> "$out" || true
+          cp "$out" /tmp/class-list.txt
+          # Dump compact bytecode only for matched/helper classes, one file per class.
+          { grep -R -a -l -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ vật phẩm trong hành trang|Xóa nhân vật đang chơi|Fake phái|OfflineDeleteMenu|InventoryClear|CharacterDelete|FakeClassState' classes --include='*.class' || true; } \
+            | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u | head -30 > /tmp/matches.txt
+          while IFS= read -r c; do
+            [ -n "$c" ] || continue
+            safe=$(echo "$c" | tr '/.$' '___')
+            javap -classpath game.jar -p -c "$c" > "$GITHUB_WORKSPACE/item_diag/javap_${safe}.txt" 2>&1 || true
+          done < /tmp/matches.txt
+      - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_catalog_report.txt
+          git add -- item_diag
           git diff --cached --quiet && exit 0
-          git commit -m "chore: inspect item catalog UI on current JAR"
+          git commit -m "chore: add focused item UI diagnostics"
           git push

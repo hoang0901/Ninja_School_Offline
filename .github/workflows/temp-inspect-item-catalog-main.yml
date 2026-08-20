@@ -10,41 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Produce small focused diagnostics
+      - name: Produce targeted menu/catalog diagnostics
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag"
-          mkdir -p /tmp/nsoinspect/classes "$GITHUB_WORKSPACE/item_diag"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag2"
+          mkdir -p /tmp/nsoinspect/classes "$GITHUB_WORKSPACE/item_diag2"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           unzip -q game.jar -d classes
-          out="$GITHUB_WORKSPACE/item_diag/classes.txt"
-          : > "$out"
-          for term in 'Nhận vật phẩm' 'Nhận xu' 'Nhận lượng' 'Nhận yên' 'Xóa toàn bộ vật phẩm trong hành trang' 'Xóa nhân vật đang chơi' 'Fake phái'; do
-            echo "TERM=$term" >> "$out"
-            grep -R -a -l -F "$term" classes --include='*.class' | sed 's#^classes/##' | head -30 >> "$out" || true
+          for c in k1d OfflineDeleteMenu dt k25 DoHoang091; do
+            if [ -f "classes/$c.class" ]; then
+              javap -classpath game.jar -p -c "$c" > "/tmp/$c.javap" 2>&1 || true
+              { grep -n -B35 -A100 -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ|Xóa nhân vật|Fake phái|OfflineDeleteMenu|FakeClassState|InventoryClear|CharacterDelete' "/tmp/$c.javap" || true; } > "$GITHUB_WORKSPACE/item_diag2/${c}_focus.txt"
+              # Method signatures only, useful for finding renderer/input methods.
+              grep -E '^  (public|private|protected|static|final|synchronized|native|abstract|strictfp|[A-Za-z0-9_$<>\[\].]+)[^:]*(\);|\) throws|\) ?$)' "/tmp/$c.javap" | head -300 > "$GITHUB_WORKSPACE/item_diag2/${c}_methods.txt" || true
+            fi
           done
-          echo 'HELPERS=' >> "$out"
-          find classes -type f \( -name 'OfflineDeleteMenu.class' -o -name 'InventoryClear.class' -o -name 'CharacterDelete.class' -o -name 'FakeClassState.class' \) -printf '%P\n' | sort >> "$out" || true
-          echo 'REF_HELPERS=' >> "$out"
-          grep -R -a -l -E 'OfflineDeleteMenu|InventoryClear|CharacterDelete|FakeClassState' classes --include='*.class' | sed 's#^classes/##' | head -80 >> "$out" || true
-          cp "$out" /tmp/class-list.txt
-          # Dump compact bytecode only for matched/helper classes, one file per class.
-          { grep -R -a -l -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên|Xóa toàn bộ vật phẩm trong hành trang|Xóa nhân vật đang chơi|Fake phái|OfflineDeleteMenu|InventoryClear|CharacterDelete|FakeClassState' classes --include='*.class' || true; } \
-            | sed 's#^classes/##;s#\.class$##;s#/#.#g' | sort -u | head -30 > /tmp/matches.txt
-          while IFS= read -r c; do
-            [ -n "$c" ] || continue
-            safe=$(echo "$c" | tr '/.$' '___')
-            javap -classpath game.jar -p -c "$c" > "$GITHUB_WORKSPACE/item_diag/javap_${safe}.txt" 2>&1 || true
-          done < /tmp/matches.txt
-      - name: Commit diagnostics
+          # Class constant-pool neighbors for likely inventory UI/item icon rendering references.
+          javap -classpath game.jar -p -verbose k1d > /tmp/k1d.verbose 2>&1 || true
+          grep -n -B15 -A35 -E 'Nhận vật phẩm|Nhận xu|Nhận lượng|Nhận yên' /tmp/k1d.verbose > "$GITHUB_WORKSPACE/item_diag2/k1d_constants.txt" || true
+      - name: Commit targeted diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag
+          git add -- item_diag2
           git diff --cached --quiet && exit 0
-          git commit -m "chore: add focused item UI diagnostics"
+          git commit -m "chore: add targeted catalog bytecode diagnostics"
           git push

@@ -1,0 +1,990 @@
+===== k7 =====
+573-       4: getstatic     #126                // Field g:LDoHoang091$k0;
+574-       7: ifnull        24
+575-      10: getstatic     #127                // Field h:I
+576-      13: iload_1
+577-      14: if_icmpne     24
+578-      17: getstatic     #128                // Field i:Z
+579-      20: ifeq          24
+580-      23: return
+581-      24: aload_0
+582-      25: iload_1
+583-      26: invokestatic  #211                // Method a:(LDoHoang091$k0;I)V
+584-      29: iconst_1
+585-      30: putstatic     #128                // Field i:Z
+586-      33: iload_1
+587-      34: putstatic     #127                // Field h:I
+588-      37: getstatic     #126                // Field g:LDoHoang091$k0;
+589-      40: ifnonnull     58
+590-      43: aload_0
+591-      44: invokestatic  #219                // Method b:(LDoHoang091$k0;)LDoHoang091$k0;
+592-      47: putstatic     #126                // Field g:LDoHoang091$k0;
+593-      50: iconst_1
+594-      51: putstatic     #129                // Field j:Z
+595-      54: iconst_1
+596-      55: putstatic     #137                // Field r:Z
+597-      58: return
+598-
+599-  private static DoHoang091$k0 b(DoHoang091$k0);
+600-    Code:
+601-       0: new           #17                 // class DoHoang091$k0
+602-       3: dup
+603-       4: aload_0
+604-       5: getfield      #56                 // Field DoHoang091$k0.a:Ljava/lang/String;
+605-       8: aload_0
+606-       9: getfield      #115                // Field DoHoang091$k0.p:B
+607-      12: aload_0
+608:      13: getfield      #116                // Field DoHoang091$k0.q:S
+609-      16: invokespecial #155                // Method DoHoang091$k0."<init>":(Ljava/lang/String;BS)V
+610-      19: astore_1
+611-      20: aload_1
+612-      21: invokestatic  #221                // Method c:(LDoHoang091$k0;)V
+613-      24: aload_1
+614-      25: iconst_0
+615-      26: putfield      #108                // Field DoHoang091$k0.bx:B
+616-      29: aload_1
+617-      30: iconst_1
+618-      31: putfield      #117                // Field DoHoang091$k0.r:I
+619-      34: aload_1
+620-      35: lconst_0
+621-      36: putfield      #121                // Field DoHoang091$k0.v:J
+622-      39: aload_1
+623-      40: iconst_0
+624-      41: putfield      #109                // Field DoHoang091$k0.by:S
+625-      44: aload_1
+626-      45: iconst_0
+627-      46: putfield      #110                // Field DoHoang091$k0.bz:S
+628-      49: aload_1
+629-      50: iconst_5
+630-      51: putfield      #84                 // Field DoHoang091$k0.bA:S
+631-      54: aload_1
+632-      55: iconst_5
+633-      56: putfield      #85                 // Field DoHoang091$k0.bB:S
+634-      59: aload_1
+635-      60: iconst_5
+636-      61: putfield      #86                 // Field DoHoang091$k0.bC:I
+637-      64: aload_1
+638-      65: iconst_5
+639-      66: putfield      #87                 // Field DoHoang091$k0.bD:I
+640-      69: aload_1
+641-      70: iconst_0
+642-      71: putfield      #90                 // Field DoHoang091$k0.bG:I
+643-      74: aload_1
+644-      75: iconst_m1
+645-      76: putfield      #91                 // Field DoHoang091$k0.bH:S
+646-      79: iconst_0
+647-      80: istore_2
+648-      81: goto          101
+649-      84: aload_1
+650-      85: getfield      #88                 // Field DoHoang091$k0.bE:[B
+651-      88: iload_2
+652-      89: iconst_m1
+653-      90: bastore
+654-      91: aload_1
+655-      92: getfield      #89                 // Field DoHoang091$k0.bF:[B
+656-      95: iload_2
+657-      96: iconst_0
+658-      97: bastore
+659-      98: iinc          2, 1
+660-     101: iload_2
+661-     102: aload_1
+662-     103: getfield      #88                 // Field DoHoang091$k0.bE:[B
+663-     106: arraylength
+664-     107: if_icmplt     84
+665-     110: aload_1
+666-     111: invokevirtual #156                // Method DoHoang091$k0.c:()V
+667-     114: aload_1
+668-     115: iconst_1
+669-     116: putfield      #124                // Field DoHoang091$k0.z:Z
+670-     119: aload_1
+671-     120: iconst_1
+672-     121: putfield      #122                // Field DoHoang091$k0.x:I
+673-     124: aload_1
+674-     125: iconst_1
+675-     126: putfield      #123                // Field DoHoang091$k0.y:I
+676-     129: aload_1
+677-     130: areturn
+678-
+--
+743-      94: aload_0
+744-      95: getfield      #82                 // Field DoHoang091$k0.aj:[B
+745-      98: iload_1
+746-      99: iconst_0
+747-     100: bastore
+748-     101: aload_0
+749-     102: getfield      #83                 // Field DoHoang091$k0.ak:[J
+750-     105: iload_1
+751-     106: ldc2_w        #46                 // long -1l
+752-     109: lastore
+753-     110: iinc          1, 1
+754-     113: iload_1
+755-     114: aload_0
+756-     115: getfield      #78                 // Field DoHoang091$k0.af:[S
+757-     118: arraylength
+758-     119: if_icmplt     66
+759-     122: return
+760-
+761-  private static void d(DoHoang091$k0) throws java.lang.Exception;
+762-    Code:
+763-       0: iconst_0
+764-       1: putstatic     #129                // Field j:Z
+765-       4: getstatic     #126                // Field g:LDoHoang091$k0;
+766-       7: iconst_0
+767-       8: putfield      #124                // Field DoHoang091$k0.z:Z
+768-      11: getstatic     #126                // Field g:LDoHoang091$k0;
+769-      14: aload_0
+770-      15: getfield      #56                 // Field DoHoang091$k0.a:Ljava/lang/String;
+771-      18: putfield      #56                 // Field DoHoang091$k0.a:Ljava/lang/String;
+772-      21: getstatic     #126                // Field g:LDoHoang091$k0;
+773-      24: aload_0
+774-      25: getfield      #115                // Field DoHoang091$k0.p:B
+775-      28: putfield      #115                // Field DoHoang091$k0.p:B
+776-      31: getstatic     #126                // Field g:LDoHoang091$k0;
+777-      34: aload_0
+778:      35: getfield      #116                // Field DoHoang091$k0.q:S
+779:      38: putfield      #116                // Field DoHoang091$k0.q:S
+780-      41: getstatic     #126                // Field g:LDoHoang091$k0;
+781-      44: aload_0
+782-      45: getfield      #118                // Field DoHoang091$k0.s:I
+783-      48: putfield      #118                // Field DoHoang091$k0.s:I
+784-      51: getstatic     #126                // Field g:LDoHoang091$k0;
+785-      54: aload_0
+786-      55: getfield      #119                // Field DoHoang091$k0.t:S
+787-      58: putfield      #119                // Field DoHoang091$k0.t:S
+788-      61: getstatic     #126                // Field g:LDoHoang091$k0;
+789-      64: aload_0
+790-      65: getfield      #120                // Field DoHoang091$k0.u:S
+791-      68: putfield      #120                // Field DoHoang091$k0.u:S
+792-      71: getstatic     #126                // Field g:LDoHoang091$k0;
+793-      74: invokestatic  #193                // Method k0.a:(LDoHoang091$k0;)V
+794-      77: getstatic     #126                // Field g:LDoHoang091$k0;
+795-      80: invokestatic  #202                // Method k25.a:(LDoHoang091$k0;)I
+796-      83: istore_1
+797-      84: getstatic     #126                // Field g:LDoHoang091$k0;
+798-      87: invokestatic  #204                // Method k25.b:(LDoHoang091$k0;)I
+799-      90: istore_2
+800-      91: getstatic     #126                // Field g:LDoHoang091$k0;
+801-      94: iload_1
+802-      95: putfield      #122                // Field DoHoang091$k0.x:I
+803-      98: getstatic     #126                // Field g:LDoHoang091$k0;
+804-     101: iload_2
+805-     102: putfield      #123                // Field DoHoang091$k0.y:I
+806-     105: aload_0
+807-     106: getfield      #119                // Field DoHoang091$k0.t:S
+808-     109: putstatic     #134                // Field o:S
+809-     112: aload_0
+810-     113: getfield      #120                // Field DoHoang091$k0.u:S
+811-     116: putstatic     #135                // Field p:S
+812-     119: getstatic     #126                // Field g:LDoHoang091$k0;
+813-     122: getfield      #91                 // Field DoHoang091$k0.bH:S
+814-     125: ifge          156
+815-     128: getstatic     #126                // Field g:LDoHoang091$k0;
+816-     131: getfield      #90                 // Field DoHoang091$k0.bG:I
+817-     134: ifle          156
+818-     137: getstatic     #126                // Field g:LDoHoang091$k0;
+819-     140: getstatic     #126                // Field g:LDoHoang091$k0;
+820-     143: getfield      #88                 // Field DoHoang091$k0.bE:[B
+821-     146: iconst_0
+822-     147: baload
+823-     148: sipush        255
+824-     151: iand
+825-     152: i2s
+826-     153: putfield      #91                 // Field DoHoang091$k0.bH:S
+827-     156: return
+828-
+829-  private static void e(DoHoang091$k0) throws java.lang.Exception;
+830-    Code:
+831-       0: aload_0
+832-       1: invokestatic  #193                // Method k0.a:(LDoHoang091$k0;)V
+833-       4: aload_0
+834-       5: invokestatic  #202                // Method k25.a:(LDoHoang091$k0;)I
+835-       8: istore_1
+836-       9: aload_0
+837-      10: invokestatic  #204                // Method k25.b:(LDoHoang091$k0;)I
+838-      13: istore_2
+839-      14: aload_0
+840-      15: iload_1
+841-      16: putfield      #122                // Field DoHoang091$k0.x:I
+842-      19: aload_0
+843-      20: iload_2
+844-      21: putfield      #123                // Field DoHoang091$k0.y:I
+845-      24: aload_0
+846-      25: iconst_0
+847-      26: putfield      #124                // Field DoHoang091$k0.z:Z
+848-      29: aload_0
+849-      30: invokestatic  #148                // Method DoHoang091.c:(LDoHoang091$k0;)V
+===== DoHoang091 =====
+17498-      23: astore_1
+17499-      24: aload_1
+17500-      25: bipush        39
+17501-      27: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17502-      30: aload_1
+17503-      31: getstatic     #215                // Field ak:I
+17504-      34: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17505-      37: aload_1
+17506-      38: getstatic     #212                // Field aj:[LDoHoang091$k0;
+17507-      41: arraylength
+17508-      42: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17509-      45: aload_1
+17510-      46: getstatic     #15                 // Field ar:Ljava/lang/String;
+17511-      49: ifnonnull     57
+17512-      52: ldc           #11                 // String offline
+17513-      54: goto          60
+17514-      57: getstatic     #15                 // Field ar:Ljava/lang/String;
+17515-      60: invokevirtual #889                // Method java/io/DataOutputStream.writeUTF:(Ljava/lang/String;)V
+17516-      63: iconst_0
+17517-      64: istore_2
+17518-      65: goto          1211
+17519-      68: getstatic     #212                // Field aj:[LDoHoang091$k0;
+17520-      71: iload_2
+17521-      72: aaload
+17522-      73: astore_3
+17523-      74: aload_1
+17524-      75: aload_3
+17525-      76: getfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+17526-      79: invokevirtual #889                // Method java/io/DataOutputStream.writeUTF:(Ljava/lang/String;)V
+17527-      82: aload_1
+17528-      83: aload_3
+17529-      84: getfield      #884                // Field DoHoang091$k0.p:B
+17530-      87: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17531-      90: aload_1
+17532-      91: aload_3
+17533:      92: getfield      #2406               // Field DoHoang091$k0.q:S
+17534-      95: invokevirtual #904                // Method java/io/DataOutputStream.writeShort:(I)V
+17535-      98: aload_1
+17536-      99: aload_3
+17537-     100: getfield      #898                // Field DoHoang091$k0.r:I
+17538-     103: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17539-     106: aload_1
+17540-     107: aload_3
+17541-     108: getfield      #1010               // Field DoHoang091$k0.s:I
+17542-     111: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17543-     114: aload_1
+17544-     115: aload_3
+17545-     116: getfield      #1157               // Field DoHoang091$k0.t:S
+17546-     119: invokevirtual #904                // Method java/io/DataOutputStream.writeShort:(I)V
+17547-     122: aload_1
+17548-     123: aload_3
+17549-     124: getfield      #1163               // Field DoHoang091$k0.u:S
+17550-     127: invokevirtual #904                // Method java/io/DataOutputStream.writeShort:(I)V
+17551-     130: aload_1
+17552-     131: aload_3
+17553-     132: getfield      #1078               // Field DoHoang091$k0.v:J
+17554-     135: invokevirtual #1081               // Method java/io/DataOutputStream.writeLong:(J)V
+17555-     138: aload_1
+17556-     139: aload_3
+17557-     140: getfield      #1568               // Field DoHoang091$k0.w:I
+17558-     143: invokevirtual #1046               // Method java/io/DataOutputStream.writeInt:(I)V
+17559-     146: aload_1
+17560-     147: aload_3
+17561-     148: getfield      #1068               // Field DoHoang091$k0.x:I
+17562-     151: invokevirtual #1046               // Method java/io/DataOutputStream.writeInt:(I)V
+17563-     154: aload_1
+17564-     155: aload_3
+17565-     156: getfield      #1075               // Field DoHoang091$k0.y:I
+17566-     159: invokevirtual #1046               // Method java/io/DataOutputStream.writeInt:(I)V
+17567-     162: aload_1
+17568-     163: aload_3
+17569-     164: getfield      #1070               // Field DoHoang091$k0.z:Z
+17570-     167: invokevirtual #1132               // Method java/io/DataOutputStream.writeBoolean:(Z)V
+17571-     170: aload_1
+17572-     171: aload_3
+17573-     172: getfield      #807                // Field DoHoang091$k0.K:[S
+17574-     175: arraylength
+17575-     176: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17576-     179: aload_1
+17577-     180: aload_3
+17578-     181: getfield      #807                // Field DoHoang091$k0.K:[S
+17579-     184: aload_3
+17580-     185: getfield      #809                // Field DoHoang091$k0.L:[S
+17581-     188: invokestatic  #2409               // Method a:(Ljava/io/DataOutputStream;[S[S)V
+17582-     191: aload_1
+17583-     192: aload_3
+17584-     193: getfield      #837                // Field DoHoang091$k0.af:[S
+17585-     196: aload_3
+17586-     197: getfield      #840                // Field DoHoang091$k0.ag:[S
+17587-     200: invokestatic  #2409               // Method a:(Ljava/io/DataOutputStream;[S[S)V
+17588-     203: aload_1
+17589-     204: aload_3
+17590-     205: getfield      #1049               // Field DoHoang091$k0.E:I
+17591-     208: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17592-     211: aload_1
+17593-     212: aload_3
+17594-     213: getfield      #2241               // Field DoHoang091$k0.F:B
+17595-     216: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+17596-     219: aload_1
+17597-     220: aload_3
+17598-     221: getfield      #2243               // Field DoHoang091$k0.G:S
+17599-     224: invokevirtual #904                // Method java/io/DataOutputStream.writeShort:(I)V
+17600-     227: aload_1
+17601-     228: aload_3
+17602-     229: getfield      #1670               // Field DoHoang091$k0.H:I
+17603-     232: invokevirtual #878                // Method java/io/DataOutputStream.writeByte:(I)V
+--
+19782-     112: aload_3
+19783-     113: iconst_0
+19784-     114: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19785-     117: arraylength
+19786-     118: invokestatic  #953                // Method java/lang/System.arraycopy:(Ljava/lang/Object;ILjava/lang/Object;II)V
+19787-     121: aload_3
+19788-     122: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19789-     125: arraylength
+19790-     126: aload_2
+19791-     127: aastore
+19792-     128: aload_3
+19793-     129: putstatic     #212                // Field aj:[LDoHoang091$k0;
+19794-     132: aload_3
+19795-     133: arraylength
+19796-     134: iconst_1
+19797-     135: isub
+19798-     136: istore_0
+19799-     137: iload_0
+19800-     138: iconst_0
+19801-     139: if_icmplt     277
+19802-     142: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19803-     145: iload_0
+19804-     146: aaload
+19805-     147: astore        4
+19806-     149: aload         4
+19807-     151: getfield      #898                // Field DoHoang091$k0.r:I
+19808-     154: sipush        129
+19809-     157: if_icmpne     170
+19810-     160: aload         4
+19811-     162: getfield      #884                // Field DoHoang091$k0.p:B
+19812-     165: iconst_1
+19813-     166: i2b
+19814-     167: if_icmpeq     173
+19815-     170: goto          183
+19816-     173: aload         4
+19817:     175: getfield      #2406               // Field DoHoang091$k0.q:S
+19818-     178: iconst_2
+19819-     179: i2s
+19820-     180: if_icmpeq     186
+19821-     183: goto          196
+19822-     186: aload         4
+19823-     188: getfield      #892                // Field DoHoang091$k0.bx:B
+19824-     191: iconst_1
+19825-     192: i2b
+19826-     193: if_icmpeq     277
+19827-     196: aload         4
+19828-     198: getfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19829-     201: astore        5
+19830-     203: invokestatic  #2394               // Method ar:()LDoHoang091$k0;
+19831-     206: astore        6
+19832-     208: aload         6
+19833-     210: aconst_null
+19834-     211: if_acmpeq     225
+19835-     214: aload         6
+19836-     216: astore        4
+19837-     218: aload         4
+19838-     220: aload         5
+19839-     222: putfield      #886                // Field DoHoang091$k0.a:Ljava/lang/String;
+19840-     225: aload         4
+19841-     227: iconst_1
+19842-     228: i2b
+19843-     229: putfield      #884                // Field DoHoang091$k0.p:B
+19844-     232: aload         4
+19845-     234: iconst_2
+19846-     235: i2s
+19847:     236: putfield      #2406               // Field DoHoang091$k0.q:S
+19848-     239: aload         4
+19849-     241: iconst_1
+19850-     242: i2b
+19851-     243: putfield      #892                // Field DoHoang091$k0.bx:B
+19852-     246: aload         4
+19853-     248: sipush        129
+19854-     251: putfield      #898                // Field DoHoang091$k0.r:I
+19855-     254: aload         4
+19856-     256: invokestatic  #2370               // Method l:(LDoHoang091$k0;)V
+19857-     259: getstatic     #212                // Field aj:[LDoHoang091$k0;
+19858-     262: iload_0
+19859-     263: aload         4
+19860-     265: aastore
+19861-     266: iload_0
+19862-     267: putstatic     #215                // Field ak:I
+19863-     270: iconst_1
+19864-     271: putstatic     #223                // Field an:Z
+19865-     274: invokestatic  #764                // Method as:()V
+19866-     277: return
+19867-}
+===== Class_fq =====
+2142-     342: aload_0
+2143-     343: getfield      #119                // Field Class_eo.v:I
+2144-     346: getstatic     #83                 // Field Class_ad.v:B
+2145-     349: invokestatic  #215                // Method h:(II)Z
+2146-     352: ifeq          368
+2147-     355: getstatic     #85                 // Field Class_ag.b:I
+2148-     358: invokestatic  #180                // Method Class_eo.a:(I)V
+2149-     361: aload_0
+2150-     362: getstatic     #85                 // Field Class_ag.b:I
+2151-     365: putfield      #119                // Field Class_eo.v:I
+2152-     368: getstatic     #148                // Field p:[I
+2153-     371: iconst_0
+2154-     372: iaload
+2155-     373: putstatic     #144                // Field l:Z
+2156-     376: getstatic     #116                // Field Class_cy.j:Z
+2157-     379: invokestatic  #212                // Method g:(I)Z
+2158-     382: ifeq          389
+2159-     385: invokestatic  #185                // Method Class_eo.m:()V
+2160-     388: return
+2161-     389: aload_0
+2162-     390: getstatic     #84                 // Field Class_ag.a:I
+2163-     393: getstatic     #148                // Field p:[I
+2164-     396: iconst_2
+2165-     397: iaload
+2166-     398: getstatic     #148                // Field p:[I
+2167-     401: iconst_3
+2168-     402: iaload
+2169-     403: getstatic     #148                // Field p:[I
+2170-     406: iconst_3
+2171-     407: iaload
+2172-     408: invokevirtual #181                // Method Class_eo.a:(IIII)V
+2173-     411: return
+2174-     412: getstatic     #140                // Field h:Z
+2175-     415: invokestatic  #216                // Method i:(I)Z
+2176-     418: ifeq          529
+2177:     421: getstatic     #93                 // Field Class_ag.q:S
+2178-     424: invokestatic  #210                // Method f:(I)Z
+2179-     427: ifeq          529
+2180:     430: getstatic     #93                 // Field Class_ag.q:S
+2181-     433: invokestatic  #156                // Method Class_ad.m:(I)Z
+2182-     436: invokestatic  #216                // Method i:(I)Z
+2183-     439: ifeq          454
+2184:     442: getstatic     #93                 // Field Class_ag.q:S
+2185-     445: invokestatic  #157                // Method Class_ad.n:(I)Z
+2186-     448: invokestatic  #212                // Method g:(I)Z
+2187-     451: ifeq          529
+2188-     454: getstatic     #82                 // Field Class_ad.r:S
+2189:     457: getstatic     #93                 // Field Class_ag.q:S
+2190-     460: invokestatic  #215                // Method h:(II)Z
+2191-     463: ifeq          488
+2192-     466: aload_0
+2193:     467: getstatic     #93                 // Field Class_ag.q:S
+2194-     470: getstatic     #148                // Field p:[I
+2195-     473: iconst_2
+2196-     474: iaload
+2197-     475: getstatic     #148                // Field p:[I
+2198-     478: iconst_3
+2199-     479: iaload
+2200-     480: getstatic     #148                // Field p:[I
+2201-     483: iconst_3
+2202-     484: iaload
+2203-     485: invokevirtual #181                // Method Class_eo.a:(IIII)V
+2204-     488: getstatic     #148                // Field p:[I
+2205-     491: iconst_4
+2206-     492: iaload
+2207-     493: getstatic     #148                // Field p:[I
+2208-     496: iconst_0
+2209-     497: iaload
+2210-     498: getstatic     #148                // Field p:[I
+2211-     501: iconst_1
+2212-     502: iaload
+2213-     503: invokestatic  #160                // Method Class_ct.b:(III)V
+2214-     506: invokestatic  #171                // Method Class_dm.l:()Z
+2215-     509: invokestatic  #212                // Method g:(I)Z
+2216-     512: ifeq          529
+2217-     515: getstatic     #148                // Field p:[I
+2218-     518: iconst_0
+2219-     519: iaload
+2220-     520: putstatic     #140                // Field h:Z
+2221-     523: ldc2_w        #72                 // long 1000l
+2222-     526: invokestatic  #182                // Method Class_eo.a:(J)V
+2223-     529: aload_0
+2224-     530: getstatic     #91                 // Field Class_ag.m:I
+2225-     533: getstatic     #85                 // Field Class_ag.b:I
+2226-     536: getstatic     #148                // Field p:[I
+2227-     539: iconst_3
+2228-     540: iaload
+2229-     541: getstatic     #148                // Field p:[I
+2230-     544: iconst_3
+2231-     545: iaload
+2232-     546: invokevirtual #181                // Method Class_eo.a:(IIII)V
+2233-     549: return
+2234-     550: aload_0
+2235-     551: invokespecial #198                // Method aa:()Z
+2236-     554: invokestatic  #212                // Method g:(I)Z
+2237-     557: ifeq          2024
+2238-     560: getstatic     #148                // Field p:[I
+2239-     563: iconst_0
+2240-     564: iaload
+2241-     565: putstatic     #136                // Field d:Z
+2242-     568: getstatic     #148                // Field p:[I
+2243-     571: iconst_0
+2244-     572: iaload
+2245-     573: putstatic     #140                // Field h:Z
+2246-     576: return
+2247-     577: getstatic     #134                // Field b:I
+2248-     580: getstatic     #148                // Field p:[I
+2249-     583: bipush        10
+2250-     585: iaload
+2251-     586: invokestatic  #211                // Method f:(II)Z
+2252-     589: ifeq          696
+2253-     592: getstatic     #90                 // Field Class_ag.l:B
+2254-     595: getstatic     #148                // Field p:[I
+2255-     598: iconst_0
+2256-     599: iaload
+2257-     600: invokestatic  #211                // Method f:(II)Z
+2258-     603: ifeq          637
+2259-     606: new           #69                 // class java/lang/StringBuffer
+2260-     609: dup
+2261-     610: ldc           #25                 // String Dừng auto nv nâng cấp:
+2262-     612: invokespecial #233                // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+2263-     615: aconst_null
+--
+2354-     828: iaload
+2355-     829: invokestatic  #215                // Method h:(II)Z
+2356-     832: ifeq          897
+2357-     835: getstatic     #82                 // Field Class_ad.r:S
+2358-     838: getstatic     #148                // Field p:[I
+2359-     841: bipush        18
+2360-     843: iaload
+2361-     844: invokestatic  #215                // Method h:(II)Z
+2362-     847: ifeq          865
+2363-     850: getstatic     #82                 // Field Class_ad.r:S
+2364-     853: getstatic     #148                // Field p:[I
+2365-     856: bipush        19
+2366-     858: iaload
+2367-     859: invokestatic  #211                // Method f:(II)Z
+2368-     862: ifeq          875
+2369-     865: ldc2_w        #72                 // long 1000l
+2370-     868: invokestatic  #182                // Method Class_eo.a:(J)V
+2371-     871: invokestatic  #185                // Method Class_eo.m:()V
+2372-     874: return
+2373-     875: aload_0
+2374-     876: getstatic     #84                 // Field Class_ag.a:I
+2375-     879: getstatic     #148                // Field p:[I
+2376-     882: iconst_2
+2377-     883: iaload
+2378-     884: getstatic     #148                // Field p:[I
+2379-     887: iconst_3
+2380-     888: iaload
+2381-     889: getstatic     #148                // Field p:[I
+2382-     892: iconst_3
+2383-     893: iaload
+2384-     894: invokevirtual #181                // Method Class_eo.a:(IIII)V
+2385-     897: return
+2386-     898: getstatic     #140                // Field h:Z
+2387-     901: invokestatic  #216                // Method i:(I)Z
+2388-     904: ifeq          981
+2389:     907: getstatic     #93                 // Field Class_ag.q:S
+2390-     910: invokestatic  #210                // Method f:(I)Z
+2391-     913: ifeq          981
+2392:     916: getstatic     #93                 // Field Class_ag.q:S
+2393-     919: invokestatic  #156                // Method Class_ad.m:(I)Z
+2394-     922: invokestatic  #216                // Method i:(I)Z
+2395-     925: ifeq          940
+2396:     928: getstatic     #93                 // Field Class_ag.q:S
+2397-     931: invokestatic  #157                // Method Class_ad.n:(I)Z
+2398-     934: invokestatic  #212                // Method g:(I)Z
+2399-     937: ifeq          981
+2400-     940: getstatic     #148                // Field p:[I
+2401-     943: iconst_4
+2402-     944: iaload
+2403-     945: getstatic     #148                // Field p:[I
+2404-     948: iconst_0
+2405-     949: iaload
+2406-     950: getstatic     #148                // Field p:[I
+2407-     953: iconst_1
+2408-     954: iaload
+2409-     955: invokestatic  #160                // Method Class_ct.b:(III)V
+2410-     958: invokestatic  #171                // Method Class_dm.l:()Z
+2411-     961: invokestatic  #212                // Method g:(I)Z
+2412-     964: ifeq          981
+2413-     967: getstatic     #148                // Field p:[I
+2414-     970: iconst_0
+2415-     971: iaload
+2416-     972: putstatic     #140                // Field h:Z
+2417-     975: ldc2_w        #72                 // long 1000l
+2418-     978: invokestatic  #182                // Method Class_eo.a:(J)V
+2419-     981: getstatic     #134                // Field b:I
+2420-     984: getstatic     #148                // Field p:[I
+2421-     987: iconst_2
+2422-     988: iaload
+2423-     989: invokestatic  #211                // Method f:(II)Z
+2424-     992: ifeq          1052
+2425-     995: new           #69                 // class java/lang/StringBuffer
+2426-     998: dup
+2427-     999: ldc           #48                 // String Xem Info NVDV
+2428-    1001: invokespecial #233                // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+2429-    1004: getstatic     #138                // Field f:I
+2430-    1007: getstatic     #148                // Field p:[I
+2431-    1010: iconst_0
+2432-    1011: iaload
+2433-    1012: iadd
+2434-    1013: invokevirtual #234                // Method java/lang/StringBuffer.append:(I)Ljava/lang/StringBuffer;
+2435-    1016: invokevirtual #236                // Method java/lang/StringBuffer.toString:()Ljava/lang/String;
+2436-    1019: invokestatic  #161                // Method Class_ct.c:(Ljava/lang/String;)V
+2437-    1022: getstatic     #148                // Field p:[I
+2438-    1025: bipush        13
+2439-    1027: iaload
+2440-    1028: getstatic     #148                // Field p:[I
+2441-    1031: iconst_0
+2442-    1032: iaload
+2443-    1033: getstatic     #148                // Field p:[I
+2444-    1036: bipush        15
+2445-    1038: iaload
+2446-    1039: invokestatic  #160                // Method Class_ct.b:(III)V
+2447-    1042: invokestatic  #172                // Method Class_dm.n:()Z
+2448-    1045: ldc           #1                  // String
+2449-    1047: invokevirtual #231                // Method java/lang/String.length:()I
+2450-    1050: pop2
+2451-    1051: return
+2452-    1052: getstatic     #134                // Field b:I
+2453-    1055: getstatic     #148                // Field p:[I
+2454-    1058: iconst_3
+2455-    1059: iaload
+2456-    1060: invokestatic  #211                // Method f:(II)Z
+2457-    1063: ifeq          1122
+2458-    1066: new           #69                 // class java/lang/StringBuffer
+2459-    1069: dup
+2460-    1070: ldc           #40                 // String Nhận NVDV
+2461-    1072: invokespecial #233                // Method java/lang/StringBuffer."<init>":(Ljava/lang/String;)V
+2462-    1075: getstatic     #138                // Field f:I
+2463-    1078: getstatic     #148                // Field p:[I
+2464-    1081: iconst_0
+2465-    1082: iaload
+2466-    1083: iadd
+--
+2779-    1841: getstatic     #148                // Field p:[I
+2780-    1844: iconst_0
+2781-    1845: iaload
+2782-    1846: getstatic     #148                // Field p:[I
+2783-    1849: iconst_0
+2784-    1850: iaload
+2785-    1851: invokestatic  #160                // Method Class_ct.b:(III)V
+2786-    1854: invokestatic  #172                // Method Class_dm.n:()Z
+2787-    1857: ldc           #1                  // String
+2788-    1859: invokevirtual #231                // Method java/lang/String.length:()I
+2789-    1862: pop2
+2790-    1863: getstatic     #138                // Field f:I
+2791-    1866: getstatic     #148                // Field p:[I
+2792-    1869: iconst_0
+2793-    1870: iaload
+2794-    1871: iadd
+2795-    1872: putstatic     #138                // Field f:I
+2796-    1875: getstatic     #150                // Field r:I
+2797-    1878: getstatic     #148                // Field p:[I
+2798-    1881: iconst_0
+2799-    1882: iaload
+2800-    1883: iadd
+2801-    1884: putstatic     #150                // Field r:I
+2802-    1887: return
+2803-    1888: aload_0
+2804-    1889: getfield      #117                // Field Class_eo.ah:LClass_eo;
+2805-    1892: invokestatic  #201                // Method b:(Ljava/lang/Object;)Z
+2806-    1895: ifeq          2021
+2807-    1898: aload_0
+2808-    1899: getfield      #117                // Field Class_eo.ah:LClass_eo;
+2809-    1902: instanceof    #63                 // class Class_fq
+2810-    1905: invokestatic  #216                // Method i:(I)Z
+2811-    1908: ifeq          2021
+2812-    1911: ldc2_w        #78                 // long 3000l
+2813-    1914: invokestatic  #182                // Method Class_eo.a:(J)V
+2814:    1917: getstatic     #93                 // Field Class_ag.q:S
+2815-    1920: invokestatic  #210                // Method f:(I)Z
+2816-    1923: ifeq          2017
+2817:    1926: getstatic     #93                 // Field Class_ag.q:S
+2818-    1929: invokestatic  #156                // Method Class_ad.m:(I)Z
+2819-    1932: invokestatic  #216                // Method i:(I)Z
+2820-    1935: ifeq          1950
+2821:    1938: getstatic     #93                 // Field Class_ag.q:S
+2822-    1941: invokestatic  #157                // Method Class_ad.n:(I)Z
+2823-    1944: invokestatic  #212                // Method g:(I)Z
+2824-    1947: ifeq          2017
+2825-    1950: getstatic     #82                 // Field Class_ad.r:S
+2826:    1953: getstatic     #93                 // Field Class_ag.q:S
+2827-    1956: invokestatic  #215                // Method h:(II)Z
+2828-    1959: ifeq          1984
+2829-    1962: aload_0
+2830:    1963: getstatic     #93                 // Field Class_ag.q:S
+2831-    1966: getstatic     #148                // Field p:[I
+2832-    1969: iconst_2
+2833-    1970: iaload
+2834-    1971: getstatic     #148                // Field p:[I
+2835-    1974: iconst_3
+2836-    1975: iaload
+2837-    1976: getstatic     #148                // Field p:[I
+2838-    1979: iconst_3
+2839-    1980: iaload
+2840-    1981: invokevirtual #181                // Method Class_eo.a:(IIII)V
+2841-    1984: getstatic     #148                // Field p:[I
+2842-    1987: iconst_4
+2843-    1988: iaload
+2844-    1989: getstatic     #148                // Field p:[I
+2845-    1992: iconst_0
+2846-    1993: iaload
+2847-    1994: getstatic     #148                // Field p:[I
+2848-    1997: iconst_1
+2849-    1998: iaload
+2850-    1999: invokestatic  #160                // Method Class_ct.b:(III)V
+2851-    2002: invokestatic  #171                // Method Class_dm.l:()Z
+2852-    2005: invokestatic  #212                // Method g:(I)Z
+2853-    2008: ifeq          2017
+2854-    2011: ldc2_w        #72                 // long 1000l
+2855-    2014: invokestatic  #182                // Method Class_eo.a:(J)V
+2856-    2017: invokestatic  #178                // Method Class_dt.p:()V
+2857-    2020: return
+2858-    2021: invokestatic  #177                // Method Class_dt.k:()V
+2859-    2024: return
+2860-
+2861-  private static boolean d(int, int);
+2862-    Code:
+2863-       0: iload_0
+2864-       1: iload_1
+2865-       2: if_icmpgt     9
+2866-       5: iconst_1
+2867-       6: goto          10
+2868-       9: iconst_0
+2869-      10: ireturn
+2870-
+2871-  private static boolean e(int, int);
+2872-    Code:
+2873-       0: iload_0
+2874-       1: iload_1
+2875-       2: if_icmpge     9
+2876-       5: iconst_1
+2877-       6: goto          10
+2878-       9: iconst_0
+2879-      10: ireturn
+2880-
+2881-  private static void y();
+2882-    Code:
+2883-       0: bipush        20
+2884-       2: newarray       int
+2885-       4: putstatic     #148                // Field p:[I
+2886-       7: getstatic     #148                // Field p:[I
+2887-      10: iconst_0
+2888-      11: ldc           #2                  // String
+2889-      13: invokevirtual #231                // Method java/lang/String.length:()I
+2890-      16: iastore
+2891-      17: getstatic     #148                // Field p:[I
+2892-      20: iconst_1
+2893-      21: bipush        116
+2894-      23: bipush        125
+2895-      25: ixor
+2896-      26: bipush        58
+2897-      28: bipush        51
+2898-      30: ixor
+2899-      31: iconst_m1
+2900-      32: ixor
+===== Class_gd =====
+6955-    10221: iconst_1
+6956-    10222: iaload
+6957-    10223: ldc_w         #1490              // String tomboy
+6958-    10226: aastore
+6959-    10227: dup
+6960-    10228: getstatic     #2092              // Field sr:[I
+6961-    10231: iconst_2
+6962-    10232: iaload
+6963-    10233: ldc_w         #1513              // String with brooch
+6964-    10236: aastore
+6965-    10237: dup
+6966-    10238: getstatic     #2092              // Field sr:[I
+6967-    10241: iconst_3
+6968-    10242: iaload
+6969-    10243: ldc_w         #1460              // String pony tail
+6970-    10246: aastore
+6971-    10247: dup
+6972-    10248: getstatic     #2092              // Field sr:[I
+6973-    10251: iconst_4
+6974-    10252: iaload
+6975-    10253: ldc_w         #1373              // String curly
+6976-    10256: aastore
+6977-    10257: aastore
+6978-    10258: dup
+6979-    10259: getstatic     #2092              // Field sr:[I
+6980-    10262: iconst_2
+6981-    10263: iaload
+6982-    10264: getstatic     #2092              // Field sr:[I
+6983-    10267: iconst_5
+6984-    10268: iaload
+6985-    10269: anewarray     #1587              // class java/lang/String
+6986-    10272: dup
+6987-    10273: getstatic     #2092              // Field sr:[I
+6988-    10276: iconst_1
+6989-    10277: iaload
+6990:    10278: ldc_w         #1408              // String head band
+6991-    10281: aastore
+6992-    10282: dup
+6993-    10283: getstatic     #2092              // Field sr:[I
+6994-    10286: iconst_2
+6995-    10287: iaload
+6996-    10288: ldc_w         #1347              // String afro
+6997-    10291: aastore
+6998-    10292: dup
+6999-    10293: getstatic     #2092              // Field sr:[I
+7000-    10296: iconst_3
+7001-    10297: iaload
+7002-    10298: ldc_w         #1473              // String samurai
+7003-    10301: aastore
+7004-    10302: dup
+7005-    10303: getstatic     #2092              // Field sr:[I
+7006-    10306: iconst_4
+7007-    10307: iaload
+7008-    10308: ldc_w         #1479              // String spike
+7009-    10311: aastore
+7010-    10312: aastore
+7011-    10313: putstatic     #1969              // Field oc:[[Ljava/lang/String;
+7012-    10316: getstatic     #2092              // Field sr:[I
+7013-    10319: bipush        8
+7014-    10321: iaload
+7015-    10322: anewarray     #1587              // class java/lang/String
+7016-    10325: dup
+7017-    10326: getstatic     #2092              // Field sr:[I
+7018-    10329: iconst_1
+7019-    10330: iaload
+7020-    10331: ldc_w         #607               // String Inventory
+7021-    10334: aastore
+7022-    10335: dup
+7023-    10336: getstatic     #2092              // Field sr:[I
+7024-    10339: iconst_2
+7025-    10340: iaload
+7026-    10341: ldc_w         #1005              // String Skill
+7027-    10344: aastore
+7028-    10345: dup
+7029-    10346: getstatic     #2092              // Field sr:[I
+7030-    10349: iconst_3
+7031-    10350: iaload
+7032-    10351: ldc_w         #920               // String Potential
+7033-    10354: aastore
+7034-    10355: dup
+7035-    10356: getstatic     #2092              // Field sr:[I
+7036-    10359: iconst_4
+7037-    10360: iaload
+7038-    10361: ldc_w         #599               // String Info
+7039-    10364: aastore
+7040-    10365: dup
+7041-    10366: getstatic     #2092              // Field sr:[I
+7042-    10369: iconst_5
+7043-    10370: iaload
+7044-    10371: ldc_w         #469               // String Equipment
+7045-    10374: aastore
+7046-    10375: dup
+7047-    10376: getstatic     #2092              // Field sr:[I
+7048-    10379: bipush        6
+7049-    10381: iaload
+7050-    10382: ldc_w         #743               // String Mounts
+7051-    10385: aastore
+7052-    10386: dup
+7053-    10387: getstatic     #2092              // Field sr:[I
+7054-    10390: bipush        7
+7055-    10392: iaload
+7056-    10393: ldc           #145               // String Bijuu
+7057-    10395: aastore
+7058-    10396: putstatic     #2082              // Field sh:[Ljava/lang/String;
+7059-    10399: getstatic     #2092              // Field sr:[I
+7060-    10402: iconst_3
+===== k16 =====
+16741-       9: ifnonnull     16
+16742-      12: iconst_m1
+16743-      13: goto          22
+16744-      16: aload_1
+16745-      17: bipush        7
+16746-      19: invokevirtual #534                // Method k1f.intAt:(I)I
+16747-      22: ireturn
+16748-
+16749-  static int z(int) throws java.lang.Exception;
+16750-    Code:
+16751-       0: getstatic     #297                // Field g:Lk2c;
+16752-       3: iload_0
+16753-       4: invokevirtual #541                // Method k2c.find:(I)Lk1f;
+16754-       7: astore_1
+16755-       8: aload_1
+16756-       9: ifnonnull     16
+16757-      12: iconst_m1
+16758-      13: goto          22
+16759-      16: aload_1
+16760-      17: bipush        8
+16761-      19: invokevirtual #534                // Method k1f.intAt:(I)I
+16762-      22: ireturn
+16763-
+16764-  static short a(DoHoang091$k0) throws java.lang.Exception;
+16765-    Code:
+16766-       0: aload_0
+16767-       1: invokestatic  #516                // Method j:(LDoHoang091$k0;)I
+16768-       4: istore_1
+16769-       5: iload_1
+16770-       6: iflt          15
+16771-       9: iload_1
+16772-      10: invokestatic  #528                // Method y:(I)I
+16773-      13: i2s
+16774-      14: ireturn
+16775-      15: aload_0
+16776:      16: getfield      #251                // Field DoHoang091$k0.q:S
+16777-      19: ireturn
+16778-
+16779-  static short b(DoHoang091$k0) throws java.lang.Exception;
+16780-    Code:
+16781-       0: aload_0
+16782-       1: invokestatic  #516                // Method j:(LDoHoang091$k0;)I
+16783-       4: sipush        820
+16784-       7: if_icmpne     14
+16785-      10: sipush        204
+16786-      13: ireturn
+16787-      14: aload_0
+16788-      15: getfield      #188                // Field DoHoang091$k0.aB:[S
+16789-      18: iconst_1
+16790-      19: saload
+16791-      20: ifge          26
+16792-      23: bipush        15
+16793-      25: ireturn
+16794-      26: aload_0
+16795-      27: getfield      #188                // Field DoHoang091$k0.aB:[S
+16796-      30: iconst_1
+16797-      31: saload
+16798-      32: ldc           #9                  // int 65535
+16799-      34: iand
+16800-      35: istore_1
+16801-      36: iload_1
+16802-      37: invokestatic  #529                // Method z:(I)I
+16803-      40: iflt          47
+16804-      43: iconst_m1
+16805-      44: goto          52
+16806-      47: iload_1
+16807-      48: invokestatic  #528                // Method y:(I)I
+16808-      51: i2s
+16809-      52: ireturn
+16810-
+16811-  static short c(DoHoang091$k0) throws java.lang.Exception;
+16812-    Code:
+16813-       0: aload_0
+16814-       1: invokestatic  #516                // Method j:(LDoHoang091$k0;)I
+16815-       4: invokestatic  #415                // Method U:(I)I
+16816-       7: istore_1
+16817-       8: iload_1
+16818-       9: iflt          15
+16819-      12: iload_1
+16820-      13: i2s
+16821-      14: ireturn
+16822-      15: aload_0
+16823-      16: getfield      #188                // Field DoHoang091$k0.aB:[S
+16824-      19: iconst_2
+16825-      20: saload
+16826-      21: iflt          38
+16827-      24: aload_0
+16828-      25: getfield      #188                // Field DoHoang091$k0.aB:[S
+16829-      28: iconst_2
+16830-      29: saload
+16831-      30: ldc           #9                  // int 65535
+16832-      32: iand
+16833-      33: invokestatic  #528                // Method y:(I)I
+16834-      36: i2s
+16835-      37: ireturn
+16836-      38: aload_0
+16837-      39: getfield      #250                // Field DoHoang091$k0.p:B
+16838-      42: ifne          50
+16839-      45: bipush        10
+16840-      47: goto          51
+16841-      50: iconst_1
+16842-      51: ireturn
+16843-
+16844-  static short d(DoHoang091$k0) throws java.lang.Exception;
+16845-    Code:
+16846-       0: aload_0
+CharacterDelete.class
+x1/img/
+x1/img/Big4.png
+x1/img/Big0.png
+x1/img/Big2.png
+x1/img/Big1.png
+x1/img/Big3.png

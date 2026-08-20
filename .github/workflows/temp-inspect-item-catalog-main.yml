@@ -14,6 +14,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "diagnostic rerun v2"
           rm -rf /tmp/nsoinspect && mkdir -p /tmp/nsoinspect/classes
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar

@@ -1,0 +1,31 @@
+name: Dump startup controller
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-dump-core-start.yml]
+permissions:
+  contents: write
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dump controllers
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo '=== CLASS_DS ==='
+            javap -classpath Nso_Offline_By_h0901.jar -p -c Class_ds || true
+            echo '=== CLASS_HA ==='
+            javap -classpath Nso_Offline_By_h0901.jar -p -c Class_ha || true
+            echo '=== CLASS_EW ==='
+            javap -classpath Nso_Offline_By_h0901.jar -p -c Class_ew || true
+            echo '=== CLASS_FP ==='
+            javap -classpath Nso_Offline_By_h0901.jar -p -c Class_fp || true
+            echo '=== CLASS_BY ==='
+            javap -classpath Nso_Offline_By_h0901.jar -p -c Class_by || true
+          } > core_start_debug.txt 2>&1
+          git add -- core_start_debug.txt
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: capture startup controller'
+          git push origin main

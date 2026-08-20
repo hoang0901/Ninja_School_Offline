@@ -1,0 +1,40 @@
+name: temp inspect character delete
+on:
+  push:
+    paths:
+      - '.github/workflows/temp-inspect-character-delete.yml'
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Inspect delete/save bytecode
+        run: |
+          set -e
+          J=Nso_Offline_By_h0901.jar
+          {
+            echo '=== CharacterDelete ==='
+            javap -classpath "$J" -c -p CharacterDelete
+            echo '=== DoHoang091SaveState ==='
+            javap -classpath "$J" -c -p DoHoang091SaveState
+            echo '=== OfflineBridge ==='
+            javap -classpath "$J" -c -p OfflineBridge
+            echo '=== refs to CharacterDelete ==='
+            for c in $(jar tf "$J" | sed -n 's#/#.#g;s/\.class$//p'); do javap -classpath "$J" -c -p "$c" 2>/dev/null | grep -B12 -A20 'CharacterDelete.deleteCurrent' && echo "CLASS=$c" || true; done
+          } > character_delete_inspect.txt
+      - name: Commit report and self-clean
+        run: |
+          git config user.name ChatGPT
+          git config user.email actions@github.com
+          git add character_delete_inspect.txt
+          git commit -m 'chore: inspect character delete persistence' || true
+          git push origin main
+          git rm .github/workflows/temp-inspect-character-delete.yml
+          git commit -m 'chore: remove delete inspector'
+          git push origin main

@@ -10,35 +10,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect existing icon-grid/shop protocol
+      - name: Find client menu packet handler and item-grid renderer
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag4"
-          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag4"
+          rm -rf /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag5"
+          mkdir -p /tmp/nsoinspect "$GITHUB_WORKSPACE/item_diag5"
           cd /tmp/nsoinspect
           cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
           curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
           mkdir cfrout
           java -jar cfr.jar game.jar --outputdir cfrout --silent true >/tmp/cfr.log 2>&1 || true
-          f=cfrout/k1d.java
-          [ -f "$f" ]
-          grep -n -B80 -A220 -E 'C\\u1eeda h\\u00e0ng|Qu\\u1ea7y s\\u00e1ch|case 267|private static void u\(' "$f" > "$GITHUB_WORKSPACE/item_diag4/k1d_shop_catalog.txt" || true
-          grep -n -B20 -A180 -E 'String\[\].*int\[\]|int\[\].*String\[\]' "$f" > "$GITHUB_WORKSPACE/item_diag4/k1d_menu_sender.txt" || true
-          # Look for all direct embedded-client packet sends and nearby item/template handling.
-          grep -n -B25 -A90 -E 'DoHoang091\.a\(\(byte\)|DoHoang091\.a\([^;]*byte|ByteArrayOutputStream|DataOutputStream' "$f" | head -12000 > "$GITHUB_WORKSPACE/item_diag4/k1d_packets.txt" || true
-          # Client-side occurrences around menu/shop/inventory/icon drawing.
-          g=cfrout/DoHoang091.java
-          if [ -f "$g" ]; then
-            grep -n -B40 -A140 -E 'hành trang|Hành trang|Cửa hàng|shop|Shop|icon|Icon|readUTF|case 63|case 29' "$g" | head -16000 > "$GITHUB_WORKSPACE/item_diag4/client_ui_refs.txt" || true
-          fi
+          # Locate likely packet-63 handlers and packet-29 menu-selection senders across all classes.
+          grep -R -n -E 'case 63:|== 63|!= 63' cfrout --include='*.java' | head -200 > "$GITHUB_WORKSPACE/item_diag5/case63_locations.txt" || true
+          grep -R -n -E 'case 29:|== 29|!= 29' cfrout --include='*.java' | head -200 > "$GITHUB_WORKSPACE/item_diag5/case29_locations.txt" || true
+          # Build focused snippets for every source containing case 63/29.
+          cut -d: -f1 "$GITHUB_WORKSPACE/item_diag5/case63_locations.txt" | sort -u | head -20 > /tmp/files63.txt || true
+          while IFS= read -r f; do
+            [ -f "$f" ] || continue
+            b=$(basename "$f" .java)
+            grep -n -B80 -A240 -E 'case 63:|== 63|!= 63|readUTF|Vector|menu|Menu' "$f" | head -12000 > "$GITHUB_WORKSPACE/item_diag5/${b}_63.txt" || true
+          done < /tmp/files63.txt
+          # Find likely grid/icon/inventory drawing sources.
+          grep -R -n -E 'hành trang|Hành trang|inventory|Inventory|drawImage|drawRegion|icon|Icon' cfrout --include='*.java' | head -3000 > "$GITHUB_WORKSPACE/item_diag5/grid_locations.txt" || true
+          # Existing shop-like packet/open methods in offline server.
+          grep -n -B80 -A240 -E 'C\\u1eeda h\\u00e0ng|Qu\\u1ea7y s\\u00e1ch' cfrout/k1d.java > "$GITHUB_WORKSPACE/item_diag5/k1d_shop.txt" || true
       - name: Commit diagnostics
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- item_diag4
+          git add -- item_diag5
           git diff --cached --quiet && exit 0
-          git commit -m "chore: inspect existing item grid protocol"
+          git commit -m "chore: locate client catalog grid hook"
           git push

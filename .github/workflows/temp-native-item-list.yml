@@ -1,0 +1,40 @@
+name: Temporary native item list
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-native-item-list.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decompile packet handler only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/native native_item_list
+          mkdir -p /tmp/native/classes native_item_list
+          cd /tmp/native
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          unzip -q game.jar 'Class_by.class' 'Class_ct.class' 'Class_ew.class' 'Class_fe.class' 'Class_fj.class' 'Class_cy.class' -d classes
+          curl -fsSL -o cfr.jar https://www.benf.org/other/cfr/cfr-0.152.jar
+          for c in Class_by Class_ew Class_ct; do
+            java -jar cfr.jar "classes/$c.class" --extraclasspath game.jar --outputdir out --silent true >/tmp/$c.log 2>&1 || true
+          done
+          for f in out/Class_by.java out/Class_ew.java out/Class_ct.java; do
+            [ -f "$f" ] || continue
+            b=$(basename "$f" .java)
+            grep -n -B100 -A500 -E 'Class_fe|Class_fj\[|new Class_fj|readShort|readByte|readInt|shop|Shop|C\\u1eeda h\\u00e0ng|Mua|B\\u00e1n' "$f" | head -30000 > "$GITHUB_WORKSPACE/native_item_list/${b}.txt" || true
+          done
+      - name: Commit diagnostics
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add native_item_list
+          git diff --cached --quiet && exit 0
+          git commit -m "chore: inspect native item list protocol"
+          git push

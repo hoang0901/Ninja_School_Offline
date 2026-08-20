@@ -1,0 +1,41 @@
+name: Inspect startup bytecode
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-javap-start.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Javap startup classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/javapstart && mkdir -p /tmp/javapstart
+          cd /tmp/javapstart
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          javap -classpath game.jar -p -c Class_da > Class_da.javap.txt
+          javap -classpath game.jar -p -c Class_do > Class_do.javap.txt || true
+          javap -classpath game.jar -p -c DoHoang091 > DoHoang091.javap.txt
+          git worktree add /tmp/feature origin/chatgpt/save-menu-redesign
+          mkdir -p /tmp/feature/start_flow_inspect
+          cp *.txt /tmp/feature/start_flow_inspect/
+          cd /tmp/feature
+          git add -- start_flow_inspect
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: capture startup bytecode' || true
+          git push origin HEAD:chatgpt/save-menu-redesign
+      - name: Cleanup
+        if: always()
+        shell: bash
+        run: |
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main || true
+          git rm -f .github/workflows/temp-javap-start.yml || true
+          git -c user.name='ChatGPT' -c user.email='actions@github.com' commit -m 'chore: remove startup bytecode inspector' || true
+          git push origin main || true

@@ -1,0 +1,56 @@
+name: Patch hoang fan to sword
+on:
+  push:
+    branches: [chatgpt/hoang-fan-to-sword]
+    paths: [.github/workflows/patch-hoang-sword-only.yml]
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Patch class only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/patch && mkdir -p /tmp/patch/src /tmp/patch/out
+          cd /tmp/patch
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          curl -fsSL -o javassist.jar https://repo1.maven.org/maven2/org/javassist/javassist/3.30.2-GA/javassist-3.30.2-GA.jar
+          cat > src/Patch.java <<'JAVA'
+          import java.io.*;
+          import javassist.*;
+          public class Patch {
+            public static void main(String[] args) throws Exception {
+              ClassPool pool = new ClassPool(true);
+              pool.insertClassPath("game.jar");
+              CtClass c = pool.get("DoHoang091");
+              CtMethod m = c.getDeclaredMethod("zHoangVipStarter");
+              m.setBody("{ if (as == null && aj != null) { for (int i=0;i<aj.length;i++) { if (aj[i]!=null && aj[i].a!=null && \"hoang\".equalsIgnoreCase(aj[i].a)) { if (aj[i].bx!=(byte)1) { aj[i].bx=(byte)1; DoHoang091.l(aj[i]); an=true; DoHoang091.as(); } break; } } } }");
+              byte[] bytes = c.toBytecode();
+              try(FileOutputStream f=new FileOutputStream("out/DoHoang091.class")){f.write(bytes);} c.detach();
+            }
+          }
+          JAVA
+          javac -cp javassist.jar -d out src/Patch.java
+          java -cp javassist.jar:out Patch
+          jar uf game.jar -C out DoHoang091.class
+          zip -d game.jar 'META-INF/*.SF' 'META-INF/*.RSA' 'META-INF/*.DSA' >/dev/null 2>&1 || true
+          unzip -t game.jar >/dev/null
+          javap -classpath game.jar -p -c DoHoang091 > verify.txt
+          grep -q 'String hoang' verify.txt
+          grep -q 'Field DoHoang091\$k0.bx:B' verify.txt
+          {
+            echo '=== SHA256 ==='; sha256sum game.jar
+            echo '=== PATCHED METHOD ==='; grep -n -A120 -B5 'zHoangVipStarter' verify.txt | tail -n 170
+          } > "$GITHUB_WORKSPACE/hoang_sword_only_verify.txt"
+          cp game.jar "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+          cd "$GITHUB_WORKSPACE"
+          git add -- Nso_Offline_By_h0901.jar hoang_sword_only_verify.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'fix: change hoang from fan to sword only'
+          git push origin HEAD:chatgpt/hoang-fan-to-sword

@@ -1,0 +1,61 @@
+name: Extract native trade methods small
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-native-trade-methods-small.yml]
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Extract only exact native trade methods
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/tsmall && mkdir -p /tmp/tsmall/report
+          cd /tmp/tsmall
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          javap -classpath game.jar -p -c -s Class_ct > ct.txt
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          ls=Path('ct.txt').read_text(errors='replace').splitlines()
+          headers=[]
+          for i,l in enumerate(ls):
+              if re.match(r'^\s{2}(public|private|protected)',l) and '(' in l and l.rstrip().endswith(';'):
+                  headers.append(i)
+          headers.append(len(ls))
+          wanted=['Field Class_gd.fv:Ljava/lang/String;','Field Class_gd.pw:Ljava/lang/String;','Field Class_gd.doa:Ljava/lang/String;','Field Class_gd.el:Ljava/lang/String;']
+          out=[]
+          for a,b in zip(headers,headers[1:]):
+              block='\n'.join(ls[a:b])
+              hits=[w for w in wanted if w in block]
+              if hits:
+                  out.append('===== '+ls[a].strip()+' | '+', '.join(hits)+' =====\n'+block+'\n')
+          Path('report/trade_methods.txt').write_text('\n'.join(out))
+          PY
+          git -C "$GITHUB_WORKSPACE" checkout chatgpt/native-catalog-inventory-ui
+          rm -rf "$GITHUB_WORKSPACE/native_trade_exact"
+          cp -r report "$GITHUB_WORKSPACE/native_trade_exact"
+          cd "$GITHUB_WORKSPACE"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- native_trade_exact
+          git diff --cached --quiet || git commit -m "chore: extract native trade UI methods"
+          git push origin HEAD:chatgpt/native-catalog-inventory-ui
+      - name: Cleanup workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE"
+          git checkout main
+          git pull --ff-only origin main
+          git rm -- .github/workflows/temp-native-trade-methods-small.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: remove native trade method extractor"
+          git push origin main

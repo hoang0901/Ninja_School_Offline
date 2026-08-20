@@ -1,0 +1,41 @@
+name: Debug save menu build
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/temp-debug-save-menu-build.yml]
+permissions:
+  contents: write
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reproduce build and capture exact failure
+        shell: bash
+        run: |
+          set +e
+          rm -rf /tmp/smd && mkdir -p /tmp/smd/src /tmp/smd/classes
+          cd /tmp/smd
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          git -C "$GITHUB_WORKSPACE" show f0acf971ddb30385d58aa5e324dd26da722029c8:.github/workflows/temp-build-save-menu-asm.yml > workflow.yml
+          awk '/cat > src\/Build.java <<'\''JAVA'\''/{f=1;next} f && /^          JAVA$/{exit} f{sub(/^          /,"");print}' workflow.yml > src/Build.java
+          {
+            echo '=== source lines ==='; wc -l src/Build.java; head -n 5 src/Build.java; tail -n 5 src/Build.java
+            echo '=== downloads ==='
+          } > log.txt
+          curl -fsSL -o asm.jar https://repo1.maven.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar >>log.txt 2>&1; echo "curl_asm=$?" >>log.txt
+          curl -fsSL -o asm-tree.jar https://repo1.maven.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar >>log.txt 2>&1; echo "curl_tree=$?" >>log.txt
+          javac -cp asm.jar:asm-tree.jar -d classes src/Build.java >>log.txt 2>&1; echo "javac=$?" >>log.txt
+          java -cp asm.jar:asm-tree.jar:classes Build >>log.txt 2>&1; echo "generator=$?" >>log.txt
+          jar uf game.jar -C classes OfflineStartMenu.class -C classes Class_da.class -C classes CharacterDelete.class >>log.txt 2>&1; echo "jar_update=$?" >>log.txt
+          unzip -t game.jar >>log.txt 2>&1; echo "unzip_test=$?" >>log.txt
+          javap -classpath game.jar -p OfflineStartMenu >>log.txt 2>&1; echo "javap_menu=$?" >>log.txt
+          javap -classpath game.jar -p -c Class_da >>log.txt 2>&1; echo "javap_da=$?" >>log.txt
+          javap -classpath game.jar -p -c CharacterDelete >>log.txt 2>&1; echo "javap_delete=$?" >>log.txt
+          cp log.txt "$GITHUB_WORKSPACE/save_menu_build_error.txt"
+          cd "$GITHUB_WORKSPACE"
+          git add save_menu_build_error.txt
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'chore: capture save menu build error' || true
+          git push origin main || true

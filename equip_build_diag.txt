@@ -1,0 +1,22 @@
+=== ENV ===
+openjdk version "17.0.20" 2026-07-21
+OpenJDK Runtime Environment Temurin-17.0.20+8 (build 17.0.20+8)
+OpenJDK 64-Bit Server VM Temurin-17.0.20+8 (build 17.0.20+8, mixed mode, sharing)
+javac 17.0.20
+CURL_RC=0
+JAVAC_RC=0
+Class_ct.j=Class_ct.j(int)
+k16.i=k16.i(int,int)
+PATCH_RC=0
+    testing: ka.class                 OK
+    testing: k1d.class                OK
+    testing: Class_ct.class           OK
+    testing: k16.class                OK
+No errors detected in compressed data of game.jar.
+UNZIP_RC=0
+CHANGED=Class_ct.class,k16.class
+DATA_UNCHANGED=1
+VERIFY_RC=0
+5b3a2b148857d9e9a79781e9feaa8dc5cecacab42c60b1c379262bf4187da49c  before.jar
+eabebef06ec12f19e8c30c6825bf3ba1a7fa489df4916a4f080689f2fc53f711  game.jar
+PUBLISH_READY=1

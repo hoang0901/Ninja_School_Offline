@@ -1,0 +1,97 @@
+name: Diagnose and publish equipment indexUI build
+on:
+  push:
+    branches: [chatgpt/fix-equip-indexui-7-23-9]
+    paths: [.github/workflows/diagnose-equip-indexui-build.yml]
+permissions:
+  contents: write
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch, verify, and publish JAR when successful
+        shell: bash
+        run: |
+          set +e
+          rm -rf /tmp/eqdiag && mkdir -p /tmp/eqdiag/src /tmp/eqdiag/classes
+          cd /tmp/eqdiag
+          cp "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar" game.jar
+          cp game.jar before.jar
+          {
+            echo '=== ENV ==='
+            java -version
+            javac -version
+            curl -fsSL -o javassist.jar https://repo1.maven.org/maven2/org/javassist/javassist/3.30.2-GA/javassist-3.30.2-GA.jar
+            echo CURL_RC=$?
+            cat > src/Patch.java <<'JAVA'
+          import javassist.*;
+          import java.io.*;
+          import java.util.*;
+          import java.util.jar.*;
+          public final class Patch {
+            public static void main(String[] args) throws Exception {
+              ClassPool cp=new ClassPool(true); cp.insertClassPath("game.jar");
+              CtClass ct=cp.get("Class_ct");
+              CtMethod j=ct.getDeclaredMethod("j",new CtClass[]{CtClass.intType});
+              System.out.println("Class_ct.j="+j.getLongName());
+              j.insertBefore("{ if ($1 == 7) $1 = 23; else if ($1 == 23) $1 = 7; }");
+              replace("game.jar","Class_ct.class",ct.toBytecode()); ct.detach();
+              cp=new ClassPool(true); cp.insertClassPath("game.jar");
+              CtClass k=cp.get("k16");
+              CtMethod m=k.getDeclaredMethod("i",new CtClass[]{CtClass.intType,CtClass.intType});
+              System.out.println("k16.i="+m.getLongName());
+              m.insertBefore("{ if ($2 == 9) return false; }");
+              replace("game.jar","k16.class",k.toBytecode()); k.detach();
+            }
+            static void replace(String jarPath,String entry,byte[] data)throws Exception{
+              File src=new File(jarPath),tmp=new File(jarPath+".tmp");
+              JarFile jf=new JarFile(src); JarOutputStream out=new JarOutputStream(new FileOutputStream(tmp));
+              byte[] buf=new byte[8192]; Enumeration<JarEntry> en=jf.entries();
+              while(en.hasMoreElements()){
+                JarEntry e=en.nextElement(); String n=e.getName();
+                if(n.equals(entry)) continue;
+                JarEntry ne=new JarEntry(n); if(e.getTime()!=-1)ne.setTime(e.getTime()); out.putNextEntry(ne);
+                InputStream in=jf.getInputStream(e); int r; while((r=in.read(buf))!=-1)out.write(buf,0,r); in.close(); out.closeEntry();
+              }
+              out.putNextEntry(new JarEntry(entry)); out.write(data); out.closeEntry(); out.close(); jf.close();
+              if(!src.delete()||!tmp.renameTo(src))throw new IOException("replace failed");
+            }
+          }
+          JAVA
+            javac -cp javassist.jar -d classes src/Patch.java
+            echo JAVAC_RC=$?
+            java -cp javassist.jar:classes Patch
+            echo PATCH_RC=$?
+            unzip -t game.jar | tail -5
+            echo UNZIP_RC=$?
+            python3 - <<'PY'
+          import zipfile,hashlib
+          with zipfile.ZipFile('before.jar') as a,zipfile.ZipFile('game.jar') as b:
+              an=set(a.namelist()); bn=set(b.namelist())
+              assert an==bn
+              changed=[]
+              for n in sorted(an):
+                  if hashlib.sha256(a.read(n)).digest()!=hashlib.sha256(b.read(n)).digest(): changed.append(n)
+              assert set(changed)=={'Class_ct.class','k16.class'}, changed
+              print('CHANGED='+','.join(changed))
+              for n in ('offline/full/item.dat','offline/full/item.idx','offline/admin_seed.rms'):
+                  if n in an: assert a.read(n)==b.read(n), n
+              print('DATA_UNCHANGED=1')
+          PY
+            echo VERIFY_RC=$?
+            sha256sum before.jar game.jar
+          } > build.log 2>&1
+          cat build.log
+          cp build.log "$GITHUB_WORKSPACE/equip_build_diag.txt"
+          if grep -q '^PATCH_RC=0$' build.log && grep -q '^UNZIP_RC=0$' build.log && grep -q '^VERIFY_RC=0$' build.log; then
+            cp game.jar "$GITHUB_WORKSPACE/Nso_Offline_By_h0901.jar"
+            echo PUBLISH_READY=1 >> "$GITHUB_WORKSPACE/equip_build_diag.txt"
+          else
+            echo PUBLISH_READY=0 >> "$GITHUB_WORKSPACE/equip_build_diag.txt"
+          fi
+          cd "$GITHUB_WORKSPACE"
+          git add -- equip_build_diag.txt
+          if grep -q '^PUBLISH_READY=1$' equip_build_diag.txt; then git add -- Nso_Offline_By_h0901.jar; fi
+          git -c user.name=ChatGPT -c user.email=actions@github.com commit -m 'fix: correct equipment indexUI 7 23 and charm slot 9' || true
+          git push origin HEAD:chatgpt/fix-equip-indexui-7-23-9 || true
